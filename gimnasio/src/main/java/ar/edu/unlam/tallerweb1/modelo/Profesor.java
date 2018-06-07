@@ -5,13 +5,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
 @Entity
-public class Actividad {
+public class Profesor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nombre;
+	private String apellido;
 	
 	
 	public Long getId() {
@@ -25,6 +25,12 @@ public class Actividad {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public String getApellido() {
+		return apellido;
+	}
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	

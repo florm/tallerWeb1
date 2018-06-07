@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.ManyToMany;
+
 
 
 @Entity
@@ -23,6 +23,7 @@ public class Socio {
 	private String ciudad;
 	private String calle;
 	private String numcalle;
+	
 	@ManyToOne
 	private Sucursal sucursal;
 	

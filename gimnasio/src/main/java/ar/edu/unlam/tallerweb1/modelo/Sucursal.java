@@ -18,8 +18,10 @@ public class Sucursal {
 	private String ciudad;
 	private String calle;
 	private String numcalle;
+	
 	@OneToMany
-	private List<Actividad> listaAtividades;
+	private List<Actividad> listaActividades;
+	
 	@OneToMany
 	private List<Socio> listaSocios;
 	
@@ -66,11 +68,11 @@ public class Sucursal {
 	public void setNumcalle(String numcalle) {
 		this.numcalle = numcalle;
 	}
-	public List<Actividad> getListaAtividades() {
-		return listaAtividades;
+	public List<Actividad> getListaActividades() {
+		return listaActividades;
 	}
-	public void setListaAtividades(List<Actividad> listaAtividades) {
-		this.listaAtividades = listaAtividades;
+	public void setListaActividades(List<Actividad> listaAtividades) {
+		this.listaActividades = listaAtividades;
 	}
 	public List<Socio> getListaSocios() {
 		return listaSocios;

@@ -1,19 +1,26 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import java.util.Date;
+
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+@Entity
 public class SucursalActividad {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String dia;
-	private String hora;
-	private String cupo;
+	private Date dia;
+	private Date horaDesde;
+	private Date horaHasta;
+	private Integer cupo;
+	
 	@ManyToOne
 	private Actividad actividad;
+	
 	@ManyToOne 
 	private Sucursal sucursal;
 	
@@ -26,22 +33,28 @@ public class SucursalActividad {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getDia() {
+	public Date getDia() {
 		return dia;
 	}
-	public void setDia(String dia) {
+	public void setDia(Date dia) {
 		this.dia = dia;
 	}
-	public String getHora() {
-		return hora;
+	public Date getHoraDesde() {
+		return horaDesde;
 	}
-	public void setHora(String hora) {
-		this.hora = hora;
+	public Date getHoraHasta() {
+		return horaHasta;
 	}
-	public String getCupo() {
+	public void setHoraDesde(Date horaDesde) {
+		this.horaDesde = horaDesde;
+	}
+	public void setHoraHasta(Date horaHasta) {
+		this.horaHasta = horaHasta;
+	}
+	public Integer getCupo() {
 		return cupo;
 	}
-	public void setCupo(String cupo) {
+	public void setCupo(Integer cupo) {
 		this.cupo = cupo;
 	}
 	public Actividad getActividad() {
