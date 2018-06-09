@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -33,8 +34,8 @@ public class Sucursal {
 	@OneToMany
 	private List<Socio> listaSocios;
 	
-//	@OneToOne
-//	private Operador operador;
+	@OneToOne
+	private Operador operador;
 
 	public Long getId() {
 		return id;
@@ -116,13 +117,13 @@ public class Sucursal {
 		this.listaSocios = listaSocios;
 	}
 
-//	public Operador getOperador() {
-//		return operador;
-//	}
-//
-//	public void setOperador(Operador operador) {
-//		this.operador = operador;
-//	}
+	public Operador getOperador() {
+		return operador;
+	}
+
+	public void setOperador(Operador operador) {
+		this.operador = operador;
+	}
 	
 	
 	

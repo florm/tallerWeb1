@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 
 
@@ -17,8 +18,8 @@ public class Operador {
 	private String nombre;
 	private String apellido;
 	
-//	@OneToOne
-//	private Sucursal sucursal;
+	@OneToOne
+	private Sucursal sucursal;
 
 	public Long getId() {
 		return id;
@@ -44,13 +45,13 @@ public class Operador {
 		this.apellido = apellido;
 	}
 
-//	public Sucursal getSucursal() {
-//		return sucursal;
-//	}
-//
-//	public void setSucursal(Sucursal sucursal) {
-//		this.sucursal = sucursal;
-//	}
+	public Sucursal getSucursal() {
+		return sucursal;
+	}
+
+	public void setSucursal(Sucursal sucursal) {
+		this.sucursal = sucursal;
+	}
 	
 	
 }
