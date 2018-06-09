@@ -19,90 +19,138 @@ public class Socio {
 	private String telefono;
 	private String mail;
 	private String pais;
-	private String provincia;
-	private String ciudad;
-	private String calle;
-	private String numcalle;
+	
+	@ManyToOne
+	private Provincia provincia;
+	
+	@ManyToOne
+	private Ciudad ciudad;
+	
+	private String domicilioCalle;
+	private String domicilioNumero;
+	private String domicilioDepto;
 	
 	@ManyToOne
 	private Sucursal sucursal;
 	
-	
+	@ManyToOne
+	private Pase pase;
 	//Falta ManyToMany con SucAct
-	
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getDni() {
 		return dni;
 	}
+
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public String getApellido() {
 		return apellido;
 	}
+
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+
 	public String getTelefono() {
 		return telefono;
 	}
+
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+
 	public String getMail() {
 		return mail;
 	}
+
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+
 	public String getPais() {
 		return pais;
 	}
+
 	public void setPais(String pais) {
 		this.pais = pais;
 	}
-	public String getProvincia() {
+
+	public Provincia getProvincia() {
 		return provincia;
 	}
-	public void setProvincia(String provincia) {
+
+	public void setProvincia(Provincia provincia) {
 		this.provincia = provincia;
 	}
-	public String getCiudad() {
+
+	public Ciudad getCiudad() {
 		return ciudad;
 	}
-	public void setCiudad(String ciudad) {
+
+	public void setCiudad(Ciudad ciudad) {
 		this.ciudad = ciudad;
 	}
-	public String getCalle() {
-		return calle;
+
+	public String getDomicilioCalle() {
+		return domicilioCalle;
 	}
-	public void setCalle(String calle) {
-		this.calle = calle;
+
+	public void setDomicilioCalle(String domicilioCalle) {
+		this.domicilioCalle = domicilioCalle;
 	}
-	public String getNumcalle() {
-		return numcalle;
+
+	public String getDomicilioNumero() {
+		return domicilioNumero;
 	}
-	public void setNumcalle(String numcalle) {
-		this.numcalle = numcalle;
+
+	public void setDomicilioNumero(String domicilioNumero) {
+		this.domicilioNumero = domicilioNumero;
 	}
+
+	public String getDomicilioDepto() {
+		return domicilioDepto;
+	}
+
+	public void setDomicilioDepto(String domicilioDepto) {
+		this.domicilioDepto = domicilioDepto;
+	}
+
 	public Sucursal getSucursal() {
 		return sucursal;
 	}
+
 	public void setSucursal(Sucursal sucursal) {
 		this.sucursal = sucursal;
 	}
+
+	public Pase getPase() {
+		return pase;
+	}
+
+	public void setPase(Pase pase) {
+		this.pase = pase;
+	}
+	
+	
+	
 
 	
 }
