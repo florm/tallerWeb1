@@ -42,10 +42,10 @@ public class SucursalActividad {
 	private Set<Socio> socios = new HashSet<>();
 	//
 	
-	public Long getId() {
+	public Long getIdSucursalActividad() {
 		return idSucursalActividad;
 	}
-	public void setId(Long id) {
+	public void setIdSucursalActividad(Long id) {
 		this.idSucursalActividad = id;
 	}
 	public Date getDia() {
@@ -84,7 +84,12 @@ public class SucursalActividad {
 	public void setSucursal(Sucursal sucursal) {
 		this.sucursal = sucursal;
 	}
-	
+	public Set<Socio> getSocios() {
+		return socios;
+	}
+	public void setSocios(Set<Socio> socios) {
+		this.socios = socios;
+	}
 	
 
 }

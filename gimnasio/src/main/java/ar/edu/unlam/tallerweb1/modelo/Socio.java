@@ -45,11 +45,11 @@ public class Socio {
     private Set<SucursalActividad> actividadesEnSucursal = new HashSet<>();
 	//
 	
-	public Long getId() {
+	public Long getIdSocio() {
 		return idSocio;
 	}
 
-	public void setId(Long id) {
+	public void setIdSocio(Long id) {
 		this.idSocio = id;
 	}
 
@@ -156,9 +156,15 @@ public class Socio {
 	public void setPase(Pase pase) {
 		this.pase = pase;
 	}
-	
-	
-	
 
+	public Set<SucursalActividad> getActividadesEnSucursal() {
+		return actividadesEnSucursal;
+	}
+
+	public void setActividadesEnSucursal(Set<SucursalActividad> actividadesEnSucursal) {
+		this.actividadesEnSucursal = actividadesEnSucursal;
+	}
+	
+	
 	
 }
