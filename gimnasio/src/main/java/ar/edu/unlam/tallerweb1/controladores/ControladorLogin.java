@@ -23,7 +23,7 @@ public class ControladorLogin {
 	private ServicioLogin servicioLogin;
 
 	// Este metodo escucha la URL localhost:8080/NOMBRE_APP/login si la misma es invocada por metodo http GET
-	@RequestMapping("/login")
+	@RequestMapping("/inscripcion")
 	public ModelAndView irALogin() {
 
 		ModelMap modelo = new ModelMap();
@@ -33,7 +33,7 @@ public class ControladorLogin {
 		modelo.put("usuario", usuario);
 		// Se va a la vista login (el nombre completo de la lista se resuelve utilizando el view resolver definido en el archivo spring-servlet.xml)
 		// y se envian los datos a la misma  dentro del modelo
-		return new ModelAndView("login", modelo);
+		return new ModelAndView("inscripcion", modelo);
 	}
 
 	// Este metodo escucha la URL validar-login siempre y cuando se invoque con metodo http POST
