@@ -39,20 +39,6 @@ public class ActividadDaoImpl implements ActividadDao {
 		
 		session.save(socio);
 		session.save(sucursalActividad);
-		
-//		Socio socio = 
-//				(Socio) session.createCriteria(Socio.class)
-//				.add(Restrictions.eq("idSocio", idSocio))
-//				.uniqueResult();
-		
-//		SucursalActividad sucursalActividad = 
-//				(SucursalActividad) session.createCriteria(SucursalActividad.class)
-//				.add(Restrictions.eq("idSucursalActividad", idSucursalActividad))
-//				.uniqueResult();
-				
-				
-
-		
 	}
 
 }
