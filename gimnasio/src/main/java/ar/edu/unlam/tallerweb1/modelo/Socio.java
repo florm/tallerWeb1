@@ -1,9 +1,13 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
@@ -12,7 +16,7 @@ import javax.persistence.ManyToOne;
 public class Socio {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long idSocio;
 	private String dni;
 	private String nombre;
 	private String apellido;
@@ -35,14 +39,18 @@ public class Socio {
 	
 	@ManyToOne
 	private Pase pase;
-	//Falta ManyToMany con SucAct
-
+	
+	//ManyToMany con SucursalActividad
+	@ManyToMany(mappedBy = "socios")
+    private Set<SucursalActividad> actividadesEnSucursal = new HashSet<>();
+	//
+	
 	public Long getId() {
-		return id;
+		return idSocio;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		this.idSocio = id;
 	}
 
 	public String getDni() {
