@@ -70,7 +70,7 @@
 							<li class="active"><a href="index.html">Inicio</a></li>
 							<li><a href="gallery.html">Galería</a></li>
 							<li><a href="about.html">Nosotros</a></li>
-							<li><a href="pricing.html">Pases</a></li>
+							<li><a href="pases">Pases</a></li>
 							<li><a href="contact.html">Contacto</a></li>
 							<li class="has-dropdown">
 								<a href="blog.html">Mi Cuenta</a>
