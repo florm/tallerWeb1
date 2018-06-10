@@ -15,29 +15,25 @@ import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioActividad;
 import helpers.Formulario;
 
+@Controller
 public class ControladorActividad {
 @Inject
 private ServicioActividad servicioActividad;
 
-@RequestMapping(path = "/inscripcion-actividad", method = RequestMethod.POST) //Formulario clase auxiliar
+@RequestMapping(path = "/inscribiractividad", method = RequestMethod.POST) //Formulario clase auxiliar
 public ModelAndView irAFormularioDeInscripcionActividad(@ModelAttribute ("formulario") Formulario formulario) {
-	//Long idSucursal = formulario.getIdSucursal();
 	Formulario formularioVacio = new Formulario();
 	ModelMap model = new ModelMap();
 	List<SucursalActividad> lista = servicioActividad.listarActividadesEnSucursal(formulario.getIdSucursal());
 	model.put("listaActividades", lista);
-	model.put("formulario", formularioVacio); //el ModelAttribute se va a llamar formulario en el form
-	return new ModelAndView("inscripcion-actividad", model);
+	model.put("formulario", formularioVacio); 
+	return new ModelAndView("inscribiractividad", model);
 	}
 
-@RequestMapping(path = "/registrar-actividad-socio", method = RequestMethod.POST)
-public ModelAndView irARegistroCompleto(@ModelAttribute("formulario") Formulario formulario) { //suponiendo que recibe idSocio y idSucursalActividad
-	//Long idSocio = formulario.getIdSocio();
-	//Long idSucursalActividad = formulario.getIdSucursal();
+@RequestMapping(path = "/registrarsocio", method = RequestMethod.POST)
+public ModelAndView irARegistroCompleto(@ModelAttribute("formulario") Formulario formulario) {
 	servicioActividad.guardarSocioActividadSucursal(formulario.getIdSocio(), formulario.getIdSucursalActividad());
-	//servicioActividad.guardarSocioActividadSucursal(idSocio, idSucursalActividad);
-	
-	return new ModelAndView("/");
+	return new ModelAndView("registrocompleto");
 	}
 
 
