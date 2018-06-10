@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ar.edu.unlam.tallerweb1.dao.SucursalActividadDao;
+import ar.edu.unlam.tallerweb1.dao.ActividadDao;
 import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 
 @Service ("ServicioActividad")
@@ -15,15 +15,14 @@ import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 public class ServicioActividadImp implements ServicioActividad {
 	
 	@Inject
-	private SucursalActividadDao servicioSucursalActividadDao;
+	private ActividadDao servicioActividadDao;
 	@Override
 	public List<SucursalActividad> listarActividadesEnSucursal(Long id) {
-		return servicioSucursalActividadDao.listarActividadesEnSucursal(id);
+		return servicioActividadDao.listarActividadesEnSucursal(id);
 	}
 	@Override
 	public void guardarSocioActividadSucursal(Long idSocio, Long idSucursalActividad) {
-		// TODO Auto-generated method stub
-		
+		servicioActividadDao.guardarSocioActividadSucursal(idSocio, idSucursalActividad);
 	}
 
 }

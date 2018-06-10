@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 
-@Repository ("SucursalActividadDao")
-public class SucursalActividadDaoImpl implements SucursalActividadDao {
+@Repository ("ActividadDao")
+public class ActividadDaoImpl implements ActividadDao {
 	
 	@Inject
     private SessionFactory sessionFactory;
