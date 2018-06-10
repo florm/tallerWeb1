@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.SocioDao;
+import ar.edu.unlam.tallerweb1.modelo.Pase;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 
 @Service("servicioSocio")
@@ -20,5 +21,6 @@ public class ServicioSocioImpl implements ServicioSocio {
 	public List<Socio> buscarSocios(Long idSucursal) {
 		return socioDao.buscarSocios(idSucursal);
 	}
+	
 
 }

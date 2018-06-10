@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import ar.edu.unlam.tallerweb1.modelo.Pase;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 
 @Repository("socioDao")
@@ -28,4 +29,5 @@ public class SocioDaoImpl implements SocioDao {
 		return listaDeSocios;
 	}
 
+	
 }
