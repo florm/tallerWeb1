@@ -458,7 +458,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 #fh5co-header .display-tc .btn,
 #fh5co-counter .display-tc .btn,
-.fh5co-cover .display-tc .btn {
+.fh5co-cover .display-tc .btn{
   padding: 15px 30px;
   background: #F85A16 !important;
   color: #fff;
@@ -1688,3 +1688,6 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+
+

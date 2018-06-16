@@ -98,7 +98,7 @@
 						<div class="display-tc animate-box" data-animate-effect="fadeIn">
 							<h1>Un estilo de vida, <br> no un deber.</h1>
 							<h2>La cadena de gimnasios más grande de Buenos Aires</h2>
-							<p><a href="https://vimeo.com/channels/staffpicks/93951774" class="btn btn-primary popup-vimeo">Registrarse</a></p>
+							<p><a href="login" class="btn btn-primary popup-vimeo">Registrarse</a></p>
 						</div>
 					</div>
 				</div>

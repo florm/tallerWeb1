@@ -1,0 +1,10 @@
+@CHARSET "ISO-8859-1";
+
+.btn-login{
+    padding: 8px 43px;
+  background: #F85A16 !important;
+  color: #fff;
+  border: none !important;
+  font-size: 18px;
+  border-radius: 30px;
+}
