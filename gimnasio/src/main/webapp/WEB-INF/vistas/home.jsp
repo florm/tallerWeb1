@@ -113,7 +113,7 @@
 			</div>
 		</div>
 	</header>
-<!-- modal registro -->
+<!-- modal login -->
 <div class="modal fade login" id="modal-login" role="dialog" tabindex="-1">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
@@ -163,9 +163,7 @@
 	<script src="js/owl.carousel.min.js"></script>
 	<!-- countTo -->
 	<script src="js/jquery.countTo.js"></script>
-	<!-- Magnific Popup -->
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/magnific-popup-options.js"></script>
+	
 	<!-- Main -->
 	<script src="js/main.js"></script>
 
