@@ -7,8 +7,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Stamina Gimnasios</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
-	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
 	<meta name="author" content="freehtml5.co" />
 
 
@@ -18,7 +16,9 @@
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
 	<link rel="stylesheet" href="css/icomoon.css">
+	
 	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap4.min.css">
 	<link rel="stylesheet" href="css/bootstrap.css">
 
 	<!-- Magnific Popup -->
@@ -37,6 +37,9 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+	
+	<link href="css/fontawesome-all.css" rel="stylesheet">
+	<link href="css/estilos.css" rel="stylesheet">
 
 	</head>
 	<body>
@@ -72,7 +75,8 @@
 							<li><a href="about.html">Nosotros</a></li>
 							<li><a href="pases">Pases</a></li>
 							<li><a href="contact.html">Contacto</a></li>
-							<li class="has-dropdown">
+							
+							<li class="has-dropdown" id="usuario-menu">
 								<a href="blog.html">Mi Cuenta</a>
 								<ul class="dropdown">
 									<li><a href="#">Inscripciones</a></li>
@@ -81,6 +85,7 @@
 									<li><a href="#">Mis datos</a></li>
 								</ul>
 							</li>
+							
 						</ul>
 					</div>
 				</div>
@@ -98,14 +103,50 @@
 						<div class="display-tc animate-box" data-animate-effect="fadeIn">
 							<h1>Un estilo de vida, <br> no un deber.</h1>
 							<h2>La cadena de gimnasios más grande de Buenos Aires</h2>
-							<p><a href="login" class="btn btn-primary popup-vimeo">Registrarse</a></p>
+							
+							<button id="btn-modal" class="btn with-arrow" type="button" rel="tooltip" data-placement="bottom" title="" data-toggle="modal" data-target="#modal-login" data-original-title="Login">
+								Ingresar
+							</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</header>
-
+<!-- modal registro -->
+<div class="modal fade login" id="modal-login" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Iniciar sesion</h4>
+        <button class="close" aria-label="Close" data-dismiss="modal" ,="" type="button">
+          <span aria-hidden="true">×</span>
+        </button>
+        
+      </div>
+      <div class="modal-body p-5">
+	      <form class="text-center" method="post" action="validar-login" id="form-login">
+		    <div class="form-group input-size">
+		        <input type="text" class="form-control" id="email"  name="email" placeholder="Email" required>
+		    </div>
+		    <div class="form-group input-size">
+		        <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
+		    </div>
+		    <div id="divLoginErroneo" class="alert alert-danger-custom" role="alert" hidden="hidden">
+		        Revise su Usuario y Contraseña e intente ingresar nuevamente
+		    </div>
+		
+		    <input type="submit" id="btn-login" value="Ingresar" class="btn btn-primary">
+		    <div class="text-center">
+		        <span>Aún no está registrado?</span>
+		        <a href="usuario/registrar">Registrarse</a>
+		    </div>
+		</form>
+      	
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 
 <!-- jQuery -->
@@ -128,6 +169,7 @@
 	<!-- Main -->
 	<script src="js/main.js"></script>
 
+	<script src="js/home.js"></script>
 	
 
 <body>
