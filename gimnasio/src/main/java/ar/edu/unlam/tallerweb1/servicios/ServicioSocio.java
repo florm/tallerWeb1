@@ -7,5 +7,5 @@ import ar.edu.unlam.tallerweb1.modelo.Socio;
 public interface ServicioSocio {
 
 	List<Socio> buscarSocios(Long idSucursal);
-	
+	void agregarPaseASocio(Long idSocio, Long idPase);
 }
