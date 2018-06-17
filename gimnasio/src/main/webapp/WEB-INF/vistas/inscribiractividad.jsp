@@ -11,12 +11,12 @@
 <body>
 	
 	<form:form action="lala" method="GET" modelAttribute="formulario">
-  	<select >
+  	<form:select path="idSucursalActividad">
  		<option value=""> Seleccione actividad..
  		<c:forEach items= "${listaActividades}" var="listaActividades">
- 			<option value="${listaActividades.idSucursalActividad}" path="idSucursalActividad">${listaActividades.actividad.getNombre()}	
+ 			<option value="${listaActividades.idSucursalActividad}">${listaActividades.actividad.getNombre()}	
  		</c:forEach>
-  	</select>
+  	</form:select>
   	
   	<br><br>Prueba<br>  <form:input path="prueba" type="text" />
  	
