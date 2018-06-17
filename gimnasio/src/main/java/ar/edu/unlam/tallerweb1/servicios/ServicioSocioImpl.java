@@ -22,5 +22,9 @@ public class ServicioSocioImpl implements ServicioSocio {
 		return socioDao.buscarSocios(idSucursal);
 	}
 	
-
+	@Override
+	public void agregarPaseASocio(Long idSocio, Long idPase) {
+		socioDao.agregarPaseASocio(idSocio, idPase);
+	}
+	
 }
