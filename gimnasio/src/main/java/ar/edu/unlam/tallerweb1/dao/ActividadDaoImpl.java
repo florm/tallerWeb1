@@ -16,13 +16,15 @@ public class ActividadDaoImpl implements ActividadDao {
 	
 	@Inject
     private SessionFactory sessionFactory;
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<SucursalActividad> listarActividadesEnSucursal(Long id) {
 		final Session session = sessionFactory.getCurrentSession();
 		List <SucursalActividad> lista = 
 				session.createCriteria(SucursalActividad.class)
 				.createAlias("sucursal", "buscaSucursal")
-				.add(Restrictions.eq("buscaSucursal.idSucursal", id))
+				.add(Restrictions.eq("buscaSucursal.id", id))
 				.list();
 		return lista;
 	}

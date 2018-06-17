@@ -29,5 +29,12 @@ public class SocioDaoImpl implements SocioDao {
 		return listaDeSocios;
 	}
 
-	
+	@Override
+	public void agregarPaseASocio(Long idSocio, Long idPase) {
+		final Session sesion = sessionFactory.getCurrentSession();
+		Socio socio = sesion.get(Socio.class, idSocio);
+		Pase pase = sesion.get(Pase.class, idPase);
+		socio.setPase(pase);
+		sesion.save(socio);
+	}
 }
