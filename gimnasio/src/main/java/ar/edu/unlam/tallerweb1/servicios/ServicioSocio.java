@@ -9,5 +9,7 @@ public interface ServicioSocio {
 
 	List<Socio> buscarSocios(Long idSucursal);
 	Socio buscarSocio(Usuario usuario);
+	Socio buscarSocio(Long idSocio);
 	void agregarPaseASocio(Long idSocio, Long idPase);
+	
 }

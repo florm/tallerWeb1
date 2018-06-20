@@ -14,6 +14,7 @@ public class Beneficio {
 	private Long id;
 	
 	private String nombre;
+	private String descuento;
 	private String descripcion;
 	
 	@ManyToOne
@@ -49,6 +50,14 @@ public class Beneficio {
 
 	public void setPase(Pase pase) {
 		this.pase = pase;
+	}
+	
+	public String getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(String descuento) {
+		this.descuento = descuento;
 	}
 	
 	

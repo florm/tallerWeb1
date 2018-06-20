@@ -1188,9 +1188,9 @@ h1, h2, h3, h4, h5, h6, figure {
   padding-left: 7px;
 }
 .fh5co-blog .blog-text h3 {
-  font-size: 20px;
-  margin-bottom: 20px;
-  line-height: 1.5;
+    font-size: 20px;
+    margin-bottom: 42px;
+    line-height: 1.5;
 }
 .fh5co-blog .blog-text h3 a {
   color: black;

@@ -19,46 +19,55 @@ value("matisuarez@gmail.com", "123456", null);
 insert into usuario(email, password, rol)
 value("jlopez@gmail.com", "123456", null);
 
--- tabla socio
-insert into Socio(apellido, dni, domicilioCalle, domicilioDepto, domicilioNumero, mail, nombre, pais, telefono, ciudad_id, pase_id, provincia_id, sucursal_id, usuario_id)
-values('Suarez', '29941591','oro',null,'1813', 'matisuarez@gmail.com', 'Matias', 'Argentina', '1544896790',1, null, 1, 1, 1);
-insert into Socio(apellido, dni, domicilioCalle, domicilioDepto, domicilioNumero, mail, nombre, pais, telefono, ciudad_id, pase_id, provincia_id, sucursal_id, usuario_id)
-values('Lopez', '40345678','suipacha',null,'300', 'jlopez@gmail.com', 'Julieta', 'Argentina','1593457123', null, null, 2, 2, 2);
-
 
 -- tabla pase
 insert into Pase(cantidadActividades, nombre, precio)
-values(null,'Plan Premiun', 1600);
-insert into Pase(cantidadActividades, nombre, precio)
-values(10,'Plan Estandar', 1200);
+values(2,'Plan Inicial', 700);
 insert into Pase(cantidadActividades, nombre, precio)
 values(3,'Plan Basico', 800);
+insert into Pase(cantidadActividades, nombre, precio)
+values(10,'Plan Plus', 1200);
+insert into Pase(cantidadActividades, nombre, precio)
+values(null,'Plan Premiun', 1700);
+
+-- tabla socio
+insert into Socio(apellido, dni, domicilioCalle, domicilioDepto, domicilioNumero, mail, nombre, pais, telefono, ciudad_id, pase_id, provincia_id, sucursal_id, usuario_id)
+values('Suarez', '29941591','oro',null,'1813', 'matisuarez@gmail.com', 'Matias', 'Argentina', '1544896790',1, 1, 1, 1, 1);
+insert into Socio(apellido, dni, domicilioCalle, domicilioDepto, domicilioNumero, mail, nombre, pais, telefono, ciudad_id, pase_id, provincia_id, sucursal_id, usuario_id)
+values('Lopez', '40345678','suipacha',null,'300', 'jlopez@gmail.com', 'Julieta', 'Argentina','1593457123', null, 4, 2, 2, 2);
+
+
+
+
+
 
 -- tabla beneficio
-insert into Beneficio (descripcion, nombre, pase_id)
-values('Descuento del 20% en tu compra','Adidas',1);
-insert into Beneficio (descripcion, nombre, pase_id)
-values('Descuento del 20% en tu compra','Nike',1);
-insert into Beneficio (descripcion, nombre, pase_id)
-values('20% de Descuento en todos los productos exceptuando lentes de contacto descartables y soluciones','Lof',1);
-insert into Beneficio (descripcion, nombre, pase_id)
-values('20% de descuento en mesas restaurante y
-10% de descuento sobre cubierto en salones privados para eventos','Rodizio',1);
-insert into Beneficio (descripcion, nombre, pase_id)
-values('15% de descuento en planes de salud','Medife',1);
+insert into Beneficio (descripcion, descuento, nombre, pase_id)
+values('En cualquier producto de nuestra tienda','20% OFF','Adidas',4);
+insert into Beneficio (descripcion, descuento, nombre, pase_id)
+values('Valido unicamente para indumentaria (no zapatillas)','20% OFF','Nike',4);
+insert into Beneficio (descripcion, descuento, nombre, pase_id)
+values('En todos los productos exceptuando lentes de contacto descartables y soluciones','30% OFF','Lof',4);
+insert into Beneficio (descripcion, descuento, nombre, pase_id)
+values('En mesas restaurante y sobre cubierto en salones privados para eventos','25% OFF','AmericaResto',4);
+insert into Beneficio (descripcion, descuento, nombre, pase_id)
+values('En plan de salud plata','15% OFF','Medife',4);
 
-insert into Beneficio (descripcion, nombre, pase_id)
-values('Descuento del 10% en tu compra','Adidas',2);
-insert into Beneficio (descripcion, nombre, pase_id)
-values('15% de descuento en mesas restaurante y
-10% de descuento sobre cubierto en salones privados para eventos','Rodizio',2);
-insert into Beneficio (descripcion, nombre, pase_id)
-values('10% de descuento en planes de salud','Medife',2);
+insert into Beneficio (descripcion, descuento, nombre, pase_id)
+values('En cualquier producto de nuestra tienda','10% OFF','Adidas',3);
+insert into Beneficio (descripcion, descuento, nombre, pase_id)
+values('En mesas restaurante y sobre cubierto en salones privados para eventos','15% OFF','AmericaResto',3);
+insert into Beneficio (descripcion, descuento, nombre, pase_id)
+values('En plan de salud clasico','10% OFF','Medife',3);
 
-insert into Beneficio (descripcion, nombre, pase_id)
-values('10% de descuento en mesas restaurante','Rodizio',3);
-insert into Beneficio (descripcion, nombre, pase_id)
-values('5% de descuento en planes de salud','Medife',3);
+insert into Beneficio (descripcion, descuento, nombre, pase_id)
+values('Solo valido para mesas restaurante','10% OFF','AmericaResto',2);
+insert into Beneficio (descripcion, descuento, nombre, pase_id)
+values('En planes de salud basico','5% OFF','Medife',2);
+
+insert into Beneficio (descripcion, descuento, nombre, pase_id)
+values('En mesas restaurante','5% OFF','AmericaResto',1);
+
 
 -- tabla actividad
 insert into actividad(nombre)
@@ -72,15 +81,15 @@ values ('Spinning');
 
 -- tabla profesor
 insert into profesor(apellido, nombre)
-values('Maria','Lopez');
+values('Lopez','Maria');
 insert into profesor(apellido, nombre)
-values('Juan','Fernandez');
+values('Fernandez','Juan');
 insert into profesor(apellido, nombre)
-values('Laura','Rodriguez');
+values('Rodriguez','Laura');
 insert into profesor(apellido, nombre)
-values('Diego','Castro');
+values('Castro','Diego');
 insert into profesor(apellido, nombre)
-values('Luciano','Diaz');
+values('Diaz','Luciano');
 
 
 -- tabla sucursal actividad
@@ -97,4 +106,8 @@ insert into sucursalactividad (cupo, dia, horaDesde, horaHasta, actividad_id,pro
 values (10,'Viernes','15','16',3,5,1);
 insert into sucursalactividad (cupo, dia, horaDesde, horaHasta, actividad_id,profesor_id, sucursal_id)
 values (15,'Sabado','11','12',4,1,1);
+
+
+
+
 

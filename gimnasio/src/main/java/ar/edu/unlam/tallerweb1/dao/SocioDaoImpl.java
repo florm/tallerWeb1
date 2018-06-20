@@ -50,6 +50,16 @@ public class SocioDaoImpl implements SocioDao {
 		Hibernate.initialize(socio.getSucursal());
 		Hibernate.initialize(socio.getSucursal().getListaActividades());
 		Hibernate.initialize(socio.getSucursal().getListaSocios());
+		Hibernate.initialize(socio.getPase());
+		return socio;
+	}
+
+	@Override
+	public Socio buscarSocio(Long idSocio) {
+		Session sesion = sessionFactory.getCurrentSession();
+		Socio socio = (Socio) sesion.createCriteria(Socio.class)
+				.add(Restrictions.eq("idSocio", idSocio))
+				.uniqueResult();
 		return socio;
 	}
 	
