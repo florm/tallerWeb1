@@ -16,7 +16,7 @@ Lista de Usuarios
   	<select>
  	
  		<c:forEach items= "${listaSocios}" var="socio">
- 			<option value="${socio.id}">${socio.nombre}	
+ 			<option value="${socio.idSocio}">${socio.nombre}	
  		</c:forEach>
   	</select> 
 </form>

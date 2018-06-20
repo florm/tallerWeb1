@@ -13,33 +13,26 @@
 	<link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">
 	
 	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
+	<link href="<c:url value="/css/animate.css" />" rel="stylesheet">
 	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	
+	<link href="<c:url value="/css/icomoon.css" />" rel="stylesheet">
 	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap4.min.css">
-	<link rel="stylesheet" href="css/bootstrap.css">
-
-	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="css/magnific-popup.css">
-
-	<!-- Owl Carousel  -->
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<link href="<c:url value="/css/bootstrap4.min.css" />" rel="stylesheet">
+	<link href="<c:url value="/css/bootstrap.css" />" rel="stylesheet">
 
 	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
-
+	<link href="<c:url value="/css/style.css" />" rel="stylesheet">
+	
 	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="<c:url value="/js/modernizr-2.6.2.min.js" />"></script>
+	
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
+	<script src="<c:url value="/js/respond.min.js" />"></script>
 	<![endif]-->
 	
-	<link href="css/fontawesome-all.css" rel="stylesheet">
-	<link href="css/estilos.css" rel="stylesheet">
+	<link href="<c:url value="/css/fontawesome-all.css" />" rel="stylesheet">
+	<link href="<c:url value="/css/estilos.css" />" rel="stylesheet">
 
 	</head>
 	<body>
@@ -75,12 +68,12 @@
 					</div>
 					<div class="d-flex menu-1">
 						<ul>
-							<li class="active"><a href="<c:url value="/home" />">Inicio</a></li>
+							<li class="active"><a href="index.html">Inicio</a></li>
 							<li><a href="gallery.html">Galería</a></li>
 							<li><a href="about.html">Nosotros</a></li>
 							<li><a href="pases">Pases</a></li>
 							<li><a href="contact.html">Contacto</a></li>
-							<li><a href="<c:url value="./sucursal/${sessionScope.idSucursal}/actividades" />">Actividades</a></li>
+							<li><a href="<c:url value="/sucursal/${sessionScope.idSucursal}/actividades" />">Actividades</a></li>
 							
 						</ul>
 					</div>
@@ -91,49 +84,51 @@
 		</div>
 	</nav>
 
-	<header id="fh5co-header" class="fh5co-cover" style="background-image:url(images/img_banner.jpg);" data-stellar-background-ratio="0.3">
-		<div class="overlay"></div>
-		<div class="container">
+	<div class="container">
 			<div class="row">
-				<div class="col-md-8 col-md-offset-2 text-center">
-					<div class="display-t">
-						<div class="display-tc animate-box" data-animate-effect="fadeIn">
-							<h1>Un estilo de vida, <br> no un deber.</h1>
-							<h2>La cadena de gimnasios más grande de Buenos Aires</h2>
-							<!-- 
-							<button id="btn-modal" class="btn with-arrow" type="button" rel="tooltip" data-placement="bottom" title="" data-toggle="modal" data-target="#modal-login" data-original-title="Login">
-								Ingresar
-							</button> -->
+				<c:forEach items="${listaActividades}" var="lista">
+					<div class="col-md-4 text-center animate-box fadeInUp animated-fast">
+						<div class="services">
+							<h3>${lista.actividad.nombre}</h3>
+							<h4>Cupo Máximo ${lista.cupo} personas</h4>
+							<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius</p>
+							<p><a href="#" class="btn btn-primary btn-outline btn-sm">More <i class="icon-arrow-right"></i></a></p>
 						</div>
 					</div>
-				</div>
+				</c:forEach>
+							
 			</div>
 		</div>
-	</header>
 
 
 <!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
+	
+	<script src="<c:url value="/js/jquery.min.js" />"></script>
 	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
+	
+	<script src="<c:url value="/js/jquery.easing.1.3.js" />"></script>
 	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
+	
+	<script src="<c:url value="/js/bootstrap.min.js" />"></script>
 	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
+		
+	<script src="<c:url value="/js/jquery.waypoints.min.js" />"></script>
 	<!-- Stellar Parallax -->
-	<script src="js/jquery.stellar.min.js"></script>
+	
+	<script src="<c:url value="/js/jquery.stellar.min.js" />"></script>
 	<!-- Carousel -->
-	<script src="js/owl.carousel.min.js"></script>
+	
+	<script src="<c:url value="/js/owl.carousel.min.js" />"></script>
 	<!-- countTo -->
-	<script src="js/jquery.countTo.js"></script>
+	
+	<script src="<c:url value="/js/jquery.countTo.js" />"></script>
 	
 	<!-- Main -->
-	<script src="js/main.js"></script>
-
-	<script src="js/home.js"></script>
+	<script src="<c:url value="/js/main.js" />"></script>
+	
 	
 
-<body>
+
 </body>
 
 </html>

@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.persistencia;
 import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.Sucursal;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 import org.junit.Test;
 import org.springframework.test.annotation.Rollback;
@@ -67,6 +68,33 @@ public class ConexionBaseDeDatosTest extends SpringTest{
         
         
     }
+    @SuppressWarnings({ "unused", "unchecked" })
+	@Test
+    @Transactional @Rollback(true)
+    public void testBuscaSocio(){
+    	Session sesion = getSession();
+    	Usuario usuario1 = new Usuario();
+    	usuario1.setEmail("email1");
+    	usuario1.setPassword("pass1");
+    	sesion.save(usuario1);
+        
+        Socio socio1 = new Socio();
+        socio1.setNombre("martin");
+        socio1.setUsuario(usuario1);
+        Socio socio2 = new Socio();
+        socio2.setNombre("juan");
+        
+        sesion.save(socio1);
+        sesion.save(socio2);
+        
+        Socio socio =  (Socio) sesion.createCriteria(Socio.class)
+    			.createAlias("usuario", "buscarPorUsuario")
+    			.add(Restrictions.eq("buscarPorUsuario.email", "email1")).uniqueResult();
+        
+        System.out.println(socio.getNombre());
+        
+    }
+    
     
     
 }

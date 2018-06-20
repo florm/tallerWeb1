@@ -4,11 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 
 
@@ -24,6 +26,17 @@ public class Socio {
 	private String mail;
 	private String pais;
 	
+	@OneToOne
+	private Usuario usuario;
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	@ManyToOne
 	private Provincia provincia;
 	
@@ -41,7 +54,7 @@ public class Socio {
 	private Pase pase;
 	
 	//ManyToMany con SucursalActividad
-	@ManyToMany(mappedBy = "socios")
+	@ManyToMany(mappedBy = "socios", fetch=FetchType.EAGER)
     private Set<SucursalActividad> actividadesEnSucursal = new HashSet<>();
 	//
 	

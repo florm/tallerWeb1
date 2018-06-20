@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.edu.unlam.tallerweb1.dao.SocioDao;
 import ar.edu.unlam.tallerweb1.modelo.Pase;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 @Service("servicioSocio")
 @Transactional
@@ -25,6 +26,11 @@ public class ServicioSocioImpl implements ServicioSocio {
 	@Override
 	public void agregarPaseASocio(Long idSocio, Long idPase) {
 		socioDao.agregarPaseASocio(idSocio, idPase);
+	}
+
+	@Override
+	public Socio buscarSocio(Usuario usuario) {
+		return socioDao.buscarSocio(usuario);
 	}
 	
 }

@@ -21,3 +21,15 @@
 	padding: 0;
 	margin: 0;
 }
+
+.not-active {
+  pointer-events: none;
+  cursor: default;
+  text-decoration: none;
+  color: black;
+}
+
+.services{
+	margin-top: 2rem;
+	border-top: 2px solid orange;
+}
