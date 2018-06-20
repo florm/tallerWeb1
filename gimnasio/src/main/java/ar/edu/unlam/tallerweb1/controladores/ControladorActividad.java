@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
@@ -22,12 +23,19 @@ public class ControladorActividad {
 	@Inject
 	private ServicioActividad servicioActividad;
 
-	@RequestMapping(path = "/registrarsocio", method = RequestMethod.POST)
+	@RequestMapping(path = "/registrarActividad", method = RequestMethod.POST)
 	public ModelAndView irARegistroCompleto(@ModelAttribute("formulario") Formulario formulario) {
 		servicioActividad.guardarSocioActividadSucursal(formulario.getIdSocio(), formulario.getIdSucursalActividad());
-		return new ModelAndView("registrocompleto");
+		ModelMap modelo = new ModelMap();
+		modelo.put("exito", "La inscripcion se realizó correctamente");
+		return new ModelAndView("listaActividades", modelo);
 	}
-
+	
+	@RequestMapping(path = "/actividad/{idSucursalActividad}", method = RequestMethod.GET)
+	public ModelAndView irARegistroCompleto(@PathVariable Long idSucursalActividad, @RequestParam(value="socio") Long idSocio) {
+		servicioActividad.guardarSocioActividadSucursal(idSocio, idSucursalActividad);
+		return new ModelAndView("listaActividades");
+	}
 	// INSCRIBIR SOCIO EN ACTIVIDAD
 
 	// ORIGINAL, falta persistir
@@ -70,8 +78,10 @@ public class ControladorActividad {
 	@RequestMapping("/sucursal/{id}/actividades")
 	public ModelAndView irAListaActividades(@PathVariable Long id) {
 		ModelMap modelo = new ModelMap();
+		Formulario formulario = new Formulario();
 		List<SucursalActividad> lista = servicioActividad.listarActividadesEnSucursal(id);
 		modelo.put("listaActividades", lista);
+		modelo.put("formularioInscripcion", formulario);
 		return new ModelAndView("listaActividades",modelo);
 	}
 
