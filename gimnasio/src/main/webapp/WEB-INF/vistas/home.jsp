@@ -52,6 +52,7 @@
 				<div class="container">
 					<div class="row justify-content-end">
 						<div class="col-auto">
+							<a href="<c:url value="/"/>">Salir</a>
 							<p>Bienvenido ${sessionScope.nombre}</p>
 						</div>
 						<div class="col-auto">
@@ -80,7 +81,9 @@
 							<li><a href="about.html">Nosotros</a></li>
 							<li><a href="pases">Pases</a></li>
 							<li><a href="contact.html">Contacto</a></li>
-							<li><a href="<c:url value="./sucursal/${sessionScope.idSucursal}/actividades" />">Actividades</a></li>
+							<li><a href="<c:url value="/sucursal/${sessionScope.idSucursal}/actividades" />">Actividades</a></li>
+							<li><a href="<c:url value="/beneficios/pase/${sessionScope.idPase}" />">Beneficios</a></li>								
+							<li><a href="<c:url value="/socio/${sessionScope.idSocio}/mi-cuenta" />">Mi Cuenta</a></li>
 							
 						</ul>
 					</div>
