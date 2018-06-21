@@ -48,7 +48,7 @@
 					<div class="row justify-content-end">
 						<div class="col-auto">
 							<a href="<c:url value="/"/>">Salir</a>
-							<p class="num">Bienvenido/a ${sessionScope.nombre}</p>
+							<p>Bienvenido/a ${sessionScope.nombre}</p>
 						</div>
 						<div class="col-auto">
 
@@ -92,40 +92,25 @@
 
 		<div class="container">
 			<div class="row">
-				<c:forEach items="${listaActividades}" var="lista">
-					<div
-						class="col-md-4 text-center animate-box fadeInUp animated-fast">
-						<div class="services">
-							<h3>${lista.actividad.nombre}</h3>
-							<h4>Cupo Máximo ${lista.cupo} personas</h4>
-							<span class="time">${lista.dia} de ${lista.horaDesde} a ${lista.horaHasta} hs</span>
-							<p>Profesor a cargo:</p>
-							<label>${lista.profesor.nombre} ${lista.profesor.apellido}</label>
-							<c:url var="post_url" value="/registrarActividad" />
-							<form:form action="${post_url}" method="post"
-								modelAttribute="formularioInscripcion">
-								<form:input path="idSocio" name="idSocio"
-									value="${sessionScope.idSocio}" hidden="hidden"></form:input>
-								<form:input path="idSucursalActividad"
-									name="idSucursalActividad" value="${lista.idSucursalActividad}"
-									hidden="hidden"></form:input>
-								<form:input path="idSucursal" name="idSucursal"
-									value="${sessionScope.idSucursal}" hidden="hidden"></form:input>
-								<p>
-									<button type="submit"
-										class="btn btn-primary btn-outline btn-sm">
-										Inscribirse <i class="icon-arrow-right"></i>
-									</button>
-								</p>
-							</form:form>
-
-						</div>
+				<c:forEach items="${listaBeneficios}" var="lista">
+					<div class="col-lg-4 col-md-4">
+					<div class="fh5co-blog animate-box fadeInUp animated-fast">
+						<c:url var="imagen" value="/images/${lista.nombre}.jpg" />
+						<a href="#"><img class="img-responsive" src="${imagen}" alt=""></a>
+						<div class="blog-text d-flex flex-column justify-content-between align-items-start">
+							<h3><a class="text-uppercase "href="" #="">${lista.nombre}</a></h3>
+							<span class="posted_on">${lista.descuento}</span>
+							
+							<p>${lista.descripcion}</p>
+							<a href="#" class="btn btn-primary">Imprimir cupón</a>
+						</div> 
 					</div>
+				</div>
 				</c:forEach>
 
 			</div>
 		</div>
-</div>
+
 
 		<!-- jQuery -->
 

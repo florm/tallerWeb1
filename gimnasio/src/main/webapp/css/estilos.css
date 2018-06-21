@@ -34,3 +34,27 @@
 	border-top: 2px solid orange;
 }
 
+#formularioInscripcion{
+	margin: 2rem;
+}
+
+span.time {
+    display: inline-block;
+    padding: 5px 12px;
+    background: #F85A16;
+    color: #fff;
+    font-size: 13px;
+}
+
+.fh5co-blog .blog-text {
+   margin-top: -2em !important;
+}
+
+.fh5co-blog a img {
+    width: 73%;
+}
+
+.fh5co-blog .blog-text {
+   	min-height: 333px !important;
+    box-shadow: 9px 10px 20px -10px rgb(248, 91, 23) !important;
+}
