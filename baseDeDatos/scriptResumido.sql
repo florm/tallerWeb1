@@ -72,14 +72,18 @@ values('En mesas restaurante','5% OFF','America Restó',1);
 
 
 -- tabla actividad
-insert into actividad(nombre)
-values ('Pilates');
-insert into actividad(nombre)
-values ('Natacion');
-insert into actividad(nombre)
-values ('Yoga');
-insert into actividad(nombre)
-values ('Spinning');
+insert into actividad(nombre) values ('Pilates');
+insert into actividad(nombre) values ('Natacion');
+insert into actividad(nombre) values ('Yoga');
+insert into actividad(nombre) values ('Spinning');
+insert into Actividad(nombre) values ('Kick Boxing');
+insert into Actividad(nombre) values ('Crossfit');
+insert into Actividad(nombre) values ('Cardio Funcional');
+insert into Actividad(nombre) values ('Boxeo');
+insert into Actividad(nombre) values ('Fitness');
+insert into Actividad(nombre) values ('Zumba');
+insert into Actividad(nombre) values ('Body Pump');
+insert into Actividad(nombre) values ('Power Plate');
 
 -- tabla profesor
 insert into profesor(apellido, nombre)
@@ -108,8 +112,6 @@ insert into sucursalactividad (cupo, dia, horaDesde, horaHasta, actividad_id,pro
 values (10,'Viernes','15','16',3,5,1);
 insert into sucursalactividad (cupo, dia, horaDesde, horaHasta, actividad_id,profesor_id, sucursal_id)
 values (15,'Sabado','11','12',4,1,1);
-
-
 
 
 
