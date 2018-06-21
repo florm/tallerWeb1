@@ -6,7 +6,7 @@
 		<div class="container">
 			<div class="row justify-content-end">
 				<div class="col-auto">
-					<a href="<c:url value="/"/>">Salir</a>
+					<a href="<c:url value="/salir"/>">Salir</a>
 					<p class="num">Bienvenido/a ${sessionScope.nombre}</p>
 				</div>
 				<div class="col-auto">
@@ -31,8 +31,7 @@
 					</div>
 				</div>
 				<div class="d-flex menu-1">
-					<ul>
-					<h1>${sessionScope.idSocio}</h1>
+					<ul>					
 						<c:choose>
 							<c:when test="${sessionScope.rol != null}">
 								<!-- menu admin -->
