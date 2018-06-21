@@ -820,16 +820,16 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 .price-box {
-  width: 100%;
-  text-align: center;
-  padding: 30px;
-  background: rgba(0, 0, 0, 0.05);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  border-radius: 5px;
-  margin-bottom: 40px;
-  position: relative;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.05);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 40px;
+    position: relative;
 }
 .price-box.popular .btn-select-plan {
   background: #F85A16;
@@ -877,9 +877,9 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 .price {
-  font-size: 72px;
-  color: #000;
-  line-height: 50px;
+    font-size: 55px;
+    color: #000;
+    line-height: 50px;
 }
 .price .currency {
   font-size: 30px;
