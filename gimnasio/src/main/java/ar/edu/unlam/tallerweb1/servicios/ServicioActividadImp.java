@@ -24,5 +24,14 @@ public class ServicioActividadImp implements ServicioActividad {
 	public void guardarSocioActividadSucursal(Long idSocio, Long idSucursalActividad) {
 		servicioActividadDao.guardarSocioActividadSucursal(idSocio, idSucursalActividad);
 	}
-
+	@Override
+	public Boolean validarInscripcionActividad(Long idSocio) {
+		Integer cantActividades = 0;
+		cantActividades=servicioActividadDao.obtenerCantidadDeActividades(idSocio);
+		if(cantActividades>=0||cantActividades==null) {
+			return true;
+		}
+		else 
+			return false;
+	}
 }

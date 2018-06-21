@@ -43,4 +43,12 @@ public class ActividadDaoImpl implements ActividadDao {
 		session.save(sucursalActividad);
 	}
 
+	@Override
+	public Integer obtenerCantidadDeActividades(Long idSocio) {
+		Integer cantRestantesActividades=0;
+		final Session session = sessionFactory.getCurrentSession();
+		Socio socio  = session.get(Socio.class, idSocio);
+		cantRestantesActividades= 5-socio.getActividadesEnSucursal().size();
+		return cantRestantesActividades;
+	}
 }

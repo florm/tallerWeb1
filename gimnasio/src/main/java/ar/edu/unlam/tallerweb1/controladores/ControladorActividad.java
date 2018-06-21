@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioActividad;
+import ar.edu.unlam.tallerweb1.servicios.ServicioActividadImp;
 import helpers.Formulario;
 
 @Controller
@@ -25,10 +26,16 @@ public class ControladorActividad {
 
 	@RequestMapping(path = "/registrarActividad", method = RequestMethod.POST)
 	public ModelAndView irARegistroCompleto(@ModelAttribute("formulario") Formulario formulario) {
-		servicioActividad.guardarSocioActividadSucursal(formulario.getIdSocio(), formulario.getIdSucursalActividad());
 		ModelMap modelo = new ModelMap();
-		modelo.put("exito", "La inscripcion se realizó correctamente");
-		return new ModelAndView("listaActividades", modelo);
+		if(servicioActividad.validarInscripcionActividad(formulario.getIdSocio())==true) {
+			servicioActividad.guardarSocioActividadSucursal(formulario.getIdSocio(), formulario.getIdSucursalActividad());
+			modelo.put("exito", "La inscripcion se realizó correctamente");
+			return new ModelAndView("listaActividades", modelo);
+		}
+		else {
+			modelo.put("error","Ah alcanzado el numero maximo de actividades");
+			return new ModelAndView("errorCantActividades", modelo);
+		}	
 	}
 	
 	@RequestMapping(path = "/actividad/{idSucursalActividad}", method = RequestMethod.GET)

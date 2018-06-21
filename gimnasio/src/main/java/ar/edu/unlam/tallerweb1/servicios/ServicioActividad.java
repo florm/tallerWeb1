@@ -8,4 +8,5 @@ public interface ServicioActividad {
 
 	List<SucursalActividad> listarActividadesEnSucursal(Long id); //Recibe el id de sucursal de usuario
 	public void guardarSocioActividadSucursal(Long idSocio, Long idSucursalActividad);
+	public Boolean validarInscripcionActividad(Long idSocio);
 }

@@ -83,6 +83,3 @@ values (10,null,null,null,3,1);
 insert into sucursalactividad (cupo, dia, horaDesde, horaHasta, actividad_id, sucursal_id)
 values (15,null,null,null,4,1);
 
-
-
-

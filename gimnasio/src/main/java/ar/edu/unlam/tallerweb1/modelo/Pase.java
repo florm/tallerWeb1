@@ -15,7 +15,7 @@ public class Pase {
 	private Long id;
 	
 	private String nombre;
-	private Integer cantidadActividades;
+	private Integer cantidadActividades=0;
 	private Double precio;
 	
 	@OneToMany
