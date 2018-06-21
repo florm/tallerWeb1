@@ -14,10 +14,12 @@ insert into Sucursal(calle, codPostal, nombre, numcalle, pais, ciudad_id, provin
 values('Maipu', '1005','Sucursal Centro','850','Argentina', null, 2);
 
 -- tabla usuario
+insert into usuario(email,password,rol)
+value('admin@stamina.com','admin','admin');
 insert into usuario(email, password, rol)
-value("matisuarez@gmail.com", "123456", null);
+value('matisuarez@gmail.com', '123456', null);
 insert into usuario(email, password, rol)
-value("jlopez@gmail.com", "123456", null);
+value('jlopez@gmail.com', '123456', null);
 
 
 -- tabla pase
@@ -49,24 +51,24 @@ values('Valido unicamente para indumentaria (no zapatillas)','20% OFF','Nike',4)
 insert into Beneficio (descripcion, descuento, nombre, pase_id)
 values('En todos los productos exceptuando lentes de contacto descartables y soluciones','30% OFF','Lof',4);
 insert into Beneficio (descripcion, descuento, nombre, pase_id)
-values('En mesas restaurante y sobre cubierto en salones privados para eventos','25% OFF','AmericaResto',4);
+values('En mesas restaurante y sobre cubierto en salones privados para eventos','25% OFF','America Restó',4);
 insert into Beneficio (descripcion, descuento, nombre, pase_id)
 values('En plan de salud plata','15% OFF','Medife',4);
 
 insert into Beneficio (descripcion, descuento, nombre, pase_id)
 values('En cualquier producto de nuestra tienda','10% OFF','Adidas',3);
 insert into Beneficio (descripcion, descuento, nombre, pase_id)
-values('En mesas restaurante y sobre cubierto en salones privados para eventos','15% OFF','AmericaResto',3);
+values('En mesas restaurante y sobre cubierto en salones privados para eventos','15% OFF','America Restó',3);
 insert into Beneficio (descripcion, descuento, nombre, pase_id)
 values('En plan de salud clasico','10% OFF','Medife',3);
 
 insert into Beneficio (descripcion, descuento, nombre, pase_id)
-values('Solo valido para mesas restaurante','10% OFF','AmericaResto',2);
+values('Solo valido para mesas restaurante','10% OFF','America Restó',2);
 insert into Beneficio (descripcion, descuento, nombre, pase_id)
 values('En planes de salud basico','5% OFF','Medife',2);
 
 insert into Beneficio (descripcion, descuento, nombre, pase_id)
-values('En mesas restaurante','5% OFF','AmericaResto',1);
+values('En mesas restaurante','5% OFF','America Restó',1);
 
 
 -- tabla actividad

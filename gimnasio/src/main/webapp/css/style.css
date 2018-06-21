@@ -91,9 +91,8 @@ h1, h2, h3, h4, h5, h6, figure {
   z-index: 1001;
 }
 .fh5co-nav .top-menu {
-    padding: 15px 0;
+    padding: 2rem;
     border-bottom: 2px solid #f85a16;
-    margin-bottom: 2rem;
 }
 .fh5co-nav .top {
   background: #F85A16;

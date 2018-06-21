@@ -40,11 +40,18 @@ public class ControladorLogin {
 
 		Usuario usuarioBuscado = servicioLogin.consultarUsuario(usuario);
 		if (usuarioBuscado != null) {
-			request.getSession().setAttribute("idSucursal",
-					servicioSocio.buscarSocio(usuarioBuscado).getSucursal().getId());
-			request.getSession().setAttribute("nombre", servicioSocio.buscarSocio(usuarioBuscado).getNombre());
-			request.getSession().setAttribute("idSocio", servicioSocio.buscarSocio(usuarioBuscado).getIdSocio());
-			request.getSession().setAttribute("idPase", servicioSocio.buscarSocio(usuarioBuscado).getPase().getId());
+			if(usuarioBuscado.getRol()!= null){
+				request.getSession().setAttribute("rol", usuarioBuscado.getRol());
+				request.getSession().setAttribute("nombre", "admin");
+			}
+			else{
+				request.getSession().setAttribute("idSucursal",
+						servicioSocio.buscarSocio(usuarioBuscado).getSucursal().getId());
+				request.getSession().setAttribute("nombre", servicioSocio.buscarSocio(usuarioBuscado).getNombre());
+				request.getSession().setAttribute("idSocio", servicioSocio.buscarSocio(usuarioBuscado).getIdSocio());
+				request.getSession().setAttribute("idPase", servicioSocio.buscarSocio(usuarioBuscado).getPase().getId());
+			}
+						
 			return new ModelAndView("redirect:/home");
 		} else {
 			ModelMap model = new ModelMap();
