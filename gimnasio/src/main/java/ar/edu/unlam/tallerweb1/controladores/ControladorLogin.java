@@ -40,12 +40,20 @@ public class ControladorLogin {
 
 		Usuario usuarioBuscado = servicioLogin.consultarUsuario(usuario);
 		if (usuarioBuscado != null) {
-			request.getSession().setAttribute("idSucursal",
-					servicioSocio.buscarSocio(usuarioBuscado).getSucursal().getId());
-			request.getSession().setAttribute("nombre", servicioSocio.buscarSocio(usuarioBuscado).getNombre());
-			request.getSession().setAttribute("idSocio", servicioSocio.buscarSocio(usuarioBuscado).getIdSocio());
-			request.getSession().setAttribute("idPase", servicioSocio.buscarSocio(usuarioBuscado).getPase().getId());
+			if(usuarioBuscado.getRol() != null){
+				request.getSession().setAttribute("rol", usuarioBuscado.getRol());
+				request.getSession().setAttribute("nombre", "admin");
+			}
+			else{
+				request.getSession().setAttribute("idSucursal",
+						servicioSocio.buscarSocio(usuarioBuscado).getSucursal().getId());
+				request.getSession().setAttribute("nombre", servicioSocio.buscarSocio(usuarioBuscado).getNombre());
+				request.getSession().setAttribute("idSocio", servicioSocio.buscarSocio(usuarioBuscado).getIdSocio());
+				request.getSession().setAttribute("idPase", servicioSocio.buscarSocio(usuarioBuscado).getPase().getId());
+			}
+						
 			return new ModelAndView("redirect:/home");
+		
 		} else {
 			ModelMap model = new ModelMap();
 			model.put("error", "Usuario o clave incorrecta");
@@ -82,5 +90,10 @@ public class ControladorLogin {
 	// return new ModelAndView("redirect:/login");
 	// }
 	
+	@RequestMapping(path = "/salir")
+	public ModelAndView salir(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return new ModelAndView("redirect:/");
+	}
 	
 }

@@ -42,54 +42,8 @@
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
-		<nav class="fh5co-nav" role="navigation">
-			<div class="top">
-				<div class="container">
-					<div class="row justify-content-end">
-						<div class="col-auto">
-							<a href="<c:url value="/"/>">Salir</a>
-							<p class="num">Bienvenido/a ${sessionScope.nombre}</p>
-						</div>
-						<div class="col-auto">
+		<%@include file="menu.jsp"%>
 
-							<p class="num">Tel: +01 123 456 7890</p>
-							<ul class="fh5co-social">
-								<li><a href="#"><i class="icon-twitter"></i></a></li>
-								<li><a href="#"><i class="icon-dribbble"></i></a></li>
-								<li><a href="#"><i class="icon-github"></i></a></li>
-							</ul>
-						</div>
-
-					</div>
-				</div>
-			</div>
-			<div class="top-menu">
-				<div class="container-fluid">
-					<div class="row justify-content-between menuppal">
-						<div class="col-xs-2">
-							<div id="fh5co-logo">
-								<a href="index.html">Stamina<span>.</span></a>
-							</div>
-						</div>
-						<div class="d-flex menu-1">
-							<ul>
-								<li class="active"><a href="index.html">Inicio</a></li>
-								<li><a href="gallery.html">Galería</a></li>
-								<li><a href="about.html">Nosotros</a></li>
-								<li><a href="pases">Pases</a></li>
-								<li><a href="contact.html">Contacto</a></li>
-								<li><a href="<c:url value="/sucursal/${sessionScope.idSucursal}/actividades" />">Actividades</a></li>
-								<li><a href="<c:url value="/beneficios/pase/${sessionScope.idPase}" />">Beneficios</a></li>
-								<li><a href="<c:url value="/socio/${sessionScope.idSocio}/mi-cuenta" />">Mi Cuenta</a></li>
-							</ul>
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-		</nav>
-		
 		<div class="container">
 		<c:if test="${not empty exito}">
 				<h4>
@@ -105,9 +59,11 @@
 						<div class="services">
 							<h3>${lista.actividad.nombre}</h3>
 							<h4>Cupo Máximo ${lista.cupo} personas</h4>
-							<span class="time">${lista.dia} de ${lista.horaDesde} a ${lista.horaHasta} hs</span>
+							<span class="time">${lista.dia} de ${lista.horaDesde} a
+								${lista.horaHasta} hs</span>
 							<p>Profesor a cargo:</p>
-							<label>${lista.profesor.nombre} ${lista.profesor.apellido}</label>
+							<label>${lista.profesor.nombre}
+								${lista.profesor.apellido}</label>
 							<c:url var="post_url" value="/registrarActividad" />
 							<form:form action="${post_url}" method="post"
 								modelAttribute="formularioInscripcion">
@@ -132,32 +88,31 @@
 
 			</div>
 		</div>
-</div>
+	</div>
+	<!-- jQuery -->
 
-		<!-- jQuery -->
+	<script src="<c:url value="/js/jquery.min.js" />"></script>
+	<!-- jQuery Easing -->
 
-		<script src="<c:url value="/js/jquery.min.js" />"></script>
-		<!-- jQuery Easing -->
+	<script src="<c:url value="/js/jquery.easing.1.3.js" />"></script>
+	<!-- Bootstrap -->
 
-		<script src="<c:url value="/js/jquery.easing.1.3.js" />"></script>
-		<!-- Bootstrap -->
+	<script src="<c:url value="/js/bootstrap.min.js" />"></script>
+	<!-- Waypoints -->
 
-		<script src="<c:url value="/js/bootstrap.min.js" />"></script>
-		<!-- Waypoints -->
+	<script src="<c:url value="/js/jquery.waypoints.min.js" />"></script>
+	<!-- Stellar Parallax -->
 
-		<script src="<c:url value="/js/jquery.waypoints.min.js" />"></script>
-		<!-- Stellar Parallax -->
+	<script src="<c:url value="/js/jquery.stellar.min.js" />"></script>
+	<!-- Carousel -->
 
-		<script src="<c:url value="/js/jquery.stellar.min.js" />"></script>
-		<!-- Carousel -->
+	<script src="<c:url value="/js/owl.carousel.min.js" />"></script>
+	<!-- countTo -->
 
-		<script src="<c:url value="/js/owl.carousel.min.js" />"></script>
-		<!-- countTo -->
+	<script src="<c:url value="/js/jquery.countTo.js" />"></script>
 
-		<script src="<c:url value="/js/jquery.countTo.js" />"></script>
-
-		<!-- Main -->
-		<script src="<c:url value="/js/main.js" />"></script>
+	<!-- Main -->
+	<script src="<c:url value="/js/main.js" />"></script>
 </body>
 
 </html>
