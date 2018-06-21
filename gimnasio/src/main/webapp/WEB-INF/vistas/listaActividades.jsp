@@ -1,4 +1,4 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+ <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <html>
@@ -89,8 +89,15 @@
 				</div>
 			</div>
 		</nav>
-
+		
 		<div class="container">
+		<c:if test="${not empty exito}">
+				<h4>
+					<span class="mr-2">${exito}</span>
+					<a href=<c:url value="/sucursal/${sessionScope.idSucursal}/actividades" />>Volver</a>
+				</h4>
+				<br>
+			</c:if>
 			<div class="row">
 				<c:forEach items="${listaActividades}" var="lista">
 					<div
