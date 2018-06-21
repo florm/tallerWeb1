@@ -61,14 +61,18 @@ insert into Beneficio (descripcion, nombre, pase_id)
 values('5% de descuento en planes de salud','Medife',3);
 
 -- tabla actividad
-insert into actividad(nombre)
-values ('Pilates');
-insert into actividad(nombre)
-values ('Natacion');
-insert into actividad(nombre)
-values ('Yoga');
-insert into actividad(nombre)
-values ('Spinning');
+insert into actividad(nombre) values ('Pilates');
+insert into actividad(nombre) values ('Natacion');
+insert into actividad(nombre) values ('Yoga');
+insert into actividad(nombre) values ('Spinning');
+insert into Actividad(nombre) values ('Kick Boxing');
+insert into Actividad(nombre) values ('Crossfit');
+insert into Actividad(nombre) values ('Cardio Funcional');
+insert into Actividad(nombre) values ('Boxeo');
+insert into Actividad(nombre) values ('Fitness');
+insert into Actividad(nombre) values ('Zumba');
+insert into Actividad(nombre) values ('Body Pump');
+insert into Actividad(nombre) values ('Power Plate');
 
 -- tabla profesor
 insert into profesor(apellido, nombre)
