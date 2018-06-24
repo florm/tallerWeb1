@@ -42,52 +42,30 @@
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
-		<%@include file="menu.jsp"%>
+		<%@include file="menuSinLogin.jsp"%>
 
 		<div class="container">
-		<c:if test="${not empty exito}">
-				<h4>
-					<span class="mr-2">${exito}</span>
-					<a href="<c:url value="/sucursal/${sessionScope.idSucursal}/actividades" />">Volver</a>
-				</h4>
-				<br>
-			</c:if>
+			<div class="row d-flex flex-column text-center m-5">
+				<h2>Actividades</h2>
+				<p>Los días y horarios de las Actividades varían de acuerdo a la Sucursal</p>
+			</div>
 			<div class="row">
-				<c:forEach items="${listaActividades}" var="lista">
+				<c:forEach items="${listaActividades}" var="actividad">
 					<div
 						class="col-md-4 text-center animate-box fadeInUp animated-fast">
 						<div class="services">
-							<h3>${lista.actividad.nombre}</h3>
-							<h4>Cupo Máximo ${lista.cupo} personas</h4>
-							<span class="time">${lista.dia} de ${lista.horaDesde} a
-								${lista.horaHasta} hs</span>
-							<p>Profesor a cargo:</p>
-							<label>${lista.profesor.nombre}
-								${lista.profesor.apellido}</label>
-							<c:url var="post_url" value="/registrarActividad" />
-							<form:form action="${post_url}" method="post"
-								modelAttribute="formularioInscripcion">
-								<form:input path="idSocio" name="idSocio"
-									value="${sessionScope.idSocio}" hidden="hidden"></form:input>
-								<form:input path="idSucursalActividad"
-									name="idSucursalActividad" value="${lista.idSucursalActividad}"
-									hidden="hidden"></form:input>
-								<form:input path="idSucursal" name="idSucursal"
-									value="${sessionScope.idSucursal}" hidden="hidden"></form:input>
-								<p>
-									<button type="submit"
-										class="btn btn-primary btn-outline btn-sm">
-										Inscribirse <i class="icon-arrow-right"></i>
-									</button>
-								</p>
-							</form:form>
-
+						<c:url var="imagen" value="/images/${actividad.nombre}.svg" />
+						<span><img class="img-responsive" src="${imagen}" alt=""></span>
+							<h3>${actividad.nombre}</h3>
+							<p>${actividad.descripcion}</p>
+							
 						</div>
 					</div>
 				</c:forEach>
 
 			</div>
 		</div>
+		<%@include file="footer.jsp"%>
 	</div>
 	<!-- jQuery -->
 

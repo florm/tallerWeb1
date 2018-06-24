@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSocio;
+import ar.edu.unlam.tallerweb1.servicios.ServicioSucursal;
 
 @RestController
 public class ControladorLogin {
@@ -25,6 +26,8 @@ public class ControladorLogin {
 	private ServicioLogin servicioLogin;
 	@Inject
 	private ServicioSocio servicioSocio;
+	@Inject
+	private ServicioSucursal servicioSucursal;
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView irALogin() {
@@ -43,6 +46,7 @@ public class ControladorLogin {
 			if(usuarioBuscado.getRol() != null){
 				request.getSession().setAttribute("rol", usuarioBuscado.getRol());
 				request.getSession().setAttribute("nombre", "admin");
+				return new ModelAndView("redirect:/homeAdmin");
 			}
 			else{
 				request.getSession().setAttribute("idSucursal",
@@ -65,6 +69,13 @@ public class ControladorLogin {
 	@RequestMapping(path = "/home")
 	public ModelAndView irAHome() {
 		return new ModelAndView("home");
+	}
+	
+	@RequestMapping(path = "/homeAdmin")
+	public ModelAndView irAHomeAdministrador() {
+		ModelMap modelo = new ModelMap();
+		modelo.put("listaSucursales", servicioSucursal.listarSucursales());
+		return new ModelAndView("homeAdministrador", modelo);
 	}
 
 	@RequestMapping("/inscripcion")

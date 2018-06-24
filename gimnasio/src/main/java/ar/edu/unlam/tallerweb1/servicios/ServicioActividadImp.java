@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.ActividadDao;
+import ar.edu.unlam.tallerweb1.modelo.Actividad;
 import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 
 @Service ("ServicioActividad")
@@ -23,6 +24,10 @@ public class ServicioActividadImp implements ServicioActividad {
 	@Override
 	public void guardarSocioActividadSucursal(Long idSocio, Long idSucursalActividad) {
 		servicioActividadDao.guardarSocioActividadSucursal(idSocio, idSucursalActividad);
+	}
+	@Override
+	public List<Actividad> listaActividades() {
+		return servicioActividadDao.listaActividades();
 	}
 
 }
