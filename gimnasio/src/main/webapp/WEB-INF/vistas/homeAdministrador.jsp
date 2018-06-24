@@ -14,31 +14,14 @@
 	href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800"
 	rel="stylesheet">
 
-<!-- Animate.css -->
-<link rel="stylesheet" href="css/animate.css">
-<!-- Icomoon Icon Fonts-->
-<link rel="stylesheet" href="css/icomoon.css">
-
 <!-- Bootstrap  -->
 <link rel="stylesheet" href="css/bootstrap4.min.css">
 <link rel="stylesheet" href="css/bootstrap.css">
 
-<!-- Magnific Popup -->
-<link rel="stylesheet" href="css/magnific-popup.css">
-
-<!-- Owl Carousel  -->
-<link rel="stylesheet" href="css/owl.carousel.min.css">
-<link rel="stylesheet" href="css/owl.theme.default.min.css">
-
 <!-- Theme style  -->
 <link rel="stylesheet" href="css/style.css">
 
-<!-- Modernizr JS -->
-<script src="js/modernizr-2.6.2.min.js"></script>
-<!-- FOR IE9 below -->
-<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
+<link href="<c:url value="/css/datatables.css" />" rel="stylesheet">
 
 <link href="css/fontawesome-all.css" rel="stylesheet">
 <link href="css/estilos.css" rel="stylesheet">
@@ -49,32 +32,37 @@
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
-		<%@include file="menu.jsp"%>
+		<%@include file="menuAdministrador.jsp"%>
 
-		<header id="fh5co-header" class="fh5co-cover"
-			style="background-image: url(images/img_banner.jpg);"
-			data-stellar-background-ratio="0.3">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2 text-center">
-						<div class="display-t">
-							<div class="display-tc animate-box" data-animate-effect="fadeIn">
-								<h1>
-									Un estilo de vida, <br> no un deber.
-								</h1>
-								<h2>La cadena de gimnasios más grande de Buenos Aires</h2>
-								<!-- 
-							<button id="btn-modal" class="btn with-arrow" type="button" rel="tooltip" data-placement="bottom" title="" data-toggle="modal" data-target="#modal-login" data-original-title="Login">
-								Ingresar
-							</button> -->
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
-		<%@include file="footer.jsp"%>
+		<div class="container mt-5">
+			<table id="sucursales" class="table table-striped table-bordered" style="width:100%">
+				<thead>
+					<tr>
+						<td>Nombre</td>
+						<td>Localidad</td>
+						<td>Direccion</td>
+						<td>Codigo Postal</td>
+						<td>Responsable</td>
+						<td>Acciones</td>
+					</tr>
+				
+				</thead>
+				<tbody>
+					<c:forEach items="${listaSucursales}" var="sucursal">
+						<tr>
+							<td>${sucursal.nombre}</td>
+							<td>${sucursal.ciudad.nombre}</td>
+							<td>${sucursal.calle} ${sucursal.numcalle}</td>
+							<td>${sucursal.codPostal}</td>
+							<td>${sucursal.operador.nombre} ${sucursal.operador.apellido}</td>
+							<td><a href="<c:url value="socios?idSucursal=${sucursal.id}" />" class="btn btn-primary btn-outline btn-sm">Ver socios <i class="icon-arrow-right"></i></a></td>
+						</tr>
+					</c:forEach>
+				
+				</tbody>
+			
+			</table>
+		</div>	
 	</div>
 
 
@@ -93,11 +81,13 @@
 	<!-- countTo -->
 	<script src="js/jquery.countTo.js"></script>
 
+	<script src="<c:url value="/js/datatables.js" />"></script>
 	<!-- Main -->
 	<script src="js/main.js"></script>
-
+	
+	<script src="<c:url value="/js/sucursales.js" />"></script>
 	<script src="js/home.js"></script>
-<body>
+
 </body>
 
 </html>

@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import ar.edu.unlam.tallerweb1.modelo.Actividad;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 
@@ -41,6 +42,14 @@ public class ActividadDaoImpl implements ActividadDao {
 		
 		session.save(socio);
 		session.save(sucursalActividad);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Actividad> listaActividades() {
+		final Session session = sessionFactory.getCurrentSession();
+		List<Actividad> listaActividades = session.createCriteria(Actividad.class).list();
+		return listaActividades;
 	}
 
 }

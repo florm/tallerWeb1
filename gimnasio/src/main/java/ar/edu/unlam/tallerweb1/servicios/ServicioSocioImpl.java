@@ -37,5 +37,10 @@ public class ServicioSocioImpl implements ServicioSocio {
 	public Socio buscarSocio(Long idSocio) {
 		return socioDao.buscarSocio(idSocio);
 	}
+
+	@Override
+	public List<Socio> buscarSocios() {
+		return socioDao.buscarSocios();
+	}
 	
 }

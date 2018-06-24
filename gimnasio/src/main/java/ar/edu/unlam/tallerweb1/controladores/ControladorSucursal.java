@@ -29,5 +29,7 @@ public class ControladorSucursal {
 		
 		return new ModelAndView("listaSocios", modelo);
 	}
+	
+	
 
 }

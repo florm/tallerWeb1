@@ -32,6 +32,7 @@
 .services{
 	margin-top: 2rem;
 	border-top: 2px solid #7b300f;
+	height: 388px;
 }
 
 #formularioInscripcion{
@@ -57,4 +58,33 @@ span.time {
 .fh5co-blog .blog-text {
    	min-height: 333px !important;
     box-shadow: 9px 10px 20px -10px rgb(248, 91, 23) !important;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #f85a16 !important;
+    border-color: #f85a16 !important;
+}
+
+.login{
+	padding: 20px;
+    background: #f85a16;
+    margin: 12px;
+    z-index: 1000;
+}
+
+.form-login button {
+    padding: 5px 10px;
+    color: #000;
+    border: none;
+    background: none;
+}
+
+.form-login input{
+	background: #ffffff;
+    border: none;
+    margin: 10px;
+    padding: 1px;
+    font-size: 15px;
 }

@@ -7,6 +7,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.servicios.ServicioSocio;
@@ -30,4 +31,21 @@ public class ControladorSocio {
 		servicioSocio.agregarPaseASocio(formulario.getIdSocio(), formulario.getIdPase());
 		return new ModelAndView("cargacompleta");
 	}
+	
+	@RequestMapping(path = "socios/")
+	public ModelAndView listarSocios(){
+		ModelMap modelo = new ModelMap();
+		modelo.put("listaSocios", servicioSocio.buscarSocios());
+		return new ModelAndView("socios",modelo);
+	}
+	
+	@RequestMapping(path = "socios")
+	public ModelAndView listarSocios(@RequestParam(value="idSucursal") Long idSucursal){
+		ModelMap modelo = new ModelMap();
+		modelo.put("listaSocios", servicioSocio.buscarSocios(idSucursal));
+		return new ModelAndView("socios",modelo);
+	}
+	
+	
+	
 }

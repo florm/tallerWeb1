@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Actividad;
 import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioActividad;
 import helpers.Formulario;
 
@@ -83,6 +85,17 @@ public class ControladorActividad {
 		modelo.put("listaActividades", lista);
 		modelo.put("formularioInscripcion", formulario);
 		return new ModelAndView("listaActividades",modelo);
+	}
+	
+	@RequestMapping("/actividades")
+	public ModelAndView verActividades() {
+		ModelMap modelo = new ModelMap();
+		Usuario usuario = new Usuario();
+		
+		List<Actividad> listaActividades = servicioActividad.listaActividades();
+		modelo.put("listaActividades", listaActividades);
+		modelo.put("usuario", usuario);
+		return new ModelAndView("actividadesGenerales",modelo);
 	}
 
 }

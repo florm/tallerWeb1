@@ -62,6 +62,14 @@ public class SocioDaoImpl implements SocioDao {
 				.uniqueResult();
 		return socio;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Socio> buscarSocios() {
+		Session sesion = sessionFactory.getCurrentSession();
+		List<Socio> socio = sesion.createCriteria(Socio.class).list();
+		return socio;
+	}
 	
 	
 }

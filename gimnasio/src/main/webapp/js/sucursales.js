@@ -1,4 +1,4 @@
-var pases = $('#pases').DataTable( {
+var sucursales = $('#sucursales').DataTable( {
         lengthChange: false,
             
         scrollY:        400,
