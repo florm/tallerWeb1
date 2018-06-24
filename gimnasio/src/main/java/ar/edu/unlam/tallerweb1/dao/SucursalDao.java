@@ -7,4 +7,5 @@ import ar.edu.unlam.tallerweb1.modelo.Sucursal;
 
 public interface SucursalDao {
 	List<Sucursal> listaSucursales();
+	Sucursal getSucursal(Long id);
 }

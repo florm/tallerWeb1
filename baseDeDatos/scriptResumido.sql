@@ -114,5 +114,15 @@ values (10,'Viernes','15','16',3,5,1);
 insert into sucursalactividad (cupo, dia, horaDesde, horaHasta, actividad_id,profesor_id, sucursal_id)
 values (15,'Sabado','11','12',4,1,1);
 
+-- tabla pago
+insert into pago(fecha,importe,socio_idSocio)
+values('20180502', 1200.00,1);
+insert into pago(fecha,importe,socio_idSocio)
+values('20180505', 800.00,1);
+insert into pago(fecha,importe,socio_idSocio)
+values('20180615', 500.00,2);
+insert into pago(fecha,importe,socio_idSocio)
+values('20180625', 400.00,1);
+
 
 

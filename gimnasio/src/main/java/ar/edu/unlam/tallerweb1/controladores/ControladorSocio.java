@@ -32,19 +32,7 @@ public class ControladorSocio {
 		return new ModelAndView("cargacompleta");
 	}
 	
-	@RequestMapping(path = "socios/")
-	public ModelAndView listarSocios(){
-		ModelMap modelo = new ModelMap();
-		modelo.put("listaSocios", servicioSocio.buscarSocios());
-		return new ModelAndView("socios",modelo);
-	}
 	
-	@RequestMapping(path = "socios")
-	public ModelAndView listarSocios(@RequestParam(value="idSucursal") Long idSucursal){
-		ModelMap modelo = new ModelMap();
-		modelo.put("listaSocios", servicioSocio.buscarSocios(idSucursal));
-		return new ModelAndView("socios",modelo);
-	}
 	
 	
 	

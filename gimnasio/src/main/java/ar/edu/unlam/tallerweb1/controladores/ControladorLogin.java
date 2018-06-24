@@ -16,12 +16,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioSucursal;
 @RestController
 public class ControladorLogin {
 
-	// La anotacion @Inject indica a Spring que en este atributo se debe setear
-	// (inyeccion de dependencias)
-	// un objeto de una clase que implemente la interface ServicioLogin, dicha
-	// clase debe estar anotada como
-	// @Service o @Repository y debe estar en un paquete de los indicados en
-	// applicationContext.xml
+	
 	@Inject
 	private ServicioLogin servicioLogin;
 	@Inject
@@ -71,12 +66,7 @@ public class ControladorLogin {
 		return new ModelAndView("home");
 	}
 	
-	@RequestMapping(path = "/homeAdmin")
-	public ModelAndView irAHomeAdministrador() {
-		ModelMap modelo = new ModelMap();
-		modelo.put("listaSucursales", servicioSucursal.listarSucursales());
-		return new ModelAndView("homeAdministrador", modelo);
-	}
+	
 
 	@RequestMapping("/inscripcion")
 	public ModelAndView irAInscripcion() {

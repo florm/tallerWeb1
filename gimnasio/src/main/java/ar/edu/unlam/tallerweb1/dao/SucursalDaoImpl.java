@@ -28,6 +28,14 @@ public class SucursalDaoImpl implements SucursalDao {
 				.list();
 		return lista;
 	}
+
+	@Override
+	public Sucursal getSucursal(Long id) {
+		Session sesion = sessionFactory.getCurrentSession();
+		Sucursal sucursal = sesion.get(Sucursal.class, id);
+				
+		return sucursal;
+	}
 	
 	
 }
