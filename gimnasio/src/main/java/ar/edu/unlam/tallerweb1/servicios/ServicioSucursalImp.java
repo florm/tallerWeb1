@@ -22,6 +22,11 @@ public class ServicioSucursalImp implements ServicioSucursal {
 	public List<Sucursal> listarSucursales() {
 		return sucursalDao.listaSucursales();
 	}
+
+	@Override
+	public Sucursal getSucursal(Long id) {
+		return sucursalDao.getSucursal(id);
+	}
 	
 
 }

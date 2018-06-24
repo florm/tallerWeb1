@@ -88,3 +88,9 @@ span.time {
     padding: 1px;
     font-size: 15px;
 }
+
+.contenedor-fltros {
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px 0 #e4eaec;
+}

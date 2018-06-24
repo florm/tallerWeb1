@@ -9,5 +9,6 @@ import ar.edu.unlam.tallerweb1.modelo.Sucursal;
 public interface ServicioSucursal {
 
 	List<Sucursal> listarSucursales(); 
+	Sucursal getSucursal(Long id);
 	
 }
