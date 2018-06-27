@@ -59,6 +59,7 @@
 						<div class="services">
 							<h3>${lista.actividad.nombre}</h3>
 							<h4>Cupo Máximo ${lista.cupo} personas</h4>
+							<h4>Cupo Actual ${lista.cupoActual}/${lista.cupo} personas</h4>
 							<span class="time">${lista.dia} de ${lista.horaDesde} a
 								${lista.horaHasta} hs</span>
 							<p>Profesor a cargo:</p>
