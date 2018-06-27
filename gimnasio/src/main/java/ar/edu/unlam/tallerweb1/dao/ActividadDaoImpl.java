@@ -40,8 +40,9 @@ public class ActividadDaoImpl implements ActividadDao {
 		socio.getActividadesEnSucursal().add(sucursalActividad);
 		sucursalActividad.getSocios().add(socio);
 		
-		session.save(socio);
-		session.save(sucursalActividad);
+		session.update(socio);
+		session.update(sucursalActividad);
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -50,6 +51,15 @@ public class ActividadDaoImpl implements ActividadDao {
 		final Session session = sessionFactory.getCurrentSession();
 		List<Actividad> listaActividades = session.createCriteria(Actividad.class).list();
 		return listaActividades;
+	}
+
+	@Override
+	public SucursalActividad traerActividadDeSucursal(Long idSucursalActividad) {
+		Session sesion = sessionFactory.getCurrentSession();
+		SucursalActividad sucursalActividad = (SucursalActividad) sesion.createCriteria(SucursalActividad.class)
+				.add(Restrictions.eq("idSucursalActividad", idSucursalActividad))
+				.uniqueResult();
+		return sucursalActividad;
 	}
 
 }

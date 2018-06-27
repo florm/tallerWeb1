@@ -23,7 +23,12 @@ public class ServicioActividadImp implements ServicioActividad {
 	}
 	@Override
 	public void guardarSocioActividadSucursal(Long idSocio, Long idSucursalActividad) {
-		servicioActividadDao.guardarSocioActividadSucursal(idSocio, idSucursalActividad);
+		SucursalActividad actividad = servicioActividadDao.traerActividadDeSucursal(idSucursalActividad);
+		if (actividad.getCupoActual()<=actividad.getCupo()) {
+			servicioActividadDao.guardarSocioActividadSucursal(idSocio, idSucursalActividad);
+			
+		}
+		
 	}
 	@Override
 	public List<Actividad> listaActividades() {
