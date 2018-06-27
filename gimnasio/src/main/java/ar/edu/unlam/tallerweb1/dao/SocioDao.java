@@ -12,4 +12,5 @@ public interface SocioDao {
 	Socio buscarSocio(Usuario usuario); 
 	void agregarPaseASocio(Long idSocio, Long idPase);
 	Socio buscarSocio(Long idSocio);
+	void modificarSocio(Socio socioUpdate, Socio socioBdd);
 }
