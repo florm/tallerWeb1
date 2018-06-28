@@ -43,52 +43,23 @@
 
 	<div id="page">
 		<%@include file="menu.jsp"%>
-
+		
 		<div class="container">
-		<c:if test="${not empty exito}">
-				<h4>
-					<span class="mr-2">${exito}</span>
-					<a href="<c:url value="/sucursal/${sessionScope.idSucursal}/actividades" />">Volver</a>
-				</h4>
-				<br>
-			</c:if>
 			<div class="row">
-				<c:forEach items="${listaActividades}" var="lista">
-					<div
-						class="col-md-4 text-center animate-box fadeInUp animated-fast">
-						<div class="services">
-							<h3>${lista.actividad.nombre}</h3>
-							<h4>Cupo Máximo ${lista.cupo} personas</h4>
-							<h4>Cupo Actual ${lista.cupoActual}/${lista.cupo} personas</h4>
-							<span class="time">${lista.dia} de ${lista.horaDesde} a
-								${lista.horaHasta} hs</span>
-							<p>Profesor a cargo:</p>
-							<label>${lista.profesor.nombre}
-								${lista.profesor.apellido}</label>
-							<c:url var="post_url" value="/registrarActividad" />
-							<form:form action="${post_url}" method="post"
-								modelAttribute="formularioInscripcion">
-								<form:input path="idSocio" name="idSocio"
-									value="${sessionScope.idSocio}" hidden="hidden"></form:input>
-								<form:input path="idSucursalActividad"
-									name="idSucursalActividad" value="${lista.idSucursalActividad}"
-									hidden="hidden"></form:input>
-								<form:input path="idSucursal" name="idSucursal"
-									value="${sessionScope.idSucursal}" hidden="hidden"></form:input>
-								<p>
-									<button type="submit"
-										class="btn btn-primary btn-outline btn-sm">
-										Inscribirse <i class="icon-arrow-right"></i>
-									</button>
-								</p>
-							</form:form>
-
-						</div>
+				<div class="col-md-4 text-center animate-box fadeInUp animated-fast mx-auto">
+					<div class="services">
+						Nombre: ${socio.getNombre() }<br><br>
+						Apellido: ${socio.getApellido() }<br><br>
+						DNI: ${socio.getDni() }<br><br>
+						Telefono: ${socio.getTelefono() }<br><br>
+						Mail: ${socio.getMail() }<br><br>
+						Pais: ${socio.getPais() }<br><br>
 					</div>
-				</c:forEach>
-
+				</div>	
 			</div>
 		</div>
+
+		<%@include file="footer.jsp"%>
 	</div>
 	<!-- jQuery -->
 

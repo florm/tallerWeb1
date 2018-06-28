@@ -12,5 +12,5 @@ public interface ServicioSocio {
 	Socio buscarSocio(Usuario usuario);
 	Socio buscarSocio(Long idSocio);
 	void agregarPaseASocio(Long idSocio, Long idPase);
-	
+	void modificarSocio(Socio socioUpdate, Socio socioBdd);
 }

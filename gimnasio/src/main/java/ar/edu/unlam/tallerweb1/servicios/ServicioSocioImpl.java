@@ -42,5 +42,10 @@ public class ServicioSocioImpl implements ServicioSocio {
 	public List<Socio> buscarSocios() {
 		return socioDao.buscarSocios();
 	}
+
+	@Override
+	public void modificarSocio(Socio socioUpdate, Socio socioBdd) {
+		socioDao.modificarSocio(socioUpdate, socioBdd);
+	}
 	
 }

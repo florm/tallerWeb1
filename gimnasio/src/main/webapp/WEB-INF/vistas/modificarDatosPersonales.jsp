@@ -43,52 +43,44 @@
 
 	<div id="page">
 		<%@include file="menu.jsp"%>
-
+		
 		<div class="container">
-		<c:if test="${not empty exito}">
-				<h4>
-					<span class="mr-2">${exito}</span>
-					<a href="<c:url value="/sucursal/${sessionScope.idSucursal}/actividades" />">Volver</a>
-				</h4>
-				<br>
-			</c:if>
 			<div class="row">
-				<c:forEach items="${listaActividades}" var="lista">
-					<div
-						class="col-md-4 text-center animate-box fadeInUp animated-fast">
-						<div class="services">
-							<h3>${lista.actividad.nombre}</h3>
-							<h4>Cupo Máximo ${lista.cupo} personas</h4>
-							<h4>Cupo Actual ${lista.cupoActual}/${lista.cupo} personas</h4>
-							<span class="time">${lista.dia} de ${lista.horaDesde} a
-								${lista.horaHasta} hs</span>
-							<p>Profesor a cargo:</p>
-							<label>${lista.profesor.nombre}
-								${lista.profesor.apellido}</label>
-							<c:url var="post_url" value="/registrarActividad" />
-							<form:form action="${post_url}" method="post"
-								modelAttribute="formularioInscripcion">
-								<form:input path="idSocio" name="idSocio"
-									value="${sessionScope.idSocio}" hidden="hidden"></form:input>
-								<form:input path="idSucursalActividad"
-									name="idSucursalActividad" value="${lista.idSucursalActividad}"
-									hidden="hidden"></form:input>
-								<form:input path="idSucursal" name="idSucursal"
-									value="${sessionScope.idSucursal}" hidden="hidden"></form:input>
-								<p>
-									<button type="submit"
-										class="btn btn-primary btn-outline btn-sm">
-										Inscribirse <i class="icon-arrow-right"></i>
-									</button>
-								</p>
-							</form:form>
+				<div class="col-md-4 text-center animate-box fadeInUp animated-fast mx-auto">
+					
+					<div class="modal-body p-5">
+					
+				      	<form:form class="text-center" method="post" action="modificardatossocio" id="form-login" modelAttribute="socioVacio">
 
-						</div>
-					</div>
-				</c:forEach>
-
+						    <div class="form-group input-size">
+						        <form:input readonly="true" path="nombre" type="text" class="form-control" id="nombre"  name="nombre" value="${socio.getNombre()}" ></form:input>
+						    </div>
+						    <div class="form-group input-size">
+						        <form:input readonly="true" path="apellido" type="text" class="form-control" id="apellido"  name="apellido" value="${socio.getApellido()}" ></form:input>
+						    </div>
+						    <div class="form-group input-size">
+						        <form:input readonly="true" path="dni" type="text" class="form-control" id="dni"  name="dni" value="${socio.getDni()}"></form:input>
+						    </div>
+						    <div class="form-group input-size">
+						        <form:input path="telefono" type="text" class="form-control" id="telefono"  name="telefono" value="${socio.getTelefono()}"></form:input>
+						    </div>
+						    <div class="form-group input-size">
+						        <form:input path="mail" type="text" class="form-control" id="mail"  name="mail" value="${socio.getMail()}"></form:input>
+						    </div>
+						    <div class="form-group input-size">
+						        <form:input readonly="true" path="pais" type="text" class="form-control" id="pais"  name="pais" value="${socio.getPais()}"></form:input>
+						    </div>
+						    
+						    <button type="submit" id="btn-modificar" value="modificar" class="btn btn-primary">Modificar</button>
+					    
+						</form:form>
+      				</div>
+						
+				</div>	
 			</div>
 		</div>
+
+		<%@include file="footer.jsp"%>
 	</div>
 	<!-- jQuery -->
 

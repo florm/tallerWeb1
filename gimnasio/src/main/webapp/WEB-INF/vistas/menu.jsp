@@ -45,6 +45,7 @@
 								Cuenta</a>
 							<ul class="dropdown" style="display: none;">
 								<li><a href="<c:url value="/socio/${sessionScope.idSocio}/datospersonales" />">Datos Personales</a></li>
+								<li><a href="<c:url value="/socio/${sessionScope.idSocio}/modificardatospersonales" />">Modificar Datos Personales</a></li>
 								<li><a href="<c:url value="/socio/${sessionScope.idSocio}/pase" />">Pase</a></li>
 								<li><a href="<c:url value="/socio/${sessionScope.idSocio}/actividades" />">Actividades</a></li>
 								<li><a href="<c:url value="/socio/${sessionScope.idSocio}/pago" />">Realizar Pago</a></li>

@@ -22,6 +22,7 @@ public class SucursalActividad {
 	private String dia;
 	private String horaDesde;
 	private String horaHasta;
+	private Integer cupoActual;
 	private Integer cupo;
 
 	@ManyToOne
@@ -32,6 +33,14 @@ public class SucursalActividad {
 
 	@ManyToOne
 	private Profesor profesor;
+
+	public Integer getCupoActual() {
+		return cupoActual;
+	}
+
+	public void setCupoActual(Integer cupoActual) {
+		this.cupoActual = cupoActual;
+	}
 
 	public Profesor getProfesor() {
 		return profesor;
