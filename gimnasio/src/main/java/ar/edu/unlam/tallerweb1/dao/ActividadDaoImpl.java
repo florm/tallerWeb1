@@ -62,4 +62,10 @@ public class ActividadDaoImpl implements ActividadDao {
 		return sucursalActividad;
 	}
 
+	@Override
+	public void modificarCupoDeActividadEnSucursal(SucursalActividad sucursalActividad) {
+		Session sesion = sessionFactory.getCurrentSession();
+		sesion.update(sucursalActividad);
+	}
+
 }

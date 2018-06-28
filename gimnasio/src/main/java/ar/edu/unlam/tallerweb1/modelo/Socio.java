@@ -25,7 +25,7 @@ public class Socio {
 	private String telefono;
 	private String mail;
 	private String pais;
-	
+
 	@OneToOne
 	private Usuario usuario;
 	
@@ -57,6 +57,7 @@ public class Socio {
 	@ManyToMany(mappedBy = "socios", fetch=FetchType.EAGER)
     private Set<SucursalActividad> actividadesEnSucursal = new HashSet<>();
 	//
+	
 	
 	public Long getIdSocio() {
 		return idSocio;

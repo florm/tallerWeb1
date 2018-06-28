@@ -43,10 +43,17 @@ public class ControladorActividad {
 	
 	@RequestMapping(path = "/registrarActividad", method = RequestMethod.POST)
 	public ModelAndView irARegistroCompleto(@ModelAttribute("formulario") Formulario formulario) {
-		servicioActividad.guardarSocioActividadSucursal(formulario.getIdSocio(), formulario.getIdSucursalActividad());
+		boolean resultado = servicioActividad.guardarSocioActividadSucursal(formulario.getIdSocio(), formulario.getIdSucursalActividad());
 		ModelMap modelo = new ModelMap();
-		modelo.put("exito", "La inscripcion se realizó correctamente");
-		return new ModelAndView("listaActividades", modelo);
+		if (resultado == true) {
+			modelo.put("exito", "La inscripcion se realizó correctamente");
+			return new ModelAndView("listaActividades", modelo);
+		}else {
+			modelo.put("exito", "Actividad llena");
+			return new ModelAndView("listaActividades", modelo);
+		}
+		
+		
 	}
 	// INSCRIBIR SOCIO EN ACTIVIDAD
 

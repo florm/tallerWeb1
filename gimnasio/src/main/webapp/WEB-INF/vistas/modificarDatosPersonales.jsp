@@ -51,15 +51,15 @@
 					<div class="modal-body p-5">
 					
 				      	<form:form class="text-center" method="post" action="modificardatossocio" id="form-login" modelAttribute="socioVacio">
-						    <!-- FALTA REVISAR READONLY -->
+
 						    <div class="form-group input-size">
-						        <form:input readonly="" path="nombre" type="text" class="form-control" id="nombre"  name="nombre" value="${socio.getNombre()}" ></form:input>
+						        <form:input readonly="true" path="nombre" type="text" class="form-control" id="nombre"  name="nombre" value="${socio.getNombre()}" ></form:input>
 						    </div>
 						    <div class="form-group input-size">
-						        <form:input readonly="" path="apellido" type="text" class="form-control" id="apellido"  name="apellido" value="${socio.getApellido()}" ></form:input>
+						        <form:input readonly="true" path="apellido" type="text" class="form-control" id="apellido"  name="apellido" value="${socio.getApellido()}" ></form:input>
 						    </div>
 						    <div class="form-group input-size">
-						        <form:input readonly="" path="dni" type="text" class="form-control" id="dni"  name="dni" value="${socio.getDni()}"></form:input>
+						        <form:input readonly="true" path="dni" type="text" class="form-control" id="dni"  name="dni" value="${socio.getDni()}"></form:input>
 						    </div>
 						    <div class="form-group input-size">
 						        <form:input path="telefono" type="text" class="form-control" id="telefono"  name="telefono" value="${socio.getTelefono()}"></form:input>
@@ -68,7 +68,7 @@
 						        <form:input path="mail" type="text" class="form-control" id="mail"  name="mail" value="${socio.getMail()}"></form:input>
 						    </div>
 						    <div class="form-group input-size">
-						        <form:input readonly="" path="pais" type="text" class="form-control" id="pais"  name="pais" value="${socio.getPais()}"></form:input>
+						        <form:input readonly="true" path="pais" type="text" class="form-control" id="pais"  name="pais" value="${socio.getPais()}"></form:input>
 						    </div>
 						    
 						    <button type="submit" id="btn-modificar" value="modificar" class="btn btn-primary">Modificar</button>

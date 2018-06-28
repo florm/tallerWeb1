@@ -10,4 +10,5 @@ public interface ActividadDao {
 	public void guardarSocioActividadSucursal(Long idSocio, Long idSucursalActividad);
 	List<Actividad> listaActividades();
 	SucursalActividad traerActividadDeSucursal(Long idSucursalActividad);
+	public void modificarCupoDeActividadEnSucursal(SucursalActividad sucursalActividad);
 }
