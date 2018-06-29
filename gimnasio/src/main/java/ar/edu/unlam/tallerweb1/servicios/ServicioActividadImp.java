@@ -28,13 +28,13 @@ public class ServicioActividadImp implements ServicioActividad {
 	@Override
 	public boolean guardarSocioActividadSucursal(Long idSocio, Long idSucursalActividad) {
 		Socio socio = servicioSocioDao.buscarSocio(idSocio);
-		if (socio.getActividadesEnSucursal().size() < socio.getPase().getCantidadActividades()) {
-			//agregar dao para actualizar actividades actuales de socio
-			// ver como validar ya que una cosa es para inscribir socio en actividad llena
-			// y otra es que el socio no se pueda inscribir ya que tiene limite de actividades
-		}
+//		if (socio.getActividadesEnSucursal().size() < socio.getPase().getCantidadActividades()) {
+//			//agregar dao para actualizar actividades actuales de socio
+//			// ver como validar ya que una cosa es para inscribir socio en actividad llena
+//			// y otra es que el socio no se pueda inscribir ya que tiene limite de actividades
+//		}
 		SucursalActividad sucursalActividad = servicioActividadDao.traerActividadDeSucursal(idSucursalActividad);
-		if (sucursalActividad.getCupoActual()<sucursalActividad.getCupo()) {
+		if (sucursalActividad.getCupoActual()<sucursalActividad.getCupo() && socio.getActividadesEnSucursal().contains(sucursalActividad) == false) {
 			Integer cupoActual = sucursalActividad.getCupoActual()+1;
 			sucursalActividad.setCupoActual(cupoActual);
 			servicioActividadDao.modificarCupoDeActividadEnSucursal(sucursalActividad);

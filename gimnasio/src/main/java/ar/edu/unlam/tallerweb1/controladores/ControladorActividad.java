@@ -15,23 +15,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Actividad;
+import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioActividad;
+import ar.edu.unlam.tallerweb1.servicios.ServicioSocio;
 import helpers.Formulario;
 
 @Controller
 public class ControladorActividad {
 	@Inject
 	private ServicioActividad servicioActividad;
+	@Inject
+	private ServicioSocio servicioSocio;
 	
 	@RequestMapping("/sucursal/{id}/actividades")
-	public ModelAndView irAListaActividades(@PathVariable Long id) {
+	public ModelAndView irAListaActividades(@PathVariable (value="id") Long id, @RequestParam(value="socio") Long idSocio) {
+		//@PathVariable (value="idsocio") Long idSocio
 		ModelMap modelo = new ModelMap();
 		Formulario formulario = new Formulario();
 		List<SucursalActividad> lista = servicioActividad.listarActividadesEnSucursal(id);
+		Boolean validarPase = servicioSocio.validarActividadSocio(idSocio);
 		modelo.put("listaActividades", lista);
 		modelo.put("formularioInscripcion", formulario);
+		modelo.put("validarPase", validarPase);
 		return new ModelAndView("listaActividades",modelo);
 	}
 	
@@ -49,7 +56,7 @@ public class ControladorActividad {
 			modelo.put("exito", "La inscripcion se realizó correctamente");
 			return new ModelAndView("listaActividades", modelo);
 		}else {
-			modelo.put("exito", "Actividad llena");
+			modelo.put("exito", "Ya se encuentra inscripto en esta actividad");
 			return new ModelAndView("listaActividades", modelo);
 		}
 		

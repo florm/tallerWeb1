@@ -48,7 +48,7 @@
 		<c:if test="${not empty exito}">
 				<h4>
 					<span class="mr-2">${exito}</span>
-					<a href="<c:url value="/sucursal/${sessionScope.idSucursal}/actividades" />">Volver</a>
+					<a href="<c:url value="/sucursal/${sessionScope.idSucursal}/actividades?socio=${sessionScope.idSocio}" />">Volver</a>
 				</h4>
 				<br>
 			</c:if>
@@ -76,11 +76,23 @@
 								<form:input path="idSucursal" name="idSucursal"
 									value="${sessionScope.idSucursal}" hidden="hidden"></form:input>
 								<p>
+								<c:choose>
+									<c:when test="${lista.cupoActual == lista.cupo || validarPase == true }">
+									<button disabled="disabled" type="submit"
+										class="btn btn-primary btn-outline btn-sm">
+										Inscribirse <i class="icon-arrow-right"></i>
+									</button><br>
+									<c:if test="${validarPase == true}"><p class="pmensaje">Alcanzo el maximo de actividades por pase.</p></c:if>
+									</c:when> 
+									<c:otherwise>
 									<button type="submit"
 										class="btn btn-primary btn-outline btn-sm">
 										Inscribirse <i class="icon-arrow-right"></i>
 									</button>
+									</c:otherwise>
+								</c:choose>
 								</p>
+								
 							</form:form>
 
 						</div>

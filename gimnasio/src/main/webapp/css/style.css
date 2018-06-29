@@ -19,6 +19,12 @@ body {
   background: #fff;
 }
 
+/*MODIFICACION PROPIA*/
+.pmensaje{
+	font-size: 10px;
+}
+/**/
+
 #page {
   position: relative;
   width: 100%;
@@ -58,7 +64,7 @@ a:hover, a:active, a:focus {
 }
 
 p {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 h1, h2, h3, h4, h5, h6, figure {
