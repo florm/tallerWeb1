@@ -37,7 +37,7 @@
 						<li><a
 							href="<c:url value="/socio/${sessionScope.idSocio}/pases" />">Pases</a></li>
 						<li><a
-							href="<c:url value="/sucursal/${sessionScope.idSucursal}/actividades" />">Actividades</a></li>
+							href="<c:url value="/sucursal/${sessionScope.idSucursal}/actividades?socio=${sessionScope.idSocio}" />">Actividades</a></li>
 						<li><a
 							href="<c:url value="/beneficios/pase/${sessionScope.idPase}" />">Beneficios</a></li>
 						<li class="has-dropdown"><a

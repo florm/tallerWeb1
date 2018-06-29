@@ -47,5 +47,17 @@ public class ServicioSocioImpl implements ServicioSocio {
 	public void modificarSocio(Socio socioUpdate, Socio socioBdd) {
 		socioDao.modificarSocio(socioUpdate, socioBdd);
 	}
+
+	
+	//borrar despues
+	@Override
+	public Boolean validarActividadSocio(Long idSocio) {
+		Socio socio = socioDao.buscarSocio(idSocio);
+		if (socio.getActividadesEnSucursal().size() == socio.getPase().getCantidadActividades()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 }
