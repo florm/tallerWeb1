@@ -34,6 +34,9 @@ public class ServicioActividadImp implements ServicioActividad {
 //			// y otra es que el socio no se pueda inscribir ya que tiene limite de actividades
 //		}
 		SucursalActividad sucursalActividad = servicioActividadDao.traerActividadDeSucursal(idSucursalActividad);
+		if(sucursalActividad.getCupoActual()==null) {
+			sucursalActividad.setCupoActual(0);
+		}
 		if (sucursalActividad.getCupoActual()<sucursalActividad.getCupo() && socio.getActividadesEnSucursal().contains(sucursalActividad) == false) {
 			Integer cupoActual = sucursalActividad.getCupoActual()+1;
 			sucursalActividad.setCupoActual(cupoActual);
