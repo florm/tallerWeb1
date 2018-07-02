@@ -82,7 +82,8 @@
 										class="btn btn-primary btn-outline btn-sm">
 										Inscribirse <i class="icon-arrow-right"></i>
 									</button><br>
-									<c:if test="${validarPase == true}"><p class="pmensaje">Alcanzo el maximo de actividades por pase.</p></c:if>
+									<c:if test="${lista.cupoActual == lista.cupo}"><p class="pmensaje">-Esta actividad se encuentra llena</p></c:if>
+									<c:if test="${validarPase == true}"><p class="pmensaje">- Alcanzo el maximo de actividades por pase.</p></c:if>
 									</c:when> 
 									<c:otherwise>
 									<button type="submit"
