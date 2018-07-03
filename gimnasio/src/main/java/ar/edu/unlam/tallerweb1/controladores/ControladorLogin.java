@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.servicios.ServicioLocalizacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSocio;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSucursal;
@@ -23,6 +26,8 @@ public class ControladorLogin {
 	private ServicioSocio servicioSocio;
 	@Inject
 	private ServicioSucursal servicioSucursal;
+	@Inject
+	private ServicioLocalizacion servicioLocalizacion;
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView irALogin() {
@@ -96,5 +101,20 @@ public class ControladorLogin {
 		request.getSession().invalidate();
 		return new ModelAndView("redirect:/");
 	}
+	
+	
+//	//Controladores del registro
+//	
+//	@RequestMapping(path = "/registrar", method = RequestMethod.GET)
+//	public ModelAndView irARegistrar() {
+//		Usuario usuario = new Usuario();
+//		Socio socio = new Socio();
+//		ModelMap modelo = new ModelMap();
+//		modelo.put("usuario", usuario);
+//		modelo.put("socio", socio);
+//		modelo.put("listaProvincia", servicioLocalizacion.listarProvincias());
+//		modelo.put("listaCiudad", servicioLocalizacion.listarCiudades());
+//		return new ModelAndView("registrar", modelo);
+//	}
 	
 }

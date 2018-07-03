@@ -25,10 +25,30 @@ public class Socio {
 	private String telefono;
 	private String mail;
 	private String pais;
+	private Integer descuento;
 
 	@OneToOne
 	private Usuario usuario;
 	
+	@OneToOne
+	private Socio recomendadoPor;
+	
+	public Integer getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(Integer descuento) {
+		this.descuento = descuento;
+	}
+
+	public Socio getRecomendadoPor() {
+		return recomendadoPor;
+	}
+
+	public void setRecomendadoPor(Socio recomendadoPor) {
+		this.recomendadoPor = recomendadoPor;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
