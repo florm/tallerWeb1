@@ -77,6 +77,28 @@ public class SocioDaoImpl implements SocioDao {
 		socioBdd.setMail(socioUpdate.getMail());
 		sesion.update(socioBdd);
 	}
+
+	@Override
+	public Socio buscarSocioPorDni(String dni) {
+		Session sesion = sessionFactory.getCurrentSession();
+		Socio socio = (Socio) sesion.createCriteria(Socio.class)
+				.add(Restrictions.eq("dni", dni))
+				.uniqueResult();
+		return socio;
+	}
+
+	@Override
+	public void registrarSocio(Socio socio, Socio socioReferente) {
+		Session sesion = sessionFactory.getCurrentSession();
+		sesion.save(socio);
+		sesion.update(socioReferente);
+	}
+
+	@Override
+	public void registrarSocioSinReferente(Socio socio) {
+		Session sesion = sessionFactory.getCurrentSession();
+		sesion.save(socio);
+	}
 	
 	
 }

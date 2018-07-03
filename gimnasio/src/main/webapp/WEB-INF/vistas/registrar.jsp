@@ -53,7 +53,7 @@
 				<div class="col-md-8 text-center animate-box fadeInUp animated-fast mx-auto">
 					
 					<div class="modal-body p-5">
-					<form:form class="text-center" method="POST" action="registrarsociotest" modelAttribute="socio">
+					<form:form class="text-center" method="POST" action="registrosocio" modelAttribute="socio">
 
 						    <div class="form-group input-size col-md-6">
 						        <form:input path="nombre" type="text" class="form-control" id="nombre"  name="nombre" placeholder="Nombre"></form:input>
@@ -62,7 +62,7 @@
 						        <form:input path="apellido" type="text" class="form-control" id="apellido"  name="apellido" placeholder="Apellido"></form:input>
 						    </div>
 						    <div class="form-group input-size col-md-6">
-						        <form:input path="apellido" type="number" class="form-control" id="dni"  name="dni" placeholder="D.N.I."></form:input>
+						        <form:input path="dni" type="text" class="form-control" id="dni"  name="dni" placeholder="D.N.I."></form:input>
 						    </div>
 						    <div class="form-group input-size col-md-6">
 						        <form:input path="domicilioCalle" type="text" class="form-control" id="domicilioCalle"  name="domicilioCalle" placeholder="Calle"></form:input>
@@ -82,10 +82,10 @@
 						    
 						    						    				    
 						    <div class="form-group input-size col-md-6">
-							    <form:select path="provincia.id" id="provincia.id" name="provincia.id" cssClass="form-control">
-							 		<option value="" selected> Seleccione provincia..
-							 		<c:forEach items= "${listaProvincia}" var="provincia">
-							 			<option value="${provincia.id}">${provincia.nombre}	
+							    <form:select required="true" path="ciudad.id" id="ciudad.id" name="ciudad.id" cssClass="form-control">
+							 		<option value="" selected> Seleccione ciudad..
+							 		<c:forEach items= "${listaCiudad}" var="ciudad">
+							 			<option value="${ciudad.id}">${ciudad.nombre}	
 							 		</c:forEach>
 						  		</form:select>
   							</div>						
@@ -95,14 +95,14 @@
 						    </div>
 						    
 						    <div class="form-group input-size col-md-6">
-						        <form:input path="usuario.email" type="text" class="form-control" id="usuario.email"  name="usuario.email" placeholder="Login"></form:input>
+						        <form:input required="true" path="usuario.nick" type="text" class="form-control" id="usuario.nick"  name="usuario.nick" placeholder="Login"></form:input>
 						    </div>
 						    <div class="form-group input-size col-md-6">
 						        <form:input path="recomendadoPor.dni" type="number" class="form-control" id="recomendadoPor.dni"  name="recomendadoPor.dni" placeholder="DNI Recomendador"></form:input>
 						    </div>
   	
 						    <div class="form-group col-md-12">		    
-						    <button type="submit" id="btnRegistrar" value="registrar" class="btn btn-primary">Modificar</button>
+						    <button type="submit" id="btnRegistrar" value="registrar" class="btn btn-primary">Registrar</button>
 					    	</div>
 						</form:form>
       				</div>

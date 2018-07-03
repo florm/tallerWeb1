@@ -14,4 +14,5 @@ public interface ServicioSocio {
 	void agregarPaseASocio(Long idSocio, Long idPase);
 	void modificarSocio(Socio socioUpdate, Socio socioBdd);
 	Boolean validarActividadSocio(Long idSocio);
+	Boolean registrarSocio(Socio socio);
 }
