@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -15,13 +16,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.servicios.ServicioLocalizacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSocio;
+import ar.edu.unlam.tallerweb1.servicios.ServicioSucursal;
 import helpers.Formulario;
 
 @Controller
 public class ControladorSocio {
 	@Inject
 	private ServicioSocio servicioSocio;
+	@Inject
+	private ServicioSucursal servicioSucursal;
+	@Inject
+	private ServicioLocalizacion servicioLocalizacion;
 	
 	@RequestMapping (path = "/inscribirpase", method = RequestMethod.POST)
 	public ModelAndView agregarPaseASocio(@ModelAttribute ("formulario") Formulario formulario) {
@@ -58,6 +66,30 @@ public class ControladorSocio {
 		Socio socioBdd = servicioSocio.buscarSocio(id);
 		servicioSocio.modificarSocio(socioUpdate, socioBdd);
 		return new ModelAndView("modificarDatosPersonales");
+	}
+	
+	
+	//Controladores del registro
+	
+		@RequestMapping(path = "/registrar", method = RequestMethod.GET)
+		public ModelAndView irARegistrar() {
+			Usuario usuario = new Usuario();
+			Socio socio = new Socio();
+			ModelMap modelo = new ModelMap();
+			modelo.put("usuario", usuario);
+			modelo.put("socio", socio);
+			modelo.put("listaProvincia", servicioLocalizacion.listarProvincias());
+			modelo.put("listaCiudad", servicioLocalizacion.listarCiudades());
+			return new ModelAndView("registrar", modelo);
+		}
+	
+	@RequestMapping (path = "registrarsociotest", method = RequestMethod.POST)
+	public ModelAndView registrarSocio(@ModelAttribute ("socio") Socio socio) {//, @RequestParam(value="provincia") String id )throws ParseException {
+		//Long idProvincia = Long.parseLong(id);
+		ModelMap model = new ModelMap();
+		model.put("socio", socio);
+		//model.put("provincia", idProvincia);
+		return new ModelAndView("pruebasocio", model);
 	}
 	
 }
