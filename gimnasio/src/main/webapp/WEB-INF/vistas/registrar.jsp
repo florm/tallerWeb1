@@ -88,23 +88,7 @@
 							 			<option value="${provincia.id}">${provincia.nombre}	
 							 		</c:forEach>
 						  		</form:select>
-  							</div>
-  							
-  							<!-- VER LOGICA DE COMBOBOX, PROBAR BIDIRECCIONA
-  							<div class="form-group input-size col-md-6">
-							    <form:select path="ciudad.id" id="ciudad.id" name="ciudad.id" class="form-control form-control-sm">
-							 		<option value=""> Seleccione ciudad..
-							 		<c:forEach items= "${listaCiudad}" var="ciudad">
-							 		<c:if test="${ciudad.getProvincia().getId()} == provincia.id">
-							 			<option value="${ciudad.id}">${ciudad.nombre}
-							 		</c:if>
-							 			
-							 		</c:forEach>
-						  		</form:select>
-  							</div>
-  							-->
-  							
-  							
+  							</div>						
   							
   							<div class="form-group input-size col-md-6">
 						        <form:input path="usuario.password" type="password" class="form-control" id="usuario.password"  name="usuario.password" placeholder="Password"></form:input>
