@@ -67,9 +67,6 @@
 						    <div class="form-group input-size">
 						        <form:input path="mail" type="text" class="form-control" id="mail"  name="mail" value="${socio.getMail()}"></form:input>
 						    </div>
-						    <div class="form-group input-size">
-						        <form:input readonly="true" path="pais" type="text" class="form-control" id="pais"  name="pais" value="${socio.getPais()}"></form:input>
-						    </div>
 						    
 						    <button type="submit" id="btn-modificar" value="modificar" class="btn btn-primary">Modificar</button>
 					    
