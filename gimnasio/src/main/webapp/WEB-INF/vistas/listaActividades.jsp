@@ -45,6 +45,7 @@
 		<%@include file="menu.jsp"%>
 
 		<div class="container">
+		<!--<c:if test="${sessionScope.idPase == null}"><h3>-Necesita tener un pase para inscribirse en una actividad.</h3></c:if>-->
 		<c:if test="${not empty exito}">
 				<h4>
 					<span class="mr-2">${exito}</span>
@@ -52,6 +53,7 @@
 				</h4>
 				<br>
 			</c:if>
+			<c:if test="${sessionScope.idPase != 5}"> <!-- El pase de ID 5 es el que se utiliza por defecto en un usuario recien registrado, no posee actividades disponibles -->
 			<div class="row">
 				<c:forEach items="${listaActividades}" var="lista">
 					<div
@@ -99,8 +101,9 @@
 						</div>
 					</div>
 				</c:forEach>
-
-			</div>
+			
+			</div></c:if>
+			
 		</div>
 	</div>
 	<!-- jQuery -->
