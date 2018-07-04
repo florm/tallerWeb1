@@ -53,7 +53,20 @@
 				</h4>
 				<br>
 			</c:if>
-			<c:if test="${sessionScope.idPase == 5}"></c:if>
+			<c:if test="${sessionScope.idPase == 5}"> <!-- Si el pase es 5 aparecerá esta leyenda -->
+			
+			<br><div class="col-md-8 col-md-offset-2 text-center">
+						<div class="display-t">
+							<div class="display-tc animate-box" data-animate-effect="fadeIn">
+								<h1>
+									No hay actividades disponibles <br> 
+								</h1>
+								<h2>Necesita abonar un pase para poder inscribirse a las distintas actividades.</h2>
+							</div>
+						</div>
+					</div>
+			
+			</c:if>
 			<c:if test="${sessionScope.idPase != 5}"> <!-- El pase de ID 5 es el que se utiliza por defecto en un usuario recien registrado, no posee actividades disponibles -->
 			<div class="row">
 				<c:forEach items="${listaActividades}" var="lista">
