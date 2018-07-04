@@ -60,8 +60,6 @@ public class ControladorSucursal {
 			listaCoordenadas.add(coordenadaSucursal);
 		}
 				
-				
-		System.out.println(Coordenadas.getJson(listaCoordenadas));
 		return Coordenadas.getJson(listaCoordenadas);
 	}
 	
