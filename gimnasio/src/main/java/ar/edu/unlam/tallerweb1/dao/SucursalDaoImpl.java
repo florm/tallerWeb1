@@ -37,5 +37,4 @@ public class SucursalDaoImpl implements SucursalDao {
 		return sucursal;
 	}
 	
-	
 }

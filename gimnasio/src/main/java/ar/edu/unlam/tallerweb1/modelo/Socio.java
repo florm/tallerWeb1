@@ -24,7 +24,6 @@ public class Socio {
 	private String apellido;
 	private String telefono;
 	private String mail;
-	private String pais;
 	private Integer descuento;
 
 	@OneToOne
@@ -57,8 +56,8 @@ public class Socio {
 		this.usuario = usuario;
 	}
 
-	@ManyToOne
-	private Provincia provincia;
+//	@ManyToOne
+//	private Provincia provincia;
 	
 	@ManyToOne
 	private Ciudad ciudad;
@@ -127,21 +126,13 @@ public class Socio {
 		this.mail = mail;
 	}
 
-	public String getPais() {
-		return pais;
-	}
-
-	public void setPais(String pais) {
-		this.pais = pais;
-	}
-
-	public Provincia getProvincia() {
-		return provincia;
-	}
-
-	public void setProvincia(Provincia provincia) {
-		this.provincia = provincia;
-	}
+//	public Provincia getProvincia() {
+//		return provincia;
+//	}
+//
+//	public void setProvincia(Provincia provincia) {
+//		this.provincia = provincia;
+//	}
 
 	public Ciudad getCiudad() {
 		return ciudad;
