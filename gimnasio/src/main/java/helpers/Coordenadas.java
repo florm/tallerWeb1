@@ -36,9 +36,14 @@ public class Coordenadas {
 	}
 	
 	public static String getJson(ArrayList<Coordenadas> coord){
-		String resp = new String();
+		String resp = "[";
+		Integer counter= 1;
 		for (Coordenadas coordenadas : coord) {
-			resp += "{ \"nombre\":\"" + coordenadas.nombre + "," + "\"lat\":\"" + coordenadas.lat + "," + "\"nombre\":\"" + coordenadas.lng + "}";
+			if (!counter.equals(coord.size()))
+				resp += "{\"nombre\":\""+ coordenadas.nombre +"\""+ ",\"lat\":\""+coordenadas.lat+"\""+",\"lng\":\""+ coordenadas.lng +"\"},";
+			else
+				resp += "{\"nombre\":\""+ coordenadas.nombre +"\""+ ",\"lat\":\""+coordenadas.lat+"\""+",\"lng\":\""+ coordenadas.lng +"\"}]";
+			counter ++;
 		}
 		return resp;
 	}

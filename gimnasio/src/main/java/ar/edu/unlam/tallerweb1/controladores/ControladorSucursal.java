@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -24,10 +25,12 @@ import helpers.Coordenadas;
 
 
 @Controller
+
 public class ControladorSucursal {
 	
 	@Inject
 	private ServicioSocio servicioSocio;
+	@Inject
 	private ServicioSucursal servicioSucursal;
 	
 	@RequestMapping(value="/sucursales")
@@ -44,7 +47,7 @@ public class ControladorSucursal {
 	
 	@RequestMapping(value="/getSucursales")
 	@ResponseBody
-	public void getSucursales() {
+	public String getSucursales() {
 
 		ModelMap modelo = new ModelMap();
 		Usuario usuario = new Usuario();
@@ -59,6 +62,7 @@ public class ControladorSucursal {
 				
 				
 		System.out.println(Coordenadas.getJson(listaCoordenadas));
+		return Coordenadas.getJson(listaCoordenadas);
 	}
 	
 	

@@ -1,11 +1,18 @@
+ $(document).ready(function (){
+	 $.get("getSucursales", function (data) {
+		 var datos = JSON.parse(data);
+		 cargarMapa(datos);
+     });
 
-    cargarMapa();
+
+ });
 
 
-function cargarMapa() {
+
+function cargarMapa(marcadores) {
 
     var mapOptions = {
-        center:new google.maps.LatLng(-34.6686986,-58.5614947),
+        center:new google.maps.LatLng(-34.6357663,-58.4812772),
         zoom:12,
         panControl: true,
         zoomControl: true,
@@ -19,9 +26,24 @@ function cargarMapa() {
 
     var map = new google.maps.Map(document.getElementById("mapa"),mapOptions);
 
-    //var marker = new google.maps.Marker({
-    //    position: new google.maps.LatLng(-34.6686986,-58.5614947),
-    //    map: map
-    //});
+    cargarMarcadores(marcadores, map);
    
+}
+
+function cargarMarcadores(marcadores, map){
+    $.each(marcadores, function(i,item){
+        var marker = i;
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(item['lat'],item['lng']),
+            map: map
+        });
+        var info = new google.maps.InfoWindow({
+            content: item['nombre']
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+            info.open(map,marker);
+        });
+
+    });
 }

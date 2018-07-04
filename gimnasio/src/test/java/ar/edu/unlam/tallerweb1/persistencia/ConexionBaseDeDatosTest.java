@@ -104,16 +104,20 @@ public class ConexionBaseDeDatosTest extends SpringTest{
               
         Sucursal sucursal1 = new Sucursal();
         sucursal1.setId(1L);
+        sucursal1.setNombre("suc1");
         
         Sucursal sucursal2 = new Sucursal();
         sucursal1.setId(2L);
+        sucursal2.setNombre("suc2");
         
         sesion.save(sucursal1);
         sesion.save(sucursal2);
         
         List<Sucursal> lista = sesion.createCriteria(Sucursal.class)
 				.list();
-        System.out.println(lista);
+        for (Sucursal sucursal : lista) {
+			System.out.println(sucursal.getNombre());
+		}
     }
     
     
