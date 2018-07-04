@@ -62,13 +62,13 @@
 						        <form:input path="apellido" type="text" class="form-control" id="apellido"  name="apellido" placeholder="Apellido"></form:input>
 						    </div>
 						    <div class="form-group input-size col-md-6">
-						        <form:input path="dni" type="text" class="form-control" id="dni"  name="dni" placeholder="D.N.I."></form:input>
+						        <form:input path="dni" type="number" class="form-control" id="dni"  name="dni" placeholder="D.N.I."></form:input>
 						    </div>
 						    <div class="form-group input-size col-md-6">
 						        <form:input path="domicilioCalle" type="text" class="form-control" id="domicilioCalle"  name="domicilioCalle" placeholder="Calle"></form:input>
 						    </div>
 						    <div class="form-group input-size col-md-6">
-						        <form:input path="domicilioNumero" type="text" class="form-control" id="domicilioNumero"  name="domicilioNumero" placeholder="Numero"></form:input>
+						        <form:input path="domicilioNumero" type="number" class="form-control" id="domicilioNumero"  name="domicilioNumero" placeholder="Numero"></form:input>
 						    </div>
 						    <div class="form-group input-size col-md-6">
 						        <form:input path="domicilioDepto" type="text" class="form-control" id="domicilioDepto"  name="domicilioDepto" placeholder="Departamento"></form:input>
@@ -77,7 +77,7 @@
 						        <form:input path="mail" type="email" class="form-control" id="mail"  name="mail" placeholder="Mail"></form:input>
 						    </div>
 						    <div class="form-group input-size col-md-6">
-						        <form:input path="telefono" type="text" class="form-control" id="telefono"  name="telefono" placeholder="Telefono"></form:input>
+						        <form:input path="telefono" type="number" class="form-control" id="telefono"  name="telefono" placeholder="Telefono"></form:input>
 						    </div>
 						    
 						    						    				    
@@ -95,15 +95,25 @@
 						    </div>
 						    
 						    <div class="form-group input-size col-md-6">
-						        <form:input required="true" path="usuario.nick" type="text" class="form-control" id="usuario.nick"  name="usuario.nick" placeholder="Login"></form:input>
-						    </div>
+						        <form:input required="true" path="usuario.nick" type="text" class="form-control" id="usuario.nick"  name="usuario.nick" placeholder="Nickname"></form:input>
+						    </div> 
 						    <div class="form-group input-size col-md-6">
 						        <form:input path="recomendadoPor.dni" type="number" class="form-control" id="recomendadoPor.dni"  name="recomendadoPor.dni" placeholder="DNI Recomendador"></form:input>
 						    </div>
   	
+  							 <div class="form-group input-size col-md-6 center">
+							    <form:select required="true" path="sucursal.id" id="sucursal.id" name="sucursal.id" cssClass="form-control">
+							 		<option value="" selected> Seleccione Sucursal..
+							 		<c:forEach items= "${listaSucursal}" var="sucursal">
+							 			<option value="${sucursal.id}">${sucursal.nombre}	
+							 		</c:forEach>
+						  		</form:select>
+  							</div>
+  	
 						    <div class="form-group col-md-12">		    
 						    <button type="submit" id="btnRegistrar" value="registrar" class="btn btn-primary">Registrar</button>
 					    	</div>
+					    	
 						</form:form>
       				</div>
 						

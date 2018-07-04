@@ -9,10 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.LocalizacionDao;
 import ar.edu.unlam.tallerweb1.dao.SocioDao;
+import ar.edu.unlam.tallerweb1.dao.SucursalDao;
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
 import ar.edu.unlam.tallerweb1.modelo.Ciudad;
 import ar.edu.unlam.tallerweb1.modelo.Pase;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
+import ar.edu.unlam.tallerweb1.modelo.Sucursal;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 @Service("servicioSocio")
@@ -25,6 +27,8 @@ public class ServicioSocioImpl implements ServicioSocio {
 	private UsuarioDao usuarioDao;
 	@Inject
 	private LocalizacionDao localizacionDao;
+	@Inject
+	private SucursalDao sucursalDao;
 	
 	@Override
 	public List<Socio> buscarSocios(Long idSucursal) {
@@ -78,14 +82,18 @@ public class ServicioSocioImpl implements ServicioSocio {
 			Socio socioReferente = socioDao.buscarSocioPorDni(socio.getRecomendadoPor().getDni());
 			Ciudad ciudad = localizacionDao.traerCiudad(socio.getCiudad().getId());
 			Usuario usuario = usuarioDao.guardarUsuario(socio.getUsuario().getNick(), socio.getUsuario().getPassword());
+			Sucursal sucursal = sucursalDao.getSucursal(socio.getSucursal().getId());
 			socio.setUsuario(usuario);
 			socio.setCiudad(ciudad);
-				if (socioReferente != null) {
+			socio.setSucursal(sucursal);
+			sucursal.getListaSocios().add(socio); //les mando la sucursal y cuando guardo socio hago update a la lista de socios de sucursal
+				if (socioReferente == null) {
+					socio.setRecomendadoPor(null); // Si no coloco este campo como null, tira error
+					socioDao.registrarSocioSinReferente(socio, sucursal);
+				} else {
 					socio.setRecomendadoPor(socioReferente);
 					socioReferente.setDescuento(1); //En el futuro si el campo descuento es 1, la proxima cuota 
-					socioDao.registrarSocio(socio, socioReferente);
-				} else {
-					socioDao.registrarSocioSinReferente(socio);
+					socioDao.registrarSocio(socio, socioReferente, sucursal);
 				}
 			return true;
 		} else {

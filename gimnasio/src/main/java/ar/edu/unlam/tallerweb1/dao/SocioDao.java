@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.dao;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Socio;
+import ar.edu.unlam.tallerweb1.modelo.Sucursal;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 public interface SocioDao {
@@ -14,6 +15,6 @@ public interface SocioDao {
 	Socio buscarSocio(Long idSocio);
 	void modificarSocio(Socio socioUpdate, Socio socioBdd);
 	Socio buscarSocioPorDni(String dni);
-	void registrarSocio (Socio socio, Socio socioReferente);
-	void registrarSocioSinReferente (Socio socio);
+	void registrarSocio (Socio socio, Socio socioReferente, Sucursal sucursal);
+	void registrarSocioSinReferente (Socio socio, Sucursal sucursal);
 }

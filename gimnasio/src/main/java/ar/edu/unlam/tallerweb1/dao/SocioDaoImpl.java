@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Pase;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
+import ar.edu.unlam.tallerweb1.modelo.Sucursal;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 @Repository("socioDao")
@@ -88,16 +89,18 @@ public class SocioDaoImpl implements SocioDao {
 	}
 
 	@Override
-	public void registrarSocio(Socio socio, Socio socioReferente) {
+	public void registrarSocio(Socio socio, Socio socioReferente, Sucursal sucursal) {
 		Session sesion = sessionFactory.getCurrentSession();
 		sesion.save(socio);
 		sesion.update(socioReferente);
+		sesion.update(sucursal);
 	}
 
 	@Override
-	public void registrarSocioSinReferente(Socio socio) {
+	public void registrarSocioSinReferente(Socio socio, Sucursal sucursal) {
 		Session sesion = sessionFactory.getCurrentSession();
 		sesion.save(socio);
+		sesion.update(sucursal);
 	}
 	
 	
