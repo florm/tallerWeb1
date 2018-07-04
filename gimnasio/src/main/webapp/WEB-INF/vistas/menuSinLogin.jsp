@@ -45,6 +45,7 @@
 						<li class="active"><a href="<c:url value="/" />">Inicio</a></li>
 						<li><a href="<c:url value="pases" />">Pases</a></li>
 						<li><a href="<c:url value="/actividades" />">Actividades</a></li>
+						<li><a href="<c:url value="/sucursales" />">Sucursales</a></li>
 						<li><a href="<c:url value="/beneficios" />">Beneficios</a></li>
 						<li><a href="<c:url value="/registrar" />">Registrate</a></li>
 					</ul>
