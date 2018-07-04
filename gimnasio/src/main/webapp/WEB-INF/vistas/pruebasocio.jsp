@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-${socio.getUsuario().getEmail()}<br>
-idProvincia: ${socio.getProvincia().getId()}<br>
-${socio.getRecomendadoPor().getDni()}
+${msj}
 </body>
 </html>

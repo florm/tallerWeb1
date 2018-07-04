@@ -89,7 +89,7 @@
       <div class="modal-body p-5">
 	      <form:form class="text-center" method="post" action="validar-login" id="form-login" modelAttribute="usuario">
 		    <div class="form-group input-size">
-		        <form:input path="email" type="text" class="form-control" id="email"  name="email" placeholder="Email"></form:input>
+		        <form:input path="nick" type="text" class="form-control" id="nick"  name="nick" placeholder="Nickname"></form:input>
 		    </div>
 		    <div class="form-group input-size">
 		        <form:input path="password" type="password" class="form-control" id="password" name="password" placeholder="Contraseña"></form:input>

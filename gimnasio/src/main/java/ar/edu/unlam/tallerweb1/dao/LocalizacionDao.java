@@ -8,4 +8,5 @@ import ar.edu.unlam.tallerweb1.modelo.Provincia;
 public interface LocalizacionDao {
 	List<Provincia> listarProvincias();
 	List<Ciudad> listarCiudades();
+	Ciudad traerCiudad(Long idCiudad);
 }

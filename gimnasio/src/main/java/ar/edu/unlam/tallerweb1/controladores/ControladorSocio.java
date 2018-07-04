@@ -78,18 +78,23 @@ public class ControladorSocio {
 			ModelMap modelo = new ModelMap();
 			modelo.put("usuario", usuario);
 			modelo.put("socio", socio);
-			modelo.put("listaProvincia", servicioLocalizacion.listarProvincias());
+			//modelo.put("listaProvincia", servicioLocalizacion.listarProvincias());
 			modelo.put("listaCiudad", servicioLocalizacion.listarCiudades());
+			modelo.put("listaSucursal", servicioSucursal.listarSucursales());
 			return new ModelAndView("registrar", modelo);
 		}
 	
-	@RequestMapping (path = "registrarsociotest", method = RequestMethod.POST)
-	public ModelAndView registrarSocio(@ModelAttribute ("socio") Socio socio) {//, @RequestParam(value="provincia") String id )throws ParseException {
-		//Long idProvincia = Long.parseLong(id);
-		ModelMap model = new ModelMap();
-		model.put("socio", socio);
-		//model.put("provincia", idProvincia);
-		return new ModelAndView("pruebasocio", model);
+	@RequestMapping (path = "/registrosocio", method = RequestMethod.POST)
+	public ModelAndView registrarSocio(@ModelAttribute ("socio") Socio socio) {
+		boolean resultado = servicioSocio.registrarSocio(socio);
+		ModelMap modelo = new ModelMap();
+		if (resultado == true) {
+			modelo.put("msj", "Registro correcto");
+			return new ModelAndView("pruebasocio", modelo);
+		}else {
+			modelo.put("msj", "El nombre de usuario ya existe");
+			return new ModelAndView("pruebasocio", modelo);
+		}
 	}
 	
 }

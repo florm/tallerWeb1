@@ -74,7 +74,7 @@ public class ConexionBaseDeDatosTest extends SpringTest{
     public void testBuscaSocio(){
     	Session sesion = getSession();
     	Usuario usuario1 = new Usuario();
-    	usuario1.setEmail("email1");
+    	usuario1.setNick("nick1");
     	usuario1.setPassword("pass1");
     	sesion.save(usuario1);
         
@@ -89,7 +89,7 @@ public class ConexionBaseDeDatosTest extends SpringTest{
         
         Socio socio =  (Socio) sesion.createCriteria(Socio.class)
     			.createAlias("usuario", "buscarPorUsuario")
-    			.add(Restrictions.eq("buscarPorUsuario.email", "email1")).uniqueResult();
+    			.add(Restrictions.eq("buscarPorUsuario.nick", "nick1")).uniqueResult();
         
         System.out.println(socio.getNombre());
         

@@ -15,8 +15,8 @@
 					<form:form method="post" action="validar-login" class="form-login"
 						modelAttribute="usuario">
 
-						<form:input class="form-control-md" path="email" type="text"
-							id="email" name="email" placeholder="Email"></form:input>
+						<form:input class="form-control-md" path="nick" type="text"
+							id="nick" name="nick" placeholder="Nickname"></form:input>
 
 
 						<form:input class="form-control-md" path="password"

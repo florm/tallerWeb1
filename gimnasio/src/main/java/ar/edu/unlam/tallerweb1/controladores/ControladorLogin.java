@@ -102,19 +102,4 @@ public class ControladorLogin {
 		return new ModelAndView("redirect:/");
 	}
 	
-	
-//	//Controladores del registro
-//	
-//	@RequestMapping(path = "/registrar", method = RequestMethod.GET)
-//	public ModelAndView irARegistrar() {
-//		Usuario usuario = new Usuario();
-//		Socio socio = new Socio();
-//		ModelMap modelo = new ModelMap();
-//		modelo.put("usuario", usuario);
-//		modelo.put("socio", socio);
-//		modelo.put("listaProvincia", servicioLocalizacion.listarProvincias());
-//		modelo.put("listaCiudad", servicioLocalizacion.listarCiudades());
-//		return new ModelAndView("registrar", modelo);
-//	}
-	
 }

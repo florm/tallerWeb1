@@ -31,7 +31,6 @@ public class ControladorActividad {
 	
 	@RequestMapping("/sucursal/{id}/actividades")
 	public ModelAndView irAListaActividades(@PathVariable (value="id") Long id, @RequestParam(value="socio") Long idSocio) {
-		//@PathVariable (value="idsocio") Long idSocio
 		ModelMap modelo = new ModelMap();
 		Formulario formulario = new Formulario();
 		List<SucursalActividad> lista = servicioActividad.listarActividadesEnSucursal(id);
@@ -41,12 +40,6 @@ public class ControladorActividad {
 		modelo.put("validarPase", validarPase);
 		return new ModelAndView("listaActividades",modelo);
 	}
-	
-//	@RequestMapping(path = "/actividad/{idSucursalActividad}", method = RequestMethod.GET)
-//	public ModelAndView irARegistroCompleto(@PathVariable Long idSucursalActividad, @RequestParam(value="socio") Long idSocio) {
-//		servicioActividad.guardarSocioActividadSucursal(idSocio, idSucursalActividad);
-//		return new ModelAndView("listaActividades");
-//	}
 	
 	@RequestMapping(path = "/registrarActividad", method = RequestMethod.POST)
 	public ModelAndView irARegistroCompleto(@ModelAttribute("formulario") Formulario formulario) {
@@ -59,50 +52,8 @@ public class ControladorActividad {
 			modelo.put("exito", "Ya se encuentra inscripto en esta actividad");
 			return new ModelAndView("listaActividades", modelo);
 		}
-		
-		
 	}
-	// INSCRIBIR SOCIO EN ACTIVIDAD
-
-	// ORIGINAL, falta persistir
-	// @RequestMapping(path = "/inscribiractividad", method =
-	// RequestMethod.POST) //Formulario clase auxiliar
-	// public ModelAndView irAFormularioDeInscripcionActividad(@ModelAttribute
-	// ("formulario") Formulario formulario) {
-	// Formulario formularioVacio = new Formulario();
-	// ModelMap model = new ModelMap();
-	// List<SucursalActividad> lista =
-	// servicioActividad.listarActividadesEnSucursal(formulario.getIdSucursal());
-	// model.put("listaActividades", lista);
-	// model.put("formulario", formularioVacio);
-	// return new ModelAndView("inscribiractividad", model);
-	// }
-
-	// PRUEBA PARA TRAER SELECT - inscribiractividad e inscribiractividad2 son
-	// ejemplos
-//	@RequestMapping(path = "/inscribiractividad", method = RequestMethod.GET) // Formulario
-//																				// clase
-//																				// auxiliar
-//	public ModelAndView irAFormularioDeInscripcionActividad() {
-//		Formulario formularioVacio = new Formulario();
-//		ModelMap model = new ModelMap();
-//		List<SucursalActividad> lista = servicioActividad.listarActividadesEnSucursal(2L);
-//		model.put("listaActividades", lista);
-//		model.put("formulario", formularioVacio);
-//		return new ModelAndView("inscribiractividad", model);
-//	}
-
-	// pasar por pathvariable
-//	@RequestMapping(path = "/lala", method = RequestMethod.GET)
-//	public ModelAndView lala(@ModelAttribute("formulario") Formulario formulario) {
-//		ModelMap model = new ModelMap();
-//		model.put("idSucursalActividad", formulario.getIdSucursalActividad());
-//		model.put("prueba", formulario.getPrueba());
-//		return new ModelAndView("inscribiractividad2", model);
-//	}
-//	
-	
-	
+		
 	@RequestMapping("/actividades")
 	public ModelAndView verActividades() {
 		ModelMap modelo = new ModelMap();

@@ -8,6 +8,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 // implelemtacion del DAO de usuarios, la anotacion @Repository indica a Spring que esta clase es un componente que debe
@@ -29,11 +31,31 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		// uniqueResult da error si se encuentran más de un resultado en la busqueda.
 		final Session session = sessionFactory.getCurrentSession();
 		Usuario usuarioBuscado = (Usuario) session.createCriteria(Usuario.class)
-				.add(Restrictions.eq("email", usuario.getEmail()))
+				.add(Restrictions.eq("nick", usuario.getNick()))
 				.add(Restrictions.eq("password", usuario.getPassword()))
 				.uniqueResult();
 		
 		return usuarioBuscado;
 	}
+
+	@Override
+	public List<Usuario> verSiExisteUsuario(String nick) {
+		final Session session = sessionFactory.getCurrentSession();
+		List<Usuario> existeUsuario = session.createCriteria(Usuario.class)
+				.add(Restrictions.eq("nick", nick))
+				.list();
+		return existeUsuario;
+	}
+
+	@Override
+	public Usuario guardarUsuario(String nick, String password) {
+		final Session session = sessionFactory.getCurrentSession();
+		Usuario usuario = new Usuario();
+		usuario.setNick(nick);
+		usuario.setPassword(password);
+		session.save(usuario);
+		return usuario;
+	}
+
 
 }
