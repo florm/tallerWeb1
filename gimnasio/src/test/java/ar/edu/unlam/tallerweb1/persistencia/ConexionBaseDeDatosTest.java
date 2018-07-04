@@ -95,6 +95,29 @@ public class ConexionBaseDeDatosTest extends SpringTest{
         
     }
     
+    @SuppressWarnings({ "unused", "unchecked" })
+	@Test
+    @Transactional @Rollback(true)
+    public void listarSucursal(){
+    	Session sesion = getSession();
+        
+              
+        Sucursal sucursal1 = new Sucursal();
+        sucursal1.setId(1L);
+        
+        Sucursal sucursal2 = new Sucursal();
+        sucursal1.setId(2L);
+        
+        sesion.save(sucursal1);
+        sesion.save(sucursal2);
+        
+        List<Sucursal> lista = sesion.createCriteria(Sucursal.class)
+				.list();
+        System.out.println(lista);
+    }
+    
+    
+    
     
     
 }
