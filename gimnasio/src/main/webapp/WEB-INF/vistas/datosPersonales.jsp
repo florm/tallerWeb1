@@ -53,7 +53,6 @@
 						DNI: ${socio.getDni() }<br><br>
 						Telefono: ${socio.getTelefono() }<br><br>
 						Mail: ${socio.getMail() }<br><br>
-						Pais: ${socio.getPais() }<br><br>
 					</div>
 				</div>	
 			</div>

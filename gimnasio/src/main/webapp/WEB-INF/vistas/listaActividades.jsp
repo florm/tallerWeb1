@@ -53,6 +53,7 @@
 				</h4>
 				<br>
 			</c:if>
+			<c:if test="${sessionScope.idPase == 5}"></c:if>
 			<c:if test="${sessionScope.idPase != 5}"> <!-- El pase de ID 5 es el que se utiliza por defecto en un usuario recien registrado, no posee actividades disponibles -->
 			<div class="row">
 				<c:forEach items="${listaActividades}" var="lista">
