@@ -43,18 +43,9 @@
 
 	<div id="page">
 		<%@include file="menu.jsp"%>
-
+		
+		<c:if test="${sessionScope.idPase == 5}"> <!-- Si el pase es 5 aparecerá esta leyenda -->
 		<div class="container">
-		<!--<c:if test="${sessionScope.idPase == null}"><h3>-Necesita tener un pase para inscribirse en una actividad.</h3></c:if>-->
-		<c:if test="${not empty exito}">
-				<h4>
-					<span class="mr-2">${exito}</span>
-					<a href="<c:url value="/sucursal/${sessionScope.idSucursal}/actividades?socio=${sessionScope.idSocio}" />">Volver</a>
-				</h4>
-				<br>
-			</c:if>
-			<c:if test="${sessionScope.idPase == 5}"> <!-- Si el pase es 5 aparecerá esta leyenda -->
-			
 			<br><div class="col-md-8 col-md-offset-2 text-center">
 						<div class="display-t">
 							<div class="display-tc animate-box" data-animate-effect="fadeIn">
@@ -65,8 +56,19 @@
 							</div>
 						</div>
 					</div>
-			
+			</div>
+		</c:if>
+		
+		<div class="container">
+		<!--<c:if test="${sessionScope.idPase == null}"><h3>-Necesita tener un pase para inscribirse en una actividad.</h3></c:if>-->
+		<c:if test="${not empty exito}">
+				<h4>
+					<span class="mr-2">${exito}</span>
+					<a href="<c:url value="/sucursal/${sessionScope.idSucursal}/actividades?socio=${sessionScope.idSocio}" />">Volver</a>
+				</h4>
+				<br>
 			</c:if>
+			
 			<c:if test="${sessionScope.idPase != 5}"> <!-- El pase de ID 5 es el que se utiliza por defecto en un usuario recien registrado, no posee actividades disponibles -->
 			<div class="row">
 				<c:forEach items="${listaActividades}" var="lista">
