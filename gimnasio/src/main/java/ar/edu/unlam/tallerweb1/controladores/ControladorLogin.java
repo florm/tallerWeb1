@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Pase;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalizacion;
@@ -49,11 +50,13 @@ public class ControladorLogin {
 				return new ModelAndView("redirect:/homeAdmin");
 			}
 			else{
+				
 				request.getSession().setAttribute("idSucursal",
 						servicioSocio.buscarSocio(usuarioBuscado).getSucursal().getId());
 				request.getSession().setAttribute("nombre", servicioSocio.buscarSocio(usuarioBuscado).getNombre());
 				request.getSession().setAttribute("idSocio", servicioSocio.buscarSocio(usuarioBuscado).getIdSocio());
 				request.getSession().setAttribute("idPase", servicioSocio.buscarSocio(usuarioBuscado).getPase().getId());
+				
 			}
 						
 			return new ModelAndView("redirect:/home");

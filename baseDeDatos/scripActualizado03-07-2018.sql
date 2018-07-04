@@ -39,6 +39,8 @@ insert into Pase(cantidadActividades, nombre, precio)
 values(10,'Plan Plus', 1200);
 insert into Pase(cantidadActividades, nombre, precio)
 values(null,'Plan Premiun', 1700);
+insert into Pase(cantidadActividades, nombre, precio)
+values(0,'Vacio', 0);
 
 -- tabla socio
 insert into Socio(apellido, dni, domicilioCalle, domicilioDepto, domicilioNumero, mail, nombre, telefono, ciudad_id, pase_id,sucursal_id, usuario_id)
@@ -73,7 +75,6 @@ values('En planes de salud basico','5% OFF','Medife',2);
 
 insert into Beneficio (descripcion, descuento, nombre, pase_id)
 values('En mesas restaurante','5% OFF','America Resto',1);
-
 
 -- tabla actividad
 insert into actividad(nombre, descripcion) values ('Pilates', 'El método Pilates es un sistema de ejercicios apto para todas las edades y condiciones físicas, orientado a la flexibilidad y tonificación corporal, modelando la figura y estilizando la musculatura.');
