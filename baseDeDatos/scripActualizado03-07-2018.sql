@@ -76,12 +76,6 @@ values('En planes de salud basico','5% OFF','Medife',2);
 insert into Beneficio (descripcion, descuento, nombre, pase_id)
 values('En mesas restaurante','5% OFF','America Resto',1);
 
--- test
-insert into Beneficio (descripcion, descuento, nombre, pase_id)
-values('Solo valido para mesas restaurante','10% OFF','America Resto',5);
-insert into Beneficio (descripcion, descuento, nombre, pase_id)
-values('En planes de salud basico','5% OFF','Medife',5);
-
 -- tabla actividad
 insert into actividad(nombre, descripcion) values ('Pilates', 'El método Pilates es un sistema de ejercicios apto para todas las edades y condiciones físicas, orientado a la flexibilidad y tonificación corporal, modelando la figura y estilizando la musculatura.');
 insert into actividad(nombre, descripcion) values ('Natacion', 'Genera un importante fortalecimiento cordiopulmonar, reduciendo el riesgo de enfermedades cardiovasculares y estimulando la circulación sanguínea.');
