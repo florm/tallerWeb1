@@ -106,14 +106,14 @@ values (5, 0,'Lunes','10','11',1,1,2);
 insert into sucursalactividad (cupo, cupoActual, dia, horaDesde, horaHasta, actividad_id,profesor_id, sucursal_id)
 values (2, 0,'Martes','8','9',2,2,2);
 
-insert into sucursalactividad (cupo, dia, horaDesde, horaHasta, actividad_id,profesor_id, sucursal_id)
-values (5,'Miercoles','20','21',1,3,1);
-insert into sucursalactividad (cupo, dia, horaDesde, horaHasta, actividad_id,profesor_id, sucursal_id)
-values (2,'Lunes','9','10',2,4,1);
-insert into sucursalactividad (cupo, dia, horaDesde, horaHasta, actividad_id,profesor_id, sucursal_id)
-values (10,'Viernes','15','16',3,5,1);
-insert into sucursalactividad (cupo, dia, horaDesde, horaHasta, actividad_id,profesor_id, sucursal_id)
-values (15,'Sabado','11','12',4,1,1);
+insert into sucursalactividad (cupo, cupoActual, dia, horaDesde, horaHasta, actividad_id,profesor_id, sucursal_id)
+values (5, 0,'Miercoles','20','21',1,3,1);
+insert into sucursalactividad (cupo, cupoActual, dia, horaDesde, horaHasta, actividad_id,profesor_id, sucursal_id)
+values (2, 0,'Lunes','9','10',2,4,1);
+insert into sucursalactividad (cupo, cupoActual, dia, horaDesde, horaHasta, actividad_id,profesor_id, sucursal_id)
+values (10, 0,'Viernes','15','16',3,5,1);
+insert into sucursalactividad (cupo, cupoActual, dia, horaDesde, horaHasta, actividad_id,profesor_id, sucursal_id)
+values (15, 0,'Sabado','11','12',4,1,1);
 
 -- tabla pago
 insert into pago(fecha,importe,socio_idSocio)
