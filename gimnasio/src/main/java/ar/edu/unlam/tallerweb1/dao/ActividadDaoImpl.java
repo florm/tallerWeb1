@@ -3,6 +3,8 @@ package ar.edu.unlam.tallerweb1.dao;
 import javax.inject.Inject;
 import java.util.List;
 
+import org.hibernate.FetchMode;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -22,11 +24,14 @@ public class ActividadDaoImpl implements ActividadDao {
 	@Override
 	public List<SucursalActividad> listarActividadesEnSucursal(Long id) {
 		final Session session = sessionFactory.getCurrentSession();
+		@SuppressWarnings("deprecation")
 		List <SucursalActividad> lista = 
 				session.createCriteria(SucursalActividad.class)
 				.createAlias("sucursal", "buscaSucursal")
 				.add(Restrictions.eq("buscaSucursal.id", id))
+				.setFetchMode("socios", FetchMode.EAGER)
 				.list();
+		
 		return lista;
 	}
 	
@@ -66,6 +71,18 @@ public class ActividadDaoImpl implements ActividadDao {
 	public void modificarCupoDeActividadEnSucursal(SucursalActividad sucursalActividad) {
 		Session sesion = sessionFactory.getCurrentSession();
 		sesion.update(sucursalActividad);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<SucursalActividad> listaActividadesDeSocio(Long idSocio) {
+		Session sesion = sessionFactory.getCurrentSession();
+		List<SucursalActividad> lista = sesion.createCriteria(SucursalActividad.class)
+				.createAlias("socios", "listaSocios")
+				.add(Restrictions.eq("listaSocios.idSocio", idSocio))
+				.list();
+		
+		return lista;
 	}
 
 }

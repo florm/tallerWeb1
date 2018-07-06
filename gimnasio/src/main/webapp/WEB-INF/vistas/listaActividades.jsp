@@ -93,15 +93,25 @@
 									hidden="hidden"></form:input>
 								<form:input path="idSucursal" name="idSucursal"
 									value="${sessionScope.idSucursal}" hidden="hidden"></form:input>
+									
+								<c:forEach items="${lista.socios}" var="socio">
+										
+										<c:if test="${socio.idSocio == sessionScope.idSocio}">
+											<c:set var="idNoDisponible" value="${lista.idSucursalActividad }"></c:set>
+										</c:if>
+								</c:forEach>
 								<p>
+								
 								<c:choose>
-									<c:when test="${lista.cupoActual == lista.cupo || validarPase == true }">
-									<button disabled="disabled" type="submit"
-										class="btn btn-primary btn-outline btn-sm">
-										Inscribirse <i class="icon-arrow-right"></i>
-									</button><br>
+									
+									<c:when test="${lista.cupoActual == lista.cupo || validarPase == true || lista.idSucursalActividad == idNoDisponible }">
+										<button disabled="disabled" type="submit"
+											class="btn btn-primary btn-outline btn-sm">
+											Inscribirse <i class="icon-arrow-right"></i>
+										</button><br>
 									<c:if test="${lista.cupoActual == lista.cupo}"><p class="pmensaje">-Esta actividad se encuentra llena</p></c:if>
-									<c:if test="${validarPase == true}"><p class="pmensaje">- Alcanzo el maximo de actividades por pase.</p></c:if>
+									<c:if test="${validarPase == true}"><p class="pmensaje">- Alcanzó el máximo de actividades por pase.</p></c:if>
+									<c:if test="${lista.idSucursalActividad == idNoDisponible}"><p class="pmensaje">- Ya se encuentra inscripto en esta actividad.</p></c:if>
 									</c:when> 
 									<c:otherwise>
 									<button type="submit"

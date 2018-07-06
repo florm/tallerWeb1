@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -46,6 +47,16 @@ public class ServicioActividadImp implements ServicioActividad {
 	@Override
 	public List<Actividad> listaActividades() {
 		return servicioActividadDao.listaActividades();
+	}
+	@Override
+	public List<SucursalActividad> listaActividadesNoDisponibles(Long idSocio, List<SucursalActividad> actividadesEnSucursal) {
+		List<SucursalActividad> actividadesDeSocio = servicioActividadDao.listaActividadesDeSocio(idSocio);
+		List<SucursalActividad> actividadesNoDisponibles = new ArrayList<SucursalActividad>();
+		for (SucursalActividad actividadSocio : actividadesDeSocio) {
+			if(actividadesEnSucursal.contains(actividadSocio))
+				actividadesNoDisponibles.add(actividadSocio);
+		}
+		return actividadesNoDisponibles;
 	}
 
 }
