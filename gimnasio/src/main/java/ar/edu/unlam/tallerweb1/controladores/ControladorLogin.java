@@ -29,6 +29,14 @@ public class ControladorLogin {
 	private ServicioSucursal servicioSucursal;
 	@Inject
 	private ServicioLocalizacion servicioLocalizacion;
+	
+	//mocking
+		public void setServicioLogin(ServicioLogin servicioLogin) {
+			this.servicioLogin = servicioLogin;
+		}
+		public void setServicioSocio(ServicioSocio servicioSocio) {
+			this.servicioSocio = servicioSocio;
+		}
 
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView irALogin() {
@@ -56,7 +64,6 @@ public class ControladorLogin {
 				request.getSession().setAttribute("nombre", servicioSocio.buscarSocio(usuarioBuscado).getNombre());
 				request.getSession().setAttribute("idSocio", servicioSocio.buscarSocio(usuarioBuscado).getIdSocio());
 				request.getSession().setAttribute("idPase", servicioSocio.buscarSocio(usuarioBuscado).getPase().getId());
-				
 			}
 						
 			return new ModelAndView("redirect:/home");
@@ -104,5 +111,7 @@ public class ControladorLogin {
 		request.getSession().invalidate();
 		return new ModelAndView("redirect:/");
 	}
+	
+	
 	
 }
