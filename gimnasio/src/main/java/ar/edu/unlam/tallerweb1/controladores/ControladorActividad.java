@@ -35,6 +35,7 @@ public class ControladorActividad {
 		Formulario formulario = new Formulario();
 		List<SucursalActividad> lista = servicioActividad.listarActividadesEnSucursal(id);
 		Boolean validarPase = servicioSocio.validarActividadSocio(idSocio);
+				
 		modelo.put("listaActividades", lista);
 		modelo.put("formularioInscripcion", formulario);
 		modelo.put("validarPase", validarPase);

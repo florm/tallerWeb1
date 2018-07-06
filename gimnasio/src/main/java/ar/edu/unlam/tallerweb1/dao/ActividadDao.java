@@ -11,4 +11,5 @@ public interface ActividadDao {
 	List<Actividad> listaActividades();
 	SucursalActividad traerActividadDeSucursal(Long idSucursalActividad);
 	public void modificarCupoDeActividadEnSucursal(SucursalActividad sucursalActividad);
+	List<SucursalActividad> listaActividadesDeSocio(Long idSocio);
 }
