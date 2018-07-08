@@ -66,12 +66,10 @@ public class ControladorActividad {
 		if (resultado == true) {
 			
 			String rta = "{\"mensaje\":\"La inscripcion se realizo correctamente\", \"estado\":\"1\"}";
-			System.out.println(rta);
 			return rta;
 		}else {
 			
 			String rta = "{\"mensaje\":\"Ya se encuentra inscripto en esta actividad\", \"estado\":\"0\"}";
-			System.out.println(rta);
 			return rta;
 		}
 	}
