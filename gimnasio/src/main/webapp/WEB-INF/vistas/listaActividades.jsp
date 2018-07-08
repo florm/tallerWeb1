@@ -45,6 +45,7 @@
 		<%@include file="menu.jsp"%>
 		
 		<c:if test="${sessionScope.idPase == 5}"> <!-- Si el pase es 5 aparecerá esta leyenda -->
+		
 		<div class="container">
 			<br><div class="col-md-8 col-md-offset-2 text-center">
 						<div class="display-t">
@@ -58,8 +59,10 @@
 					</div>
 			</div>
 		</c:if>
-		
+		<div class="row d-none justify-content-center align-items-center p-3 m-3" id="responseOk"></div>
+		<div class="row d-none justify-content-center align-items-center p-3 m-3" id="responseError"></div>
 		<div class="container">
+		
 		<!--<c:if test="${sessionScope.idPase == null}"><h3>-Necesita tener un pase para inscribirse en una actividad.</h3></c:if>-->
 		<c:if test="${not empty exito}">
 				<h4>
@@ -84,8 +87,8 @@
 							<label>${lista.profesor.nombre}
 								${lista.profesor.apellido}</label>
 							<c:url var="post_url" value="/registrarActividad" />
-							<form:form action="${post_url}" method="post"
-								modelAttribute="formularioInscripcion">
+							<form:form action="${post_url}" method="post" modelAttribute="formularioInscripcion"
+								>
 								<form:input path="idSocio" name="idSocio"
 									value="${sessionScope.idSocio}" hidden="hidden"></form:input>
 								<form:input path="idSucursalActividad"
@@ -114,8 +117,8 @@
 									<c:if test="${lista.idSucursalActividad == idNoDisponible}"><p class="pmensaje">- Ya se encuentra inscripto en esta actividad.</p></c:if>
 									</c:when> 
 									<c:otherwise>
-									<button type="submit"
-										class="btn btn-primary btn-outline btn-sm">
+									<button 
+										class="btn btn-primary btn-outline btn-sm btninscribir">
 										Inscribirse <i class="icon-arrow-right"></i>
 									</button>
 									</c:otherwise>
@@ -156,6 +159,7 @@
 
 	<!-- Main -->
 	<script src="<c:url value="/js/main.js" />"></script>
+	<script src="<c:url value="/js/actividades.js" />"></script>
 </body>
 
 </html>

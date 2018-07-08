@@ -5,13 +5,16 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Actividad;
@@ -42,16 +45,34 @@ public class ControladorActividad {
 		return new ModelAndView("listaActividades",modelo);
 	}
 	
-	@RequestMapping(path = "/registrarActividad", method = RequestMethod.POST)
-	public ModelAndView irARegistroCompleto(@ModelAttribute("formulario") Formulario formulario) {
+//	@RequestMapping(path = "/registrarActividad", method = RequestMethod.POST)
+//	public ModelAndView irARegistroCompleto(@ModelAttribute("formulario") Formulario formulario) {
+//		boolean resultado = servicioActividad.guardarSocioActividadSucursal(formulario.getIdSocio(), formulario.getIdSucursalActividad());
+//		ModelMap modelo = new ModelMap();
+//		if (resultado == true) {
+//			modelo.put("exito", "La inscripcion se realizó correctamente");
+//			return new ModelAndView("listaActividades", modelo);
+//		}else {
+//			modelo.put("exito", "Ya se encuentra inscripto en esta actividad");
+//			return new ModelAndView("listaActividades", modelo);
+//		}
+//	}
+	
+	@RequestMapping(path = "/registrarActividad", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public String irARegistroCompleto(@RequestBody Formulario formulario) {
 		boolean resultado = servicioActividad.guardarSocioActividadSucursal(formulario.getIdSocio(), formulario.getIdSucursalActividad());
-		ModelMap modelo = new ModelMap();
+		
 		if (resultado == true) {
-			modelo.put("exito", "La inscripcion se realizó correctamente");
-			return new ModelAndView("listaActividades", modelo);
+			
+			String rta = "{\"mensaje\":\"La inscripcion se realizo correctamente\", \"estado\":\"1\"}";
+			System.out.println(rta);
+			return rta;
 		}else {
-			modelo.put("exito", "Ya se encuentra inscripto en esta actividad");
-			return new ModelAndView("listaActividades", modelo);
+			
+			String rta = "{\"mensaje\":\"Ya se encuentra inscripto en esta actividad\", \"estado\":\"0\"}";
+			System.out.println(rta);
+			return rta;
 		}
 	}
 		
