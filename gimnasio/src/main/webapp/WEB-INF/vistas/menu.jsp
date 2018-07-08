@@ -41,8 +41,7 @@
 						<li><a
 							href="<c:url value="/beneficios/pase/${sessionScope.idPase}" />">Beneficios</a></li>
 						<li class="has-dropdown"><a
-							href="#">Mi
-								Cuenta</a>
+							href="#" style="color:  black;">Mi Cuenta</a>
 							<ul class="dropdown" style="display: none;">
 								<li><a href="<c:url value="/socio/${sessionScope.idSocio}/datospersonales" />">Datos Personales</a></li>
 								<li><a href="<c:url value="/socio/${sessionScope.idSocio}/modificardatospersonales" />">Modificar Datos Personales</a></li>

@@ -49,7 +49,7 @@
 			
 			<br><div class="col-md-8 col-md-offset-2 text-center">
 						<div class="display-t">
-							<div class="display-tc animate-box" data-animate-effect="fadeIn">
+							<div class="display-tc" data-animate-effect="fadeIn">
 								<h1>
 									No hay beneficios disponibles <br> 
 								</h1>
