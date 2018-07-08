@@ -3,8 +3,6 @@ package ar.edu.unlam.tallerweb1.persistencia;
 import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.controladores.ControladorLogin;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
-import ar.edu.unlam.tallerweb1.modelo.Tambor;
-import ar.edu.unlam.tallerweb1.modelo.Tragamonedas;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSocio;

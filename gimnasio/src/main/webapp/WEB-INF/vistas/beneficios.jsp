@@ -75,7 +75,7 @@
 								<span class="posted_on">${lista.descuento}</span>
 
 								<p>${lista.descripcion}</p>
-								<a href="#" class="btn btn-primary">Imprimir cupón</a>
+								<a href="<c:url value='/download/${lista.nombre}' />" class="btn btn-primary">Imprimir cupón</a>
 							</div>
 						</div>
 					</div>
