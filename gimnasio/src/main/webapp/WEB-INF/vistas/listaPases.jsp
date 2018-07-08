@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -42,10 +43,15 @@
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
+		<c:if test="${empty sessionScope.idSocio}">
 		<%@include file="menuSinLogin.jsp"%>
+		</c:if>
+		<c:if test="${!empty sessionScope.idSocio}">
+			<%@include file="menu.jsp"%>
+		</c:if>
 		<div class="container">
 			<div class="row animate-box fadeInUp animated-fast">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+				<div class="col-md-8 col-md-offset-2 text-center">
 					<h2>Pases</h2>
 					<p>Elige un plan:</p>
 				</div>
@@ -53,28 +59,35 @@
 			<div class="row">
 				<div class="pricing">
 					<c:forEach items="${listaPases}" var="lista">
-						<div class="col-md-3 animate-box fadeInUp animated-fast">
-							<div class="price-box">
-								<h2 class="pricing-plan">${lista.nombre}</h2>
-								<div class="price">
-									<sup class="currency">$</sup>${lista.precio}<small>mensual</small>
+						<c:if test="${lista.id !=5  }">
+							<div class="col-md-3 animate-box fadeInUp animated-fast">
+								<div class="price-box">
+									<h2 class="pricing-plan">${lista.nombre}</h2>
+									<div class="price">
+										<sup class="currency">$</sup>${lista.precio}<small>mensual</small>
+									</div>
+									<ul class="classes">
+										
+										<li class="color">Cantidad de Beneficios: ${fn:length(lista.listaBeneficios)}</li>
+										<li>Cantidad de actividades: <c:choose>
+												<c:when test="${lista.cantidadActividades == nul}">
+									Ilimitadas
+									</c:when>
+												<c:otherwise>
+									${lista.cantidadActividades}
+									</c:otherwise>
+											</c:choose></li>
+									</ul>
+									<c:if test="${empty sessionScope.idSocio}">
+										<a href="<c:url value="registrar"/>" class="btn btn-select-plan btn-sm">Registrarse</a>
+									</c:if>
+									<c:if test="${!empty sessionScope.idSocio}">
+										<a href="<c:url value="/pago/socio/${sessionScope.idSocio}/pase/${lista.id}" />" class="btn btn-select-plan btn-sm">Seleccionar Pase</a>
+									</c:if>
+									
 								</div>
-								<ul class="classes">
-									<li class="color">Cantidad de beneficios:</li>
-									<li>Cantidad de actividades: <c:choose>
-											<c:when test="${lista.cantidadActividades == nul}">
-								Ilimitadas
-								</c:when>
-											<c:otherwise>
-								${lista.cantidadActividades}
-								</c:otherwise>
-										</c:choose></li>
-								</ul>
-								<a href="#" class="btn btn-select-plan btn-sm">Seleccionar
-									Pase</a>
 							</div>
-						</div>
-
+						</c:if>
 					</c:forEach>
 
 				</div>
@@ -90,24 +103,29 @@
 	</div>
 
 	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
+
+	<script src="<c:url value="/js/jquery.min.js" />"></script>
 	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
+
+	<script src="<c:url value="/js/jquery.easing.1.3.js" />"></script>
 	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
+
+	<script src="<c:url value="/js/bootstrap.min.js" />"></script>
 	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
+
+	<script src="<c:url value="/js/jquery.waypoints.min.js" />"></script>
 	<!-- Stellar Parallax -->
-	<script src="js/jquery.stellar.min.js"></script>
+
+	<script src="<c:url value="/js/jquery.stellar.min.js" />"></script>
 	<!-- Carousel -->
-	<script src="js/owl.carousel.min.js"></script>
+
+	<script src="<c:url value="/js/owl.carousel.min.js" />"></script>
 	<!-- countTo -->
-	<script src="js/jquery.countTo.js"></script>
-	<!-- Magnific Popup -->
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/magnific-popup-options.js"></script>
+
+	<script src="<c:url value="/js/jquery.countTo.js" />"></script>
+	
 	<!-- Main -->
-	<script src="js/main.js"></script>
+	<script src="<c:url value="/js/main.js" />"></script>
 
 </body>
 </html>

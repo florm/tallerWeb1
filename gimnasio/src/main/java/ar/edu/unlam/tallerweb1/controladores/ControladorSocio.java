@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Pase;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalizacion;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPase;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSocio;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSucursal;
 import helpers.Formulario;
@@ -30,6 +32,8 @@ public class ControladorSocio {
 	private ServicioSucursal servicioSucursal;
 	@Inject
 	private ServicioLocalizacion servicioLocalizacion;
+	@Inject
+	private ServicioPase servicioPase;
 	
 	@RequestMapping (path = "/inscribirpase", method = RequestMethod.POST)
 	public ModelAndView agregarPaseASocio(@ModelAttribute ("formulario") Formulario formulario) {
@@ -95,6 +99,14 @@ public class ControladorSocio {
 			modelo.put("msj", "El nombre de usuario ya existe");
 			return new ModelAndView("pruebasocio", modelo);
 		}
+	}
+	
+	@RequestMapping (path="socio/{idSocio}/pases")
+	public ModelAndView verPases (@PathVariable(value="idSocio") Long idSocio){
+		ModelMap modelo = new ModelMap();
+		List<Pase> listaPases = servicioPase.listarPases();
+		modelo.put("listaPases", listaPases);
+		return new ModelAndView("listaPases", modelo);
 	}
 	
 }
