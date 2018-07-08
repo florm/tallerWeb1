@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Beneficio;
-
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioBeneficio;
 
 
@@ -24,6 +24,14 @@ public class ControladorBeneficios {
 	
 	@Inject
 	private ServicioBeneficio servicoBeneficio;
+	
+	@RequestMapping(path="/beneficios")
+	public ModelAndView beneficiosGenerales(){
+		ModelMap modelo = new ModelMap();
+		Usuario usuario = new Usuario();
+		modelo.put("usuario", usuario);
+		return new ModelAndView("beneficiosGenerales", modelo);
+	}
 
 	@RequestMapping("/beneficios/pase/{id}")
 	public ModelAndView irABeneficios(@PathVariable(value="id") Long idPase) {
