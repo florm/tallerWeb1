@@ -13,4 +13,5 @@ public interface ServicioPago {
 	public List<Pago> listaPagos(List<Socio> socios, Date fechaDesde, Date fechaHasta);
 	public Double getTotalRecaudado(List<Pago> pagos);
 	public List<Descuento> listarDescuentos();
+	public List<Descuento> listarDescuentosConImporte(Double importe, Socio socio);
 }

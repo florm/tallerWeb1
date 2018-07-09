@@ -1,12 +1,14 @@
 package helpers;
 
+import java.util.Date;
+
 public class Formulario {
 	private Long idSucursal;
 	private Long idSocio;
 	private Long idSucursalActividad;
 	private Long idPase;
 	private Long idDescuento;
-	
+	// pendiente private Date fecha;
 
 	
 	

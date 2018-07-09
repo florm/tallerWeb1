@@ -117,11 +117,12 @@ public class ControladorSocio {
 	public ModelAndView irAPagar (@PathVariable(value="idSocio") Long idSocio, @PathVariable(value="idPase") Long idPase){
 		Formulario formulario = new Formulario();
 		ModelMap modelo = new ModelMap();
-		modelo.put("socio", servicioSocio.buscarSocio(idSocio));
-		modelo.put("pase", idPase);
-		modelo.put("listaDescuentos", servicioPago.listarDescuentos());
+		Pase pase = servicioPase.buscarPase(idPase); //lo hago de esta manera porque necesito usarlo dos veces
+		Socio socio = servicioSocio.buscarSocio(idSocio); //lo hago de esta manera porque necesito usarlo dos veces
+		modelo.put("socio", socio);
+		modelo.put("pase", pase);
+		modelo.put("listaDescuentos", servicioPago.listarDescuentosConImporte(pase.getPrecio(), socio));
 		modelo.put("formulario", formulario);
-		//modelo.put("pase", servicioPase.)
 		return new ModelAndView("pagartest", modelo );
 	}
 	

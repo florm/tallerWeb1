@@ -39,6 +39,25 @@ public class ServicioPagoImpl implements ServicioPago {
 	public List<Descuento> listarDescuentos() {
 		return pagoDao.listarDescuentos();
 	}
+
+	@Override
+	public List<Descuento> listarDescuentosConImporte(Double importe, Socio socio) {
+		List<Descuento> listaDescuentos = pagoDao.listarDescuentos();
+		for (Descuento descuento : listaDescuentos) {
+			if(descuento.getMeses()== 1) {
+				descuento.setImporte(importe);
+			}else {
+				descuento.setImporte(importe*descuento.getPorcentaje());
+			}
+			
+			if(socio.getDescuento() != null) {
+				descuento.setImporte(descuento.getImporte()*0.95);
+			}
+		}
+		return listaDescuentos;
+	}
+	
+	
 	
 
 }

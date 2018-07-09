@@ -17,8 +17,17 @@ public class Descuento {
 	private Integer meses;
 	private Integer descuento;
 	private Double porcentaje;
+	private Double importe;
 	
 	
+	
+	
+	public Double getImporte() {
+		return importe;
+	}
+	public void setImporte(Double importe) {
+		this.importe = importe;
+	}
 	public Integer getMeses() {
 		return meses;
 	}
