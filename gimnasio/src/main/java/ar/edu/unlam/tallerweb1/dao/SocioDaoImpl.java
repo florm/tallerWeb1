@@ -101,10 +101,16 @@ public class SocioDaoImpl implements SocioDao {
 	@Override
 	public void registrarSocioSinReferente(Socio socio, Sucursal sucursal) {
 		Session sesion = sessionFactory.getCurrentSession(); 
-		Pase pase = sesion.get(Pase.class, 5L);// borrar despues
-		socio.setPase(pase);// borrar despues
+		Pase pase = sesion.get(Pase.class, 5L);
+		socio.setPase(pase);
 		sesion.save(socio);
 		sesion.update(sucursal);
+	}
+
+	@Override
+	public void actualizarSocio(Socio socio) {
+		Session sesion = sessionFactory.getCurrentSession();
+		sesion.update(socio);
 	}
 	
 	
