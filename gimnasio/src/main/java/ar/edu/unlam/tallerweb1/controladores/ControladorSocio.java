@@ -123,7 +123,12 @@ public class ControladorSocio {
 		modelo.put("pase", pase);
 		modelo.put("listaDescuentos", servicioPago.listarDescuentosConImporte(pase.getPrecio(), socio));
 		modelo.put("formulario", formulario);
-		return new ModelAndView("pagartest", modelo );
+		return new ModelAndView("formulariopago", modelo );
 	}
 	
+	@RequestMapping(path = "pago/socio/{idSocio}/abonarpase", method = RequestMethod.POST)
+	public ModelAndView abonarPase(@ModelAttribute ("formulario") Formulario formulario) {
+		servicioPago.abonarPase(formulario.getIdSocio(), formulario.getIdPase(), formulario.getIdDescuento());
+		return new ModelAndView("redirect:/");
+	}
 }

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.PagoDao;
 import ar.edu.unlam.tallerweb1.dao.PaseDao;
+import ar.edu.unlam.tallerweb1.dao.SocioDao;
 import ar.edu.unlam.tallerweb1.modelo.Descuento;
 import ar.edu.unlam.tallerweb1.modelo.Pago;
 import ar.edu.unlam.tallerweb1.modelo.Pase;
@@ -21,6 +22,12 @@ public class ServicioPagoImpl implements ServicioPago {
 
 	@Inject
 	PagoDao pagoDao;
+	
+	@Inject
+	PaseDao paseDao;
+	
+	@Inject
+	SocioDao socioDao;
 
 	@Override
 	public List<Pago> listaPagos(List<Socio> socios, Date fechaDesde, Date fechaHasta) {
@@ -55,6 +62,37 @@ public class ServicioPagoImpl implements ServicioPago {
 			}
 		}
 		return listaDescuentos;
+	}
+
+	@Override
+	public void abonarPase(Long idSocio, Long idPase, Long idDescuento) {
+		Descuento descuento = pagoDao.buscarDescuento(idDescuento);
+		Pase pase = paseDao.buscarPase(idPase);
+		Socio socio = socioDao.buscarSocio(idSocio);
+		Pago pago = new Pago();
+		
+		if (descuento.getMeses() != 1) {
+			pago.setImporte((pase.getPrecio()*descuento.getPorcentaje())*descuento.getMeses());			
+		}else {
+			pago.setImporte(pase.getPrecio());
+		}
+		
+		if (socio.getDescuento() != null) {
+			pago.setImporte(pago.getImporte()*0.95);
+			socio.setDescuento(null);
+		}
+		
+		if (socio.getRecomendadoPor() != null) {
+			Socio socioRecomendador = socioDao.buscarSocio(socio.getRecomendadoPor().getIdSocio());
+			socioRecomendador.setDescuento(1);
+			socioDao.actualizarSocio(socioRecomendador);
+		}
+		
+		socio.setPase(pase);
+		socioDao.actualizarSocio(socio);
+		
+		pago.setSocio(socio);
+		pagoDao.abonarPase(pago);
 	}
 	
 	

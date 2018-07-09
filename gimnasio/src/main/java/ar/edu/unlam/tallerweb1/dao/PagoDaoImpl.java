@@ -12,6 +12,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Actividad;
+import ar.edu.unlam.tallerweb1.modelo.Ciudad;
 import ar.edu.unlam.tallerweb1.modelo.Descuento;
 import ar.edu.unlam.tallerweb1.modelo.Pago;
 import ar.edu.unlam.tallerweb1.modelo.Pase;
@@ -40,6 +41,22 @@ public class PagoDaoImpl implements PagoDao {
 		final Session session = sessionFactory.getCurrentSession();
 		List<Descuento> listaDescuentos = session.createCriteria(Descuento.class).list();
 		return listaDescuentos;
+	}
+	
+	@Override
+	public Descuento buscarDescuento(Long idDescuento) {
+		Session sesion = sessionFactory.getCurrentSession();
+		Descuento descuento = (Descuento) sesion.createCriteria(Descuento.class)
+				.add(Restrictions.eq("id", idDescuento))
+				.uniqueResult();
+		return descuento;
+	}
+
+	@Override
+	public void abonarPase(Pago pago) {
+		Session sesion = sessionFactory.getCurrentSession();
+		sesion.save(pago);
+		
 	}
 
 }

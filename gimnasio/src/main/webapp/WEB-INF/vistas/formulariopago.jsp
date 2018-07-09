@@ -56,25 +56,28 @@
 						<c:if test="${socio.descuento != null}">
 						<div class="row justify-content-center align-items-center p-3 m-3" id="responseOk">Los precios incluyen un descuento del 5% por referidos. Felicidades!</div>
 						</c:if>
-						<form:form class="text-center" method="post" action="abonarpase" id="" modelAttribute="formulario">
 						
-						
+						<c:url var="post_url" value="/pago/socio/${sessionScope.idSocio}/abonarpase" />
+						<form:form class="text-center" method="POST" action="${post_url}" modelAttribute="formulario">
+			
 						    <div class="form-group input-size">
-								<form:input readonly="true" path="idSocio" type="text" class="form-control" id="idSocio"  name="nombre" value="${socio.idSocio}" ></form:input>
+								<form:input readonly="true" path="" type="text" class="form-control" id=""  name="nombre" value="${pase.nombre}" ></form:input>
 						    </div>
 						    <div class="form-group input-size">
-								<form:input readonly="true" path="idSocio" type="text" class="form-control" id="idSocio"  name="nombre" value="${socio.idSocio}" ></form:input>
-						    </div>
-						    <div class="form-group input-size">
-
 							  	<form:select required="true" path="idDescuento" id="idDescuento" name="idDescuento" cssClass="form-control">
 							 		<option value="" selected> Seleccione cantidad de meses..
 							 		<c:forEach items= "${listaDescuentos}" var="descuento">
 							 			<option value="${descuento.id}">${descuento.meses} Meses (${descuento.descuento}% de Descuento) Precio por mes: $${descuento.importe}
 							 		</c:forEach>
 						  		</form:select>
-							  	
+						  	</div>
+							 <div class="form-group input-size">
+								<form:input hidden="true" path="idSocio" type="text" class="form-control" id="idSocio"  name="idSocio" value="${socio.idSocio}" ></form:input>
+						   	 </div>
+						     <div class="form-group input-size">
+								<form:input hidden="true" path="idPase" type="text" class="form-control" id="idPase"  name="idPase" value="${pase.id}" ></form:input>
 						    </div>
+						    <button type="submit" id="btn-pagar" value="pagar" class="btn btn-primary">Pagar</button>
 						</form:form>
 						
 					</div>

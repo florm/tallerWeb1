@@ -17,4 +17,5 @@ public interface SocioDao {
 	Socio buscarSocioPorDni(String dni);
 	void registrarSocio (Socio socio, Socio socioReferente, Sucursal sucursal);
 	void registrarSocioSinReferente (Socio socio, Sucursal sucursal);
+	void actualizarSocio(Socio socio);
 }

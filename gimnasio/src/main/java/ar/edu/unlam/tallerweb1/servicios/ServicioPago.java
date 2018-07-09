@@ -14,4 +14,5 @@ public interface ServicioPago {
 	public Double getTotalRecaudado(List<Pago> pagos);
 	public List<Descuento> listarDescuentos();
 	public List<Descuento> listarDescuentosConImporte(Double importe, Socio socio);
+	public void abonarPase(Long idSocio, Long idPase, Long idDescuento);
 }

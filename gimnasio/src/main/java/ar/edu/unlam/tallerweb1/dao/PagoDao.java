@@ -11,4 +11,6 @@ import ar.edu.unlam.tallerweb1.modelo.Socio;
 public interface PagoDao {
 	List<Pago> listaPagos(List<Socio> socios, Date fechaDesde, Date fechaHasta);
 	public List<Descuento> listarDescuentos();
+	public Descuento buscarDescuento(Long idDescuento);
+	public void abonarPase(Pago pago);
 }
