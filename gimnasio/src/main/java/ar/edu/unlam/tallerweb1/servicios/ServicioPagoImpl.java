@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.PagoDao;
 import ar.edu.unlam.tallerweb1.dao.PaseDao;
+import ar.edu.unlam.tallerweb1.modelo.Descuento;
 import ar.edu.unlam.tallerweb1.modelo.Pago;
 import ar.edu.unlam.tallerweb1.modelo.Pase;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
@@ -32,6 +33,11 @@ public class ServicioPagoImpl implements ServicioPago {
 			total += pago.getImporte();
 		}
 		return total;
+	}
+
+	@Override
+	public List<Descuento> listarDescuentos() {
+		return pagoDao.listarDescuentos();
 	}
 	
 

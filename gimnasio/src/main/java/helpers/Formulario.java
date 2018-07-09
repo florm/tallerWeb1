@@ -5,26 +5,26 @@ public class Formulario {
 	private Long idSocio;
 	private Long idSucursalActividad;
 	private Long idPase;
+	private Long idDescuento;
 	
-	private String prueba;
+
 	
 	
 	
-	
+	public Long getIdDescuento() {
+		return idDescuento;
+	}
+
+	public void setIdDescuento(Long idDescuento) {
+		this.idDescuento = idDescuento;
+	}
+
 	public Long getIdPase() {
 		return idPase;
 	}
 
 	public void setIdPase(Long idPase) {
 		this.idPase = idPase;
-	}
-
-	public String getPrueba() {
-		return prueba;
-	}
-
-	public void setPrueba(String prueba) {
-		this.prueba = prueba;
 	}
 
 	public Long getIdSocio() {

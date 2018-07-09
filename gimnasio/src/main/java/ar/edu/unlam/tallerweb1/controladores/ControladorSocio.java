@@ -19,6 +19,7 @@ import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalizacion;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPago;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPase;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSocio;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSucursal;
@@ -34,6 +35,8 @@ public class ControladorSocio {
 	private ServicioLocalizacion servicioLocalizacion;
 	@Inject
 	private ServicioPase servicioPase;
+	@Inject
+	private ServicioPago servicioPago;
 	
 	@RequestMapping (path = "/inscribirpase", method = RequestMethod.POST)
 	public ModelAndView agregarPaseASocio(@ModelAttribute ("formulario") Formulario formulario) {
@@ -107,6 +110,19 @@ public class ControladorSocio {
 		List<Pase> listaPases = servicioPase.listarPases();
 		modelo.put("listaPases", listaPases);
 		return new ModelAndView("listaPases", modelo);
+	}
+	
+	//Utilizo un helper formulario, falta ver el caso de mercadopago
+	@RequestMapping (path="pago/socio/{idSocio}/pase/{idPase}")
+	public ModelAndView irAPagar (@PathVariable(value="idSocio") Long idSocio, @PathVariable(value="idPase") Long idPase){
+		Formulario formulario = new Formulario();
+		ModelMap modelo = new ModelMap();
+		modelo.put("socio", servicioSocio.buscarSocio(idSocio));
+		modelo.put("pase", idPase);
+		modelo.put("listaDescuentos", servicioPago.listarDescuentos());
+		modelo.put("formulario", formulario);
+		//modelo.put("pase", servicioPase.)
+		return new ModelAndView("pagartest", modelo );
 	}
 	
 }
