@@ -30,7 +30,12 @@
 
 	
 	<div id="page">
+		<c:if test="${empty sessionScope.rol}">
 		<%@include file="menuSinLogin.jsp"%>
+		</c:if>
+		<c:if test="${!empty sessionScope.rol}">
+			<%@include file="menuAdministrador.jsp"%>
+		</c:if>
 		<div class="container mt-5">
 			<div class="justify-content-center mx-5 my-3" id="mapa" style="height:500px;"></div>
 		</div>

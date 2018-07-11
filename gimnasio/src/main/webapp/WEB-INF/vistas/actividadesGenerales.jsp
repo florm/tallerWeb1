@@ -42,7 +42,12 @@
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
+		<c:if test="${empty sessionScope.rol}">
 		<%@include file="menuSinLogin.jsp"%>
+		</c:if>
+		<c:if test="${!empty sessionScope.rol}">
+			<%@include file="menuAdministrador.jsp"%>
+		</c:if>
 
 		<div class="container">
 			<div class="row d-flex flex-column text-center m-5">
