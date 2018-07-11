@@ -32,6 +32,15 @@ public class ServicioSucursalImp implements ServicioSucursal {
 	public void modificarSucursal(Sucursal sucursalUpdate, Sucursal sucursalBdd) {
 		sucursalDao.modificarSucursal(sucursalUpdate, sucursalBdd);
 	}
-
+	
+	@Override
+	public void eliminarSucursal(Sucursal sucursalEliminada) {
+		sucursalDao.eliminarSucursal(sucursalEliminada);
+	}
+	
+	@Override
+	public void agregarSucursal(Sucursal sucursalNueva) {
+		sucursalDao.agregarSucursal(sucursalNueva);
+	}
 
 }

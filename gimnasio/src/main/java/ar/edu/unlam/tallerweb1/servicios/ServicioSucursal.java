@@ -11,7 +11,7 @@ public interface ServicioSucursal {
 	List<Sucursal> listarSucursales(); 
 	Sucursal getSucursal(Long id);
 	void modificarSucursal(Sucursal sucursalUpdate, Sucursal sucursalBdd);
-
-	
+	void eliminarSucursal(Sucursal sucursalEliminada);
+	void agregarSucursal(Sucursal sucursalNueva);
 }
 

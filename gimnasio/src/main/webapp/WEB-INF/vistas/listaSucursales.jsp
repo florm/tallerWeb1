@@ -48,6 +48,7 @@
 						<td>Codigo Postal</td>
 						<td>Responsable</td>
 						<td>Modificar</td>
+						<td>Eliminar</td>
 					</tr>
 				
 				</thead>
@@ -62,6 +63,9 @@
 							<td><a href="<c:url value="/sucursal/${sucursal.id}/modificar" />" 
 							class="btn btn-primary btn-outline btn-sm">
 							Modificar<i class="icon-arrow-right"></i></a></td>
+							<td><a href="<c:url value="/sucursal/${sucursal.id}/eliminar" />" 
+							class="btn btn-primary btn-outline btn-sm">
+							Eliminar<i class="icon-arrow-right"></i></a></td>
 						</tr>
 					</c:forEach>
 				
@@ -69,9 +73,19 @@
 			
 			</table>
 		</div>	
+		<div class="container mt-5">
+		<a href="<c:url value="/sucursales" />" 
+		class="btn btn-primary btn-outline btn-sm">
+		Ver mapa<i class="icon-arrow-right"></i></a>
+		</div>
+		<div class="container mt-5">
+		<a href="<c:url value="/sucursal/agregarNuevaSucursal" />" 
+		class="btn btn-primary btn-outline btn-sm">
+		Nueva Sucursal<i class="icon-arrow-right"></i></a>
+		</div>
 	</div>
 
-
+	<%@include file="footer.jsp"%>
 
 	<!-- jQuery -->
 

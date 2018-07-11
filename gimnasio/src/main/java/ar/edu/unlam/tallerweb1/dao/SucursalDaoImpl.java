@@ -50,4 +50,18 @@ public class SucursalDaoImpl implements SucursalDao {
 		sucursalBdd.setNumcalle(sucursalUpdate.getNumcalle());		
 		sesion.update(sucursalBdd);
 	}
+	
+	@Override
+	public void eliminarSucursal(Sucursal sucursalEliminada) {
+		Session sesion = sessionFactory.getCurrentSession();
+		// listaSucursales().remove(sucursalEliminada);
+		sesion.delete(sucursalEliminada);
+	}
+	
+	@Override
+	public void agregarSucursal(Sucursal sucursalNueva) {
+		Session sesion = sessionFactory.getCurrentSession();
+		//listaSucursales().add(sucursalNueva);
+		sesion.save(sucursalNueva);
+	}
 }

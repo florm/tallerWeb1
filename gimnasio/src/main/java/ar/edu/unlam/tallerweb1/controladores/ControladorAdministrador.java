@@ -30,6 +30,7 @@ import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.Sucursal;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioActividad;
+import ar.edu.unlam.tallerweb1.servicios.ServicioLocalizacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPago;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSocio;
@@ -45,6 +46,8 @@ public class ControladorAdministrador {
 	private ServicioSucursal servicioSucursal;
 	@Inject
 	private ServicioPago servicioPago;
+	@Inject
+	private ServicioLocalizacion servicioLocalizacion;
 
 	
 	
@@ -124,5 +127,28 @@ public class ControladorAdministrador {
 		servicioSucursal.modificarSucursal(sucursalUpdate, sucursalBdd);
 		return new ModelAndView("redirect:/sucursalesadmin");
 	}
+
+	@RequestMapping(path= "/sucursal/{id}/eliminar")
+	public ModelAndView eliminarSucursal (@PathVariable Long id) {
+		Sucursal sucursalEliminada = servicioSucursal.getSucursal(id);
+		servicioSucursal.eliminarSucursal(sucursalEliminada);
+		return new ModelAndView("redirect:/sucursalesadmin");
+	}
+	
+	@RequestMapping(path= "/sucursal/agregarNuevaSucursal")
+	public ModelAndView agregarSucursal() {
+		Sucursal sucursalVacia = new Sucursal();
+		ModelMap modelo = new ModelMap();
+		modelo.put("sucursalVacia", sucursalVacia);
+		modelo.put("listaCiudad", servicioLocalizacion.listarCiudades());
+		modelo.put("listaSucursal", servicioSucursal.listarSucursales());
+		return new ModelAndView("agregarSucursal",modelo);
+}
+
+	@RequestMapping(path = "/sucursal/nuevaSucursal", method = RequestMethod.POST)
+	public ModelAndView agregarNuevaSucursal(@ModelAttribute ("sucursalVacia") Sucursal sucursalNueva) {
+		servicioSucursal.agregarSucursal(sucursalNueva);
+		return new ModelAndView("redirect:/sucursalesadmin");
+}
 
 }
