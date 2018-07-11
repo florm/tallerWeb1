@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -99,4 +100,29 @@ public class ControladorAdministrador {
 		
 		return new ModelAndView("listaPagos", modelo);
 	}
+
+	
+	@RequestMapping("/sucursalesadmin")
+	public ModelAndView irASucursales(){
+		ModelMap modelo = new ModelMap();
+		modelo.put("listaSucursales", servicioSucursal.listarSucursales());
+		return new ModelAndView("listaSucursales",modelo);
+	}
+	
+	@RequestMapping("/sucursal/{id}/modificar")
+	public ModelAndView irAModificarSucursal(@PathVariable Long id) {
+		ModelMap modelo = new ModelMap();
+		Sucursal sucursalVacia = new Sucursal();
+		modelo.put("sucursal", servicioSucursal.getSucursal(id));
+		modelo.put("sucursalVacia", sucursalVacia);
+		return new ModelAndView("modificarSucursal", modelo);
+	}
+	
+	@RequestMapping(path = "/sucursal/{id}/modificardatos", method = RequestMethod.POST)
+	public ModelAndView modificarDatosSucursal(@ModelAttribute ("sucursalVacia") Sucursal sucursalUpdate, @PathVariable Long id) {
+		Sucursal sucursalBdd = servicioSucursal.getSucursal(id);
+		servicioSucursal.modificarSucursal(sucursalUpdate, sucursalBdd);
+		return new ModelAndView("redirect:/sucursalesadmin");
+	}
+
 }
