@@ -1,3 +1,5 @@
+use gimnasio;
+
 -- tabla provincia
 Insert Into Provincia (Nombre) Values ('Buenos Aires');
 
@@ -142,7 +144,7 @@ values(4,1),(4,2),(4,3),(4,4),(4,5);
 insert into sucursal_socio (sucursal_id, listaSocios_idSocio)
 value (1,1),(2,2);
 
---Descuentos
+-- Descuentos
 insert into descuento (meses,descuento,porcentaje)
 value(1,0,0.0);
 insert into descuento (meses,descuento,porcentaje)
