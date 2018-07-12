@@ -79,7 +79,13 @@ public class ServicioSocioImpl implements ServicioSocio {
 	public Boolean registrarSocio(Socio socio) {
 		List<Usuario> lista = usuarioDao.verSiExisteUsuario(socio.getUsuario().getNick());
 		if (lista.size() == 0) {
-			Socio socioReferente = socioDao.buscarSocioPorDni(socio.getRecomendadoPor().getDni());
+			
+			Socio socioReferente;
+			if(socio.getRecomendadoPor().getDni() != "") { //Es necesario hacerlo asi ya que pincha si se envia un referente vacio
+			socioReferente = socioDao.buscarSocioPorDni(socio.getRecomendadoPor().getDni());
+			}else {
+			socioReferente = null;
+			}
 			Ciudad ciudad = localizacionDao.traerCiudad(socio.getCiudad().getId());
 			Usuario usuario = usuarioDao.guardarUsuario(socio.getUsuario().getNick(), socio.getUsuario().getPassword());
 			Sucursal sucursal = sucursalDao.getSucursal(socio.getSucursal().getId());

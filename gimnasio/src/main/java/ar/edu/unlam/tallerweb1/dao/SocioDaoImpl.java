@@ -85,6 +85,7 @@ public class SocioDaoImpl implements SocioDao {
 		Socio socio = (Socio) sesion.createCriteria(Socio.class)
 				.add(Restrictions.eq("dni", dni))
 				.uniqueResult();
+		Socio socio2 = new Socio();
 		return socio;
 	}
 

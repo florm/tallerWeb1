@@ -5,13 +5,16 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Pase;
@@ -91,18 +94,23 @@ public class ControladorSocio {
 			return new ModelAndView("registrar", modelo);
 		}
 	
-	@RequestMapping (path = "/registrosocio", method = RequestMethod.POST)
-	public ModelAndView registrarSocio(@ModelAttribute ("socio") Socio socio) {
-		boolean resultado = servicioSocio.registrarSocio(socio);
-		ModelMap modelo = new ModelMap();
+		
+	@RequestMapping (path = "/registrosocio", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public String registrarSocioCompleto(@RequestBody Socio socio) {
+
+		Boolean resultado = servicioSocio.registrarSocio(socio);
 		if (resultado == true) {
-			modelo.put("msj", "Registro correcto");
-			return new ModelAndView("pruebasocio", modelo);
+			String rta = "{\"mensaje\":\"El registro fue exitoso\", \"estado\":\"1\"}";
+			return rta;
 		}else {
-			modelo.put("msj", "El nombre de usuario ya existe");
-			return new ModelAndView("pruebasocio", modelo);
+			String rta = "{\"mensaje\":\"El nombre de usuario ya existe\", \"estado\":\"0\"}";
+			return rta;
 		}
+		
+
 	}
+	
 	
 	@RequestMapping (path="socio/{idSocio}/pases")
 	public ModelAndView verPases (@PathVariable(value="idSocio") Long idSocio){
