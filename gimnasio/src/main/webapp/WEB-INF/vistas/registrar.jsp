@@ -72,7 +72,7 @@
 						    <div class="form-group input-size col-md-6">
 						        <form:input path="dni" type="number" class="form-control" id="dni"  name="dni" placeholder="D.N.I."></form:input>
 						    </div>
-					    <div class="form-group input-size col-md-6">
+					   		<div class="form-group input-size col-md-6">
 							    <form:select required="true" path="ciudad.id" id="ciudad" name="ciudad.id" cssClass="form-control">
 							 		<option value="" selected> Seleccione ciudad..
 							 		<c:forEach items= "${listaCiudad}" var="ciudad">

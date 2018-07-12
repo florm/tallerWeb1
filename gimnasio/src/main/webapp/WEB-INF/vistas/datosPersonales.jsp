@@ -48,11 +48,14 @@
 			<div class="row">
 				<div class="col-md-4 text-center animate-box fadeInUp animated-fast mx-auto">
 					<div class="services">
-						Nombre: ${socio.getNombre() }<br><br>
-						Apellido: ${socio.getApellido() }<br><br>
-						DNI: ${socio.getDni() }<br><br>
-						Telefono: ${socio.getTelefono() }<br><br>
-						Mail: ${socio.getMail() }<br><br>
+						Username: ${socio.usuario.nick}<br><br>
+						Nombre: ${socio.nombre}<br><br>
+						Apellido: ${socio.apellido}<br><br>
+						DNI: ${socio.dni}<br><br>
+						Telefono: ${socio.telefono}<br><br>
+						Mail: ${socio.mail}<br><br>
+						Domicilio: ${socio.ciudad.nombre}, ${socio.domicilioCalle} ${socio.domicilioNumero} ${socio.domicilioDepto}<br><br>
+						
 					</div>
 				</div>	
 			</div>

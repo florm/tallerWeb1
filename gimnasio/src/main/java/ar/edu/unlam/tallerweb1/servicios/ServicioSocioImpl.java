@@ -60,6 +60,10 @@ public class ServicioSocioImpl implements ServicioSocio {
 		Socio socioB = socioDao.buscarSocio(idSocio);
 		socioB.setTelefono(socio.getTelefono());
 		socioB.setMail(socio.getMail());
+		socioB.setCiudad(localizacionDao.traerCiudad(socio.getCiudad().getId()));
+		socioB.setDomicilioCalle(socio.getDomicilioCalle());
+		socioB.setDomicilioNumero(socio.getDomicilioNumero());
+		socioB.setDomicilioDepto(socio.getDomicilioDepto());
 		socioDao.actualizarSocio(socioB);
 	}
 
