@@ -33,7 +33,7 @@
 				<div class="col-xs-10 text-right menu-1">
 					<ul>
 						<!-- menu socio -->
-						<li class="active"><a href="<c:url value="/" />">Inicio</a></li>
+						<li class="active"><a href="<c:url value="/home" />">Inicio</a></li>
 						<li><a
 							href="<c:url value="/socio/${sessionScope.idSocio}/pases" />">Pases</a></li>
 						<li><a
