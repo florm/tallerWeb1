@@ -50,7 +50,7 @@
 					
 					<div class="modal-body p-5">
 					
-				      	<form:form class="text-center" method="post" action="modificardatossocio" id="" modelAttribute="socioVacio">
+				      	<form:form class="text-center" method="post" action="modificardatossocio" id="" modelAttribute="socio">
 
 						    <div class="form-group input-size">
 						        <form:input readonly="true" path="nombre" type="text" class="form-control" id="nombre"  name="nombre" value="${socio.getNombre()}" ></form:input>
