@@ -73,8 +73,7 @@
 		
 	</div>
 
-	<%@include file="footer.jsp"%>
-
+	
 	<!-- jQuery -->
 
 	<script src="<c:url value="/js/jquery.min.js" />"></script>

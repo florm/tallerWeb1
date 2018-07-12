@@ -16,21 +16,21 @@
 				<div class="row d-flex flex-row">
 					<div class="col-6">
 						<ul class="fh5co-footer-links">
-							<li><a href="#">Pilates</a></li>
-							<li><a href="#">Natación</a></li>
-							<li><a href="#">Yoga</a></li>
-							<li><a href="#">Spinning</a></li>
-							<li><a href="#">Crossfit</a></li>
+							<li><a href="actividades">Pilates</a></li>
+							<li><a href="actividades">Natación</a></li>
+							<li><a href="actividades">Yoga</a></li>
+							<li><a href="actividades">Spinning</a></li>
+							<li><a href="actividades">Crossfit</a></li>
 						</ul>
 					</div>
 
 					<div class="col-6">
 						<ul class="fh5co-footer-links">
-							<li><a href="#">Cardio Funcional</a></li>
-							<li><a href="#">Boxeo</a></li>
-							<li><a href="#">Fitness</a></li>
-							<li><a href="#">Zumba</a></li>
-							<li><a href="#">Musculación</a></li>
+							<li><a href="actividades">Cardio Funcional</a></li>
+							<li><a href="actividades">Boxeo</a></li>
+							<li><a href="actividades">Fitness</a></li>
+							<li><a href="actividades">Zumba</a></li>
+							<li><a href="actividades">Musculación</a></li>
 						</ul>
 					</div>
 				</div>
@@ -42,9 +42,10 @@
 				<div class="col-12">
 					<ul class="fh5co-footer-links">
 						<li><a href="#">Inicio</a></li>
-						<li><a href="#">Pases</a></li>
-						<li><a href="#">Actividades</a></li>
-						<li><a href="#">Beneficios</a></li>
+						<li><a href="pases">Pases</a></li>
+						<li><a href="actividades">Actividades</a></li>
+						<li><a href="sucursales">Sucursales</a></li>
+						<li><a href="beneficios">Beneficios</a></li>
 
 					</ul>
 				</div>
@@ -52,7 +53,7 @@
 		</div>
 		<div class="row justify-content-center">
 			<p>
-				<a class="btn btn-primary" href="#">Registrarme</a>
+				<a class="btn btn-primary" href="registrar">Registrarme</a>
 			</p>
 		</div>
 
