@@ -35,5 +35,10 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/CAMI/workspace/Gimnasio/Jar/barcode.jar" sourcepath="">
+		<attributes>
+			<attribute name="annotationpath" value="/gimnasio"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
