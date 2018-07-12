@@ -1,5 +1,6 @@
- <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -42,43 +43,56 @@
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
-		<%@include file="menu.jsp"%>
-		
+		<c:if test="${empty sessionScope.idSocio}">
+		<%@include file="menuSinLogin.jsp"%>
+		</c:if>
+		<c:if test="${!empty sessionScope.idSocio}">
+			<%@include file="menu.jsp"%>
+		</c:if>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4 text-center animate-box fadeInUp animated-fast mx-auto">
-					
+				<div class="col-md-8 text-center animate-box fadeInUp animated-fast mx-auto">
 					<div class="modal-body p-5">
-					
-				      	<form:form class="text-center" method="post" action="modificardatossocio" id="" modelAttribute="socioVacio">
-
-						    <div class="form-group input-size">
-						        <form:input readonly="true" path="nombre" type="text" class="form-control" id="nombre"  name="nombre" value="${socio.getNombre()}" ></form:input>
-						    </div>
-						    <div class="form-group input-size">
-						        <form:input readonly="true" path="apellido" type="text" class="form-control" id="apellido"  name="apellido" value="${socio.getApellido()}" ></form:input>
-						    </div>
-						    <div class="form-group input-size">
-						        <form:input readonly="true" path="dni" type="text" class="form-control" id="dni"  name="dni" value="${socio.getDni()}"></form:input>
-						    </div>
-						    <div class="form-group input-size">
-						        <form:input path="telefono" type="text" class="form-control" id="telefono"  name="telefono" value="${socio.getTelefono()}"></form:input>
-						    </div>
-						    <div class="form-group input-size">
-						        <form:input path="mail" type="text" class="form-control" id="mail"  name="mail" value="${socio.getMail()}"></form:input>
-						    </div>
-						    
-						    <button type="submit" id="btn-modificar" value="modificar" class="btn btn-primary">Modificar</button>
-					    
-						</form:form>
-      				</div>
+						<c:if test="${socio.descuento != null}">
+						<div class="row justify-content-center align-items-center p-3 my-3" id="responseOk">Los precios incluyen un descuento del 5% por referidos. Felicidades!</div>
+						</c:if>
 						
-				</div>	
+						<c:url var="post_url" value="/pago/socio/${sessionScope.idSocio}/abonarpase" />
+						<form:form class="text-center" method="POST" action="${post_url}" modelAttribute="formulario">
+			
+						    <div class="form-group input-size">
+								<form:input readonly="true" path="" type="text" class="form-control" id=""  name="nombre" value="${pase.nombre}" ></form:input>
+						    </div>
+						    <div class="form-group input-size">
+							  	<form:select required="true" path="idDescuento" id="idDescuento" name="idDescuento" cssClass="form-control">
+							 		<option value="" selected> Seleccione cantidad de meses..
+							 		<c:forEach items= "${listaDescuentos}" var="descuento">
+							 			<option value="${descuento.id}">${descuento.meses} Meses (${descuento.descuento}% de Descuento) Precio por mes: $${descuento.importe}
+							 		</c:forEach>
+						  		</form:select>
+						  	</div>
+							 <div class="form-group input-size">
+								<form:input hidden="true" path="idSocio" type="text" class="form-control" id="idSocio"  name="idSocio" value="${socio.idSocio}" ></form:input>
+						   	 </div>
+						     <div class="form-group input-size">
+								<form:input hidden="true" path="idPase" type="text" class="form-control" id="idPase"  name="idPase" value="${pase.id}" ></form:input>
+						    </div>
+						    <button type="submit" id="btn-pagar" value="pagar" class="btn btn-primary">Pagar</button>
+						</form:form>
+						
+					</div>
+				</div>
 			</div>
 		</div>
 
-		<%@include file="footer.jsp"%>
+	<%@include file="footer.jsp"%>
+		
 	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+
 	<!-- jQuery -->
 
 	<script src="<c:url value="/js/jquery.min.js" />"></script>
@@ -100,9 +114,10 @@
 	<!-- countTo -->
 
 	<script src="<c:url value="/js/jquery.countTo.js" />"></script>
-
+	
 	<!-- Main -->
 	<script src="<c:url value="/js/main.js" />"></script>
-</body>
 
+</body>
 </html>
+

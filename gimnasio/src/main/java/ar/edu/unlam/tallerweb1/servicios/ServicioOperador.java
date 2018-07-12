@@ -1,0 +1,13 @@
+package ar.edu.unlam.tallerweb1.servicios;
+
+import java.util.List;
+
+import ar.edu.unlam.tallerweb1.modelo.Operador;
+
+public interface ServicioOperador {
+	
+	List<Operador> listarOperadores();
+	void eliminar(Long idOperador);
+	Operador getById(Long idOperador);
+	void modificar(Operador operador);
+}

@@ -37,6 +37,9 @@
 						<li><a href="<c:url value="/actividadesAdmin" />">Actividades</a></li>
 						<li><a href="<c:url value="/socios/" />">Socios</a></li>
 						<li><a href="<c:url value="/ganancias/" />">Ganancias</a></li>
+						<li><a href="<c:url value="/sucursalesadmin/" />">Sucursales</a></li>
+						<li><a href="<c:url value="/operadores/" />">Operadores</a></li>
+						
 					</ul>
 				</div>
 

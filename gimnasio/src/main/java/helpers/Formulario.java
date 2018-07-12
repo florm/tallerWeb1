@@ -1,30 +1,32 @@
 package helpers;
 
+import java.util.Date;
+
 public class Formulario {
 	private Long idSucursal;
 	private Long idSocio;
 	private Long idSucursalActividad;
 	private Long idPase;
+	private Long idDescuento;
+	// pendiente private Date fecha;
+
 	
-	private String prueba;
 	
 	
-	
-	
+	public Long getIdDescuento() {
+		return idDescuento;
+	}
+
+	public void setIdDescuento(Long idDescuento) {
+		this.idDescuento = idDescuento;
+	}
+
 	public Long getIdPase() {
 		return idPase;
 	}
 
 	public void setIdPase(Long idPase) {
 		this.idPase = idPase;
-	}
-
-	public String getPrueba() {
-		return prueba;
-	}
-
-	public void setPrueba(String prueba) {
-		this.prueba = prueba;
 	}
 
 	public Long getIdSocio() {

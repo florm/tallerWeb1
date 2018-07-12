@@ -23,4 +23,9 @@ public class ServicioPaseImpl implements ServicioPase {
 		
 	}
 
+	@Override
+	public Pase buscarPase(Long idPase) {
+		return paseDao.buscarPase(idPase);
+	}
+
 }
