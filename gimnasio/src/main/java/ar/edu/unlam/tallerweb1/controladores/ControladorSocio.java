@@ -65,9 +65,7 @@ public class ControladorSocio {
 	@RequestMapping("/socio/{id}/modificardatospersonales")
 	public ModelAndView irAModificarDatosSocio(@PathVariable Long id) {
 		ModelMap modelo = new ModelMap();
-		Socio socioVacio = new Socio();
 		modelo.put("socio", servicioSocio.buscarSocio(id));
-//		modelo.put("socioVacio", socioVacio);
 		return new ModelAndView("modificarDatosPersonales", modelo);
 	}
 	
