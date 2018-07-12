@@ -1,4 +1,4 @@
- <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <html>
@@ -42,34 +42,39 @@
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
-		<c:if test="${empty sessionScope.rol}">
-		<%@include file="menuSinLogin.jsp"%>
-		</c:if>
-		<c:if test="${!empty sessionScope.rol}">
-			<%@include file="menuAdministrador.jsp"%>
-		</c:if>
-
+		<%@include file="menuAdministrador.jsp"%>
+		
 		<div class="container">
-			<div class="row d-flex flex-column text-center m-5">
-				<h2>Actividades</h2>
-				<p>Los días y horarios de las Actividades varían de acuerdo a la Sucursal</p>
-			</div>
 			<div class="row">
-				<c:forEach items="${listaActividades}" var="actividad">
-					<div
-						class="col-md-4 text-center animate-box fadeInUp animated-fast">
-						<div class="services">
-						<c:url var="imagen" value="/images/${actividad.nombre}.svg" />
-						<span><img class="img-responsive" src="${imagen}" alt=""></span>
-							<h3>${actividad.nombre}</h3>
-							<p>${actividad.descripcion}</p>
-							
-						</div>
-					</div>
-				</c:forEach>
-
+				<div class="col-md-4 text-center animate-box fadeInUp animated-fast mx-auto">
+					
+					<div class="modal-body p-5">
+					
+				      	<form:form class="text-center" method="post" action="modificardatos" modelAttribute="sucursalVacia">
+							<form:input  path="ciudad.id" type="text" class="form-control" value="${sucursal.ciudad.id}" hidden="true"></form:input>
+						    <div class="form-group input-size">
+						        <form:input  path="nombre" type="text" class="form-control" value="${sucursal.nombre}" ></form:input>
+						    </div>
+						    						    
+						    <div class="form-group input-size">
+						        <form:input path="calle" type="text" class="form-control"  value="${sucursal.calle}"></form:input>
+						    </div>
+						    <div class="form-group input-size">
+						        <form:input path="numcalle" type="text" class="form-control" value="${sucursal.numcalle}"></form:input>
+						    </div>
+						    <div class="form-group input-size">
+						        <form:input path="codPostal" type="text" class="form-control" value="${sucursal.codPostal}"></form:input>
+						    </div>
+						    						    
+						    <button type="submit" id="btn-modificar" value="modificar" class="btn btn-primary">Modificar</button>
+					    
+						</form:form>
+      				</div>
+						
+				</div>	
 			</div>
 		</div>
+
 		<%@include file="footer.jsp"%>
 	</div>
 	<!-- jQuery -->

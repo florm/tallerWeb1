@@ -33,7 +33,8 @@
 
 	<div id="page">
 		<%@include file="menuAdministrador.jsp"%>
-
+		<label style="display: block;text-align: center;line-height: 150%; font-size: .85em; margin-top: 30px;">
+		Seleccione sobre que sucursal quiere realizar ABM actividades</label> 
 		<div class="container mt-5">
 			<table id="sucursales" class="table table-striped table-bordered" style="width:100%">
 				<thead>
@@ -55,7 +56,7 @@
 							<td>${sucursal.calle} ${sucursal.numcalle}</td>
 							<td>${sucursal.codPostal}</td>
 							<td>${sucursal.operador.nombre} ${sucursal.operador.apellido}</td>
-							<td><a href="<c:url value="socios?idSucursal=${sucursal.id}" />" class="btn btn-primary btn-outline btn-sm">Ver socios <i class="icon-arrow-right"></i></a></td>
+							<td><a href="<c:url value="/${sucursal.id}/listaActividadesSucursal" />" class="btn btn-primary btn-outline btn-sm">Ir <i class="icon-arrow-right"></i></a></td>
 						</tr>
 					</c:forEach>
 				
@@ -64,7 +65,6 @@
 			</table>
 		</div>	
 	</div>
-
 
 
 	<!-- jQuery -->

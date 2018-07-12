@@ -1,4 +1,4 @@
- <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <html>
@@ -42,37 +42,44 @@
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
-		<c:if test="${empty sessionScope.rol}">
-		<%@include file="menuSinLogin.jsp"%>
-		</c:if>
-		<c:if test="${!empty sessionScope.rol}">
-			<%@include file="menuAdministrador.jsp"%>
-		</c:if>
-
-		<div class="container">
-			<div class="row d-flex flex-column text-center m-5">
-				<h2>Actividades</h2>
-				<p>Los días y horarios de las Actividades varían de acuerdo a la Sucursal</p>
-			</div>
-			<div class="row">
-				<c:forEach items="${listaActividades}" var="actividad">
-					<div
-						class="col-md-4 text-center animate-box fadeInUp animated-fast">
-						<div class="services">
-						<c:url var="imagen" value="/images/${actividad.nombre}.svg" />
-						<span><img class="img-responsive" src="${imagen}" alt=""></span>
-							<h3>${actividad.nombre}</h3>
-							<p>${actividad.descripcion}</p>
-							
-						</div>
-					</div>
-				</c:forEach>
-
-			</div>
-		</div>
-		<%@include file="footer.jsp"%>
+		<%@include file="menuAdministrador.jsp"%>
+		<label style="display: block;text-align: center;line-height: 150%; font-size: .85em; margin-top: 30px;">
+		Actividades </label> 
+		<div class="container mt-5">
+			<table id="sucursales" class="table table-striped table-bordered" style="width:100%">
+				<thead>
+					<tr>
+						<td>Nombre</td>
+						<td>Dia</td>
+						<td>Horarios</td>
+						<td>Cupo</td>
+						<td>Descripcion</td>			
+						<td>Modificar</td>
+						<td>Eliminar</td>
+					</tr>
+				
+				</thead>
+				<tbody>
+					<c:forEach items="${listaSucursalActividades}" var="sucursalActividad">
+						<tr>
+							<td>${sucursalActividad.actividad.nombre}</td>
+							<td>${sucursalActividad.dia}</td>
+							<td>${sucursalActividad.horaDesde}hs  a   ${sucursalActividad.horaHasta}hs</td>
+							<td>${sucursalActividad.cupo} max</td>
+							<td>${sucursalActividad.actividad.descripcion}</td>
+							<td><a href="<c:url value="/${sucursalActividad.idSucursalActividad}/modificacionActividad" />" class="btn btn-primary btn-outline btn-sm">Modificar</i></a></td>
+							<td><a href="<c:url value="/${sucursalActividad.sucursal.id}/bajaActividad?idSucursalActividad=${sucursalActividad.idSucursalActividad}" />" class="btn btn-primary btn-outline btn-sm">Baja</a></td>
+						</tr>
+					</c:forEach>
+				
+				</tbody>
+			
+			</table>
+		</div>	
 	</div>
-	<!-- jQuery -->
+
+
+		<!-- jQuery -->
 
 	<script src="<c:url value="/js/jquery.min.js" />"></script>
 	<!-- jQuery Easing -->
@@ -96,6 +103,7 @@
 
 	<!-- Main -->
 	<script src="<c:url value="/js/main.js" />"></script>
+
 </body>
 
 </html>

@@ -12,4 +12,7 @@ public interface ActividadDao {
 	SucursalActividad traerActividadDeSucursal(Long idSucursalActividad);
 	public void modificarCupoDeActividadEnSucursal(SucursalActividad sucursalActividad);
 	List<SucursalActividad> listaActividadesDeSocio(Long idSocio);
+	public Actividad buscarActividad(Long idActividad);
+	public void modificarActividad(SucursalActividad sucursalActividadUpdate,SucursalActividad sucursalActividadBdd);
+	public void eliminarSucursalActividad(SucursalActividad sucursalActividad);
 }

@@ -32,42 +32,48 @@
 </head>
 <body>
 
+
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
 		<%@include file="menuAdministrador.jsp"%>
-		<div class="contenedor-principal">
-			<div class="contenedor-fltros p-4 my-3">
-				<form class="form-row">
-					<div class="form-group col-lg-3 col-md-6 col-sm-6">
-						<label for="txtPeriodo">Período</label> 
-							<input name="periodo" type="text" id="txtPeriodo" class="form-control" placeholder="Seleccione período">
-					</div>
 
-					<div class="form-group col-lg-3 col-md-6 col-sm-6">
-						<label for="selSucursal">Sucursal</label>
-						<select class="form-control form-control-sm" id="selSucursal">
-							<option value="" selected> Seleccione sucursal..
-							<c:forEach items="${listaSucursales}" var="sucursal">
-								<option value="${sucursal.id}">${sucursal.nombre}
-							</c:forEach>
-						</select>
-
-					</div>
-					<input name="periodoFormat" type="text" id="periodoFormat" hidden="hidden">
-				</form>
+		<div class="container mt-5">
+			<table id="sucursales" class="table table-striped table-bordered" style="width:100%">
+				<thead>
+					<tr>
+						<td>Nombre</td>
+						<td>Apellido</td>
+						<td>Sucursal</td>
+						<td>Acciones</td>
+					</tr>
 				
-			</div>
-
-			<div class="contenedor-botones d-flex justify-content-end m-2">
-				<button id="btnBuscar" class="btn btn-buscar">Calcular</button>
-			</div>
-		</div>
-
-
+				</thead>
+				<tbody>
+					<c:forEach items="${listaOperadores}" var="operador">
+						<tr>
+							<td>${operador.nombre}</td>
+							<td>${operador.apellido}</td>
+							<td>${operador.sucursal.nombre}</td>
+							<td>
+								<a href="<c:url value="/operador/modificar?operador=${operador.id}" />" 
+									class="btn btn-primary btn-outline btn-sm">
+									Modificar<i class="icon-arrow-right"></i></a>
+								<a href="<c:url value="/operador/eliminar?operador=${operador.id}" />" 
+									class="btn btn-primary btn-outline btn-sm">
+									Eliminar<i class="icon-arrow-right"></i></a>
+							</td>
+						</tr>
+					</c:forEach>
+				
+				</tbody>
+			
+			</table>
+		</div>	
+		
 	</div>
 
-
+	
 	<!-- jQuery -->
 
 	<script src="<c:url value="/js/jquery.min.js" />"></script>
@@ -99,12 +105,9 @@
 	
 <!-- Main -->
 	<script src="<c:url value="/js/main.js" />"></script>
-	<script src="<c:url value="/js/home.js" />"></script>
-	<script src="<c:url value="/js/ganancias.js" />"></script>
+	<script src="<c:url value="/js/admin.js" />"></script>
+	
 
 </body>
 
-
 </html>
-
-

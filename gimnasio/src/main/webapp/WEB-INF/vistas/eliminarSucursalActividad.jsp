@@ -39,38 +39,14 @@
 </head>
 <body>
 
-	<div class="fh5co-loader"></div>
+	<div class="fh5co-loadser"></div>
 
 	<div id="page">
-		<c:if test="${empty sessionScope.rol}">
-		<%@include file="menuSinLogin.jsp"%>
-		</c:if>
-		<c:if test="${!empty sessionScope.rol}">
-			<%@include file="menuAdministrador.jsp"%>
-		</c:if>
-
-		<div class="container">
-			<div class="row d-flex flex-column text-center m-5">
-				<h2>Actividades</h2>
-				<p>Los días y horarios de las Actividades varían de acuerdo a la Sucursal</p>
-			</div>
-			<div class="row">
-				<c:forEach items="${listaActividades}" var="actividad">
-					<div
-						class="col-md-4 text-center animate-box fadeInUp animated-fast">
-						<div class="services">
-						<c:url var="imagen" value="/images/${actividad.nombre}.svg" />
-						<span><img class="img-responsive" src="${imagen}" alt=""></span>
-							<h3>${actividad.nombre}</h3>
-							<p>${actividad.descripcion}</p>
-							
-						</div>
-					</div>
-				</c:forEach>
-
-			</div>
-		</div>
-		<%@include file="footer.jsp"%>
+		<%@include file="menuAdministrador.jsp"%>
+				<h4>
+					<span class="mr-2">${exito}</span>
+					<a href="<c:url value="listaActividadesSucursal?idSucursal=${idSucursal}" />">Volver</a>
+				</h4>
 	</div>
 	<!-- jQuery -->
 
@@ -96,6 +72,7 @@
 
 	<!-- Main -->
 	<script src="<c:url value="/js/main.js" />"></script>
+	<script src="<c:url value="/js/actividades.js" />"></script>
 </body>
 
 </html>

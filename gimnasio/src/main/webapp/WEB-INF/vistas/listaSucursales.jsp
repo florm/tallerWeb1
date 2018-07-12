@@ -32,39 +32,57 @@
 </head>
 <body>
 
+
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
 		<%@include file="menuAdministrador.jsp"%>
-		<div class="contenedor-principal">
-			<div class="contenedor-fltros p-4 my-3">
-				<form class="form-row">
-					<div class="form-group col-lg-3 col-md-6 col-sm-6">
-						<label for="txtPeriodo">Período</label> 
-							<input name="periodo" type="text" id="txtPeriodo" class="form-control" placeholder="Seleccione período">
-					</div>
 
-					<div class="form-group col-lg-3 col-md-6 col-sm-6">
-						<label for="selSucursal">Sucursal</label>
-						<select class="form-control form-control-sm" id="selSucursal">
-							<option value="" selected> Seleccione sucursal..
-							<c:forEach items="${listaSucursales}" var="sucursal">
-								<option value="${sucursal.id}">${sucursal.nombre}
-							</c:forEach>
-						</select>
-
-					</div>
-					<input name="periodoFormat" type="text" id="periodoFormat" hidden="hidden">
-				</form>
+		<div class="container mt-5">
+			<table id="sucursales" class="table table-striped table-bordered" style="width:100%">
+				<thead>
+					<tr>
+						<td>Nombre</td>
+						<td>Localidad</td>
+						<td>Direccion</td>
+						<td>Codigo Postal</td>
+						<td>Responsable</td>
+						<td>Modificar</td>
+						<td>Eliminar</td>
+					</tr>
 				
-			</div>
-
-			<div class="contenedor-botones d-flex justify-content-end m-2">
-				<button id="btnBuscar" class="btn btn-buscar">Calcular</button>
-			</div>
+				</thead>
+				<tbody>
+					<c:forEach items="${listaSucursales}" var="sucursal">
+						<tr>
+							<td>${sucursal.nombre}</td>
+							<td>${sucursal.ciudad.nombre}</td>
+							<td>${sucursal.calle} ${sucursal.numcalle}</td>
+							<td>${sucursal.codPostal}</td>
+							<td>${sucursal.operador.nombre} ${sucursal.operador.apellido}</td>
+							<td><a href="<c:url value="/sucursal/${sucursal.id}/modificar" />" 
+							class="btn btn-primary btn-outline btn-sm">
+							Modificar<i class="icon-arrow-right"></i></a></td>
+							<td><a href="<c:url value="/sucursal/${sucursal.id}/eliminar" />" 
+							class="btn btn-primary btn-outline btn-sm">
+							Eliminar<i class="icon-arrow-right"></i></a></td>
+						</tr>
+					</c:forEach>
+				
+				</tbody>
+			
+			</table>
+		</div>	
+		<div class="container mt-5">
+		<a href="<c:url value="/sucursales" />" 
+		class="btn btn-primary btn-outline btn-sm">
+		Ver mapa<i class="icon-arrow-right"></i></a>
 		</div>
-
-
+		<div class="container mt-5">
+		<a href="<c:url value="/sucursal/agregarNuevaSucursal" />" 
+		class="btn btn-primary btn-outline btn-sm">
+		Nueva Sucursal<i class="icon-arrow-right"></i></a>
+		</div>
 	</div>
 
 
@@ -104,7 +122,4 @@
 
 </body>
 
-
 </html>
-
-

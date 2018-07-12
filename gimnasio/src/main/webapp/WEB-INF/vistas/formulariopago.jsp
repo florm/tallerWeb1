@@ -54,7 +54,7 @@
 				<div class="col-md-8 text-center animate-box fadeInUp animated-fast mx-auto">
 					<div class="modal-body p-5">
 						<c:if test="${socio.descuento != null}">
-						<div class="row justify-content-center align-items-center p-3 m-3" id="responseOk">Los precios incluyen un descuento del 5% por referidos. Felicidades!</div>
+						<div class="row justify-content-center align-items-center p-3 my-3" id="responseOk">Los precios incluyen un descuento del 5% por referidos. Felicidades!</div>
 						</c:if>
 						
 						<c:url var="post_url" value="/pago/socio/${sessionScope.idSocio}/abonarpase" />
