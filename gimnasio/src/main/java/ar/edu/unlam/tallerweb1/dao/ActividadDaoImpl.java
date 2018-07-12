@@ -31,7 +31,6 @@ public class ActividadDaoImpl implements ActividadDao {
 				.add(Restrictions.eq("buscaSucursal.id", id))
 				.setFetchMode("socios", FetchMode.EAGER)
 				.list();
-		
 		return lista;
 	}
 	
@@ -84,5 +83,28 @@ public class ActividadDaoImpl implements ActividadDao {
 		
 		return lista;
 	}
+	@Override
+	public Actividad buscarActividad(Long idActividad) {
+		Session sesion = sessionFactory.getCurrentSession();
+		Actividad actividad = (Actividad) sesion.createCriteria(Actividad.class)
+				.add(Restrictions.eq("id",idActividad))
+				.uniqueResult();
+		return actividad;
+	}
+	
+	@Override
+	public void modificarActividad(SucursalActividad sucursalActividadUpdate, SucursalActividad sucursalActividadBdd) {
+		Session sesion = sessionFactory.getCurrentSession();
+		sucursalActividadBdd.setDia(sucursalActividadUpdate.getDia());
+		sucursalActividadBdd.setHoraDesde(sucursalActividadUpdate.getHoraDesde());
+		sucursalActividadBdd.setHoraHasta(sucursalActividadUpdate.getHoraHasta());
+		sucursalActividadBdd.setCupo(sucursalActividadUpdate.getCupo());
+		sesion.update(sucursalActividadBdd);
+	}
 
+	@Override
+	public void eliminarSucursalActividad(SucursalActividad sucursalActividad) {
+		Session sesion = sessionFactory.getCurrentSession();
+		sesion.delete(sucursalActividad);
+	}
 }

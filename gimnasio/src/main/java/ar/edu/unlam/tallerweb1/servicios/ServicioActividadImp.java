@@ -58,5 +58,22 @@ public class ServicioActividadImp implements ServicioActividad {
 		}
 		return actividadesNoDisponibles;
 	}
-
+	
+	@Override
+	public Actividad buscarActividad(Long idActividad) {
+		return servicioActividadDao.buscarActividad(idActividad);
+	}
+	@Override
+	public void modificarActividad(SucursalActividad sucursalActividadUpdate, SucursalActividad sucursalActividadBdd) {
+		servicioActividadDao.modificarActividad(sucursalActividadUpdate, sucursalActividadBdd);
+	}
+	@Override
+	public SucursalActividad traerActividadSucursal(Long idSucursalActividad) {
+		return servicioActividadDao.traerActividadDeSucursal(idSucursalActividad);
+	}
+	@Override
+	public void eliminarSucursalActividad(SucursalActividad sucursalActividad) {
+		servicioActividadDao.eliminarSucursalActividad(sucursalActividad);
+	}
+	
 }
