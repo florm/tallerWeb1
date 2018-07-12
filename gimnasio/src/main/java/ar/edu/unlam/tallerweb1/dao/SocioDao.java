@@ -13,7 +13,6 @@ public interface SocioDao {
 	Socio buscarSocio(Usuario usuario); 
 	void agregarPaseASocio(Long idSocio, Long idPase);
 	Socio buscarSocio(Long idSocio);
-	void modificarSocio(Socio socioUpdate, Socio socioBdd);
 	Socio buscarSocioPorDni(String dni);
 	void registrarSocio (Socio socio, Socio socioReferente, Sucursal sucursal);
 	void registrarSocioSinReferente (Socio socio, Sucursal sucursal);

@@ -56,8 +56,11 @@ public class ServicioSocioImpl implements ServicioSocio {
 	}
 
 	@Override
-	public void modificarSocio(Socio socioUpdate, Socio socioBdd) {
-		socioDao.modificarSocio(socioUpdate, socioBdd);
+	public void modificarSocio(Long idSocio, Socio socio) {
+		Socio socioB = socioDao.buscarSocio(idSocio);
+		socioB.setTelefono(socio.getTelefono());
+		socioB.setMail(socio.getMail());
+		socioDao.actualizarSocio(socioB);
 	}
 
 	
