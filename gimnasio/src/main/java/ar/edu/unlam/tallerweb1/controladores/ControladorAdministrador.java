@@ -28,6 +28,7 @@ import ar.edu.unlam.tallerweb1.modelo.Actividad;
 import ar.edu.unlam.tallerweb1.modelo.Pago;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.Sucursal;
+import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioActividad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalizacion;
@@ -48,6 +49,8 @@ public class ControladorAdministrador {
 	private ServicioPago servicioPago;
 	@Inject
 	private ServicioLocalizacion servicioLocalizacion;
+	@Inject 
+	private ServicioActividad servicioActividad;
 
 	
 	
@@ -143,7 +146,42 @@ public class ControladorAdministrador {
 		modelo.put("listaCiudad", servicioLocalizacion.listarCiudades());
 		modelo.put("listaSucursal", servicioSucursal.listarSucursales());
 		return new ModelAndView("agregarSucursal",modelo);
-}
+	}
+	@RequestMapping(path="/actividadesAdmin")
+	public ModelAndView seleccionarSucursal() {
+		ModelMap modelo = new ModelMap();
+		modelo.put("listaSucursales",servicioSucursal.listarSucursales());
+		return new ModelAndView("actividadesAdministrador",modelo);
+	}
+	@RequestMapping(path="/{idSucursal}/listaActividadesSucursal")
+	public ModelAndView abmActividades(@PathVariable ("idSucursal")Long idSucursal) {
+		ModelMap modelo = new ModelMap();
+		modelo.put("listaSucursalActividades", servicioActividad.listarActividadesEnSucursal(idSucursal));
+		return new ModelAndView("listaActividadesAbm",modelo);
+	}
+	@RequestMapping(path="/{idSucursalActividad}/modificacionActividad")
+	public ModelAndView modificacionActividad(@PathVariable Long idSucursalActividad) {
+		ModelMap modelo = new ModelMap();
+		SucursalActividad SucursalActividadVacia = new SucursalActividad();
+		modelo.put("sucursalActividad",servicioActividad.traerActividadSucursal(idSucursalActividad));
+		modelo.put("sucursalActividadVacia", SucursalActividadVacia);
+		return new ModelAndView("modificacionActividad",modelo);
+	}	
+	@RequestMapping(path="/{idSucursalActividad}/modificacionactividad", method= RequestMethod.POST)
+		public ModelAndView establecerModificacionActividad(@ModelAttribute ("sucursalActividadVacia") SucursalActividad sucursalActividadUpdate,@PathVariable Long idSucursalActividad,@RequestParam("nombreActividad") String nombre) {
+		SucursalActividad sucursalActividadBdd= servicioActividad.traerActividadSucursal(idSucursalActividad);
+		servicioActividad.modificarActividad(sucursalActividadUpdate, sucursalActividadBdd);
+		return new ModelAndView("redirect:/{idSucursalActividad}/modificacionActividad"); 
+	}
+	@RequestMapping(path="/{idSucursal}/bajaActividad")
+	public ModelAndView eliminarSucursalActividad(@PathVariable("idSucursal")Long idSucursal,@RequestParam("idSucursalActividad") Long idSucursalActividad){
+		ModelMap modelo = new ModelMap();
+		String exito = "la actividad fue eliminada con exito";
+		SucursalActividad sucursalActividad = servicioActividad.traerActividadSucursal(idSucursalActividad);
+		servicioActividad.eliminarSucursalActividad(sucursalActividad);
+		modelo.put("exito", exito);
+		return new ModelAndView("redirect:/{idSucursal}/listaActividadesSucursal");
+	}
 
 	@RequestMapping(path = "/sucursal/nuevaSucursal", method = RequestMethod.POST)
 	public ModelAndView agregarNuevaSucursal(@ModelAttribute ("sucursalVacia") Sucursal sucursalNueva) {
