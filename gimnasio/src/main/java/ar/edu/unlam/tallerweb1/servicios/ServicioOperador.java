@@ -10,4 +10,5 @@ public interface ServicioOperador {
 	void eliminar(Long idOperador);
 	Operador getById(Long idOperador);
 	void modificar(Operador operador);
+	void registrar(Operador operador);
 }

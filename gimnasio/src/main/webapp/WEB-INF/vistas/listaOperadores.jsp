@@ -69,6 +69,9 @@
 				</tbody>
 			
 			</table>
+			<a href="<c:url value="/operador/alta" />" 
+									class="btn btn-primary btn-outline btn-sm">
+									Agregar Operador<i class="icon-arrow-right"></i></a>
 		</div>	
 		
 	</div>
