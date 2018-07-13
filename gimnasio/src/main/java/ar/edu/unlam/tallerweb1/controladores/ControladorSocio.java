@@ -133,7 +133,7 @@ public class ControladorSocio {
 	}
 	
 	@RequestMapping(path = "pago/socio/{idSocio}/abonarpase", method = RequestMethod.POST)
-	public ModelAndView abonarPase(@ModelAttribute ("formulario") Formulario formulario) throws ParseException {
+	public ModelAndView abonarPase(@ModelAttribute ("formulario") Formulario formulario) {
 		servicioPago.abonarPase(formulario.getIdSocio(), formulario.getIdPase(), formulario.getIdDescuento());
 		return new ModelAndView("redirect:/home");
 	}
