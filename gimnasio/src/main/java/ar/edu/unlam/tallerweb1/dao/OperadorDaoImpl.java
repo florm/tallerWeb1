@@ -26,18 +26,40 @@ public class OperadorDaoImpl implements OperadorDao {
 	@Override
 	public void modificarOperador(Operador operador) {
 		Session sesion = sessionFactory.getCurrentSession();
+		Sucursal sucursal = sesion.get(Sucursal.class,operador.getSucursal().getId());
+		sucursal.setOperador(operador);
+		sesion.update(sucursal);
 		sesion.update(operador);
 		
 	}
 	@Override
 	public void eliminar(Long idOperador) {
-		// TODO Auto-generated method stub
+		Session sesion = sessionFactory.getCurrentSession();
+		List<Sucursal> sucursales = sesion.createCriteria(Sucursal.class)
+				.createAlias("operador", "buscarOperador")
+				.add(Restrictions.eq("buscarOperador.id", idOperador))
+				.list();
+		for (Sucursal sucursal : sucursales) {
+			sucursal.setOperador(null);
+			sesion.update(sucursal);
+		}
+				
+		sesion.delete(this.getById(idOperador));
 		
 	}
 	@Override
 	public Operador getById(Long idOperador) {
 		Session sesion = sessionFactory.getCurrentSession();
 		return sesion.get(Operador.class, idOperador);
+	}
+	@Override
+	public void registrar(Operador operador) {
+		Session sesion = sessionFactory.getCurrentSession();
+		Sucursal sucursal = sesion.get(Sucursal.class,operador.getSucursal().getId());
+		sucursal.setOperador(operador);			
+		sesion.save(operador);
+		sesion.save(sucursal);
+		
 	}
 
 	
