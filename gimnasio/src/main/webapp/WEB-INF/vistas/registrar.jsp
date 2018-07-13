@@ -15,63 +15,65 @@
 	rel="stylesheet">
 
 <!-- Animate.css -->
-<link href="<c:url value="/css/animate.css" />" rel="stylesheet">
+<link rel="stylesheet" href="css/animate.css">
 <!-- Icomoon Icon Fonts-->
-<link href="<c:url value="/css/icomoon.css" />" rel="stylesheet">
-<!-- Bootstrap  -->
-<link href="<c:url value="/css/bootstrap4.min.css" />" rel="stylesheet">
-<link href="<c:url value="/css/bootstrap.css" />" rel="stylesheet">
+<link rel="stylesheet" href="css/icomoon.css">
 
-<!-- Theme style  -->
-<link href="<c:url value="/css/style.css" />" rel="stylesheet">
+<!-- Bootstrap  -->
+<link rel="stylesheet" href="css/bootstrap4.min.css">
+<link rel="stylesheet" href="css/bootstrap.css">
+
+<!-- Magnific Popup -->
+<link rel="stylesheet" href="css/magnific-popup.css">
+
+<!-- Owl Carousel  -->
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+
 
 <!-- Modernizr JS -->
-<script src="<c:url value="/js/modernizr-2.6.2.min.js" />"></script>
-
+<script src="js/modernizr-2.6.2.min.js"></script>
 <!-- FOR IE9 below -->
 <!--[if lt IE 9]>
-	<script src="<c:url value="/js/respond.min.js" />"></script>
+	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
-<link href="<c:url value="/css/fontawesome-all.css" />" rel="stylesheet">
-<link href="<c:url value="/css/estilos.css" />" rel="stylesheet">
-<link href="<c:url value="/css/style.css" />" rel="stylesheet">
-
-
-<!-- Modernizr JS -->
-<script src="<c:url value="/js/modernizr-2.6.2.min.js" />"></script>
-
-
-
+<link href="css/fontawesome-all.css" rel="stylesheet">
+<link href="css/estilos.css" rel="stylesheet">
+<!-- Theme style  -->
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 		<%@include file="menuSinLogin.jsp"%>
-
+		
+		<div class="row d-none justify-content-center align-items-center p-3 m-3" id="responseOk"></div>
+		<div class="row d-none justify-content-center align-items-center p-3 m-3" id="responseError"></div>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 text-center animate-box fadeInUp animated-fast mx-auto">
 					
 					<div class="modal-body p-5">
-					<form:form class="text-center" method="POST" action="registrosocio" modelAttribute="socio">
+					<form:form class="text-center" method="POST" action="registrosocio" modelAttribute="socio" id="registrarSocio">
 							
-							<div class="form-group input-size col-md-6">
-						        <form:input required="true" path="usuario.nick" type="text" class="form-control" id="usuario.nick"  name="usuario.nick" placeholder="Nickname"></form:input>
+				 			<div class="form-group input-size col-md-6">
+						        <form:input required="true" path="usuario.nick" type="text" class="form-control" id="usuarion"  name="usuario.nick" placeholder="Nickname"></form:input>
 						    </div>
-							<div class="form-group input-size col-md-6">
-						        <form:input path="usuario.password" type="password" class="form-control" id="usuario.password"  name="usuario.password" placeholder="Password"></form:input>
+				 			<div class="form-group input-size col-md-6">
+						        <form:input path="usuario.password" type="password" class="form-control" id="passwordn"  name="usuario.password" placeholder="Password"></form:input>
 						    </div>
-						    <div class="form-group input-size col-md-6">
+				  		    <div class="form-group input-size col-md-6">
 						        <form:input path="nombre" type="text" class="form-control" id="nombre"  name="nombre" placeholder="Nombre"></form:input>
-						    </div>
+					  	    </div>
 						    <div class="form-group input-size col-md-6">
 						        <form:input path="apellido" type="text" class="form-control" id="apellido"  name="apellido" placeholder="Apellido"></form:input>
 						    </div>
 						    <div class="form-group input-size col-md-6">
 						        <form:input path="dni" type="number" class="form-control" id="dni"  name="dni" placeholder="D.N.I."></form:input>
 						    </div>
-						    <div class="form-group input-size col-md-6">
-							    <form:select required="true" path="ciudad.id" id="ciudad.id" name="ciudad.id" cssClass="form-control">
+					   		<div class="form-group input-size col-md-6">
+							    <form:select required="true" path="ciudad.id" id="ciudad" name="ciudad.id" cssClass="form-control">
 							 		<option value="" selected> Seleccione ciudad..
 							 		<c:forEach items= "${listaCiudad}" var="ciudad">
 							 			<option value="${ciudad.id}">${ciudad.nombre}	
@@ -94,12 +96,12 @@
 						        <form:input path="mail" type="email" class="form-control" id="mail"  name="mail" placeholder="Mail"></form:input>
 						    </div>			
   							 
-						    <div class="form-group input-size col-md-6">
-						        <form:input path="recomendadoPor.dni" type="number" class="form-control" id="recomendadoPor.dni"  name="recomendadoPor.dni" placeholder="DNI Recomendador"></form:input>
+					    <div class="form-group input-size col-md-6">
+						        <form:input path="recomendadoPor.dni" type="number" class="form-control" id="recomendadoPor"  name="recomendadoPor.dni" placeholder="DNI Recomendador"></form:input>
 						    </div>
   	
   							 <div class="form-group input-size col-md-12">
-							    <form:select required="true" path="sucursal.id" id="sucursal.id" name="sucursal.id" cssClass="form-control">
+							    <form:select required="true" path="sucursal.id" id="sucursal" name="sucursal.id" cssClass="form-control">
 							 		<option value="" selected> Seleccione Sucursal..
 							 		<c:forEach items= "${listaSucursal}" var="sucursal">
 							 			<option value="${sucursal.id}">${sucursal.nombre}	
@@ -120,31 +122,23 @@
 		<%@include file="footer.jsp"%>
 		
 	<!-- jQuery -->
-
-	<script src="<c:url value="/js/jquery.min.js" />"></script>
+	<script src="js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
-
-	<script src="<c:url value="/js/jquery.easing.1.3.js" />"></script>
+	<script src="js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
-
-	<script src="<c:url value="/js/bootstrap.min.js" />"></script>
+	<script src="js/bootstrap.min.js"></script>
 	<!-- Waypoints -->
-
-	<script src="<c:url value="/js/jquery.waypoints.min.js" />"></script>
+	<script src="js/jquery.waypoints.min.js"></script>
 	<!-- Stellar Parallax -->
-
-	<script src="<c:url value="/js/jquery.stellar.min.js" />"></script>
+	<script src="js/jquery.stellar.min.js"></script>
 	<!-- Carousel -->
-
-	<script src="<c:url value="/js/owl.carousel.min.js" />"></script>
+	<script src="js/owl.carousel.min.js"></script>
 	<!-- countTo -->
-
-	<script src="<c:url value="/js/jquery.countTo.js" />"></script>
+	<script src="js/jquery.countTo.js"></script>
 
 	<!-- Main -->
-	<script src="<c:url value="/js/main.js" />"></script>
-
-		
+	<script src="js/main.js"></script>
+	<script src="<c:url value="/js/registro.js" />"></script>
 	
 </body>
 

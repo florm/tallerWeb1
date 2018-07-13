@@ -71,14 +71,7 @@ public class SocioDaoImpl implements SocioDao {
 		List<Socio> socio = sesion.createCriteria(Socio.class).list();
 		return socio;
 	}
-	@Override
-	public void modificarSocio(Socio socioUpdate, Socio socioBdd) {
-		Session sesion = sessionFactory.getCurrentSession();
-		socioBdd.setTelefono(socioUpdate.getTelefono());
-		socioBdd.setMail(socioUpdate.getMail());
-		sesion.update(socioBdd);
-	}
-
+	
 	@Override
 	public Socio buscarSocioPorDni(String dni) {
 		Session sesion = sessionFactory.getCurrentSession();

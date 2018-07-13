@@ -56,8 +56,15 @@ public class ServicioSocioImpl implements ServicioSocio {
 	}
 
 	@Override
-	public void modificarSocio(Socio socioUpdate, Socio socioBdd) {
-		socioDao.modificarSocio(socioUpdate, socioBdd);
+	public void modificarSocio(Long idSocio, Socio socio) {
+		Socio socioB = socioDao.buscarSocio(idSocio);
+		socioB.setTelefono(socio.getTelefono());
+		socioB.setMail(socio.getMail());
+		socioB.setCiudad(localizacionDao.traerCiudad(socio.getCiudad().getId()));
+		socioB.setDomicilioCalle(socio.getDomicilioCalle());
+		socioB.setDomicilioNumero(socio.getDomicilioNumero());
+		socioB.setDomicilioDepto(socio.getDomicilioDepto());
+		socioDao.actualizarSocio(socioB);
 	}
 
 	
@@ -79,7 +86,13 @@ public class ServicioSocioImpl implements ServicioSocio {
 	public Boolean registrarSocio(Socio socio) {
 		List<Usuario> lista = usuarioDao.verSiExisteUsuario(socio.getUsuario().getNick());
 		if (lista.size() == 0) {
-			Socio socioReferente = socioDao.buscarSocioPorDni(socio.getRecomendadoPor().getDni());
+			
+			Socio socioReferente;
+			if(socio.getRecomendadoPor().getDni() != "") { //Es necesario hacerlo asi ya que pincha si se envia un referente vacio
+			socioReferente = socioDao.buscarSocioPorDni(socio.getRecomendadoPor().getDni());
+			}else {
+			socioReferente = null;
+			}
 			Ciudad ciudad = localizacionDao.traerCiudad(socio.getCiudad().getId());
 			Usuario usuario = usuarioDao.guardarUsuario(socio.getUsuario().getNick(), socio.getUsuario().getPassword());
 			Sucursal sucursal = sucursalDao.getSucursal(socio.getSucursal().getId());
