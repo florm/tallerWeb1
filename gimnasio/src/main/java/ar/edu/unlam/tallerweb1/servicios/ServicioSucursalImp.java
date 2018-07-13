@@ -43,4 +43,9 @@ public class ServicioSucursalImp implements ServicioSucursal {
 		sucursalDao.agregarSucursal(sucursalNueva);
 	}
 
+	@Override
+	public List<Sucursal> listarSucursalesLibres() {
+		return sucursalDao.listarSucursalesLibres();
+	}
+
 }

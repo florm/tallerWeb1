@@ -13,5 +13,7 @@ public interface OperadorDao {
 	Operador getById(Long idOperador);
 
 	void modificarOperador(Operador operador);
+
+	void registrar(Operador operador);
 		
 }

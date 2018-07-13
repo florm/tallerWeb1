@@ -64,4 +64,13 @@ public class SucursalDaoImpl implements SucursalDao {
 		//listaSucursales().add(sucursalNueva);
 		sesion.save(sucursalNueva);
 	}
+
+	@Override
+	public List<Sucursal> listarSucursalesLibres() {
+		Session sesion = sessionFactory.getCurrentSession();
+		List<Sucursal> listaSucursalesLibres = sesion.createCriteria(Sucursal.class)
+				.add(Restrictions.isNull("operador"))
+				.list();
+		return listaSucursalesLibres;
+	}
 }

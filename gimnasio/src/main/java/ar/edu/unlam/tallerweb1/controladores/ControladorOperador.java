@@ -51,7 +51,23 @@ public class ControladorOperador {
 	}
 	
 	@RequestMapping(path="operador/eliminar")
-	public void eliminar(@RequestParam(value="operador") Long idOperador){
+	public ModelAndView eliminar(@RequestParam(value="operador") Long idOperador){
 		servicioOperador.eliminar(idOperador);
+		return new ModelAndView("redirect:/operadores");
+	}
+	
+	@RequestMapping(path="operador/alta")
+	public ModelAndView irAalta(){
+		ModelMap modelo = new ModelMap();
+		Operador operador = new Operador();
+		modelo.put("listaSucursales", servicioSucursal.listarSucursalesLibres());
+		modelo.put("operador", operador);
+		return new ModelAndView("altaOperador", modelo);
+	}
+	
+	@RequestMapping(path="operador/registrar", method= RequestMethod.POST)
+	public ModelAndView registrar(@ModelAttribute Operador operador){
+		servicioOperador.registrar(operador);
+		return new ModelAndView("redirect:/operadores");
 	}
 }

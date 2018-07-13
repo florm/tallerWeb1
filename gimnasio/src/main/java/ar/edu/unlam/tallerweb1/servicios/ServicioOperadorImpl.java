@@ -41,4 +41,10 @@ public class ServicioOperadorImpl implements ServicioOperador {
 		
 	}
 
+	@Override
+	public void registrar(Operador operador) {
+		operadorDao.registrar(operador);
+		
+	}
+
 }
