@@ -1,5 +1,9 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -65,7 +69,7 @@ public class ServicioPagoImpl implements ServicioPago {
 	}
 
 	@Override
-	public void abonarPase(Long idSocio, Long idPase, Long idDescuento) {
+	public void abonarPase(Long idSocio, Long idPase, Long idDescuento) throws ParseException {
 		Descuento descuento = pagoDao.buscarDescuento(idDescuento);
 		Pase pase = paseDao.buscarPase(idPase);
 		Socio socio = socioDao.buscarSocio(idSocio);
@@ -92,6 +96,14 @@ public class ServicioPagoImpl implements ServicioPago {
 		socioDao.actualizarSocio(socio);
 		
 		pago.setSocio(socio);
+		
+		//Obtengo y modifico el formato de la fecha
+		Date fecha = new java.util.Date();
+		SimpleDateFormat fechaFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String fechaString = fechaFormat.format(fecha);
+		Date fechaPago = fechaFormat.parse(fechaString);
+		
+		pago.setFecha(fechaPago);
 		pagoDao.abonarPase(pago);
 	}
 	
