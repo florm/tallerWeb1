@@ -69,7 +69,7 @@ public class ServicioPagoImpl implements ServicioPago {
 	}
 
 	@Override
-	public void abonarPase(Long idSocio, Long idPase, Long idDescuento) throws ParseException {
+	public void abonarPase(Long idSocio, Long idPase, Long idDescuento){
 		Descuento descuento = pagoDao.buscarDescuento(idDescuento);
 		Pase pase = paseDao.buscarPase(idPase);
 		Socio socio = socioDao.buscarSocio(idSocio);
@@ -97,13 +97,12 @@ public class ServicioPagoImpl implements ServicioPago {
 		
 		pago.setSocio(socio);
 		
-		//Obtengo y modifico el formato de la fecha
 		Date fecha = new java.util.Date();
-		SimpleDateFormat fechaFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String fechaString = fechaFormat.format(fecha);
-		Date fechaPago = fechaFormat.parse(fechaString);
+//		SimpleDateFormat fechaFormat = new SimpleDateFormat("yyyy-MM-dd");
+//		String fechaString = fechaFormat.format(fecha);
+//		Date fechaPago = fechaFormat.parse(fechaString);
 		
-		pago.setFecha(fechaPago);
+		pago.setFecha(fecha);
 		pagoDao.abonarPase(pago);
 	}
 	
