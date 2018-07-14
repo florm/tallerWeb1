@@ -1,17 +1,25 @@
 package ar.edu.unlam.tallerweb1.persistencia;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
+import ar.edu.unlam.tallerweb1.controladores.ControladorActividad;
 import ar.edu.unlam.tallerweb1.controladores.ControladorLogin;
 import ar.edu.unlam.tallerweb1.modelo.Pase;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.Sucursal;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.servicios.ServicioActividad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSocio;
+import helpers.Formulario;
 
 import org.junit.Test;
+import org.springframework.http.MediaType;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import static org.assertj.core.api.Assertions.*;
@@ -102,6 +110,36 @@ public class TestMock extends SpringTest{
     	assertThat(vista.getViewName()).isEqualTo("redirect:/home");
     	
 		
+    }
+    
+//    @RequestMapping(path = "/registrarActividad", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+//	@ResponseBody
+//	public String irARegistroCompleto(@RequestBody Formulario formulario) {
+//		boolean resultado = servicioActividad.guardarSocioActividadSucursal(formulario.getIdSocio(), formulario.getIdSucursalActividad());
+//		
+//		if (resultado == true) {
+//			
+//			String rta = "{\"mensaje\":\"La inscripcion se realizo correctamente\", \"estado\":\"1\"}";
+//			return rta;
+//		}else {
+//			
+//			String rta = "{\"mensaje\":\"Ya se encuentra inscripto en esta actividad\", \"estado\":\"0\"}";
+//			return rta;
+//		}
+//	}
+    @Test
+    @Transactional @Rollback(true)
+    public void testRegistrarActividad(){
+    	ControladorActividad controladorActividad = new ControladorActividad();
+    	ServicioActividad servicioActividad = mock(ServicioActividad.class);
+    	controladorActividad.setServicioActividad(servicioActividad);
+    	Formulario formularioMock = mock(Formulario.class);
+    	when(formularioMock.getIdSocio()).thenReturn(1L);
+    	when(formularioMock.getIdSucursalActividad()).thenReturn(1L);
+    	when(servicioActividad.guardarSocioActividadSucursal(1L,1L)).thenReturn(true);
+    	
+    	String rta = controladorActividad.irARegistroCompleto(formularioMock);
+    	assertThat(rta).contains("La inscripcion se realizo correctamente");
     }
     
     
