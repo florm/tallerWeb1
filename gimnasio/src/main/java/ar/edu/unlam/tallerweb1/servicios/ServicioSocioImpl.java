@@ -114,5 +114,11 @@ public class ServicioSocioImpl implements ServicioSocio {
 			return false;
 		}
 	}
+
+	@Override
+	public Integer getEstadoDeSocioPorCuota(Long idSocio) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

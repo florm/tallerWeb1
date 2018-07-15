@@ -15,4 +15,5 @@ public interface ServicioSocio {
 	void modificarSocio(Long idSocio, Socio socio);
 	Boolean validarActividadSocio(Long idSocio);
 	Boolean registrarSocio(Socio socio);
+	Integer getEstadoDeSocioPorCuota(Long idSocio);
 }
