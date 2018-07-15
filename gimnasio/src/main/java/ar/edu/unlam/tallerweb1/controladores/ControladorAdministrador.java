@@ -188,5 +188,18 @@ public class ControladorAdministrador {
 		servicioSucursal.agregarSucursal(sucursalNueva);
 		return new ModelAndView("redirect:/sucursalesadmin");
 }
-
+	@RequestMapping(path="actividad/nuevaActividadEnSucursal")
+	public ModelAndView agregarNuevaSucursalActividad() {
+		ModelMap modelo = new ModelMap();
+		SucursalActividad sucursalActividadVacia = new SucursalActividad();
+		modelo.put("listaSucursales", servicioSucursal.listarSucursales());
+		modelo.put("sucursalActividadVacia", sucursalActividadVacia);
+		modelo.put("listaActividades", servicioActividad.listaActividades());
+		return new ModelAndView("formNuevaActividadEnSucursal",modelo);
+	}
+	@RequestMapping(path="actividad/nuevaActividadEnSucursalProc",method = RequestMethod.POST)
+	public ModelAndView agregarNuevaSucActividad(@ModelAttribute ("sucursalActividadVacia") SucursalActividad sucursalActividadVacia) {
+		servicioActividad.agregarSucursalActividad(sucursalActividadVacia);
+		return new ModelAndView("redirect:/actividadesAdmin");
+	}
 }

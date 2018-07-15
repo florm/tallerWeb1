@@ -15,4 +15,5 @@ public interface ServicioActividad {
 	public void modificarActividad(SucursalActividad sucursalActividadUpdate, SucursalActividad sucursalActividadBdd);
 	public SucursalActividad traerActividadSucursal(Long idSucursalActividad);
 	public void eliminarSucursalActividad(SucursalActividad sucursalActividad);
+	public void agregarSucursalActividad(SucursalActividad sucursalActividad);
 }
