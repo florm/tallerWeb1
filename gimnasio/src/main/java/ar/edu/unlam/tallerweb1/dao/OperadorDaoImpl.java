@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Operador;
+import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.Sucursal;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
@@ -62,6 +63,15 @@ public class OperadorDaoImpl implements OperadorDao {
 		sesion.save(operador);
 		sesion.save(sucursal);
 		
+	}
+	@Override
+	public Operador buscarOperador(Usuario usuario) {
+		Session sesion = sessionFactory.getCurrentSession();
+		Operador operador = (Operador) sesion.createCriteria(Operador.class)
+				.createAlias("usuario", "buscarPorUsuario")
+				.add(Restrictions.eq("buscarPorUsuario.id", usuario.getId()))
+				.uniqueResult();
+		return operador;
 	}
 
 	

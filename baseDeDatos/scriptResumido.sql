@@ -28,9 +28,9 @@ values('Florencio Varela', '1704','Sucursal Florencio Varela','1903','Argentina'
 insert into usuario(nick, password,rol)
 value('admin','admin','admin');
 insert into usuario(nick, password, rol)
-value('mati', 'mati', null);
+value('mati', 'mati', 'socio');
 insert into usuario(nick, password, rol)
-value('lopez', 'lopez', null);
+value('lopez', 'lopez', 'socio');
 
 -- tabla pase
 insert into Pase(cantidadActividades, nombre, precio)
@@ -156,8 +156,8 @@ value(12,15,0.85);
 
 -- Socio con plan vencido
 insert into usuario(nick, password, rol)
-value('ale', 'ale', null);
+value('ale', 'ale', 'socio');
 insert into Socio(apellido, dni, domicilioCalle, domicilioDepto, domicilioNumero, mail, nombre, telefono, ciudad_id, pase_id,sucursal_id, usuario_id)
-values('Casus', '29941591','coro',null,'813', 'ale@gmail.com', 'Alejandra', '1544833390',1, 1, 1, 6);
+values('Casus', '29941591','coro',null,'813', 'ale@gmail.com', 'Alejandra', '1544833390',1, 1, 1, 4);
 insert into pago(fecha,importe,socio_idSocio,fechaVencimiento)
-values('20180425', 400.00,5,'20180525');
+values('20180425', 400.00,3,'20180525');

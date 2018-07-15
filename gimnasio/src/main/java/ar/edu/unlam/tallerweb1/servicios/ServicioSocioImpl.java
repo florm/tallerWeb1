@@ -104,11 +104,18 @@ public class ServicioSocioImpl implements ServicioSocio {
 			socioReferente = null;
 			}
 			Ciudad ciudad = localizacionDao.traerCiudad(socio.getCiudad().getId());
-			Usuario usuario = usuarioDao.guardarUsuario(socio.getUsuario().getNick(), socio.getUsuario().getPassword());
+			Usuario usuario = new Usuario();
+			usuario.setNick(socio.getUsuario().getNick());
+			usuario.setPassword(socio.getUsuario().getPassword());
+			usuario.setRol("socio");
+			
+			Usuario usuarioGuardado = usuarioDao.guardarUsuario(usuario);
+			
 			Sucursal sucursal = sucursalDao.getSucursal(socio.getSucursal().getId());
-			socio.setUsuario(usuario);
+			socio.setUsuario(usuarioGuardado);
 			socio.setCiudad(ciudad);
 			socio.setSucursal(sucursal);
+			
 			sucursal.getListaSocios().add(socio); //les mando la sucursal y cuando guardo socio hago update a la lista de socios de sucursal
 				if (socioReferente == null) {
 					socio.setRecomendadoPor(null); // Si no coloco este campo como null, tira error

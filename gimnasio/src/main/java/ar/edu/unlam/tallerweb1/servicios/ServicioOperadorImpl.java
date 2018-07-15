@@ -57,4 +57,9 @@ public class ServicioOperadorImpl implements ServicioOperador {
 		
 	}
 
+	@Override
+	public Operador buscarOperador(Usuario usuario) {
+		return operadorDao.buscarOperador(usuario);
+	}
+
 }

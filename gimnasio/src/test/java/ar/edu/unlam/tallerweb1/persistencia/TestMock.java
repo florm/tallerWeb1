@@ -3,12 +3,14 @@ package ar.edu.unlam.tallerweb1.persistencia;
 import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.controladores.ControladorActividad;
 import ar.edu.unlam.tallerweb1.controladores.ControladorLogin;
+import ar.edu.unlam.tallerweb1.modelo.Operador;
 import ar.edu.unlam.tallerweb1.modelo.Pase;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.Sucursal;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioActividad;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
+import ar.edu.unlam.tallerweb1.servicios.ServicioOperador;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSocio;
 import helpers.Formulario;
 
@@ -60,7 +62,7 @@ public class TestMock extends SpringTest{
     	controladorLogin.setServicioLogin(servicioLoginMock);
     	
     	when(servicioLoginMock.consultarUsuario(usuarioMock)).thenReturn(usuarioMock);
-    	when(usuarioMock.getRol()).thenReturn("test");
+    	when(usuarioMock.getRol()).thenReturn("admin");
 
     	HttpSession sesionMock = mock(HttpSession.class);
     	when(requestMock.getSession()).thenReturn(sesionMock);
@@ -84,7 +86,7 @@ public class TestMock extends SpringTest{
     	controladorLogin.setServicioSocio(servicioSocioMock);
     	
     	when(servicioLoginMock.consultarUsuario(usuarioMock)).thenReturn(usuarioMock);
-    	when(usuarioMock.getRol()).thenReturn(null);
+    	when(usuarioMock.getRol()).thenReturn("socio");
 
     	
     	
@@ -107,6 +109,39 @@ public class TestMock extends SpringTest{
     	    	    	
     	ModelAndView vista = controladorLogin.validarLogin(usuarioMock, requestMock);
     	assertThat(vista.getViewName()).isEqualTo("redirect:/home");
+    	verify(sesionMock, times(1)).setAttribute("idSucursal", 100L);
+		
+    }
+    
+    @Test
+    @Transactional @Rollback(true)
+    public void pruebaControladorAlHomeOperador(){
+    	ControladorLogin controladorLogin = new ControladorLogin();
+    	HttpServletRequest requestMock = mock(HttpServletRequest.class);
+    	Usuario usuarioMock = mock(Usuario.class);
+    	ServicioLogin servicioLoginMock = mock(ServicioLogin.class);
+    	ServicioOperador servicioOperadorMock = mock(ServicioOperador.class);
+    	controladorLogin.setServicioLogin(servicioLoginMock);
+    	controladorLogin.setServicioOperador(servicioOperadorMock);
+    	
+    	when(servicioLoginMock.consultarUsuario(usuarioMock)).thenReturn(usuarioMock);
+    	when(usuarioMock.getRol()).thenReturn("operador");
+
+    	
+    	Operador operadorMock = mock(Operador.class);
+    	when(servicioOperadorMock.buscarOperador(usuarioMock)).thenReturn(operadorMock);
+    	Sucursal sucursalMock = mock(Sucursal.class);
+    	when(operadorMock.getSucursal()).thenReturn(sucursalMock);
+    	when(sucursalMock.getId()).thenReturn(100L);
+    	
+    	
+    	HttpSession sesionMock = mock(HttpSession.class);
+    	when(requestMock.getSession()).thenReturn(sesionMock);
+    	
+    	    	    	
+    	ModelAndView vista = controladorLogin.validarLogin(usuarioMock, requestMock);
+    	assertThat(vista.getViewName()).isEqualTo("redirect:/homeOperador/100");
+    	//assertThat(vista).contains("redirect:/homeOperador");
     	verify(sesionMock, times(1)).setAttribute("idSucursal", 100L);
 		
     }

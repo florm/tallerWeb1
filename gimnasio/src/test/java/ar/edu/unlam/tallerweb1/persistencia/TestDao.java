@@ -67,8 +67,10 @@ public class TestDao extends SpringTest{
     @Test
     @Transactional @Rollback(true)
     public void testGuardarUsuario(){
-    	
-    	Usuario usuario = usuarioDao.guardarUsuario("pepe", "pepepass");
+    	Usuario usuarioNuevo = new Usuario();
+    	usuarioNuevo.setNick("pepe");
+    	usuarioNuevo.setPassword("pepepass");
+    	Usuario usuario = usuarioDao.guardarUsuario(usuarioNuevo);
     	assertThat(getSession().get(Usuario.class, usuario.getId())).isNotNull();
     	assertEquals("pepe",getSession().get(Usuario.class, usuario.getId()).getNick());
     	
