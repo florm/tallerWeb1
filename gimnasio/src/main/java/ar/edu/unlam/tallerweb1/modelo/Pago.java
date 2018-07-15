@@ -18,8 +18,19 @@ public class Pago {
 	private Date fecha;
 	private Double importe;
 	
+	
 	@ManyToOne
 	private Socio socio;
+	
+	private Date fechaVencimiento;
+	
+	public Date getFechaVencimiento() {
+		return fechaVencimiento;
+	}
+
+	public void setFechaVencimiento(Date fechaVencimiento) {
+		this.fechaVencimiento = fechaVencimiento;
+	}
 
 	public Long getId() {
 		return id;

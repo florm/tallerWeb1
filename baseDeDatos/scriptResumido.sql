@@ -119,14 +119,14 @@ insert into sucursalactividad (cupo, cupoActual, dia, horaDesde, horaHasta, acti
 values (15, 0,'Sabado','11','12',4,1,1);
 
 -- tabla pago
-insert into pago(fecha,importe,socio_idSocio)
-values('20180502', 1200.00,1);
-insert into pago(fecha,importe,socio_idSocio)
-values('20180505', 800.00,1);
-insert into pago(fecha,importe,socio_idSocio)
-values('20180615', 500.00,2);
-insert into pago(fecha,importe,socio_idSocio)
-values('20180625', 400.00,1);
+insert into pago(fecha,importe,socio_idSocio,fechaVencimiento)
+values('20180502', 1200.00,1,'20180602');
+insert into pago(fecha,importe,socio_idSocio,fechaVencimiento)
+values('20180505', 800.00,1,'20180605');
+insert into pago(fecha,importe,socio_idSocio,fechaVencimiento)
+values('20180615', 500.00,2,'20180715');
+insert into pago(fecha,importe,socio_idSocio,fechaVencimiento)
+values('20180625', 400.00,1,'20180725');
 
 
 
