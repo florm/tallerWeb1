@@ -8,11 +8,29 @@ Insert Into Ciudad (Nombre, provincia_id) Values ('Buenos Aires', 1);
 Insert Into Ciudad (Nombre, provincia_id) Values ('Ramos Mejia', 1);
 Insert Into Ciudad (Nombre, provincia_id) Values ('San Justo', 1);
 
+-- tabla usuario select * from usuario;
+insert into usuario(nick, password,rol)
+value('admin','admin','admin');
+insert into usuario(nick, password, rol)
+value('mati', 'mati', 'socio');
+insert into usuario(nick, password, rol)
+value('lopez', 'lopez', 'socio');
+insert into usuario(nick, password, rol)
+value('ale', 'ale', 'socio');
+insert into usuario(nick, password, rol)
+value('op1', 'op1', 'operador');
+insert into usuario(nick, password, rol)
+value('op2', 'op2', 'operador');
+insert into usuario(nick, password, rol)
+value('op3', 'op3', 'operador');
+
 -- tabla Operador
-insert into Operador(apellido, nombre)
-values('Alvarez', 'Miguel');
-insert into Operador(apellido, nombre)
-values('Martinez', 'Veronica');
+insert into Operador(apellido, nombre, usuario_id)
+values('Alvarez', 'Miguel', 5);
+insert into Operador(apellido, nombre, usuario_id)
+values('Martinez', 'Veronica', 6);
+insert into Operador(apellido, nombre, usuario_id)
+values('Emma', 'Lee', 7);
 
 -- tabla sucursal
 insert into Sucursal(calle, codPostal, nombre, numcalle, pais, ciudad_id, operador_id, provincia_id, lat, lng)
@@ -24,13 +42,7 @@ values('Alvarado', '1704','Sucursal Alvarado','900','Argentina', 2, null, 1, -34
 insert into Sucursal(calle, codPostal, nombre, numcalle, pais, ciudad_id, operador_id, provincia_id, lat, lng)
 values('Florencio Varela', '1704','Sucursal Florencio Varela','1903','Argentina', 3, null, 1, -34.6699, -58.5626);
 
--- tabla usuario select * from usuario;
-insert into usuario(nick, password,rol)
-value('admin','admin','admin');
-insert into usuario(nick, password, rol)
-value('mati', 'mati', 'socio');
-insert into usuario(nick, password, rol)
-value('lopez', 'lopez', 'socio');
+
 
 -- tabla pase
 insert into Pase(cantidadActividades, nombre, precio)
@@ -49,7 +61,8 @@ insert into Socio(apellido, dni, domicilioCalle, domicilioDepto, domicilioNumero
 values('Suarez', '29941591','oro',null,'1813', 'matisuarez@gmail.com', 'Matias', '1544896790',1, 1, 1, 2);
 insert into Socio(apellido, dni, domicilioCalle, domicilioDepto, domicilioNumero, mail, nombre, telefono, ciudad_id, pase_id, sucursal_id, usuario_id)
 values('Lopez', '40345678','suipacha',null,'300', 'jlopez@gmail.com', 'Julieta','1593457123',1, 4, 2, 3);
-
+insert into Socio(apellido, dni, domicilioCalle, domicilioDepto, domicilioNumero, mail, nombre, telefono, ciudad_id, pase_id,sucursal_id, usuario_id)
+values('Casus', '29941591','coro',null,'813', 'ale@gmail.com', 'Alejandra', '1544833390',1, 1, 1, 4);
 
 -- tabla beneficio
 insert into Beneficio (descripcion, descuento, nombre, pase_id)
@@ -127,6 +140,8 @@ insert into pago(fecha,importe,socio_idSocio,fechaVencimiento)
 values('20180615', 500.00,2,'20180715');
 insert into pago(fecha,importe,socio_idSocio,fechaVencimiento)
 values('20180625', 400.00,1,'20180725');
+insert into pago(fecha,importe,socio_idSocio,fechaVencimiento)
+values('20180425', 400.00,3,'20180525');
 
 
 
@@ -154,10 +169,5 @@ value(6,10,0.90);
 insert into descuento (meses,descuento,porcentaje)
 value(12,15,0.85);
 
--- Socio con plan vencido
-insert into usuario(nick, password, rol)
-value('ale', 'ale', 'socio');
-insert into Socio(apellido, dni, domicilioCalle, domicilioDepto, domicilioNumero, mail, nombre, telefono, ciudad_id, pase_id,sucursal_id, usuario_id)
-values('Casus', '29941591','coro',null,'813', 'ale@gmail.com', 'Alejandra', '1544833390',1, 1, 1, 4);
-insert into pago(fecha,importe,socio_idSocio,fechaVencimiento)
-values('20180425', 400.00,3,'20180525');
+
+
