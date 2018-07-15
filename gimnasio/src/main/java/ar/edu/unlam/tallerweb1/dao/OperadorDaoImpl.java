@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Operador;
 import ar.edu.unlam.tallerweb1.modelo.Sucursal;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 @Repository("operadorDao")
 public class OperadorDaoImpl implements OperadorDao {
@@ -53,10 +54,11 @@ public class OperadorDaoImpl implements OperadorDao {
 		return sesion.get(Operador.class, idOperador);
 	}
 	@Override
-	public void registrar(Operador operador) {
+	public void registrar(Operador operador, Usuario usuario) {
 		Session sesion = sessionFactory.getCurrentSession();
 		Sucursal sucursal = sesion.get(Sucursal.class,operador.getSucursal().getId());
-		sucursal.setOperador(operador);			
+		sucursal.setOperador(operador);
+		operador.setUsuario(usuario);
 		sesion.save(operador);
 		sesion.save(sucursal);
 		

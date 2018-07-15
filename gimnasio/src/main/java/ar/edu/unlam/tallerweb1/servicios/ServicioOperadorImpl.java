@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.OperadorDao;
+import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
 import ar.edu.unlam.tallerweb1.modelo.Operador;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 @Service("servicioOperador")
 @Transactional
@@ -16,6 +18,9 @@ public class ServicioOperadorImpl implements ServicioOperador {
 
 	@Inject
 	private OperadorDao operadorDao;
+	
+	@Inject
+	private UsuarioDao usuarioDao;
 	
 	@Override
 	public List<Operador> listarOperadores() {
@@ -43,7 +48,12 @@ public class ServicioOperadorImpl implements ServicioOperador {
 
 	@Override
 	public void registrar(Operador operador) {
-		operadorDao.registrar(operador);
+		Usuario usuario = new Usuario();
+		usuario.setNick(operador.getUsuario().getNick());
+		usuario.setPassword(operador.getUsuario().getPassword());
+		usuario.setRol("operador");
+		Usuario usuarioGuardado = usuarioDao.guardarUsuario(usuario);
+		operadorDao.registrar(operador, usuarioGuardado);
 		
 	}
 

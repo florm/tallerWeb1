@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.dao;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Operador;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 public interface OperadorDao {
 
@@ -14,6 +15,6 @@ public interface OperadorDao {
 
 	void modificarOperador(Operador operador);
 
-	void registrar(Operador operador);
+	void registrar(Operador operador, Usuario usuario);
 		
 }

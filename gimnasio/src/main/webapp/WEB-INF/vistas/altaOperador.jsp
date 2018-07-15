@@ -61,7 +61,12 @@
 						    <div class="form-group input-size col-md-6">
 						        <form:input path="apellido" type="text" class="form-control" name="apellido" placeholder="Apellido"></form:input>
 						    </div>
-  	
+  							<div class="form-group input-size col-md-6">
+						        <form:input required="true" path="usuario.nick" type="text" class="form-control" name="usuario.nick" placeholder="Nickname"></form:input>
+						    </div>
+				 			<div class="form-group input-size col-md-6">
+						        <form:input path="usuario.password" type="password" class="form-control" name="usuario.password" placeholder="Password"></form:input>
+						    </div>
   							 <div class="form-group input-size col-md-12">
 							    <form:select required="true" path="sucursal.id" name="sucursal.id" cssClass="form-control">
 							 		<option value="" selected> Seleccione Sucursal..
