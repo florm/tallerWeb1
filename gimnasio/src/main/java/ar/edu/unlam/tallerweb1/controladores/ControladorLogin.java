@@ -40,7 +40,14 @@ public class ControladorLogin {
 		public void setServicioSocio(ServicioSocio servicioSocio) {
 			this.servicioSocio = servicioSocio;
 		}
-
+		
+		public ServicioOperador getServicioOperador() {
+			return servicioOperador;
+		}
+		public void setServicioOperador(ServicioOperador servicioOperador) {
+			this.servicioOperador = servicioOperador;
+		}
+		
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView irALogin() {
 		Usuario usuario = new Usuario();
