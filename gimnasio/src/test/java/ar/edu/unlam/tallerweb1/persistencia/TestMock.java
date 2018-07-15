@@ -64,7 +64,7 @@ public class TestMock extends SpringTest{
 
     	HttpSession sesionMock = mock(HttpSession.class);
     	when(requestMock.getSession()).thenReturn(sesionMock);
-    	doNothing().when(sesionMock).setAttribute("test","test"); //va una sola vez aunque se llame varias veces
+    	//doNothing().when(sesionMock).setAttribute("test","test"); //va una sola vez aunque se llame varias veces
     	    	    	
     	ModelAndView vista = controladorLogin.validarLogin(usuarioMock, requestMock);
     	assertThat(vista.getViewName()).isEqualTo("redirect:/homeAdmin");
@@ -92,7 +92,7 @@ public class TestMock extends SpringTest{
     	when(servicioSocioMock.buscarSocio(usuarioMock)).thenReturn(socioMock);
     	Sucursal sucursalMock = mock(Sucursal.class);
     	when(socioMock.getSucursal()).thenReturn(sucursalMock);
-    	when(sucursalMock.getId()).thenReturn(1L);
+    	when(sucursalMock.getId()).thenReturn(100L);
     	
     	when(servicioSocioMock.buscarSocio(usuarioMock).getNombre()).thenReturn("test");
     	when(servicioSocioMock.buscarSocio(usuarioMock).getIdSocio()).thenReturn(1L);
@@ -104,29 +104,13 @@ public class TestMock extends SpringTest{
     	HttpSession sesionMock = mock(HttpSession.class);
     	when(requestMock.getSession()).thenReturn(sesionMock);
     	
-    	doNothing().when(sesionMock).setAttribute("test","test");
-    	    	
+    	    	    	
     	ModelAndView vista = controladorLogin.validarLogin(usuarioMock, requestMock);
     	assertThat(vista.getViewName()).isEqualTo("redirect:/home");
-    	
+    	verify(sesionMock, times(1)).setAttribute("idSucursal", 100L);
 		
     }
-    
-//    @RequestMapping(path = "/registrarActividad", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-//	@ResponseBody
-//	public String irARegistroCompleto(@RequestBody Formulario formulario) {
-//		boolean resultado = servicioActividad.guardarSocioActividadSucursal(formulario.getIdSocio(), formulario.getIdSucursalActividad());
-//		
-//		if (resultado == true) {
-//			
-//			String rta = "{\"mensaje\":\"La inscripcion se realizo correctamente\", \"estado\":\"1\"}";
-//			return rta;
-//		}else {
-//			
-//			String rta = "{\"mensaje\":\"Ya se encuentra inscripto en esta actividad\", \"estado\":\"0\"}";
-//			return rta;
-//		}
-//	}
+
     @Test
     @Transactional @Rollback(true)
     public void testRegistrarActividad(){

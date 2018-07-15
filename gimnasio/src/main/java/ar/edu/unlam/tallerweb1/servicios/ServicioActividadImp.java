@@ -22,6 +22,13 @@ public class ServicioActividadImp implements ServicioActividad {
 	private ActividadDao servicioActividadDao;
 	@Inject
 	private SocioDao servicioSocioDao;
+	
+	public void setActividadDao(ActividadDao dao){
+		this.servicioActividadDao= dao;
+	}
+	public void setSocioDao(SocioDao dao){
+		this.servicioSocioDao= dao;
+	}
 	@Override
 	public List<SucursalActividad> listarActividadesEnSucursal(Long id) {
 		return servicioActividadDao.listarActividadesEnSucursal(id);
