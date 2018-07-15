@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.OperadorDao;
+import ar.edu.unlam.tallerweb1.dao.SucursalDao;
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
 import ar.edu.unlam.tallerweb1.modelo.Operador;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -21,6 +22,9 @@ public class ServicioOperadorImpl implements ServicioOperador {
 	
 	@Inject
 	private UsuarioDao usuarioDao;
+	
+	@Inject
+	private SucursalDao sucursalDao;
 	
 	@Override
 	public List<Operador> listarOperadores() {
@@ -43,6 +47,7 @@ public class ServicioOperadorImpl implements ServicioOperador {
 	@Override
 	public void modificar(Operador operador) {
 		operadorDao.modificarOperador(operador);
+		sucursalDao.modificarSucursal(operador);
 		
 	}
 

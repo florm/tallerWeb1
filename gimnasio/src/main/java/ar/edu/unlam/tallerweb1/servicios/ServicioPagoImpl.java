@@ -69,7 +69,7 @@ public class ServicioPagoImpl implements ServicioPago {
 	}
 
 	@Override
-	public void abonarPase(Long idSocio, Long idPase, Long idDescuento){
+	public Date abonarPase(Long idSocio, Long idPase, Long idDescuento){
 		Descuento descuento = pagoDao.buscarDescuento(idDescuento);
 		Pase pase = paseDao.buscarPase(idPase);
 		Socio socio = socioDao.buscarSocio(idSocio);
@@ -110,6 +110,8 @@ public class ServicioPagoImpl implements ServicioPago {
 		
 		pago.setFechaVencimiento(fechaVencimiento);
 		pagoDao.abonarPase(pago);
+		
+		return fechaVencimiento;
 	}
 	
 	

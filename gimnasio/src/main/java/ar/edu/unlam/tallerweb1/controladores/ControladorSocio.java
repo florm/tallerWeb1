@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,9 +22,11 @@ import ar.edu.unlam.tallerweb1.modelo.Pase;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalizacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPago;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPase;
+import ar.edu.unlam.tallerweb1.servicios.ServicioQr;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSocio;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSucursal;
 import helpers.Formulario;
@@ -40,6 +43,8 @@ public class ControladorSocio {
 	private ServicioPase servicioPase;
 	@Inject
 	private ServicioPago servicioPago;
+	@Inject
+	private ServicioQr servicioQr;
 	
 	@RequestMapping (path = "/inscribirpase", method = RequestMethod.POST)
 	public ModelAndView agregarPaseASocio(@ModelAttribute ("formulario") Formulario formulario) {
@@ -134,8 +139,9 @@ public class ControladorSocio {
 	
 	@RequestMapping(path = "pago/socio/{idSocio}/abonarpase", method = RequestMethod.POST)
 	public ModelAndView abonarPase(@ModelAttribute ("formulario") Formulario formulario){
-		servicioPago.abonarPase(formulario.getIdSocio(), formulario.getIdPase(), formulario.getIdDescuento());
-		return new ModelAndView("redirect:/home");
+		Date fechaVencimiento = servicioPago.abonarPase(formulario.getIdSocio(), formulario.getIdPase(), formulario.getIdDescuento());
+		servicioQr.generarQr(formulario.getIdSocio(),fechaVencimiento);
+		return new ModelAndView("qrConfirmacion");
 	}
 	
 	@RequestMapping (path="socio/{idSocio}/paseactual")
