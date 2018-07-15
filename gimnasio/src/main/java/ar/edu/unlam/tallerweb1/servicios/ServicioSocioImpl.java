@@ -109,7 +109,7 @@ public class ServicioSocioImpl implements ServicioSocio {
 			usuario.setPassword(socio.getUsuario().getPassword());
 			usuario.setRol("socio");
 			
-			Usuario usuarioGuardado = usuarioDao.guardarUsuario(socio.getUsuario().getNick(), socio.getUsuario().getPassword());
+			Usuario usuarioGuardado = usuarioDao.guardarUsuario(usuario);
 			
 			Sucursal sucursal = sucursalDao.getSucursal(socio.getSucursal().getId());
 			socio.setUsuario(usuarioGuardado);
