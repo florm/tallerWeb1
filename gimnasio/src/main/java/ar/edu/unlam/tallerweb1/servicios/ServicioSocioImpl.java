@@ -30,6 +30,10 @@ public class ServicioSocioImpl implements ServicioSocio {
 	@Inject
 	private SucursalDao sucursalDao;
 	
+	public void setUsuarioDao(UsuarioDao dao){
+		this.usuarioDao = dao;
+	}
+	
 	@Override
 	public List<Socio> buscarSocios(Long idSucursal) {
 		return socioDao.buscarSocios(idSucursal);
