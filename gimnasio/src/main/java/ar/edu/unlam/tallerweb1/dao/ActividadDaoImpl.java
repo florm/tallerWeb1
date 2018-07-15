@@ -107,4 +107,10 @@ public class ActividadDaoImpl implements ActividadDao {
 		Session sesion = sessionFactory.getCurrentSession();
 		sesion.delete(sucursalActividad);
 	}
+
+	@Override
+	public void agregarSucursalActividad(SucursalActividad sucursalActividadVacia) {
+		Session sesion = sessionFactory.getCurrentSession();
+		sesion.save(sucursalActividadVacia);
+	}
 }

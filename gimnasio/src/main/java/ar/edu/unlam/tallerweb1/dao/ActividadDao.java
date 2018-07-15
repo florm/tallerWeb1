@@ -15,4 +15,5 @@ public interface ActividadDao {
 	public Actividad buscarActividad(Long idActividad);
 	public void modificarActividad(SucursalActividad sucursalActividadUpdate,SucursalActividad sucursalActividadBdd);
 	public void eliminarSucursalActividad(SucursalActividad sucursalActividad);
+	public void agregarSucursalActividad(SucursalActividad sucursalActividadVacia);
 }
