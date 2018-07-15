@@ -101,8 +101,14 @@ public class ServicioPagoImpl implements ServicioPago {
 //		SimpleDateFormat fechaFormat = new SimpleDateFormat("yyyy-MM-dd");
 //		String fechaString = fechaFormat.format(fecha);
 //		Date fechaPago = fechaFormat.parse(fechaString);
-		
 		pago.setFecha(fecha);
+		
+		Calendar cal = Calendar.getInstance();
+        cal.setTime(fecha);
+        cal.add(Calendar.MONTH, descuento.getMeses());
+        Date fechaVencimiento = cal.getTime();
+		
+		pago.setFechaVencimiento(fechaVencimiento);
 		pagoDao.abonarPase(pago);
 	}
 	

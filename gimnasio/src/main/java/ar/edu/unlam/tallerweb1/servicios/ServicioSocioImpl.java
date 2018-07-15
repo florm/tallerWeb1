@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,10 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.LocalizacionDao;
+import ar.edu.unlam.tallerweb1.dao.PagoDao;
 import ar.edu.unlam.tallerweb1.dao.SocioDao;
 import ar.edu.unlam.tallerweb1.dao.SucursalDao;
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
 import ar.edu.unlam.tallerweb1.modelo.Ciudad;
+import ar.edu.unlam.tallerweb1.modelo.Pago;
 import ar.edu.unlam.tallerweb1.modelo.Pase;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.Sucursal;
@@ -29,6 +33,8 @@ public class ServicioSocioImpl implements ServicioSocio {
 	private LocalizacionDao localizacionDao;
 	@Inject
 	private SucursalDao sucursalDao;
+	@Inject
+	private PagoDao pagoDao;
 	
 	@Override
 	public List<Socio> buscarSocios(Long idSucursal) {
@@ -112,6 +118,26 @@ public class ServicioSocioImpl implements ServicioSocio {
 		} else {
 			
 			return false;
+		}
+	}
+
+	@Override
+	public Integer getEstadoDeSocioPorCuota(Long idSocio) {
+		Socio socio = socioDao.buscarSocio(idSocio);
+//		Date fecha = java.util.Calendar.getInstance().getTime();
+		
+		if (socio.getPase().getId() != 5) { //Pase por default del socio apenas se registra
+			List<Pago> listaPagos = pagoDao.traerPagosSocio(socio);
+			Pago pago = listaPagos.get(listaPagos.size()-1);
+			if(pago.getFechaVencimiento().before(Calendar.getInstance().getTime())) {
+				//fecha de vencimento es menor a la fecha actual esta vencido el pase
+				return 0;
+			} else {
+				//fecha de vencimiento es mayor a la fecha actual, todavia no esta vencido el pase
+				return 1;
+			}
+		}else {
+			return 0;
 		}
 	}
 	
