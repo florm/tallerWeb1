@@ -153,3 +153,11 @@ insert into descuento (meses,descuento,porcentaje)
 value(6,10,0.90);
 insert into descuento (meses,descuento,porcentaje)
 value(12,15,0.85);
+
+-- Socio con plan vencido
+insert into usuario(nick, password, rol)
+value('ale', 'ale', null);
+insert into Socio(apellido, dni, domicilioCalle, domicilioDepto, domicilioNumero, mail, nombre, telefono, ciudad_id, pase_id,sucursal_id, usuario_id)
+values('Casus', '29941591','coro',null,'813', 'ale@gmail.com', 'Alejandra', '1544833390',1, 1, 1, 6);
+insert into pago(fecha,importe,socio_idSocio,fechaVencimiento)
+values('20180425', 400.00,5,'20180525');

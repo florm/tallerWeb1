@@ -136,8 +136,6 @@ public class ServicioSocioImpl implements ServicioSocio {
 				//fecha de vencimiento es mayor a la fecha actual, todavia no esta vencido el pase
 				return 1;
 			}
-			
-//			return 0;
 		}else {
 			return 0;
 		}
