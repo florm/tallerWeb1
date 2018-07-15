@@ -28,9 +28,7 @@ public class OperadorDaoImpl implements OperadorDao {
 	@Override
 	public void modificarOperador(Operador operador) {
 		Session sesion = sessionFactory.getCurrentSession();
-		Sucursal sucursal = sesion.get(Sucursal.class,operador.getSucursal().getId());
-		sucursal.setOperador(operador);
-		sesion.update(sucursal);
+				
 		sesion.update(operador);
 		
 	}

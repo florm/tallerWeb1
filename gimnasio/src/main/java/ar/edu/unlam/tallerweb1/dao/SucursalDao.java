@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.dao;
 
 import java.util.List;
 
+import ar.edu.unlam.tallerweb1.modelo.Operador;
 import ar.edu.unlam.tallerweb1.modelo.Sucursal;
 
 
@@ -12,5 +13,6 @@ public interface SucursalDao {
 	void eliminarSucursal(Sucursal sucursalEliminada);
 	void agregarSucursal(Sucursal sucursalNueva);
 	List<Sucursal> listarSucursalesLibres();
+	void modificarSucursal(Operador operador);
 }
 
