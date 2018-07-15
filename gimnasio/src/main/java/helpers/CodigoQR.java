@@ -1,9 +1,11 @@
-package ar.edu.unlam.tallerweb1.modelo;
+package helpers;
 
 import java.awt.Desktop;
 import java.io.File;
 
 import com.barcodelib.barcode.QRCode;
+
+
 
 @SuppressWarnings("serial")
 public class CodigoQR extends javax.swing.JFrame {
