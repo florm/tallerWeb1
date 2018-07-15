@@ -119,14 +119,14 @@ insert into sucursalactividad (cupo, cupoActual, dia, horaDesde, horaHasta, acti
 values (15, 0,'Sabado','11','12',4,1,1);
 
 -- tabla pago
-insert into pago(fecha,importe,socio_idSocio)
-values('20180502', 1200.00,1);
-insert into pago(fecha,importe,socio_idSocio)
-values('20180505', 800.00,1);
-insert into pago(fecha,importe,socio_idSocio)
-values('20180615', 500.00,2);
-insert into pago(fecha,importe,socio_idSocio)
-values('20180625', 400.00,1);
+insert into pago(fecha,importe,socio_idSocio,fechaVencimiento)
+values('20180502', 1200.00,1,'20180602');
+insert into pago(fecha,importe,socio_idSocio,fechaVencimiento)
+values('20180505', 800.00,1,'20180605');
+insert into pago(fecha,importe,socio_idSocio,fechaVencimiento)
+values('20180615', 500.00,2,'20180715');
+insert into pago(fecha,importe,socio_idSocio,fechaVencimiento)
+values('20180625', 400.00,1,'20180725');
 
 
 
@@ -153,3 +153,11 @@ insert into descuento (meses,descuento,porcentaje)
 value(6,10,0.90);
 insert into descuento (meses,descuento,porcentaje)
 value(12,15,0.85);
+
+-- Socio con plan vencido
+insert into usuario(nick, password, rol)
+value('ale', 'ale', null);
+insert into Socio(apellido, dni, domicilioCalle, domicilioDepto, domicilioNumero, mail, nombre, telefono, ciudad_id, pase_id,sucursal_id, usuario_id)
+values('Casus', '29941591','coro',null,'813', 'ale@gmail.com', 'Alejandra', '1544833390',1, 1, 1, 6);
+insert into pago(fecha,importe,socio_idSocio,fechaVencimiento)
+values('20180425', 400.00,5,'20180525');

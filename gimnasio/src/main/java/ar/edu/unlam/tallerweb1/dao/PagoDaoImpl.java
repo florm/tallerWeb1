@@ -39,7 +39,8 @@ public class PagoDaoImpl implements PagoDao {
 	@Override
 	public List<Descuento> listarDescuentos() {
 		final Session session = sessionFactory.getCurrentSession();
-		List<Descuento> listaDescuentos = session.createCriteria(Descuento.class).list();
+		List<Descuento> listaDescuentos = session.createCriteria(Descuento.class)
+				.list();
 		return listaDescuentos;
 	}
 	
@@ -57,6 +58,16 @@ public class PagoDaoImpl implements PagoDao {
 		Session sesion = sessionFactory.getCurrentSession();
 		sesion.save(pago);
 		
+	}
+
+	@Override
+	public List<Pago> traerPagosSocio(Socio socio) {
+		Session sesion = sessionFactory.getCurrentSession();
+		List<Pago> listaPagos = sesion.createCriteria(Pago.class)
+				.add(Restrictions.eq("socio",socio))
+				.list();
+		
+		return listaPagos;
 	}
 
 }

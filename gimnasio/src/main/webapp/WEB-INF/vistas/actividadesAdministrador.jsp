@@ -34,7 +34,7 @@
 	<div id="page">
 		<%@include file="menuAdministrador.jsp"%>
 		<label style="display: block;text-align: center;line-height: 150%; font-size: .85em; margin-top: 30px;">
-		Seleccione sobre que sucursal quiere realizar ABM actividades</label> 
+		Seleccione sobre que sucursal desea modificar y eliminar actividades</label> 
 		<div class="container mt-5">
 			<table id="sucursales" class="table table-striped table-bordered" style="width:100%">
 				<thead>
@@ -63,6 +63,8 @@
 				</tbody>
 			
 			</table>
+			<td><a href="<c:url value="/actividad/nuevaActividadEnSucursal" />" class="btn btn-primary btn-outline btn-sm">Nueva Actividad En Sucursal</i></a></td>
+			<td><a href="<c:url value="/actividad/nuevaActividad" />" class="btn btn-primary btn-outline btn-sm">Nueva Actividad General</i></a></td>
 		</div>	
 	</div>
 
