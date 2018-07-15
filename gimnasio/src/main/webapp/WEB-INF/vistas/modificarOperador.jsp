@@ -43,7 +43,6 @@
 					<form:form class="text-center" method="POST" action="modificarOperador" modelAttribute="operador">
 							
 						    <form:input hidden="true" path="id" name="id" type="text" class="form-control" value="${operador.id }"></form:input>
-						   
 							<div class="form-group input-size">
 						        <form:input readonly="true" path="nombre" name="nombre" type="text" class="form-control" value="${operador.nombre }"></form:input>
 						    </div>

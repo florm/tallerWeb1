@@ -73,4 +73,13 @@ public class SucursalDaoImpl implements SucursalDao {
 				.list();
 		return listaSucursalesLibres;
 	}
+
+	@Override
+	public void modificarSucursal(Operador operador) {
+		Session sesion = sessionFactory.getCurrentSession();
+		Sucursal sucursal = sesion.get(Sucursal.class, operador.getSucursal().getId());
+		sucursal.setOperador(operador);
+		sesion.update(sucursal);
+		
+	}
 }
