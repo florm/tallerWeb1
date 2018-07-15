@@ -26,11 +26,11 @@ value('op3', 'op3', 'operador');
 
 -- tabla Operador
 insert into Operador(apellido, nombre, usuario_id)
-values('Alvarez', 'Miguel', 5);
+values('Alvarez', 'Miguel',5);
 insert into Operador(apellido, nombre, usuario_id)
-values('Martinez', 'Veronica', 6);
+values('Martinez', 'Veronica',6);
 insert into Operador(apellido, nombre, usuario_id)
-values('Emma', 'Lee', 7);
+values('Emma', 'Lee',7);
 
 -- tabla sucursal
 insert into Sucursal(calle, codPostal, nombre, numcalle, pais, ciudad_id, operador_id, provincia_id, lat, lng)
@@ -42,6 +42,9 @@ values('Alvarado', '1704','Sucursal Alvarado','900','Argentina', 2, null, 1, -34
 insert into Sucursal(calle, codPostal, nombre, numcalle, pais, ciudad_id, operador_id, provincia_id, lat, lng)
 values('Florencio Varela', '1704','Sucursal Florencio Varela','1903','Argentina', 3, null, 1, -34.6699, -58.5626);
 
+-- update de tabla operador
+update operador set sucursal_id= 1 where id = 1;
+update operador set sucursal_id= 2 where id = 2;
 
 
 -- tabla pase
