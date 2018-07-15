@@ -28,6 +28,7 @@
 <!-- Modernizr JS -->
 <script src="<c:url value="/js/modernizr-2.6.2.min.js" />"></script>
 
+<link href="<c:url value="/css/datatables.css" />" rel="stylesheet">
 <link href="<c:url value="/css/fontawesome-all.css" />" rel="stylesheet">
 <link href="<c:url value="/css/estilos.css" />" rel="stylesheet">
 
@@ -37,7 +38,7 @@
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
-		<%@include file="menuAdministrador.jsp"%>
+		<%@include file="menuOperador.jsp"%>
 
 		<div class="container mt-5">
 			<table id="socios" class="table table-striped table-bordered"
@@ -103,12 +104,13 @@
 	<!-- countTo -->
 
 	<script src="<c:url value="/js/jquery.countTo.js" />"></script>
-
+	<script src="<c:url value="/js/datatables.js" />"></script>
+	
 	<!-- Main -->
 	<script src="<c:url value="/js/main.js" />"></script>
 	
+	<script src="<c:url value="/js/home.js" />"></script>
 	
-	<script src="js/home.js"></script>
 
 </body>
 
