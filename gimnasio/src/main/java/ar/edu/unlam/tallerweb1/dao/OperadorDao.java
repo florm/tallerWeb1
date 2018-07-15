@@ -16,5 +16,6 @@ public interface OperadorDao {
 	void modificarOperador(Operador operador);
 
 	void registrar(Operador operador, Usuario usuario);
-		
+	
+	Operador buscarOperador(Usuario usuario);
 }

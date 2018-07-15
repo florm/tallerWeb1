@@ -14,6 +14,7 @@ import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalizacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
+import ar.edu.unlam.tallerweb1.servicios.ServicioOperador;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSocio;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSucursal;
 
@@ -29,6 +30,8 @@ public class ControladorLogin {
 	private ServicioSucursal servicioSucursal;
 	@Inject
 	private ServicioLocalizacion servicioLocalizacion;
+	@Inject
+	private ServicioOperador servicioOperador;
 	
 	//mocking
 		public void setServicioLogin(ServicioLogin servicioLogin) {
@@ -52,22 +55,43 @@ public class ControladorLogin {
 
 		Usuario usuarioBuscado = servicioLogin.consultarUsuario(usuario);
 		if (usuarioBuscado != null) {
-			if(usuarioBuscado.getRol() != null){
+			
+			switch (usuarioBuscado.getRol()) {
+			case "admin":
 				request.getSession().setAttribute("rol", usuarioBuscado.getRol());
-				request.getSession().setAttribute("nombre", "admin");
+				request.getSession().setAttribute("nombre", "Admin");
 				return new ModelAndView("redirect:/homeAdmin");
-			}
-			else{
-				
-				request.getSession().setAttribute("idSucursal",
-						servicioSocio.buscarSocio(usuarioBuscado).getSucursal().getId());
+			case "operador":
+				Long idSucursal = servicioOperador.buscarOperador(usuarioBuscado).getSucursal().getId();
+				request.getSession().setAttribute("rol", usuarioBuscado.getRol());
+				request.getSession().setAttribute("idSucursal", idSucursal);
+				request.getSession().setAttribute("nombre", "Operador"); 
+				return new ModelAndView("redirect:/homeOperador/"+idSucursal);
+			default: //caso socio
+				request.getSession().setAttribute("idSucursal", servicioSocio.buscarSocio(usuarioBuscado).getSucursal().getId());
 				request.getSession().setAttribute("nombre", servicioSocio.buscarSocio(usuarioBuscado).getNombre());
 				request.getSession().setAttribute("idSocio", servicioSocio.buscarSocio(usuarioBuscado).getIdSocio());
 				request.getSession().setAttribute("idPase", servicioSocio.buscarSocio(usuarioBuscado).getPase().getId());
 				request.getSession().setAttribute("estado", servicioSocio.getEstadoDeSocioPorCuota(servicioSocio.buscarSocio(usuarioBuscado).getIdSocio()));
+				return new ModelAndView("redirect:/home");
 			}
-						
-			return new ModelAndView("redirect:/home");
+			
+//			if(usuarioBuscado.getRol() != null){
+//				request.getSession().setAttribute("rol", usuarioBuscado.getRol());
+//				request.getSession().setAttribute("nombre", "admin");
+//				return new ModelAndView("redirect:/homeAdmin");
+//			}
+//			else{
+//				
+//				request.getSession().setAttribute("idSucursal",
+//						servicioSocio.buscarSocio(usuarioBuscado).getSucursal().getId());
+//				request.getSession().setAttribute("nombre", servicioSocio.buscarSocio(usuarioBuscado).getNombre());
+//				request.getSession().setAttribute("idSocio", servicioSocio.buscarSocio(usuarioBuscado).getIdSocio());
+//				request.getSession().setAttribute("idPase", servicioSocio.buscarSocio(usuarioBuscado).getPase().getId());
+//				request.getSession().setAttribute("estado", servicioSocio.getEstadoDeSocioPorCuota(servicioSocio.buscarSocio(usuarioBuscado).getIdSocio()));
+//			}
+//						
+//			return new ModelAndView("redirect:/home");
 		
 		} else {
 			ModelMap model = new ModelMap();
