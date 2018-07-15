@@ -137,4 +137,12 @@ public class ControladorSocio {
 		servicioPago.abonarPase(formulario.getIdSocio(), formulario.getIdPase(), formulario.getIdDescuento());
 		return new ModelAndView("redirect:/home");
 	}
+	
+	@RequestMapping (path="socio/{idSocio}/paseactual")
+	public ModelAndView irAPaseActual (@PathVariable(value="idSocio") Long idSocio){
+		ModelMap modelo = new ModelMap();
+		Socio socio = servicioSocio.buscarSocio(idSocio);
+		modelo.put("pase", socio.getPase());
+		return new ModelAndView("paseActual", modelo);
+	}
 }

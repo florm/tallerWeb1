@@ -45,7 +45,7 @@
 							<ul class="dropdown" style="display: none;">
 								<li><a href="<c:url value="/socio/${sessionScope.idSocio}/datospersonales" />">Datos Personales</a></li>
 								<li><a href="<c:url value="/socio/${sessionScope.idSocio}/modificardatospersonales" />">Modificar Datos Personales</a></li>
-								<li><a href="<c:url value="/socio/${sessionScope.idSocio}/pase" />">Pase Actual</a></li>
+								<li><a href="<c:url value="/socio/${sessionScope.idSocio}/paseactual" />">Pase Actual</a></li>
 							</ul></li>
 
 					</ul>
