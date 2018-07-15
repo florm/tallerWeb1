@@ -50,6 +50,9 @@
 			<%@include file="menu.jsp"%>
 		</c:if>
 		<div class="container">
+		<c:if test="${sessionScope.estado == 0 && sessionScope.idPase !=5}">
+					<div class="row justify-content-center align-items-center p-3 my-3" id="responseError">Su ${listaPases.get(sessionScope.idPase).nombre} ha vencido, puede seleccionar un nuevo Plan.</div>
+				</c:if>
 			<div class="row animate-box fadeInUp animated-fast">
 				<div class="col-md-8 col-md-offset-2 text-center">
 					<h2>Pases</h2>
@@ -57,6 +60,9 @@
 				</div>
 			</div>
 			<div class="row">
+			
+				
+			
 				<div class="pricing">
 					<c:forEach items="${listaPases}" var="lista">
 						<c:if test="${lista.id !=5  }">
@@ -81,7 +87,14 @@
 									<c:if test="${empty sessionScope.idSocio}">
 										<a href="<c:url value="registrar"/>" class="btn btn-select-plan btn-sm">Registrarse</a>
 									</c:if>
-									<c:if test="${!empty sessionScope.idSocio}">
+									<!--<c:if test="${!empty sessionScope.idSocio}">
+										<a href="<c:url value="/pago/socio/${sessionScope.idSocio}/pase/${lista.id}" />" class="btn btn-select-plan btn-sm">Seleccionar Pase</a>
+									</c:if>
+									<c:if test="${sessionScope.estado == 0}">
+										<a href="<c:url value="/pago/socio/${sessionScope.idSocio}/pase/${lista.id}" />" class="btn btn-select-plan btn-sm">Seleccionar Pase</a>
+									</c:if>-->
+																
+									<c:if test="${sessionScope.estado == 0}">
 										<a href="<c:url value="/pago/socio/${sessionScope.idSocio}/pase/${lista.id}" />" class="btn btn-select-plan btn-sm">Seleccionar Pase</a>
 									</c:if>
 									
