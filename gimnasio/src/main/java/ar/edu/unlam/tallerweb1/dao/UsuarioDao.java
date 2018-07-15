@@ -9,5 +9,5 @@ public interface UsuarioDao {
 	
 	Usuario consultarUsuario (Usuario usuario);
 	List<Usuario> verSiExisteUsuario(String nick);
-	Usuario guardarUsuario (String nick, String password);
+	Usuario guardarUsuario (Usuario usuario);
 }
