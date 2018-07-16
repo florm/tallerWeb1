@@ -53,7 +53,7 @@
 				      	<form:form class="text-center" method="post" action="nuevaSucursal" modelAttribute="sucursalVacia">
 							
 						    <div class="form-group input-size">
-						        <form:input  path="nombre" type="text" class="form-control" value="nombre" ></form:input>
+						        <form:input  path="nombre" type="text" class="form-control" placeholder="Nombre" ></form:input>
 						    </div>
 						    <div class="form-group input-size">
 							    <form:select required="true" path="ciudad.id" id="ciudad.id" name="ciudad.id" cssClass="form-control">
@@ -64,13 +64,13 @@
 						  		</form:select>
   							</div>						    
 						    <div class="form-group input-size">
-						        <form:input path="calle" type="text" class="form-control"  value="calle"></form:input>
+						        <form:input path="calle" type="text" class="form-control"  placeholder="Calle"></form:input>
 						    </div>
 						    <div class="form-group input-size">
-						        <form:input path="numcalle" type="text" class="form-control" value="numero calle"></form:input>
+						        <form:input path="numcalle" type="number" class="form-control" placeholder="Numero"></form:input>
 						    </div>
 						    <div class="form-group input-size">
-						        <form:input path="codPostal" type="text" class="form-control" value="codigo postal"></form:input>
+						        <form:input path="codPostal" type="text" class="form-control" placeholder="Codigo Postal"></form:input>
 						    </div>
 						    						    
 						    <button type="submit" id="btn-modificar" value="modificar" class="btn btn-primary">Agregar</button>

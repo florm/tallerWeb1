@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Sucursal;
@@ -12,7 +14,7 @@ public interface ServicioSucursal {
 	Sucursal getSucursal(Long id);
 	void modificarSucursal(Sucursal sucursalUpdate, Sucursal sucursalBdd);
 	void eliminarSucursal(Sucursal sucursalEliminada);
-	void agregarSucursal(Sucursal sucursalNueva);
+	void agregarSucursal(Sucursal sucursalNueva) throws UnsupportedEncodingException, MalformedURLException;
 	List<Sucursal> listarSucursalesLibres();
 }
 
