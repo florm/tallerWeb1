@@ -1,5 +1,8 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.awt.geom.Point2D;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -11,6 +14,7 @@ import ar.edu.unlam.tallerweb1.dao.LocalizacionDao;
 import ar.edu.unlam.tallerweb1.dao.SucursalDao;
 import ar.edu.unlam.tallerweb1.modelo.Ciudad;
 import ar.edu.unlam.tallerweb1.modelo.Sucursal;
+import maps.java.Geocoding;
 
 
 @Service ("servicioSucursal")
@@ -44,11 +48,15 @@ public class ServicioSucursalImp implements ServicioSucursal {
 	}
 	
 	@Override
-	public void agregarSucursal(Sucursal sucursalNueva) {
+	public void agregarSucursal(Sucursal sucursalNueva) throws UnsupportedEncodingException, MalformedURLException {
 		Ciudad ciudad = localizacionDao.traerCiudad(sucursalNueva.getCiudad().getId());
 		sucursalNueva.setCiudad(ciudad);
 		sucursalNueva.setPais("Argentina");
-		sucursalDao.agregarSucursal(sucursalNueva);
+		Geocoding ObjGeocod=new Geocoding();
+		Point2D.Double resultadoCD=ObjGeocod.getCoordinates("Padre Elizalde, 344, Ciudadela");
+//		System.out.println( resultadoCD.x + "," + resultadoCD.y);
+		sucursalNueva.setLat(resultadoCD.getX());
+		sucursalNueva.setLng(resultadoCD.getY());
 		sucursalDao.agregarSucursal(sucursalNueva);
 	}
 

@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -184,7 +186,7 @@ public class ControladorAdministrador {
 	}
 
 	@RequestMapping(path = "/sucursal/nuevaSucursal", method = RequestMethod.POST)
-	public ModelAndView agregarNuevaSucursal(@ModelAttribute ("sucursalVacia") Sucursal sucursalNueva) {
+	public ModelAndView agregarNuevaSucursal(@ModelAttribute ("sucursalVacia") Sucursal sucursalNueva) throws UnsupportedEncodingException, MalformedURLException {
 		servicioSucursal.agregarSucursal(sucursalNueva);
 		return new ModelAndView("redirect:/sucursalesadmin");
 }
