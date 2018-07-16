@@ -53,8 +53,7 @@ public class ServicioSucursalImp implements ServicioSucursal {
 		sucursalNueva.setCiudad(ciudad);
 		sucursalNueva.setPais("Argentina");
 		Geocoding ObjGeocod=new Geocoding();
-		Point2D.Double resultadoCD=ObjGeocod.getCoordinates("Padre Elizalde, 344, Ciudadela");
-//		System.out.println( resultadoCD.x + "," + resultadoCD.y);
+		Point2D.Double resultadoCD=ObjGeocod.getCoordinates(sucursalNueva.getCalle()+","+sucursalNueva.getNumcalle()+","+sucursalNueva.getCiudad().getNombre());
 		sucursalNueva.setLat(resultadoCD.getX());
 		sucursalNueva.setLng(resultadoCD.getY());
 		sucursalDao.agregarSucursal(sucursalNueva);
