@@ -16,4 +16,7 @@ public interface ServicioActividad {
 	public SucursalActividad traerActividadSucursal(Long idSucursalActividad);
 	public void eliminarSucursalActividad(SucursalActividad sucursalActividad);
 	public void agregarSucursalActividad(SucursalActividad sucursalActividad);
+	public void agregarNuevaActividad(Actividad actividad);
+	public void modificarActividad(Actividad actividadUpdate,Actividad actividad);
+	public void eliminarActividad(Actividad actividad);
 }

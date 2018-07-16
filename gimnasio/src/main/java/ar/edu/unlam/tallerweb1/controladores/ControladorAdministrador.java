@@ -151,5 +151,41 @@ public class ControladorAdministrador {
 	public ModelAndView agregarNuevaSucursal(@ModelAttribute ("sucursalVacia") Sucursal sucursalNueva) {
 		servicioSucursal.agregarSucursal(sucursalNueva);
 		return new ModelAndView("redirect:/sucursalesadmin");
-}
+	}
+	@RequestMapping(path="/actividadesAdmin")
+	public ModelAndView listaActividades() {
+		ModelMap modelo = new ModelMap();
+		modelo.put("listaActividades", servicioActividad.listaActividades());
+		return new ModelAndView("actividadesAdmin",modelo);
+	}
+	@RequestMapping(path="/actividadesAdmin/nuevaActividad")
+	public ModelAndView nuevaActividad() {
+		ModelMap modelo = new ModelMap();
+		Actividad actividad = new Actividad();
+		modelo.put("actividad", actividad);
+		return new ModelAndView("formNuevaActividad",modelo);
+	}
+	@RequestMapping(path="/actividadesAdmin/nuevaActividadProc")
+	public ModelAndView nuevaActividadProc(@ModelAttribute ("actividad") Actividad actividad) {
+		servicioActividad.agregarNuevaActividad(actividad);
+		return new ModelAndView("redirect:/actividadesAdmin");
+	}
+	@RequestMapping(path="/actividadesAdmin/{idActividad}/modificarActividad")
+	public ModelAndView modificarActividad(@PathVariable Long idActividad) {
+		ModelMap modelo = new ModelMap();
+		Actividad actividad = new Actividad();
+		modelo.put("actividad", actividad);
+		modelo.put("actividadBdd", servicioActividad.buscarActividad(idActividad));
+		return new ModelAndView("modificacionActividadAdmin",modelo);
+	}
+	@RequestMapping(path="/actividadesAdmin/{idActividad}/modificarActividadProc",method = RequestMethod.POST)
+	public ModelAndView modificarActividadProc(@ModelAttribute ("actividad") Actividad actividad,@PathVariable Long idActividad) {
+		servicioActividad.modificarActividad(actividad, servicioActividad.buscarActividad(idActividad));
+		return new ModelAndView("redirect:/actividadesAdmin");
+	}
+	@RequestMapping(path="/actividadesAdmin/{idActividad}/eliminarActividad")
+	public ModelAndView eliminarActividad(@PathVariable Long idActividad) {
+		servicioActividad.eliminarActividad(servicioActividad.buscarActividad(idActividad));
+		return new ModelAndView("redirect:/actividadesAdmin");
+	}
 }
