@@ -34,7 +34,7 @@
 					<ul>
 						<!-- menu admin -->
 						<li class="active"><a href="<c:url value="/homeAdmin" />">Inicio</a></li>
-						<li><a href="<c:url value="/actividadesAdmin" />">Actividades</a></li>
+						<li><a href="<c:url value="/actividadesOp/${sessionScope.idSucursal}" />">Actividades</a></li>
 												
 					</ul>
 				</div>

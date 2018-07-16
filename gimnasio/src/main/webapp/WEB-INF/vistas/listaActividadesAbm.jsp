@@ -42,7 +42,7 @@
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
-		<%@include file="menuAdministrador.jsp"%>
+		<%@include file="menuOperador.jsp"%>
 		<label style="display: block;text-align: center;line-height: 150%; font-size: .85em; margin-top: 30px;">
 		Actividades </label> 
 		<div class="container mt-5">
@@ -67,15 +67,15 @@
 							<td>${sucursalActividad.horaDesde}hs  a   ${sucursalActividad.horaHasta}hs</td>
 							<td>${sucursalActividad.cupo} max</td>
 							<td>${sucursalActividad.actividad.descripcion}</td>
-							<td><a href="<c:url value="/${sucursalActividad.idSucursalActividad}/modificacionActividad" />" class="btn btn-primary btn-outline btn-sm">Modificar</i></a></td>
-							<td><a href="<c:url value="/${sucursalActividad.sucursal.id}/bajaActividad?idSucursalActividad=${sucursalActividad.idSucursalActividad}" />" class="btn btn-primary btn-outline btn-sm">Baja</a></td>
+							<td><a href="<c:url value="/actividadesOp/${sucursalActividad.idSucursalActividad}/modificacionActividad" />" class="btn btn-primary btn-outline btn-sm">Modificar</i></a></td>
+							<td><a href="<c:url value="/actividadesOp/${sucursalActividad.sucursal.id}/bajaActividad?idSucursalActividad=${sucursalActividad.idSucursalActividad}" />" class="btn btn-primary btn-outline btn-sm">Baja</a></td>
 						</tr>
 					</c:forEach>
 				
 				</tbody>
 			
 			</table>
-			
+			<td><a href="<c:url value="/actividadesOp/${sessionScope.idSucursal}/nuevaActividadEnSucursal" />" class="btn btn-primary btn-outline btn-sm">Nueva Actividad</a></td>
 		</div>	
 	</div>
 
