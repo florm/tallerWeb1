@@ -150,7 +150,10 @@ public class ServicioSocioImpl implements ServicioSocio {
 				List<SucursalActividad> lista = actividadDao.listaActividadesDeSocio(idSocio);
 				for (SucursalActividad sucursalActividad : lista) {
 					sucursalActividad.getSocios().remove(socio);
-					sucursalActividad.setCupoActual(sucursalActividad.getCupoActual()-1);
+					if(sucursalActividad.getCupoActual()>0) {
+						sucursalActividad.setCupoActual(sucursalActividad.getCupoActual()-1);
+					}
+				
 					actividadDao.actualizarSucursalActividad(sucursalActividad);
 				}
 				socio.getActividadesEnSucursal().clear();
