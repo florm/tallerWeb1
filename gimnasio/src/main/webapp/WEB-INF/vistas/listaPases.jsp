@@ -51,7 +51,7 @@
 		</c:if>
 		<div class="container">
 			<c:if test="${sessionScope.estado == 0 && sessionScope.idPase !=5}">
-				<div class="row justify-content-center align-items-center p-3 my-3" id="responseError">Su ${listaPases.get(sessionScope.idPase).nombre} ha vencido, puede seleccionar un nuevo Plan.</div>
+				<div class="row justify-content-center align-items-center p-3 my-3" id="responseError">Su ${pase.nombre} ha vencido, puede seleccionar un nuevo Pase.</div>
 			</c:if>
 			<div class="row animate-box fadeInUp animated-fast">
 				<div class="col-md-8 col-md-offset-2 text-center">

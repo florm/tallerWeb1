@@ -123,7 +123,9 @@ public class ControladorSocio {
 	public ModelAndView verPases (@PathVariable(value="idSocio") Long idSocio){
 		ModelMap modelo = new ModelMap();
 		List<Pase> listaPases = servicioPase.listarPases();
+		Pase pase = servicioSocio.buscarSocio(idSocio).getPase();
 		modelo.put("listaPases", listaPases);
+		modelo.put("pase", pase);
 		return new ModelAndView("listaPases", modelo);
 	}
 	
