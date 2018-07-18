@@ -7,9 +7,9 @@
 			<div class="row justify-content-end">
 				<div class="row align-items-center">
 					<c:if test="${not empty error}">
-						<h4 class="text-center mb-0 mt-2">
-							<span>${error}</span>
-						</h4>
+						<div class="text-center">
+							<span class="loginError">${error}</span>
+						</div>
 						<br>
 					</c:if>
 					<form:form method="post" action="validar-login" class="form-login"

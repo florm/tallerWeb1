@@ -105,3 +105,6 @@ span.time {
     color: #ffffff;
 }
 
+.loginError{
+	color: #000000;
+}
