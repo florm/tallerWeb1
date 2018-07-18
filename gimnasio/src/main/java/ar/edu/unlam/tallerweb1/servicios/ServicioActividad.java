@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Actividad;
+import ar.edu.unlam.tallerweb1.modelo.Profesor;
 import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 
 public interface ServicioActividad {
@@ -19,4 +20,5 @@ public interface ServicioActividad {
 	public void agregarNuevaActividad(Actividad actividad);
 	public void modificarActividad(Actividad actividadUpdate,Actividad actividad);
 	public void eliminarActividad(Actividad actividad);
+	List<Profesor> listarProfesores();
 }

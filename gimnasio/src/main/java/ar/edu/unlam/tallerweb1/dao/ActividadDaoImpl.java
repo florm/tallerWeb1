@@ -11,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Actividad;
+import ar.edu.unlam.tallerweb1.modelo.Profesor;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 
@@ -138,5 +139,13 @@ public class ActividadDaoImpl implements ActividadDao {
 	public void actualizarSucursalActividad(SucursalActividad sucursalActividad) {
 		Session sesion = sessionFactory.getCurrentSession();
 		sesion.update(sucursalActividad);
+	}
+
+	@Override
+	public List<Profesor> listarProfesores() {
+		Session sesion = sessionFactory.getCurrentSession();
+		List<Profesor> listaProfesores = sesion.createCriteria(Profesor.class)
+				.list();
+		return listaProfesores;
 	}
 }
