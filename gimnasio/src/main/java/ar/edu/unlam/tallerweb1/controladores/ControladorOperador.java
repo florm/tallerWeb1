@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.junit.runner.Request;
 import org.springframework.stereotype.Controller;
@@ -86,26 +87,37 @@ public class ControladorOperador {
 		servicioOperador.registrar(operador);
 		return new ModelAndView("redirect:/operadores");
 	}
+	
 	@RequestMapping(path="/actividadesOp/{idSucursal}")
 	public ModelAndView abmActividades(@PathVariable ("idSucursal")Long idSucursal) {
 		ModelMap modelo = new ModelMap();
 		modelo.put("listaSucursalActividades", servicioActividad.listarActividadesEnSucursal(idSucursal));
 		return new ModelAndView("listaActividadesAbm",modelo);
 	}
+	
 	@RequestMapping(path="/actividadesOp/{idSucursalActividad}/modificacionActividad")
 	public ModelAndView modificacionActividad(@PathVariable Long idSucursalActividad) {
 		ModelMap modelo = new ModelMap();
 		SucursalActividad SucursalActividadVacia = new SucursalActividad();
 		modelo.put("sucursalActividad",servicioActividad.traerActividadSucursal(idSucursalActividad));
+		modelo.put("listaProfesores", servicioActividad.listarProfesores());
 		modelo.put("sucursalActividadVacia", SucursalActividadVacia);
 		return new ModelAndView("modificacionActividad",modelo);
 	}	
+	
 	@RequestMapping(path="/actividadesOp/{idSucursalActividad}/modificacionActividadProc", method= RequestMethod.POST)
-		public ModelAndView establecerModificacionActividad(@ModelAttribute ("sucursalActividadVacia") SucursalActividad sucursalActividadUpdate,@PathVariable Long idSucursalActividad) {
+		public ModelAndView establecerModificacionActividad(@ModelAttribute ("sucursalActividadVacia") SucursalActividad sucursalActividadUpdate
+				,@PathVariable Long idSucursalActividad, HttpServletRequest request) {
+		
 		SucursalActividad sucursalActividadBdd= servicioActividad.traerActividadSucursal(idSucursalActividad);
 		servicioActividad.modificarActividad(sucursalActividadUpdate, sucursalActividadBdd);
-		return new ModelAndView("redirect:/actividadesOp/{idSucursalActividad}/modificacionActividad"); 
+		ModelMap modelo = new ModelMap();
+		modelo.put("ok", "La actividad se guardo correctamente");
+		Long idSucursal = (Long)request.getSession().getAttribute("idSucursal");
+		modelo.put("listaSucursalActividades", servicioActividad.listarActividadesEnSucursal(idSucursal));
+		return new ModelAndView("listaActividadesAbm", modelo); 
 	}
+	
 	@RequestMapping(path="/actividadesOp/{idSucursal}/bajaActividad")
 	public ModelAndView eliminarSucursalActividad(@PathVariable("idSucursal")Long idSucursal,@RequestParam("idSucursalActividad") Long idSucursalActividad){
 		ModelMap modelo = new ModelMap();
@@ -113,6 +125,7 @@ public class ControladorOperador {
 		servicioActividad.eliminarSucursalActividad(sucursalActividad);
 		return new ModelAndView("redirect:/actividadesOp/{idSucursal}");
 	}
+	
 	@RequestMapping(path="actividadesOp/{idSucursal}/nuevaActividadEnSucursal")
 	public ModelAndView agregarNuevaSucursalActividad(@PathVariable Long idSucursal) {
 		ModelMap modelo = new ModelMap();

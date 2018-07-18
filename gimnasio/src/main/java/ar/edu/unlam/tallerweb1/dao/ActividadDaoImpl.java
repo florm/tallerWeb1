@@ -21,6 +21,9 @@ public class ActividadDaoImpl implements ActividadDao {
 	@Inject
     private SessionFactory sessionFactory;
 	
+	@Inject
+    private ProfesorDao profesorDao;
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<SucursalActividad> listarActividadesEnSucursal(Long id) {
@@ -96,6 +99,7 @@ public class ActividadDaoImpl implements ActividadDao {
 	@Override
 	public void modificarActividad(SucursalActividad sucursalActividadUpdate, SucursalActividad sucursalActividadBdd) {
 		Session sesion = sessionFactory.getCurrentSession();
+		sucursalActividadBdd.setProfesor(profesorDao.buscarProfesor(sucursalActividadUpdate.getProfesor().getId()));
 		sucursalActividadBdd.setDia(sucursalActividadUpdate.getDia());
 		sucursalActividadBdd.setHoraDesde(sucursalActividadUpdate.getHoraDesde());
 		sucursalActividadBdd.setHoraHasta(sucursalActividadUpdate.getHoraHasta());
