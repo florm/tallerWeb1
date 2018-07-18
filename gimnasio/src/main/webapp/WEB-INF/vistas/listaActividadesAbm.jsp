@@ -43,6 +43,9 @@
 
 	<div id="page">
 		<%@include file="menuOperador.jsp"%>
+		<c:if test="${not empty ok}">
+			<div class="row d-flex justify-content-center align-items-center p-3 m-3" id="responseOk">${ok}</div>
+		</c:if>
 		<label style="display: block;text-align: center;line-height: 150%; font-size: .85em; margin-top: 30px;">
 		Actividades </label> 
 		<div class="container mt-5">

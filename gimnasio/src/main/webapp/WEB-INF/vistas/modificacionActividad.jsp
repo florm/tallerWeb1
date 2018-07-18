@@ -44,6 +44,8 @@
 	<div id="page">
 		<%@include file="menuOperador.jsp"%>
 		
+		
+		
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4 text-center animate-box fadeInUp animated-fast mx-auto">
@@ -54,6 +56,14 @@
 							<div class="form-group input-size">
 						        <form:input readonly="true" path="actividad.nombre" type="text" class="form-control" value="${sucursalActividad.getActividad().getNombre()}" ></form:input>
 						    </div>
+						    <div class="form-group input-size">
+							    <form:select required="true" path="profesor.id" name="profesor.id" cssClass="form-control">
+							 		<option value="${sucursalActividad.profesor.id}" selected> ${sucursalActividad.profesor.nombre}
+							 		<c:forEach items= "${listaProfesores}" var="profesor">
+							 			<option value="${profesor.id}">${profesor.nombre}	
+							 		</c:forEach>
+						  		</form:select>
+  							</div>
 						    <div class="form-group input-size">
 						        <form:input path="dia" type="text" class="form-control" id="dia"  name="dia" value="${sucursalActividad.getDia()}" ></form:input>
 						    </div>
