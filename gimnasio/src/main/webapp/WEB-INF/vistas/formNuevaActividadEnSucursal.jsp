@@ -53,13 +53,13 @@
 		
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4 text-center animate-box fadeInUp animated-fast mx-auto">
+				<div class="col-md-6 text-center animate-box fadeInUp animated-fast mx-auto">
 					
 					<div class="modal-body p-5">
 					
 				      	<form:form class="text-center" method="post" action="nuevaActividadEnSucursalProc" modelAttribute="sucursalActividadVacia">
 						    <div class="form-group input-size">
-							    <form:input readonly="true" path="sucursal.id" type="text" class="form-control" value="${sessionScope.idSucursal}" ></form:input>
+							    <form:input hidden="true" readonly="true" path="sucursal.id" type="text" class="form-control" value="${sessionScope.idSucursal}" ></form:input>
   							</div>
   							<div class="form-group input-size">
 							    <form:select required="true" path="actividad.id" id="actividad.id" name="actividad.id" cssClass="form-control">
@@ -69,18 +69,29 @@
 							 		</c:forEach>
 						  		</form:select>
   							</div>
+  							
   							<div class="form-group input-size">
-						        <form:input  path="dia" type="text" class="form-control" placeholder="dia" ></form:input>
+							    <form:select required="true" path="profesor.id" id="profesor.id" name="profesor.id" cssClass="form-control">
+							 		<option value="" selected> Seleccione profesor..
+							 		<c:forEach items= "${listaProfesores}" var="profesor">
+							 			<option value="${profesor.id}">${profesor.nombre}	
+							 		</c:forEach>
+						  		</form:select>
+  							</div>	
+  							
+  							<div class="form-group input-size">
+						        <form:input  path="dia" type="text" class="form-control" placeholder="Ingrese un dia de la semana" ></form:input>
 						    </div>	
   							<div class="form-group input-size">
-						        <form:input  path="horaDesde" type="text" class="form-control" placeholder="horaDesde" ></form:input>
+						        <form:input  path="horaDesde" type="number" class="form-control" placeholder="Horario de inicio" ></form:input>
 						    </div>						    
 						    <div class="form-group input-size">
-						        <form:input path="horaHasta" type="text" class="form-control"  placeholder="horaHasta"></form:input>
+						        <form:input path="horaHasta" type="number" class="form-control"  placeholder="Horario de finalización"></form:input>
 						    </div>
 						    <div class="form-group input-size">
-						        <form:input path="cupo" type="text" class="form-control" placeholder="cupo"></form:input>
-						    </div>					    						    
+						        <form:input path="cupo" type="number" class="form-control" placeholder="Cupo máximo"></form:input>
+						    </div>		
+						    		    						    
 						    <button type="submit" id="btn-modificar" value="modificar" class="btn btn-primary">Agregar</button>
 					    
 						</form:form>

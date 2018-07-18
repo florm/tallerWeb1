@@ -120,6 +120,7 @@ public class ControladorOperador {
 		modelo.put("listaSucursales", servicioSucursal.listarSucursales());
 		modelo.put("sucursalActividadVacia", sucursalActividadVacia);
 		modelo.put("listaActividades", servicioActividad.listaActividades());
+		modelo.put("listaProfesores", servicioActividad.listarProfesores());
 		return new ModelAndView("formNuevaActividadEnSucursal",modelo);
 	}
 	@RequestMapping(path="actividadesOp/{idSucursal}/nuevaActividadEnSucursalProc",method = RequestMethod.POST)
