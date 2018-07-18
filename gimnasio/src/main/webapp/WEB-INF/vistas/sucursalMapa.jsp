@@ -24,7 +24,8 @@
 
 <link href="<c:url value="/css/fontawesome-all.css" />" rel="stylesheet">
 <link href="<c:url value="/css/estilos.css" />" rel="stylesheet">
-
+<!-- Modernizr JS -->
+<script src="<c:url value="/js/modernizr-2.6.2.min.js" />"></script>
 </head>
 <body>
 
@@ -47,19 +48,29 @@
 	
 
 	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	
+
+	<script src="<c:url value="/js/jquery.min.js" />"></script>
+	<!-- jQuery Easing -->
+
+	<script src="<c:url value="/js/jquery.easing.1.3.js" />"></script>
 	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	
-	
+
+	<script src="<c:url value="/js/bootstrap.min.js" />"></script>
+	<!-- Waypoints -->
+
+	<script src="<c:url value="/js/jquery.waypoints.min.js" />"></script>
+	<!-- Stellar Parallax -->
+
+	<script src="<c:url value="/js/jquery.stellar.min.js" />"></script>
+	<!-- Carousel -->
+
+	<script src="<c:url value="/js/owl.carousel.min.js" />"></script>
 	<!-- countTo -->
-	<script src="js/jquery.countTo.js"></script>
-	<!-- Magnific Popup -->
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/magnific-popup-options.js"></script>
+
+	<script src="<c:url value="/js/jquery.countTo.js" />"></script>
+
 	<!-- Main -->
-	<script src="js/main.js"></script>
+	<script src="<c:url value="/js/main.js" />"></script>
 	<script src="https://maps.google.com/maps/api/js?key=AIzaSyAYLHM4JlbbKxTvJTHS295NyCFsv5MmW1g"></script>
 	<script src="js/mapa.js"></script>
 
