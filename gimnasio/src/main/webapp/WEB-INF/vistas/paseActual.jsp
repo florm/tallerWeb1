@@ -58,9 +58,9 @@
 			</div>
 			<div class="row">
 			
-				<div class="pricing">
+				<div class="center-block">
 
-							<div class="col-md-3 animate-box fadeInUp animated-fast">
+							<div class="animate-box fadeInUp animated-fast">
 								<div class="price-box">
 									<h2 class="pricing-plan">${pase.nombre}</h2>
 									<div class="price">
@@ -77,7 +77,12 @@
 									</c:otherwise>
 											</c:choose></li>
 									</ul>
-									
+									<c:if test="${sessionScope.estado == 0 && sessionScope.idPase !=5}">
+									<div class="row justify-content-center align-items-center p-3 my-3" id="responseError">Su plan ha vencido, puede seleccionar un nuevo Plan.</div>
+									</c:if>
+									<c:if test="${sessionScope.idPase ==5}">
+									<div class="row justify-content-center align-items-center p-3 my-3" id="responseOk">Para inscribirse en un plan vaya la pestaña Pases.</div>
+									</c:if>
 								</div>
 							</div>
 
