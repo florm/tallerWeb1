@@ -65,8 +65,12 @@ public class ControladorActividad {
 	@RequestMapping(path = "/registrarActividad", method = RequestMethod.POST,produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public String irARegistroCompleto(@RequestBody Formulario formulario) {
-		boolean resultado = servicioActividad.guardarSocioActividadSucursal(formulario.getIdSocio(), formulario.getIdSucursalActividad());
-		
+		Boolean validarPase = servicioSocio.validarActividadSocio(formulario.getIdSocio());
+		if(validarPase == false){
+			String rta = "{\"mensaje\":\"Alcanzo el maximo de actividades que tiene su pase\", \"estado\":\"0\"}";
+			return rta;
+		}
+		Boolean resultado = servicioActividad.guardarSocioActividadSucursal(formulario.getIdSocio(), formulario.getIdSucursalActividad());
 		if (resultado == true) {
 			
 			String rta = "{\"mensaje\":\"La inscripcion se realizo correctamente\", \"estado\":\"1\"}";

@@ -88,13 +88,12 @@ public class ServicioSocioImpl implements ServicioSocio {
 	public Boolean validarActividadSocio(Long idSocio) {
 		Socio socio = socioDao.buscarSocio(idSocio);
 		if(socio.getPase().getCantidadActividades()==null) {
-			return false;
-		}
-		else if (socio.getActividadesEnSucursal().size() == socio.getPase().getCantidadActividades()) {
 			return true;
-		} else {
-			return false;
 		}
+		if (socio.getActividadesEnSucursal().size() < socio.getPase().getCantidadActividades()) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
