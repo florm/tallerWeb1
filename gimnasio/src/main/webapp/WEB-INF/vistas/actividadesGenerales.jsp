@@ -62,7 +62,7 @@
 						<c:url var="imagen" value="/images/${actividad.nombre}.svg" />
 						<span><img class="img-responsive" src="${imagen}" alt=""></span>
 							<h3>${actividad.nombre}</h3>
-							<p>${actividad.descripcion}</p>
+							<p style="text-align:justify;">${actividad.descripcion}</p>
 							
 						</div>
 					</div>

@@ -74,8 +74,16 @@
 				</div>
 			</div>
 		</header>
-		<%@include file="footer.jsp"%>
+		
+		<c:if test="${empty sessionScope.rol}">
+		<%@include file="footerRol.jsp"%>
+		</c:if>
+		<c:if test="${!empty sessionScope.rol}">
+			<%@include file="footer.jsp"%>
+		</c:if>
+		
 	</div>
+
 
 
 	<!-- jQuery -->

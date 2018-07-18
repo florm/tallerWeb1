@@ -91,7 +91,7 @@
 			</div>
 		</div>
 
-	<%@include file="footer.jsp"%>
+	<%@include file="footerRol.jsp"%>
 		
 	</div>
 
