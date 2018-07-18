@@ -24,12 +24,14 @@ import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 import ar.edu.unlam.tallerweb1.servicios.ServicioLocalizacion;
+import ar.edu.unlam.tallerweb1.servicios.ServicioMercadoPago;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPago;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPase;
 import ar.edu.unlam.tallerweb1.servicios.ServicioQr;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSocio;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSucursal;
 import helpers.Formulario;
+import helpers.MercadoPago;
 
 @Controller
 public class ControladorSocio {
@@ -45,6 +47,8 @@ public class ControladorSocio {
 	private ServicioPago servicioPago;
 	@Inject
 	private ServicioQr servicioQr;
+	@Inject
+	private ServicioMercadoPago servicioMercadoPago;
 	
 	@RequestMapping (path = "/inscribirpase", method = RequestMethod.POST)
 	public ModelAndView agregarPaseASocio(@ModelAttribute ("formulario") Formulario formulario) {
@@ -150,5 +154,14 @@ public class ControladorSocio {
 		Socio socio = servicioSocio.buscarSocio(idSocio);
 		modelo.put("pase", socio.getPase());
 		return new ModelAndView("paseActual", modelo);
+	}
+	
+	@RequestMapping(path="mercadopago", produces = MediaType.ALL_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+	@ResponseBody
+	public String mercadopago(@RequestBody MercadoPago mercadoPago){
+		String sandboxInitPoint =  servicioMercadoPago.createPayPreference(mercadoPago.getTitulo(),
+				mercadoPago.getDescripcion(),mercadoPago.getCantidad(),mercadoPago.getPrecio());
+		String rta = "{\"href\":\"" + sandboxInitPoint + "\"}";
+		return rta;
 	}
 }
