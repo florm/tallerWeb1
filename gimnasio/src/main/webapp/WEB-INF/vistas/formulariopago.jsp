@@ -91,8 +91,7 @@
 			</div>
 		</div>
 
-	<%@include file="footer.jsp"%>
-		
+			
 	</div>
 
 	<div class="gototop js-top">

@@ -13,9 +13,9 @@
 
 					<p class="num">Tel: +01 123 456 7890</p>
 					<ul class="fh5co-social">
-						<li><a href="#"><i class="icon-twitter"></i></a></li>
-						<li><a href="#"><i class="icon-dribbble"></i></a></li>
-						<li><a href="#"><i class="icon-github"></i></a></li>
+						<li><a href="https://www.twitter.com/"><i class="icon-twitter"></i></a></li>
+						<li><a href="https://dribbble.com/"><i class="icon-dribbble"></i></a></li>
+						<li><a href="https://github.com/"><i class="icon-github"></i></a></li>
 					</ul>
 				</div>
 
@@ -27,7 +27,7 @@
 			<div class="row">
 				<div class="col-xs-2">
 					<div id="fh5co-logo">
-						<a href="index.html">Stamina<span>.</span></a>
+						<a href="#">Stamina<span>.</span></a>
 					</div>
 				</div>
 				<div class="col-xs-10 text-right menu-1">

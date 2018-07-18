@@ -125,6 +125,7 @@
 			</div></c:if>
 			
 		</div>
+		<%@include file="footerRol.jsp"%>
 	</div>
 	<!-- jQuery -->
 

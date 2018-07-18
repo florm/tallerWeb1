@@ -5,7 +5,7 @@
 		<div class="row">
 			<div class="col-md-4 fh5co-widget">
 				<h3>Un poco sobre Stamina.</h3>
-				<p>La mayor cadena de gimnasios ubicada en Buenos Aires, que te
+				<p style="text-align:justify;">La mayor cadena de gimnasios ubicada en Buenos Aires, que te
 					permite dedicarle más tiempo a tu entrenamiento y a tu salud.
 					Contamos con más de 20 sucursales para estar más cerca tuyo y que
 					disfrutes de cada entrenamiento en un clima motivador y distendido.</p>
@@ -65,10 +65,10 @@
 				</p>
 				<p></p>
 				<ul class="fh5co-social-icons">
-					<li><a href="#"><i class="icon-twitter"></i></a></li>
-					<li><a href="#"><i class="icon-facebook"></i></a></li>
-					<li><a href="#"><i class="icon-linkedin"></i></a></li>
-					<li><a href="#"><i class="icon-dribbble"></i></a></li>
+					<li><a href="https://www.twitter.com/"><i class="icon-twitter"></i></a></li>
+					<li><a href="https://www.facebook.com/"><i class="icon-facebook"></i></a></li>
+					<li><a href="https://ar.linkedin.com/"><i class="icon-linkedin"></i></a></li>
+					<li><a href="https://dribbble.com/"><i class="icon-dribbble"></i></a></li>
 				</ul>
 				<p></p>
 			</div>
