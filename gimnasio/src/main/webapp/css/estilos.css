@@ -47,7 +47,7 @@ span.time {
     font-size: 13px;
 }
 
-.fh5co-blog .blog-text {
+/*.fh5co-blog .blog-text {
    margin-top: -2em !important;
 }
 
@@ -58,7 +58,7 @@ span.time {
 .fh5co-blog .blog-text {
    	min-height: 333px !important;
     box-shadow: 9px 10px 20px -10px rgb(248, 91, 23) !important;
-}
+}*/
 
 .page-item.active .page-link {
     z-index: 1;
