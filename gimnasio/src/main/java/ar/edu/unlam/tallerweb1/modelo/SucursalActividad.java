@@ -22,8 +22,8 @@ public class SucursalActividad {
 	private String dia;
 	private String horaDesde;
 	private String horaHasta;
-	private Integer cupoActual=0;
-	private Integer cupo=0;
+	private Integer cupoActual;
+	private Integer cupo;
 
 	@ManyToOne
 	private Actividad actividad;

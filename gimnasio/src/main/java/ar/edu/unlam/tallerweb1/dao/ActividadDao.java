@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.dao;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Actividad;
+import ar.edu.unlam.tallerweb1.modelo.Profesor;
 import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 
 public interface ActividadDao {
@@ -20,4 +21,5 @@ public interface ActividadDao {
 	public void modificarActividad(Actividad actividadUpdate,Actividad actividad);
 	public void eliminarActividad(Actividad actividad);
 	public void actualizarSucursalActividad(SucursalActividad sucursalActividad);
+	List<Profesor> listarProfesores();
 }

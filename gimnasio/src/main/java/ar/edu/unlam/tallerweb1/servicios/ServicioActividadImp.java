@@ -10,8 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.ActividadDao;
 import ar.edu.unlam.tallerweb1.dao.SocioDao;
+import ar.edu.unlam.tallerweb1.dao.SucursalDao;
 import ar.edu.unlam.tallerweb1.modelo.Actividad;
+import ar.edu.unlam.tallerweb1.modelo.Profesor;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
+import ar.edu.unlam.tallerweb1.modelo.Sucursal;
 import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 
 @Service ("ServicioActividad")
@@ -22,6 +25,8 @@ public class ServicioActividadImp implements ServicioActividad {
 	private ActividadDao servicioActividadDao;
 	@Inject
 	private SocioDao servicioSocioDao;
+	@Inject
+	private SucursalDao sucursalDao;
 	
 	public void setActividadDao(ActividadDao dao){
 		this.servicioActividadDao= dao;
@@ -84,6 +89,11 @@ public class ServicioActividadImp implements ServicioActividad {
 	}
 	@Override
 	public void agregarSucursalActividad(SucursalActividad sucursalActividadVacia) {
+		Sucursal sucursal = sucursalDao.getSucursal(sucursalActividadVacia.getSucursal().getId());
+		Actividad actividad = servicioActividadDao.buscarActividad(sucursalActividadVacia.getActividad().getId());
+		sucursalActividadVacia.setSucursal(sucursal);
+		sucursalActividadVacia.setActividad(actividad);
+		sucursalActividadVacia.setCupoActual(0);
 		servicioActividadDao.agregarSucursalActividad(sucursalActividadVacia);
 	}
 	@Override
@@ -98,6 +108,10 @@ public class ServicioActividadImp implements ServicioActividad {
 	@Override
 	public void eliminarActividad(Actividad actividad) {
 		servicioActividadDao.eliminarActividad(actividad);
+	}
+	@Override
+	public List<Profesor> listarProfesores() {
+		return servicioActividadDao.listarProfesores();
 	}
 	
 }
