@@ -1,6 +1,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="com.mercadopago.MP"%>
+<%@page import="org.codehaus.jettison.json.JSONObject"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -67,7 +70,7 @@
 							  	<form:select required="true" path="idDescuento" id="idDescuento" name="idDescuento" cssClass="form-control">
 							 		<option value="" selected> Seleccione cantidad de meses..
 							 		<c:forEach items= "${listaDescuentos}" var="descuento">
-							 			<option value="${descuento.id}">${descuento.meses} Meses (${descuento.descuento}% de Descuento) Precio por mes: $${descuento.importe}
+							 			<option value="${descuento.id}" importe="${descuento.importe}">${descuento.meses} Meses (${descuento.descuento}% de Descuento) Precio por mes: $${descuento.importe}
 							 		</c:forEach>
 						  		</form:select>
 						  	</div>
@@ -77,7 +80,10 @@
 						     <div class="form-group input-size">
 								<form:input hidden="true" path="idPase" type="text" class="form-control" id="idPase"  name="idPase" value="${pase.id}" ></form:input>
 						    </div>
-						    <button type="submit" id="btn-pagar" value="pagar" class="btn btn-primary">Pagar</button>
+						    <div id="btnmercadopago" class="d-none justify-content-center m-3"></div>
+						    <div id="btn-pagar" class="d-none justify-content-center">
+						    	<button type="submit" id="btn-pagar" value="pagar" class="btn btn-primary">2. Verificar</button>
+						    </div>
 						</form:form>
 						
 					</div>
@@ -117,6 +123,8 @@
 	
 	<!-- Main -->
 	<script src="<c:url value="/js/main.js" />"></script>
+	
+	<script src="<c:url value="/js/mercadopago.js" />"></script>
 
 </body>
 </html>
