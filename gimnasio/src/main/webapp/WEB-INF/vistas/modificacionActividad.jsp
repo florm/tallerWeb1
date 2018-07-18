@@ -42,7 +42,7 @@
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
-		<%@include file="menuAdministrador.jsp"%>
+		<%@include file="menuOperador.jsp"%>
 		
 		<div class="container">
 			<div class="row">
@@ -50,7 +50,7 @@
 					
 					<div class="modal-body p-5">
 					
-				      	<form:form class="text-center" method="post" action="modificacionactividad?nombreActividad=${sucursalActividadVacia.getActividad().getNombre()}" id="form-login" modelAttribute="sucursalActividadVacia">
+				      	<form:form class="text-center" method="post" action="modificacionActividadProc" id="form-login" modelAttribute="sucursalActividadVacia">
 							<div class="form-group input-size">
 						        <form:input readonly="true" path="actividad.nombre" type="text" class="form-control" value="${sucursalActividad.getActividad().getNombre()}" ></form:input>
 						    </div>

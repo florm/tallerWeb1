@@ -9,16 +9,19 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.edu.unlam.tallerweb1.dao.ActividadDao;
 import ar.edu.unlam.tallerweb1.dao.LocalizacionDao;
 import ar.edu.unlam.tallerweb1.dao.PagoDao;
 import ar.edu.unlam.tallerweb1.dao.SocioDao;
 import ar.edu.unlam.tallerweb1.dao.SucursalDao;
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
+import ar.edu.unlam.tallerweb1.modelo.Actividad;
 import ar.edu.unlam.tallerweb1.modelo.Ciudad;
 import ar.edu.unlam.tallerweb1.modelo.Pago;
 import ar.edu.unlam.tallerweb1.modelo.Pase;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.Sucursal;
+import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 @Service("servicioSocio")
@@ -35,6 +38,8 @@ public class ServicioSocioImpl implements ServicioSocio {
 	private SucursalDao sucursalDao;
 	@Inject
 	private PagoDao pagoDao;
+	@Inject 
+	private ActividadDao actividadDao;
 	
 	public void setUsuarioDao(UsuarioDao dao){
 		this.usuarioDao = dao;
@@ -142,6 +147,17 @@ public class ServicioSocioImpl implements ServicioSocio {
 			Pago pago = listaPagos.get(listaPagos.size()-1);
 			if(pago.getFechaVencimiento().before(Calendar.getInstance().getTime())) {
 				//fecha de vencimento es menor a la fecha actual esta vencido el pase
+				List<SucursalActividad> lista = actividadDao.listaActividadesDeSocio(idSocio);
+				for (SucursalActividad sucursalActividad : lista) {
+					sucursalActividad.getSocios().remove(socio);
+					if(sucursalActividad.getCupoActual()>0) {
+						sucursalActividad.setCupoActual(sucursalActividad.getCupoActual()-1);
+					}
+				
+					actividadDao.actualizarSucursalActividad(sucursalActividad);
+				}
+				socio.getActividadesEnSucursal().clear();
+				socioDao.actualizarSocio(socio);
 				return 0;
 			} else {
 				//fecha de vencimiento es mayor a la fecha actual, todavia no esta vencido el pase

@@ -1,6 +1,12 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head><%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -43,62 +49,32 @@
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
-		<c:if test="${empty sessionScope.idSocio}">
-		<%@include file="menuSinLogin.jsp"%>
-		</c:if>
-		<c:if test="${!empty sessionScope.idSocio}">
-			<%@include file="menu.jsp"%>
-		</c:if>
-		<div class="container">
+		<%@include file="menuAdministrador.jsp"%>
 		
-			<div class="row animate-box fadeInUp animated-fast">
-				<div class="col-md-8 col-md-offset-2 text-center">
-					<h2>Pase Actual</h2>
-				</div>
-			</div>
+		<div class="container">
 			<div class="row">
-			
-				<div class="center-block">
-
-							<div class="animate-box fadeInUp animated-fast">
-								<div class="price-box">
-									<h2 class="pricing-plan">${pase.nombre}</h2>
-									<div class="price">
-										<sup class="currency">$</sup>${pase.precio}<small>mensual</small>
-									</div>
-									<ul class="classes">
-										
-										<li>Cantidad de actividades: <c:choose>
-												<c:when test="${pase.cantidadActividades == nul}">
-									Ilimitadas
-									</c:when>
-												<c:otherwise>
-									${pase.cantidadActividades}
-									</c:otherwise>
-											</c:choose></li>
-									</ul>
-									<c:if test="${sessionScope.estado == 0 && sessionScope.idPase !=5}">
-									<div class="row justify-content-center align-items-center p-3 my-3" id="responseError">Su plan ha vencido, puede seleccionar un nuevo Plan.</div>
-									</c:if>
-									<c:if test="${sessionScope.idPase ==5}">
-									<div class="row justify-content-center align-items-center p-3 my-3" id="responseOk">Para inscribirse en un plan vaya la pestaña Pases.</div>
-									</c:if>
-								</div>
-							</div>
-
-
-				</div>
+				<div class="col-md-4 text-center animate-box fadeInUp animated-fast mx-auto">
+					
+					<div class="modal-body p-5">
+					
+				      	<form:form class="text-center" method="post" action="modificarActividadProc" modelAttribute="actividad">
+  							<div class="form-group input-size">
+						        <form:input  path="nombre" type="text" class="form-control" value="${actividadBdd.getNombre()}" ></form:input>
+						    </div>	
+  							<div class="form-group input-size">
+						        <form:input  path="descripcion" type="text" class="form-control" value="${actividadBdd.getDescripcion()}" ></form:input>
+						    </div>						    			    						    
+						    <button type="submit" id="btn-modificar" value="modificar" class="btn btn-primary">Modificar</button>
+					    
+						</form:form>
+      				</div>
+						
+				</div>	
 			</div>
 		</div>
 
-	<%@include file="footer.jsp"%>
-		
+		<%@include file="footer.jsp"%>
 	</div>
-
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
-
 	<!-- jQuery -->
 
 	<script src="<c:url value="/js/jquery.min.js" />"></script>
@@ -120,10 +96,14 @@
 	<!-- countTo -->
 
 	<script src="<c:url value="/js/jquery.countTo.js" />"></script>
-	
+
 	<!-- Main -->
 	<script src="<c:url value="/js/main.js" />"></script>
+</body>
+
+</html>
+
+<body>
 
 </body>
 </html>
-

@@ -49,7 +49,7 @@
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
-		<%@include file="menuAdministrador.jsp"%>
+		<%@include file="menuOperador.jsp"%>
 		
 		<div class="container">
 			<div class="row">
@@ -59,12 +59,7 @@
 					
 				      	<form:form class="text-center" method="post" action="nuevaActividadEnSucursalProc" modelAttribute="sucursalActividadVacia">
 						    <div class="form-group input-size">
-							    <form:select required="true" path="sucursal.id" id="sucursal.id" name="sucursal.id" cssClass="form-control">
-							 		<option value="" selected> Seleccione sucursal..
-							 		<c:forEach items= "${listaSucursales}" var="sucursal">
-							 			<option value="${sucursal.id}">${sucursal.nombre}	
-							 		</c:forEach>
-						  		</form:select>
+							    <form:input readonly="true" path="sucursal.id" type="text" class="form-control" value="${sessionScope.idSucursal}" ></form:input>
   							</div>
   							<div class="form-group input-size">
 							    <form:select required="true" path="actividad.id" id="actividad.id" name="actividad.id" cssClass="form-control">

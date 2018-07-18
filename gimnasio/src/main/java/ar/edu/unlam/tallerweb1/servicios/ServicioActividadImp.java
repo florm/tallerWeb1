@@ -86,5 +86,18 @@ public class ServicioActividadImp implements ServicioActividad {
 	public void agregarSucursalActividad(SucursalActividad sucursalActividadVacia) {
 		servicioActividadDao.agregarSucursalActividad(sucursalActividadVacia);
 	}
+	@Override
+	public void agregarNuevaActividad(Actividad actividad) {
+		servicioActividadDao.agregarNuevaActividad(actividad);
+	}
+	@Override
+	public void modificarActividad(Actividad actividadUpdate, Actividad actividad) {
+		servicioActividadDao.modificarActividad(actividadUpdate, actividad);
+		
+	}
+	@Override
+	public void eliminarActividad(Actividad actividad) {
+		servicioActividadDao.eliminarActividad(actividad);
+	}
 	
 }

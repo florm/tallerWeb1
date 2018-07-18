@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -147,59 +149,45 @@ public class ControladorAdministrador {
 		modelo.put("listaSucursal", servicioSucursal.listarSucursales());
 		return new ModelAndView("agregarSucursal",modelo);
 	}
-	@RequestMapping(path="/actividadesAdmin")
-	public ModelAndView seleccionarSucursal() {
-		ModelMap modelo = new ModelMap();
-		modelo.put("listaSucursales",servicioSucursal.listarSucursales());
-		return new ModelAndView("actividadesAdministrador",modelo);
-	}
-	@RequestMapping(path="/{idSucursal}/listaActividadesSucursal")
-	public ModelAndView abmActividades(@PathVariable ("idSucursal")Long idSucursal) {
-		ModelMap modelo = new ModelMap();
-		modelo.put("listaSucursalActividades", servicioActividad.listarActividadesEnSucursal(idSucursal));
-		return new ModelAndView("listaActividadesAbm",modelo);
-	}
-	@RequestMapping(path="/{idSucursalActividad}/modificacionActividad")
-	public ModelAndView modificacionActividad(@PathVariable Long idSucursalActividad) {
-		ModelMap modelo = new ModelMap();
-		SucursalActividad SucursalActividadVacia = new SucursalActividad();
-		modelo.put("sucursalActividad",servicioActividad.traerActividadSucursal(idSucursalActividad));
-		modelo.put("sucursalActividadVacia", SucursalActividadVacia);
-		return new ModelAndView("modificacionActividad",modelo);
-	}	
-	@RequestMapping(path="/{idSucursalActividad}/modificacionactividad", method= RequestMethod.POST)
-		public ModelAndView establecerModificacionActividad(@ModelAttribute ("sucursalActividadVacia") SucursalActividad sucursalActividadUpdate,@PathVariable Long idSucursalActividad,@RequestParam("nombreActividad") String nombre) {
-		SucursalActividad sucursalActividadBdd= servicioActividad.traerActividadSucursal(idSucursalActividad);
-		servicioActividad.modificarActividad(sucursalActividadUpdate, sucursalActividadBdd);
-		return new ModelAndView("redirect:/{idSucursalActividad}/modificacionActividad"); 
-	}
-	@RequestMapping(path="/{idSucursal}/bajaActividad")
-	public ModelAndView eliminarSucursalActividad(@PathVariable("idSucursal")Long idSucursal,@RequestParam("idSucursalActividad") Long idSucursalActividad){
-		ModelMap modelo = new ModelMap();
-		String exito = "la actividad fue eliminada con exito";
-		SucursalActividad sucursalActividad = servicioActividad.traerActividadSucursal(idSucursalActividad);
-		servicioActividad.eliminarSucursalActividad(sucursalActividad);
-		modelo.put("exito", exito);
-		return new ModelAndView("redirect:/{idSucursal}/listaActividadesSucursal");
-	}
-
 	@RequestMapping(path = "/sucursal/nuevaSucursal", method = RequestMethod.POST)
-	public ModelAndView agregarNuevaSucursal(@ModelAttribute ("sucursalVacia") Sucursal sucursalNueva) {
+	public ModelAndView agregarNuevaSucursal(@ModelAttribute ("sucursalVacia") Sucursal sucursalNueva) throws UnsupportedEncodingException, MalformedURLException {
 		servicioSucursal.agregarSucursal(sucursalNueva);
 		return new ModelAndView("redirect:/sucursalesadmin");
-}
-	@RequestMapping(path="actividad/nuevaActividadEnSucursal")
-	public ModelAndView agregarNuevaSucursalActividad() {
-		ModelMap modelo = new ModelMap();
-		SucursalActividad sucursalActividadVacia = new SucursalActividad();
-		modelo.put("listaSucursales", servicioSucursal.listarSucursales());
-		modelo.put("sucursalActividadVacia", sucursalActividadVacia);
-		modelo.put("listaActividades", servicioActividad.listaActividades());
-		return new ModelAndView("formNuevaActividadEnSucursal",modelo);
 	}
-	@RequestMapping(path="actividad/nuevaActividadEnSucursalProc",method = RequestMethod.POST)
-	public ModelAndView agregarNuevaSucActividad(@ModelAttribute ("sucursalActividadVacia") SucursalActividad sucursalActividadVacia) {
-		servicioActividad.agregarSucursalActividad(sucursalActividadVacia);
+	@RequestMapping(path="/actividadesAdmin")
+	public ModelAndView listaActividades() {
+		ModelMap modelo = new ModelMap();
+		modelo.put("listaActividades", servicioActividad.listaActividades());
+		return new ModelAndView("actividadesAdmin",modelo);
+	}
+	@RequestMapping(path="/actividadesAdmin/nuevaActividad")
+	public ModelAndView nuevaActividad() {
+		ModelMap modelo = new ModelMap();
+		Actividad actividad = new Actividad();
+		modelo.put("actividad", actividad);
+		return new ModelAndView("formNuevaActividad",modelo);
+	}
+	@RequestMapping(path="/actividadesAdmin/nuevaActividadProc")
+	public ModelAndView nuevaActividadProc(@ModelAttribute ("actividad") Actividad actividad) {
+		servicioActividad.agregarNuevaActividad(actividad);
+		return new ModelAndView("redirect:/actividadesAdmin");
+	}
+	@RequestMapping(path="/actividadesAdmin/{idActividad}/modificarActividad")
+	public ModelAndView modificarActividad(@PathVariable Long idActividad) {
+		ModelMap modelo = new ModelMap();
+		Actividad actividad = new Actividad();
+		modelo.put("actividad", actividad);
+		modelo.put("actividadBdd", servicioActividad.buscarActividad(idActividad));
+		return new ModelAndView("modificacionActividadAdmin",modelo);
+	}
+	@RequestMapping(path="/actividadesAdmin/{idActividad}/modificarActividadProc",method = RequestMethod.POST)
+	public ModelAndView modificarActividadProc(@ModelAttribute ("actividad") Actividad actividad,@PathVariable Long idActividad) {
+		servicioActividad.modificarActividad(actividad, servicioActividad.buscarActividad(idActividad));
+		return new ModelAndView("redirect:/actividadesAdmin");
+	}
+	@RequestMapping(path="/actividadesAdmin/{idActividad}/eliminarActividad")
+	public ModelAndView eliminarActividad(@PathVariable Long idActividad) {
+		servicioActividad.eliminarActividad(servicioActividad.buscarActividad(idActividad));
 		return new ModelAndView("redirect:/actividadesAdmin");
 	}
 }

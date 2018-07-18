@@ -1,6 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -43,63 +42,39 @@
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
-		<c:if test="${empty sessionScope.idSocio}">
-		<%@include file="menuSinLogin.jsp"%>
-		</c:if>
-		<c:if test="${!empty sessionScope.idSocio}">
-			<%@include file="menu.jsp"%>
-		</c:if>
-		<div class="container">
-		
-			<div class="row animate-box fadeInUp animated-fast">
-				<div class="col-md-8 col-md-offset-2 text-center">
-					<h2>Pase Actual</h2>
-				</div>
-			</div>
-			<div class="row">
+		<%@include file="menuAdministrador.jsp"%>
+		<label style="display: block;text-align: center;line-height: 150%; font-size: .85em; margin-top: 30px;">
+		Actividades </label> 
+		<div class="container mt-5">
+			<table id="sucursales" class="table table-striped table-bordered" style="width:100%">
+				<thead>
+					<tr>
+						<td>Nombre</td>
+						<td>Descripcion</td>			
+						<td>Modificar</td>
+						<td>Eliminar</td>
+					</tr>
+				
+				</thead>
+				<tbody>
+					<c:forEach items="${listaActividades}" var="actividad">
+						<tr>
+							<td>${actividad.nombre}</td>
+							<td>${actividad.descripcion}</td>
+							<td><a href="<c:url value="/actividadesAdmin/${actividad.id}/modificarActividad" />" class="btn btn-primary btn-outline btn-sm">Modificar</i></a></td>
+							<td><a href="<c:url value="/actividadesAdmin/${actividad.id}/eliminarActividad" />" class="btn btn-primary btn-outline btn-sm">Baja</a></td>
+						</tr>
+					</c:forEach>
+				
+				</tbody>
 			
-				<div class="center-block">
-
-							<div class="animate-box fadeInUp animated-fast">
-								<div class="price-box">
-									<h2 class="pricing-plan">${pase.nombre}</h2>
-									<div class="price">
-										<sup class="currency">$</sup>${pase.precio}<small>mensual</small>
-									</div>
-									<ul class="classes">
-										
-										<li>Cantidad de actividades: <c:choose>
-												<c:when test="${pase.cantidadActividades == nul}">
-									Ilimitadas
-									</c:when>
-												<c:otherwise>
-									${pase.cantidadActividades}
-									</c:otherwise>
-											</c:choose></li>
-									</ul>
-									<c:if test="${sessionScope.estado == 0 && sessionScope.idPase !=5}">
-									<div class="row justify-content-center align-items-center p-3 my-3" id="responseError">Su plan ha vencido, puede seleccionar un nuevo Plan.</div>
-									</c:if>
-									<c:if test="${sessionScope.idPase ==5}">
-									<div class="row justify-content-center align-items-center p-3 my-3" id="responseOk">Para inscribirse en un plan vaya la pestaña Pases.</div>
-									</c:if>
-								</div>
-							</div>
-
-
-				</div>
-			</div>
-		</div>
-
-	<%@include file="footer.jsp"%>
-		
+			</table>
+			<td><a href="<c:url value="/actividadesAdmin/nuevaActividad" />" class="btn btn-primary btn-outline btn-sm">Nueva Actividad</a></td>
+		</div>	
 	</div>
 
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
 
-	<!-- jQuery -->
+		<!-- jQuery -->
 
 	<script src="<c:url value="/js/jquery.min.js" />"></script>
 	<!-- jQuery Easing -->
@@ -120,10 +95,10 @@
 	<!-- countTo -->
 
 	<script src="<c:url value="/js/jquery.countTo.js" />"></script>
-	
+
 	<!-- Main -->
 	<script src="<c:url value="/js/main.js" />"></script>
 
 </body>
-</html>
 
+</html>
