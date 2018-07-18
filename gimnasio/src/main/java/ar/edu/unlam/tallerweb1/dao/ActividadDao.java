@@ -19,4 +19,5 @@ public interface ActividadDao {
 	public void agregarNuevaActividad(Actividad actividad);
 	public void modificarActividad(Actividad actividadUpdate,Actividad actividad);
 	public void eliminarActividad(Actividad actividad);
+	public void actualizarSucursalActividad(SucursalActividad sucursalActividad);
 }
