@@ -45,7 +45,7 @@
 		<%@include file="menu.jsp"%>
 
 		<div class="container">
-		<c:if test="${sessionScope.idPase == 5}"> <!-- Si el pase es 5 aparecerá esta leyenda -->
+		<c:if test="${sessionScope.estado == 0}"> <!-- Si el pase es 5 aparecerá esta leyenda -->
 			
 			<br><div class="col-md-8 col-md-offset-2 text-center">
 						<div class="display-t">
@@ -59,7 +59,7 @@
 					</div>
 			
 			</c:if>
-			<c:if test="${sessionScope.idPase != 5}"> <!-- El pase de ID 5 es el que se utiliza por defecto en un usuario recien registrado, no posee actividades disponibles -->
+			<c:if test="${sessionScope.estado != 0}"> <!-- El pase de ID 5 es el que se utiliza por defecto en un usuario recien registrado, no posee actividades disponibles -->
 			<div class="row">
 				<c:forEach items="${listaBeneficios}" var="lista">
 					<div class="col-lg-4 col-md-4 mt-5">
