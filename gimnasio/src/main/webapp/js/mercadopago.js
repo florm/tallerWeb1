@@ -24,6 +24,13 @@ idDescuento.change( function(){
 	});
 });
 
+$(document).ajaxStart(function(){
+    $("#wait").css("display", "block");
+});
+$(document).ajaxComplete(function(){
+    $("#wait").css("display", "none");
+});
+
 function dibujarBoton(data){
 	var html = "";
 	  html = html + '<a href="' + data.href + "\"target='_blank' class='btn btn-primary'>1. Pagar</a>";

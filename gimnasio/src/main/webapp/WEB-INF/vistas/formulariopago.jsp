@@ -80,6 +80,7 @@
 						     <div class="form-group input-size">
 								<form:input hidden="true" path="idPase" type="text" class="form-control" id="idPase"  name="idPase" value="${pase.id}" ></form:input>
 						    </div>
+						    <div id="wait" style="display:none;position:relative;"><br>Procesando..</div>
 						    <div id="btnmercadopago" class="d-none justify-content-center m-3"></div>
 						    <div id="btn-pagar" class="d-none justify-content-center">
 						    	<button type="submit" id="btn-pagar" value="pagar" class="btn btn-primary">2. Verificar</button>
@@ -91,7 +92,12 @@
 			</div>
 		</div>
 
-			
+	<c:if test="${empty sessionScope.rol}">
+		<%@include file="footerRol.jsp"%>
+		</c:if>
+		<c:if test="${!empty sessionScope.rol}">
+			<%@include file="footer.jsp"%>
+		</c:if>		
 	</div>
 
 	<div class="gototop js-top">
