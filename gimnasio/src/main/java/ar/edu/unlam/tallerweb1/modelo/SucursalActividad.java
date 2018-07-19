@@ -51,7 +51,7 @@ public class SucursalActividad {
 	}
 
 	// ManyToMany con Socio
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany
 	@JoinTable(name = "SocioSucursalActividad", joinColumns = @JoinColumn(name = "idSucursalActividad"), // idActividadSucursal
 			inverseJoinColumns = @JoinColumn(name = "idSocio") // idSocio
 	)

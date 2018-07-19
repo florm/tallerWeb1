@@ -81,9 +81,9 @@
 						    <div class="form-group input-size">
 						        Código Postal:<form:input path="codPostal" type="text" class="form-control" value="${sucursal.codPostal}"></form:input>
 						    </div>
-						    						    
+						    <div class="form-group input-size d-flex justify-content-center">						    
 						    <button type="submit" id="btn-modificar" value="modificar" class="btn btn-primary">Modificar</button>
-					    
+					    	</div>
 						</form:form>
 
 						
