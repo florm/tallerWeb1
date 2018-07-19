@@ -121,15 +121,15 @@ public class ControladorAdministrador {
 	public ModelAndView irAModificarSucursal(@PathVariable Long id) {
 		ModelMap modelo = new ModelMap();
 		Sucursal sucursalVacia = new Sucursal();
+		modelo.put("listaCiudades", servicioLocalizacion.listarCiudades());
 		modelo.put("sucursal", servicioSucursal.getSucursal(id));
 		modelo.put("sucursalVacia", sucursalVacia);
 		return new ModelAndView("modificarSucursal", modelo);
 	}
 	
 	@RequestMapping(path = "/sucursal/{id}/modificardatos", method = RequestMethod.POST)
-	public ModelAndView modificarDatosSucursal(@ModelAttribute ("sucursalVacia") Sucursal sucursalUpdate, @PathVariable Long id) {
-		Sucursal sucursalBdd = servicioSucursal.getSucursal(id);
-		servicioSucursal.modificarSucursal(sucursalUpdate, sucursalBdd);
+	public ModelAndView modificarDatosSucursal(@ModelAttribute ("sucursalVacia") Sucursal sucursalUpdate) throws UnsupportedEncodingException, MalformedURLException{
+		servicioSucursal.modificarSucursal(sucursalUpdate);
 		return new ModelAndView("redirect:/sucursalesadmin");
 	}
 
