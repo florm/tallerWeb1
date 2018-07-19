@@ -151,8 +151,11 @@ public class TestMock extends SpringTest{
     public void testRegistrarActividad(){
     	ControladorActividad controladorActividad = new ControladorActividad();
     	ServicioActividad servicioActividad = mock(ServicioActividad.class);
+    	ServicioSocio servicioSocio = mock(ServicioSocio.class);
     	controladorActividad.setServicioActividad(servicioActividad);
+    	controladorActividad.setServicioSocio(servicioSocio);
     	Formulario formularioMock = mock(Formulario.class);
+    	when(servicioSocio.validarActividadSocio(1L)).thenReturn(true);
     	when(formularioMock.getIdSocio()).thenReturn(1L);
     	when(formularioMock.getIdSucursalActividad()).thenReturn(1L);
     	when(servicioActividad.guardarSocioActividadSucursal(1L,1L)).thenReturn(true);

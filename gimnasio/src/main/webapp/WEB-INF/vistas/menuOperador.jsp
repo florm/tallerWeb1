@@ -33,7 +33,7 @@
 				<div class="d-flex menu-1">
 					<ul>
 						<!-- menu admin -->
-						<li class="active"><a href="<c:url value="/homeAdmin" />">Inicio</a></li>
+						<li class="active"><a href="<c:url value="/homeOperador/${sessionScope.idSucursal}" />">Inicio</a></li>
 						<li><a href="<c:url value="/actividadesOp/${sessionScope.idSucursal}" />">Actividades</a></li>
 												
 					</ul>
