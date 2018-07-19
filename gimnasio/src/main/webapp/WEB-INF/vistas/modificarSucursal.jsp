@@ -46,30 +46,46 @@
 		
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4 text-center animate-box fadeInUp animated-fast mx-auto">
+				<div class="col-md-5 animate-box fadeInUp animated-fast mx-auto">
+	
 					
-					<div class="modal-body p-5">
-					
-				      	<form:form class="text-center" method="post" action="modificardatos" modelAttribute="sucursalVacia">
-							<form:input  path="ciudad.id" type="text" class="form-control" value="${sucursal.ciudad.id}" hidden="true"></form:input>
+				      	<form:form class="" method="post" action="modificardatos" modelAttribute="sucursalVacia">
+							
+							<form:input hidden="true" path="id" type="text" class="form-control" value="${sucursal.id}" ></form:input>
+							<br><div class="form-group input-size">
+						    	Ciudad:
+							    <form:select required="true" path="ciudad.id" id="ciudad" name="ciudad.id" cssClass="form-control">
+							 		<c:forEach items= "${listaCiudades}" var="ciudad">
+								 		<c:choose>
+								 			<c:when test="${ciudad.id == sucursal.ciudad.id }">
+								 			<option value="${ciudad.id}" selected>${ciudad.nombre}
+								 			</c:when>
+								 			<c:otherwise>
+								 			<option value="${ciudad.id}">${ciudad.nombre}
+								 			</c:otherwise>
+								 		</c:choose>
+							 		</c:forEach>
+						  		</form:select>
+							</div>
+							
 						    <div class="form-group input-size">
-						        <form:input  path="nombre" type="text" class="form-control" value="${sucursal.nombre}" ></form:input>
+						        Nombre: <form:input  path="nombre" type="text" class="form-control" value="${sucursal.nombre}" ></form:input>
 						    </div>
 						    						    
 						    <div class="form-group input-size">
-						        <form:input path="calle" type="text" class="form-control"  value="${sucursal.calle}"></form:input>
+						        Calle:<form:input path="calle" type="text" class="form-control"  value="${sucursal.calle}"></form:input>
 						    </div>
 						    <div class="form-group input-size">
-						        <form:input path="numcalle" type="text" class="form-control" value="${sucursal.numcalle}"></form:input>
+						        Número:<form:input path="numcalle" type="text" class="form-control" value="${sucursal.numcalle}"></form:input>
 						    </div>
 						    <div class="form-group input-size">
-						        <form:input path="codPostal" type="text" class="form-control" value="${sucursal.codPostal}"></form:input>
+						        Código Postal:<form:input path="codPostal" type="text" class="form-control" value="${sucursal.codPostal}"></form:input>
 						    </div>
 						    						    
 						    <button type="submit" id="btn-modificar" value="modificar" class="btn btn-primary">Modificar</button>
 					    
 						</form:form>
-      				</div>
+
 						
 				</div>	
 			</div>

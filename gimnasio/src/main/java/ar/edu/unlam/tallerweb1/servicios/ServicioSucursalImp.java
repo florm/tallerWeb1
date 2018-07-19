@@ -38,8 +38,20 @@ public class ServicioSucursalImp implements ServicioSucursal {
 	}
 	
 	@Override
-	public void modificarSucursal(Sucursal sucursalUpdate, Sucursal sucursalBdd) {
-		sucursalDao.modificarSucursal(sucursalUpdate, sucursalBdd);
+	public void modificarSucursal(Sucursal sucursalUpdate) throws UnsupportedEncodingException, MalformedURLException {
+		Sucursal sucursal = sucursalDao.getSucursal(sucursalUpdate.getId());
+		Ciudad ciudad = localizacionDao.traerCiudad(sucursalUpdate.getCiudad().getId());
+		sucursal.setCiudad(ciudad);
+		sucursal.setNombre(sucursalUpdate.getNombre());
+		sucursal.setCalle(sucursalUpdate.getCalle());
+		sucursal.setNumcalle(sucursalUpdate.getNumcalle());
+		sucursal.setCodPostal(sucursalUpdate.getCodPostal());
+		Geocoding ObjGeocod=new Geocoding();
+		Point2D.Double resultadoCD=ObjGeocod.getCoordinates(sucursal.getCalle()+","+sucursal.getNumcalle()+","+sucursal.getCiudad().getNombre());
+		sucursal.setLat(resultadoCD.getX());
+		sucursal.setLng(resultadoCD.getY());
+		
+		sucursalDao.modificarSucursal(sucursal);
 	}
 	
 	@Override
