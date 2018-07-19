@@ -73,7 +73,7 @@ public class Socio {
 	private Pase pase;
 	
 	//ManyToMany con SucursalActividad
-	@ManyToMany(mappedBy = "socios", fetch=FetchType.EAGER)
+	@ManyToMany
     private Set<SucursalActividad> actividadesEnSucursal = new HashSet<>();
 	//
 	
