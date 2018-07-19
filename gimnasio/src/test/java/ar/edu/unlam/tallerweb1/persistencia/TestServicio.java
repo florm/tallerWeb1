@@ -76,6 +76,8 @@ public class TestServicio {
 		assertFalse(servicioSocio.registrarSocio(socioMock));
 		verify(socioMock, times(0)).setUsuario(usuarioMock);
 		verify(socioMock, times(0)).setRecomendadoPor(null);
+		
+		//
 	}
 	
 
