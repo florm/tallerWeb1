@@ -53,6 +53,7 @@
 				<thead>
 					<tr>
 						<td>Nombre</td>
+						<td>Profesor</td>
 						<td>Dia</td>
 						<td>Horarios</td>
 						<td>Cupo</td>
@@ -66,6 +67,7 @@
 					<c:forEach items="${listaSucursalActividades}" var="sucursalActividad">
 						<tr>
 							<td>${sucursalActividad.actividad.nombre}</td>
+							<td>${sucursalActividad.profesor.nombre}</td>
 							<td>${sucursalActividad.dia}</td>
 							<td>${sucursalActividad.horaDesde}hs  a   ${sucursalActividad.horaHasta}hs</td>
 							<td>${sucursalActividad.cupo} max</td>

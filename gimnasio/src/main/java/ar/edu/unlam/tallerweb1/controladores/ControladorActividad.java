@@ -36,6 +36,10 @@ public class ControladorActividad {
 		this.servicioActividad = servicio;
 	}
 	
+	public void setServicioSocio(ServicioSocio servicio){
+		this.servicioSocio = servicio;
+	}
+	
 	@RequestMapping("/sucursal/{id}/actividades")
 	public ModelAndView irAListaActividades(@PathVariable (value="id") Long id, @RequestParam(value="socio") Long idSocio) {
 		ModelMap modelo = new ModelMap();
