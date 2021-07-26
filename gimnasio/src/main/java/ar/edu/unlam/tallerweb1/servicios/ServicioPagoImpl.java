@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ar.edu.unlam.tallerweb1.modelo.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +19,6 @@ import ar.edu.unlam.tallerweb1.dao.SocioDao;
 @Transactional
 public class ServicioPagoImpl implements ServicioPago {
 
-	@Inject
 	PagoDao pagoDao;
 	
 	@Inject
@@ -26,6 +26,13 @@ public class ServicioPagoImpl implements ServicioPago {
 	
 	@Inject
 	SocioDao socioDao;
+
+	@Autowired
+	public ServicioPagoImpl(PagoDao pagoDao, PaseDao paseDao, SocioDao socioDao){
+		this.pagoDao = pagoDao;
+		this.paseDao = paseDao;
+		this.socioDao = socioDao;
+	}
 
 	@Override
 	public List<Pago> listaPagos(List<Socio> socios, Date fechaDesde, Date fechaHasta) {
