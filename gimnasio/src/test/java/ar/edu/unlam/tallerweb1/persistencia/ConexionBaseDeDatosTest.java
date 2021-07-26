@@ -33,7 +33,7 @@ public class ConexionBaseDeDatosTest extends SpringTest{
     public void testQueMuestreQR() {
     	CodigoQR codigo = new CodigoQR();
     	String dato = "Esto es un Codigo QR";
-    	codigo.generarQR(dato);
+    	//codigo.generarQR(dato);
     	//System.out.println(codigo);
     }
     

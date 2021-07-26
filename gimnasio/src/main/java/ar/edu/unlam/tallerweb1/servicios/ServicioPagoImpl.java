@@ -1,24 +1,18 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import ar.edu.unlam.tallerweb1.modelo.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.PagoDao;
 import ar.edu.unlam.tallerweb1.dao.PaseDao;
 import ar.edu.unlam.tallerweb1.dao.SocioDao;
-import ar.edu.unlam.tallerweb1.modelo.Descuento;
-import ar.edu.unlam.tallerweb1.modelo.Pago;
-import ar.edu.unlam.tallerweb1.modelo.Pase;
-import ar.edu.unlam.tallerweb1.modelo.Socio;
 
 @Service("servicioPago")
 @Transactional
@@ -69,7 +63,7 @@ public class ServicioPagoImpl implements ServicioPago {
 	}
 
 	@Override
-	public Date abonarPase(Long idSocio, Long idPase, Long idDescuento){
+	public Pago abonarPase(Long idSocio, Long idPase, Long idDescuento, EstadoPago estado){
 		Descuento descuento = pagoDao.buscarDescuento(idDescuento);
 		Pase pase = paseDao.buscarPase(idPase);
 		Socio socio = socioDao.buscarSocio(idSocio);
@@ -80,7 +74,7 @@ public class ServicioPagoImpl implements ServicioPago {
 		}else {
 			pago.setImporte(pase.getPrecio());
 		}
-		
+		pago.setPase(pase);
 		if (socio.getDescuento() != null) {
 			pago.setImporte(pago.getImporte()*0.95);
 			socio.setDescuento(null);
@@ -109,12 +103,21 @@ public class ServicioPagoImpl implements ServicioPago {
         Date fechaVencimiento = cal.getTime();
 		
 		pago.setFechaVencimiento(fechaVencimiento);
+		pago.setEstado(estado);
 		pagoDao.abonarPase(pago);
 		
-		return fechaVencimiento;
+		return pago;
 	}
-	
-	
-	
+
+	@Override
+	public Pago getUltimoPago(Socio socio) {
+		return pagoDao.getUltimoPago(socio);
+	}
+
+	@Override
+	public Pago getPagoById(Long idPago) {
+		return pagoDao.getPagoById(idPago);
+	}
+
 
 }

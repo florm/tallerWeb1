@@ -1,18 +1,15 @@
 package ar.edu.unlam.tallerweb1.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import ar.edu.unlam.tallerweb1.modelo.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-
-import ar.edu.unlam.tallerweb1.modelo.Operador;
-import ar.edu.unlam.tallerweb1.modelo.Socio;
-import ar.edu.unlam.tallerweb1.modelo.Sucursal;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 @Repository("operadorDao")
 public class OperadorDaoImpl implements OperadorDao {
@@ -72,5 +69,18 @@ public class OperadorDaoImpl implements OperadorDao {
 		return operador;
 	}
 
-	
+	@Override
+	public void aprobarPago(Pago pago) {
+		Session sesion = sessionFactory.getCurrentSession();
+		pago.setEstado(new EstadoPago(Estado.APROBADO.getVal()));
+		sesion.update(pago);
+	}
+
+	@Override
+	public List<Pago> buscarPagos() {
+		Session session = sessionFactory.getCurrentSession();
+		return session.createCriteria(Pago.class).list();
+	}
+
+
 }

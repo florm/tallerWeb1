@@ -2,3 +2,9 @@ Copiar las carpetas que se encuentran en dependenciasPropias en la carpeta .m2
 
 En mi caso es el siguiente ejemplo: C:\Users\Ksu\.m2\repository
 
+Para el barcode que esta en la carpeta Jar lo que tengo que hacer es:
+entro en la carpeta a donde esta mi proyecto (en la raiz, a donde esta el pom)
+y despues ejecuto la linea de mvn install. Asi queda:
+
+C:\Java\proyectos\ProyectoFinal2\Gimnasio>mvn install:install-file -Dfile=C:/Java/proyectos/ProyectoFinal2/Gimnasio/Jar/barcode.jar -DgroupId=com.barcodelib -DartifactId=barcode -Dversion=1.0 -Dpackaging=jar
+

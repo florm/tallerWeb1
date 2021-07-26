@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -68,6 +69,26 @@ public class PagoDaoImpl implements PagoDao {
 				.list();
 		
 		return listaPagos;
+	}
+
+	@Override
+	public Pago getUltimoPago(Socio socio) {
+		Session sesion = sessionFactory.getCurrentSession();
+		return (Pago) sesion.createCriteria(Pago.class)
+				.add(Restrictions.eq("socio", socio))
+				.addOrder(Order.desc("fecha"))
+				.setFirstResult(0)
+				.setMaxResults(1)
+				.uniqueResult();
+
+	}
+
+	@Override
+	public Pago getPagoById(Long idPago) {
+		return (Pago) sessionFactory.getCurrentSession()
+				.createCriteria(Pago.class)
+				.add(Restrictions.eq("id", idPago))
+				.uniqueResult();
 	}
 
 }

@@ -1,13 +1,9 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
-import ar.edu.unlam.tallerweb1.modelo.Descuento;
-import ar.edu.unlam.tallerweb1.modelo.Pago;
-import ar.edu.unlam.tallerweb1.modelo.Pase;
-import ar.edu.unlam.tallerweb1.modelo.Socio;
+import ar.edu.unlam.tallerweb1.modelo.*;
 
 public interface ServicioPago {
 
@@ -15,5 +11,9 @@ public interface ServicioPago {
 	public Double getTotalRecaudado(List<Pago> pagos);
 	public List<Descuento> listarDescuentos();
 	public List<Descuento> listarDescuentosConImporte(Double importe, Socio socio);
-	public Date abonarPase(Long idSocio, Long idPase, Long idDescuento);
+	public Pago abonarPase(Long idSocio, Long idPase, Long idDescuento, EstadoPago estado);
+
+    Pago getUltimoPago(Socio socio);
+
+    Pago getPagoById(Long idPago);
 }

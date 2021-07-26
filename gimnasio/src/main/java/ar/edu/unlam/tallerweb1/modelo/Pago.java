@@ -2,11 +2,7 @@ package ar.edu.unlam.tallerweb1.modelo;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Pago {
@@ -21,9 +17,27 @@ public class Pago {
 	
 	@ManyToOne
 	private Socio socio;
-	
+
+	@ManyToOne
+	private Pase pase;
+
+	public Pase getPase() {
+		return pase;
+	}
+
+	public void setPase(Pase pase) {
+		this.pase = pase;
+	}
+
 	private Date fechaVencimiento;
-	
+
+	@ManyToOne
+	private EstadoPago estado;
+
+	public EstadoPago getEstado() {
+		return estado;
+	}
+
 	public Date getFechaVencimiento() {
 		return fechaVencimiento;
 	}
@@ -63,7 +77,9 @@ public class Pago {
 	public void setSocio(Socio socio) {
 		this.socio = socio;
 	}
-	
-	
-	
+
+
+    public void setEstado(EstadoPago estado) {
+		this.estado = estado;
+    }
 }

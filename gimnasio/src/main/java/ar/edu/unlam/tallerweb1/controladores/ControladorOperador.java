@@ -1,12 +1,16 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.junit.runner.Request;
+import ar.edu.unlam.tallerweb1.modelo.*;
+import ar.edu.unlam.tallerweb1.servicios.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,14 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import ar.edu.unlam.tallerweb1.modelo.Operador;
-import ar.edu.unlam.tallerweb1.modelo.Sucursal;
-import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
-import ar.edu.unlam.tallerweb1.servicios.ServicioActividad;
-import ar.edu.unlam.tallerweb1.servicios.ServicioOperador;
-import ar.edu.unlam.tallerweb1.servicios.ServicioSocio;
-import ar.edu.unlam.tallerweb1.servicios.ServicioSucursal;
 
 @Controller
 public class ControladorOperador {
@@ -34,6 +30,15 @@ public class ControladorOperador {
 	private ServicioSocio servicioSocio;
 	@Inject 
 	private ServicioActividad servicioActividad;
+	private ServicioPago servicioPago;
+
+	public ControladorOperador(){}
+
+	@Autowired
+	public ControladorOperador(ServicioOperador servicioOperador, ServicioPago servicioPago){
+		this.servicioPago = servicioPago;
+		this.servicioOperador = servicioOperador;
+	}
 	
 	
 	@RequestMapping(path = "/homeOperador/{idSucursal}")
@@ -141,4 +146,28 @@ public class ControladorOperador {
 		servicioActividad.agregarSucursalActividad(sucursalActividadVacia);
 		return new ModelAndView("redirect:/actividadesOp/{idSucursal}");
 	}
+
+	@RequestMapping("/ver-pagos")
+    public ModelAndView verPagos() {
+		ModelMap modelo = new ModelMap();
+		modelo.put("pagos", servicioOperador.buscarPagos());
+		return new ModelAndView("pagos", modelo);
+    }
+
+    @RequestMapping("/aprobar-pago/{idPago}")
+	public ModelAndView aprobarPago(@PathVariable("idPago") Long idPago) {
+		Pago pago = servicioPago.getPagoById(idPago);
+		ModelMap modelo = new ModelMap();
+		try {
+			servicioOperador.aprobarPago(pago);
+		}catch(PagoYaAprobadoException e){
+			modelo.put("mensaje", "El pago ya se encuentra aprobado");
+		}catch(PagoYaRechazadoException e){
+			modelo.put("mensaje", "El pago ya se encuentra rechazado");
+		}catch(NoExistePagoException e){
+			modelo.put("mensaje", "Debe seleccionar una pago para aprobar");
+		}
+		return new ModelAndView("redirect:/ver-pagos", modelo);
+	}
+
 }

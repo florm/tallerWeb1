@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import ar.edu.unlam.tallerweb1.modelo.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,14 +16,6 @@ import ar.edu.unlam.tallerweb1.dao.PagoDao;
 import ar.edu.unlam.tallerweb1.dao.SocioDao;
 import ar.edu.unlam.tallerweb1.dao.SucursalDao;
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
-import ar.edu.unlam.tallerweb1.modelo.Actividad;
-import ar.edu.unlam.tallerweb1.modelo.Ciudad;
-import ar.edu.unlam.tallerweb1.modelo.Pago;
-import ar.edu.unlam.tallerweb1.modelo.Pase;
-import ar.edu.unlam.tallerweb1.modelo.Socio;
-import ar.edu.unlam.tallerweb1.modelo.Sucursal;
-import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 @Service("servicioSocio")
 @Transactional
@@ -143,7 +136,7 @@ public class ServicioSocioImpl implements ServicioSocio {
 		
 		if (socio.getPase().getId() != 5) { //Pase por default del socio apenas se registra
 			List<Pago> listaPagos = pagoDao.traerPagosSocio(socio);
-			Pago pago = listaPagos.get(listaPagos.size()-1);
+			Pago pago = pagoDao.getUltimoPago(socio);
 			if(pago.getFechaVencimiento().before(Calendar.getInstance().getTime())) {
 				//fecha de vencimento es menor a la fecha actual esta vencido el pase
 				List<SucursalActividad> lista = actividadDao.listaActividadesDeSocio(idSocio);

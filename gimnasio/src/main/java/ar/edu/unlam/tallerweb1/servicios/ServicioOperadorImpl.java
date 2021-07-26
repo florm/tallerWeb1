@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import ar.edu.unlam.tallerweb1.modelo.Estado;
+import ar.edu.unlam.tallerweb1.modelo.Pago;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,15 +20,19 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 @Transactional
 public class ServicioOperadorImpl implements ServicioOperador {
 
-	@Inject
 	private OperadorDao operadorDao;
 	
-	@Inject
 	private UsuarioDao usuarioDao;
 	
-	@Inject
 	private SucursalDao sucursalDao;
-	
+
+	@Autowired
+	public ServicioOperadorImpl(OperadorDao operadorDao, UsuarioDao usuarioDao,SucursalDao sucursalDao){
+		this.operadorDao = operadorDao;
+		this.usuarioDao = usuarioDao;
+		this.sucursalDao = sucursalDao;
+	}
+
 	@Override
 	public List<Operador> listarOperadores() {
 		return operadorDao.listarOperadores();
@@ -65,6 +72,36 @@ public class ServicioOperadorImpl implements ServicioOperador {
 	@Override
 	public Operador buscarOperador(Usuario usuario) {
 		return operadorDao.buscarOperador(usuario);
+	}
+
+	@Override
+	public void notificarPago() {
+
+	}
+
+	@Override
+	public void aprobarPago(Pago pago) {
+		if(pago == null) throw new NoExistePagoException();
+		if(pagoEstaAprobado(pago)) throw new PagoYaAprobadoException();
+		if(pagoEstaRechazado(pago)) throw new PagoYaRechazadoException();
+		operadorDao.aprobarPago(pago);
+	}
+
+	@Override
+	public List<Pago> buscarPagos() {
+		return operadorDao.buscarPagos();
+	}
+
+	private boolean pagoEstaRechazado(Pago pago) {
+		if(pago.getEstado().getId() == Estado.RECHAZADO.getVal())
+			return true;
+		return false;
+	}
+	private boolean pagoEstaAprobado(Pago pago) {
+		if(pago.getEstado().getId() == Estado.APROBADO.getVal()){
+			return true;
+		}
+		return false;
 	}
 
 }

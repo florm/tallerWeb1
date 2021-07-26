@@ -1,11 +1,15 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import ar.edu.unlam.tallerweb1.modelo.*;
+import ar.edu.unlam.tallerweb1.servicios.*;
+import com.mercadopago.exceptions.MPException;
+import helpers.MercadoPagoMetadata;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,18 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unlam.tallerweb1.modelo.Pase;
-import ar.edu.unlam.tallerweb1.modelo.Socio;
-import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
-
-import ar.edu.unlam.tallerweb1.servicios.ServicioLocalizacion;
-import ar.edu.unlam.tallerweb1.servicios.ServicioMercadoPago;
-import ar.edu.unlam.tallerweb1.servicios.ServicioPago;
-import ar.edu.unlam.tallerweb1.servicios.ServicioPase;
-import ar.edu.unlam.tallerweb1.servicios.ServicioQr;
-import ar.edu.unlam.tallerweb1.servicios.ServicioSocio;
-import ar.edu.unlam.tallerweb1.servicios.ServicioSucursal;
 import helpers.Formulario;
 import helpers.MercadoPago;
 
@@ -49,6 +41,10 @@ public class ControladorSocio {
 	private ServicioQr servicioQr;
 	@Inject
 	private ServicioMercadoPago servicioMercadoPago;
+	@Autowired
+	private ServicioEstadoPago servicioEstadoPago;
+	@Autowired
+	private ServicioOperador servicioOperador;
 	
 	@RequestMapping (path = "/inscribirpase", method = RequestMethod.POST)
 	public ModelAndView agregarPaseASocio(@ModelAttribute ("formulario") Formulario formulario) {
@@ -142,12 +138,27 @@ public class ControladorSocio {
 		modelo.put("formulario", formulario);
 		return new ModelAndView("formulariopago", modelo );
 	}
-	
-	@RequestMapping(path = "pago/socio/{idSocio}/abonarpase", method = RequestMethod.POST)
-	public ModelAndView abonarPase(@ModelAttribute ("formulario") Formulario formulario){
-		Date fechaVencimiento = servicioPago.abonarPase(formulario.getIdSocio(), formulario.getIdPase(), formulario.getIdDescuento());
-		servicioQr.generarQr(formulario.getIdSocio(),fechaVencimiento);
-		return new ModelAndView("qrConfirmacion");
+
+//	@RequestMapping(path = "pago/socio/{idSocio}/abonarpase", method = RequestMethod.POST)
+//	public ModelAndView abonarPase(@ModelAttribute ("formulario") Formulario formulario){
+//		Date fechaVencimiento = servicioPago.abonarPase(formulario.getIdSocio(), formulario.getIdPase(), formulario.getIdDescuento(), estado);
+//		servicioQr.generarQr(formulario.getIdSocio(),fechaVencimiento);
+//		return new ModelAndView("qrConfirmacion");
+//	}
+
+	@RequestMapping(path = "pago/socio/verificar-pase", method = RequestMethod.GET)
+	public ModelAndView verificarPase(@RequestParam(value = "idSocio") Long idSocio,
+									  @RequestParam(value = "idPase") Long idPase, @RequestParam(value = "idDescuento") Long idDescuento){
+		Formulario formulario = new Formulario();
+		ModelMap modelo = new ModelMap();
+		Pase pase = servicioPase.buscarPase(idPase); //lo hago de esta manera porque necesito usarlo dos veces
+		Socio socio = servicioSocio.buscarSocio(idSocio); //lo hago de esta manera porque necesito usarlo dos veces
+		modelo.put("socio", socio);
+		modelo.put("pase", pase);
+		modelo.put("idDescuento", idDescuento);
+		modelo.put("listaDescuentos", servicioPago.listarDescuentosConImporte(pase.getPrecio(), socio));
+		modelo.put("formulario", formulario);
+		return new ModelAndView("verificar-pase");
 	}
 	
 	@RequestMapping (path="socio/{idSocio}/paseactual")
@@ -160,10 +171,49 @@ public class ControladorSocio {
 	
 	@RequestMapping(path="mercadopago", produces = MediaType.ALL_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
 	@ResponseBody
-	public String mercadopago(@RequestBody MercadoPago mercadoPago){
+	public String mercadopago(@RequestBody MercadoPago mercadoPago) throws MPException {
 		String sandboxInitPoint =  servicioMercadoPago.createPayPreference(mercadoPago.getTitulo(),
-				mercadoPago.getDescripcion(),mercadoPago.getCantidad(),mercadoPago.getPrecio());
-		String rta = "{\"href\":\"" + sandboxInitPoint + "\"}";
-		return rta;
+				mercadoPago.getDescripcion(),mercadoPago.getCantidad(),mercadoPago.getPrecio(), mercadoPago.getIdSocio(), mercadoPago.getIdPase(), mercadoPago.getIdDescuento());
+		return sandboxInitPoint;
 	}
+
+	@RequestMapping(path="/success", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView mercadopagoOk(@RequestParam("collection_id") String collectionId) throws MPException {
+		MercadoPagoMetadata mp = servicioMercadoPago.getMetadata(collectionId);
+		EstadoPago estadoPago = servicioEstadoPago.getById(Estado.APROBADO.getVal());
+		Date fechaVencimiento = servicioPago.abonarPase(mp.getId_socio(), mp.getId_pase(), mp.getId_descuento(), estadoPago).getFechaVencimiento();
+		servicioQr.generarQr(mp.getId_socio(),fechaVencimiento);
+		return new ModelAndView("qrConfirmacion");
+
+	}
+
+	@RequestMapping(path="/pending", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView mercadopagoPending(@RequestParam("collection_id") String collectionId) throws MPException {
+		MercadoPagoMetadata mp = servicioMercadoPago.getMetadata(collectionId);
+		EstadoPago estadoPago = servicioEstadoPago.getById(Estado.PENDIENTE.getVal());
+		servicioPago.abonarPase(mp.getId_socio(), mp.getId_pase(), mp.getId_descuento(), estadoPago);
+		servicioOperador.notificarPago();
+		ModelMap model = new ModelMap();
+		model.put("mensaje", "Su pago se encuentra pendiente de aprobacion");
+		return new ModelAndView("mensajeGenerico", model);
+	}
+
+	@RequestMapping(path="/error", method = RequestMethod.GET)
+	@ResponseBody
+	public String mercadopagoError() throws MPException {
+
+		return  "error idPase: ";
+	}
+
+	@RequestMapping(path="socio/feedback")
+	@ResponseBody
+	public ModelAndView feedback(@RequestParam(value = "collection_status")String status){
+		ModelMap model = new ModelMap();
+		model.put("mensaje", status);
+		model.put("mensaje", status);
+		return new ModelAndView("feedback", model);
+	}
+
 }

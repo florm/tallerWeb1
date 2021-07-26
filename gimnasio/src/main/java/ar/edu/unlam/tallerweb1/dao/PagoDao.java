@@ -14,4 +14,7 @@ public interface PagoDao {
 	public Descuento buscarDescuento(Long idDescuento);
 	public void abonarPase(Pago pago);
 	List<Pago> traerPagosSocio(Socio socio);
+    Pago getUltimoPago(Socio socio);
+
+    Pago getPagoById(Long idPago);
 }
