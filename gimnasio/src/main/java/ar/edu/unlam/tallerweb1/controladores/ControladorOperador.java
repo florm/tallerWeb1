@@ -161,11 +161,11 @@ public class ControladorOperador {
 		try {
 			servicioOperador.aprobarPago(pago);
 		}catch(PagoYaAprobadoException e){
-			modelo.put("mensaje", "El pago ya se encuentra aprobado");
+			modelo.put("mensaje", e.getMessage());
 		}catch(PagoYaRechazadoException e){
-			modelo.put("mensaje", "El pago ya se encuentra rechazado");
+			modelo.put("mensaje", e.getMessage());
 		}catch(NoExistePagoException e){
-			modelo.put("mensaje", "Debe seleccionar una pago para aprobar");
+			modelo.put("mensaje", e.getMessage());
 		}
 		return new ModelAndView("redirect:/ver-pagos", modelo);
 	}
