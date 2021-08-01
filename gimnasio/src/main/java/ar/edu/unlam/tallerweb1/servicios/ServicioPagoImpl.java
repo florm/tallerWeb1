@@ -98,7 +98,7 @@ public class ServicioPagoImpl implements ServicioPago {
 		
 		pago.setSocio(socio);
 		
-		Date fecha = new java.util.Date();
+		Date fecha = Calendar.getInstance().getTime();
 //		SimpleDateFormat fechaFormat = new SimpleDateFormat("yyyy-MM-dd");
 //		String fechaString = fechaFormat.format(fecha);
 //		Date fechaPago = fechaFormat.parse(fechaString);
@@ -111,6 +111,7 @@ public class ServicioPagoImpl implements ServicioPago {
 		
 		pago.setFechaVencimiento(fechaVencimiento);
 		pago.setEstado(estado);
+		pago.setNuevo(true);
 		pagoDao.abonarPase(pago);
 		
 		return pago;

@@ -3,11 +3,19 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Estado;
 import ar.edu.unlam.tallerweb1.modelo.EstadoPago;
+import ar.edu.unlam.tallerweb1.modelo.Operador;
 import ar.edu.unlam.tallerweb1.modelo.Pago;
 import ar.edu.unlam.tallerweb1.servicios.*;
+import helpers.Paginado;
 import org.junit.Test;
-import org.mockito.configuration.IMockitoConfiguration;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Calendar;
+import java.util.Date;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -24,9 +32,33 @@ public class ControladorOperadorTest {
     @Test
     public void elOperadorDeLaSucursalPuedeVerPagosDeSocios(){
         givenExisteSocioEnLaSucursalDelOperador();
-        whenElOperadorIngresaAVerPagos();
+        whenElOperadorIngresaAVerPagos(null);
         thenSeMuestranPagos();
 
+    }
+
+    @Test
+    public void siExisteUnPaginadoSePuedePaginar(){
+        Paginado paginado = givenExisteUnPaginado();
+        whenElOperadorIngresaAVerPagos(paginado);
+        thenSeDevuelveUnPaginado(paginado);
+    }
+
+    private void thenSeDevuelveUnPaginado(Paginado paginado) {
+        assertThat(mav.getModel().get("paginado")).isNotNull();
+        Paginado paginadoModel = (Paginado )mav.getModel().get("paginado");
+        assertThat(paginadoModel.getRegistrosPorPagina()).isEqualTo(paginado.getRegistrosPorPagina());
+        assertThat(paginadoModel.getNumeroPagina()).isEqualTo(paginado.getNumeroPagina());
+        assertThat(paginadoModel.getRegistrosTotales()).isNotNull();
+        assertThat(paginadoModel.getRegistrosTotales()).isEqualTo(paginado.getRegistrosTotales());
+
+    }
+
+    private Paginado givenExisteUnPaginado() {
+        Paginado paginado = new Paginado();
+        paginado.setNumeroPagina(2);
+        paginado.setRegistrosPorPagina(10);
+        return paginado;
     }
 
     @Test
@@ -61,6 +93,83 @@ public class ControladorOperadorTest {
         thenNoSePuedeAprobarUnRechazado();
     }
 
+    @Test
+    public void cuandoElOperadorPideNovedadesDePagoSeDevuelveUnaListaDePagos(){
+        givenExisteUnOperador();
+        givenExistePagosDeLosUltimosCincoMinutos();
+        ResponseEntity response = whenBuscoNovedades();
+        thenEncuentroPagosDeLosUltimosMinutos(response);
+    }
+
+
+    @Test
+    public void cuandoNoHaySesionDeOperadorSePideNovedadesDePagoYNoSeDevuelveNada(){
+        givenNoExisteUnOperador();
+        givenExistePagosDeLosUltimosCincoMinutos();
+        ResponseEntity response = whenBuscoNovedades();
+        thenNoEncuentroPagos(response);
+    }
+
+    @Test
+    public void cuandoNoHayNovedadesElStatusEsNoContent(){
+        givenNoExistePagosDeLosUltimosCincoMinutos();
+        ResponseEntity response = whenBuscoNovedades();
+        thenNoEncuentroPagos(response);
+    }
+
+    @Test
+    public void cuandoElOperadorEntraAPagosLosPagosDejanDeSerNuevos(){
+        givenExisteUnPagoNuevo();
+        whenIngresaAVerPagos();
+        thenLosPagosDejanDeSerNuevos();
+    }
+
+    private void thenLosPagosDejanDeSerNuevos() {
+        verify(servicioOperador, times(1)).marcarVisto();
+    }
+
+    private void givenExisteUnPagoNuevo() {
+    }
+
+    private void whenIngresaAVerPagos() {
+        controladorOperador.verPagos(null);
+    }
+
+    private void givenNoExistePagosDeLosUltimosCincoMinutos() {
+        Pago pago = new Pago();
+        pago.setFecha(new Date(Calendar.getInstance().getTimeInMillis()- 360000));
+
+    }
+
+    private void thenNoEncuentroPagos(ResponseEntity response) {
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+    }
+
+    private void givenNoExisteUnOperador() {
+    }
+
+    private void givenExisteUnOperador() {
+        Operador op = new Operador();
+    }
+
+    private void givenExistePagosDeLosUltimosCincoMinutos() {
+        Pago pago = new Pago();
+        pago.setFecha(new Date(Calendar.getInstance().getTimeInMillis()- 120000));
+
+    }
+
+    private ResponseEntity whenBuscoNovedades() {
+        HttpServletRequest http = mock(HttpServletRequest.class);
+        HttpSession session = mock(HttpSession.class);
+        when(http.getSession()).thenReturn(session);
+        when(http.getSession().getAttribute(anyString())).thenReturn("otro");
+        return controladorOperador.getNovedades(http);
+    }
+
+    private void thenEncuentroPagosDeLosUltimosMinutos(ResponseEntity response) {
+        assertThat(response).isNotNull();
+    }
+
     private void thenNoSePuedeAprobarUnRechazado() {
         assertThat(mav.getViewName()).isEqualTo(REDIRECT);
         assertThat(mav.getModel().get("mensaje")).isEqualTo("El pago ya se encuentra rechazado");
@@ -79,8 +188,8 @@ public class ControladorOperadorTest {
     private void givenExisteSocioEnLaSucursalDelOperador() {
     }
 
-    private void whenElOperadorIngresaAVerPagos() {
-        mav = controladorOperador.verPagos();
+    private void whenElOperadorIngresaAVerPagos(Paginado paginado) {
+        mav = controladorOperador.verPagos(paginado);
     }
 
     private void thenSeMuestranPagos() {
@@ -89,8 +198,6 @@ public class ControladorOperadorTest {
         assertThat(mav.getModel().get("pagos")).isNotNull();
 
     }
-
-
 
     private Pago givenExisteUnPagoPendiente() {
         Pago pago = new Pago();

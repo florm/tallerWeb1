@@ -1,21 +1,22 @@
 package ar.edu.unlam.tallerweb1.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import ar.edu.unlam.tallerweb1.modelo.*;
+import helpers.Paginado;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository("operadorDao")
+@Repository
 public class OperadorDaoImpl implements OperadorDao {
 
-	@Inject
+	@Autowired
 	SessionFactory sessionFactory;
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Operador> listarOperadores() {
@@ -79,7 +80,28 @@ public class OperadorDaoImpl implements OperadorDao {
 	@Override
 	public List<Pago> buscarPagos() {
 		Session session = sessionFactory.getCurrentSession();
-		return session.createCriteria(Pago.class).list();
+		return session.createCriteria(Pago.class)
+				.addOrder(Order.desc("fecha"))
+				.list();
+	}
+
+	@Override
+	public List<Pago> getNovedades() {
+		Session session = sessionFactory.getCurrentSession();
+		return session.createCriteria(Pago.class)
+				.add(Restrictions.eq("nuevo", true))
+				.list();
+	}
+
+	@Override
+	public void marcarVisto() {
+
+	}
+
+	@Override
+	public Integer buscarPagosCount() {
+		return sessionFactory.getCurrentSession().createCriteria(Pago.class)
+				.list().size();
 	}
 
 

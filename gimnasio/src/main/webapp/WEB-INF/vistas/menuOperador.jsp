@@ -31,12 +31,13 @@
 					</div>
 				</div>
 				<div class="d-flex menu-1">
-					<ul>
+					<ul style="position: relative;">
 						<!-- menu operador -->
 						<li class="active"><a href="<c:url value="/homeOperador/${sessionScope.idSucursal}" />">Inicio</a></li>
 						<li><a href="<c:url value="/actividadesOp/${sessionScope.idSucursal}" />">Actividades</a></li>
-						<li><a href="<c:url value="/ver-pagos" />">Pagos</a></li>
-
+						<li><a href="<c:url value="/ver-pagos" />">Pagos</a>
+							<div class="notificacion" data-toggle="tooltip" data-placement="top" title="Hay nuevos pagos"></div>
+						</li>
 					</ul>
 				</div>
 

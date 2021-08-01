@@ -16,3 +16,4 @@ buildNumber.properties
 /gimnasio/gimnasio.iml
 .idea/*
 /*.iml
+/gimnasio/src/out/artifacts

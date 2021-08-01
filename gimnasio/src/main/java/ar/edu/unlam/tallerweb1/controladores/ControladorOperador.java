@@ -6,11 +6,15 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import ar.edu.unlam.tallerweb1.dto.PagoDto;
 import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.servicios.*;
+import helpers.Pager;
+import helpers.Paginado;
+import helpers.UtilidadesFecha;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -148,13 +152,22 @@ public class ControladorOperador {
 	}
 
 	@RequestMapping("/ver-pagos")
-    public ModelAndView verPagos() {
+    public ModelAndView verPagos(Paginado paginado) {
+		Paginado.getPaginado(paginado, servicioOperador.buscarPagosCount());
 		ModelMap modelo = new ModelMap();
-		modelo.put("pagos", servicioOperador.buscarPagos());
+		List<Pago> pagos = servicioOperador.buscarPagos(paginado);
+		List<PagoDto> pagosDto = new ArrayList<PagoDto>();
+		pagos.forEach(p-> {
+			pagosDto.add(new PagoDto(p));
+		});
+		modelo.put("pagos", pagosDto);
+		Pager pager = new Pager(paginado.getRegistrosTotales(), paginado.getNumeroPagina(), paginado.getRegistrosPorPagina());
+		modelo.put("paginado", pager);
+		servicioOperador.marcarVisto();
 		return new ModelAndView("pagos", modelo);
     }
 
-    @RequestMapping("/aprobar-pago/{idPago}")
+	@RequestMapping("/aprobar-pago/{idPago}")
 	public ModelAndView aprobarPago(@PathVariable("idPago") Long idPago) {
 		Pago pago = servicioPago.getPagoById(idPago);
 		ModelMap modelo = new ModelMap();
@@ -168,6 +181,15 @@ public class ControladorOperador {
 			modelo.put("mensaje", e.getMessage());
 		}
 		return new ModelAndView("redirect:/ver-pagos", modelo);
+	}
+
+	@RequestMapping("/getNovedades")
+	public ResponseEntity getNovedades(HttpServletRequest request){
+		if(request.getSession().getAttribute("rol").equals("operador")){
+			return ResponseEntity.ok(servicioOperador.getNovedades().size());
+		}
+		return ResponseEntity.noContent().build();
+
 	}
 
 }

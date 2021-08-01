@@ -15,6 +15,7 @@ public interface PagoDao {
 	public void abonarPase(Pago pago);
 	List<Pago> traerPagosSocio(Socio socio);
     Pago getUltimoPago(Socio socio);
-
     Pago getPagoById(Long idPago);
+    List<Pago> buscarPagosNuevos();
+	void actualizarPago(Pago pago);
 }

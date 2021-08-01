@@ -1,11 +1,12 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.inject.Inject;
-
+import ar.edu.unlam.tallerweb1.dao.PagoDao;
 import ar.edu.unlam.tallerweb1.modelo.Estado;
 import ar.edu.unlam.tallerweb1.modelo.Pago;
+import helpers.Paginado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,12 +26,14 @@ public class ServicioOperadorImpl implements ServicioOperador {
 	private UsuarioDao usuarioDao;
 	
 	private SucursalDao sucursalDao;
+	private PagoDao pagoDao;
 
 	@Autowired
-	public ServicioOperadorImpl(OperadorDao operadorDao, UsuarioDao usuarioDao,SucursalDao sucursalDao){
+	public ServicioOperadorImpl(OperadorDao operadorDao, UsuarioDao usuarioDao,SucursalDao sucursalDao, PagoDao pagoDao){
 		this.operadorDao = operadorDao;
 		this.usuarioDao = usuarioDao;
 		this.sucursalDao = sucursalDao;
+		this.pagoDao = pagoDao;
 	}
 
 	@Override
@@ -88,8 +91,31 @@ public class ServicioOperadorImpl implements ServicioOperador {
 	}
 
 	@Override
-	public List<Pago> buscarPagos() {
-		return operadorDao.buscarPagos();
+	public List<Pago> buscarPagos(Paginado paginado) {
+		List<Pago> todosLosPagos = operadorDao.buscarPagos();
+		if(paginado == null) return todosLosPagos;
+		return  todosLosPagos.stream().skip(paginado.getRegistrosPorPagina() * (paginado.getNumeroPagina() - 1))
+				.limit(paginado.getRegistrosPorPagina())
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Pago> getNovedades() {
+		return operadorDao.getNovedades();
+	}
+
+	@Override
+	public void marcarVisto() {
+		List<Pago> nuevosPagos = pagoDao.buscarPagosNuevos();
+		nuevosPagos.forEach(p->{
+			p.setNuevo(false);
+			pagoDao.actualizarPago(p);
+		});
+	}
+
+	@Override
+	public Integer buscarPagosCount() {
+		return operadorDao.buscarPagosCount();
 	}
 
 	private boolean pagoEstaRechazado(Pago pago) {

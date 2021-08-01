@@ -1,4 +1,4 @@
-;(function () {
+(function () {
 	
 	'use strict';
 
@@ -320,4 +320,49 @@
 
 
 }());
+
+
+
+function getNovedades(){
+	$.ajax({
+		url: "/gimnasio/getNovedades",
+		type: "GET",
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader("Accept", "application/json");
+			xhr.setRequestHeader("Content-Type", "application/json");
+		},
+		success: function(data) {
+			console.log(data);
+			if(data > 0){
+				$(".notificacion").val(data);
+				$(".notificacion").addClass("haynotificacion");
+			}else{
+				$(".notificacion").val();
+				$(".notificacion").removeClass("haynotificacion");
+			}
+
+		},
+		error: function(e){
+			console.log(e);
+		}
+	});
+}
+setInterval(getNovedades, 10 * 1000);
+
+var prev = $(".prev");
+var next = $(".next");
+var active = $(".page-item.active > a");
+
+prev.click(function(e){
+	e.preventDefault();
+	window.location.href = "/gimnasio/ver-pagos" + "?numeroPagina=" + (parseInt(active.attr("numerodepagina")) - 1);
+
+});
+
+next.click(function(e){
+	e.preventDefault();
+	window.location.href = "/gimnasio/ver-pagos" + "?numeroPagina=" + (parseInt(active.attr("numerodepagina")) + 1);
+
+});
+
 

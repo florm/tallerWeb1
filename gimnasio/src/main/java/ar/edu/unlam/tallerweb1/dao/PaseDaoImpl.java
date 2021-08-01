@@ -9,17 +9,18 @@ import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ar.edu.unlam.tallerweb1.modelo.Pase;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 
-@Repository("PaseDao")
+@Repository
 public class PaseDaoImpl implements PaseDao {
 
-	@Inject
-	SessionFactory sessionFactory;
-	
+	@Autowired
+	private SessionFactory sessionFactory;
+
 	@Override
 	public List<Pase> listarPases() {
 		Session sesion = sessionFactory.getCurrentSession();

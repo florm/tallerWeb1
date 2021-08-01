@@ -5,21 +5,17 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import ar.edu.unlam.tallerweb1.modelo.Actividad;
-import ar.edu.unlam.tallerweb1.modelo.Ciudad;
 import ar.edu.unlam.tallerweb1.modelo.Descuento;
 import ar.edu.unlam.tallerweb1.modelo.Pago;
-import ar.edu.unlam.tallerweb1.modelo.Pase;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 
-@Repository("PagoDao")
+@Repository
 public class PagoDaoImpl implements PagoDao {
 
 	@Inject
@@ -90,5 +86,19 @@ public class PagoDaoImpl implements PagoDao {
 				.add(Restrictions.eq("id", idPago))
 				.uniqueResult();
 	}
+
+	@Override
+	public List<Pago> buscarPagosNuevos() {
+		return sessionFactory.getCurrentSession()
+				.createCriteria(Pago.class)
+				.add(Restrictions.eq("nuevo", true))
+				.list();
+	}
+
+	@Override
+	public void actualizarPago(Pago pago) {
+		sessionFactory.getCurrentSession().update(pago);
+	}
+
 
 }

@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+
+
 import java.util.Date;
 
 import javax.persistence.*;
@@ -13,7 +15,7 @@ public class Pago {
 	
 	private Date fecha;
 	private Double importe;
-	
+	private Boolean nuevo;
 	
 	@ManyToOne
 	private Socio socio;
@@ -82,4 +84,13 @@ public class Pago {
     public void setEstado(EstadoPago estado) {
 		this.estado = estado;
     }
+
+    public void setNuevo(boolean nuevo) {
+        this.nuevo = nuevo;
+    }
+
+    public boolean getNuevo() {
+        return nuevo;
+    }
+
 }

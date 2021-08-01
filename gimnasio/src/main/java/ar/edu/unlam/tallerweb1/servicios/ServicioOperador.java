@@ -5,6 +5,7 @@ import java.util.List;
 import ar.edu.unlam.tallerweb1.modelo.Operador;
 import ar.edu.unlam.tallerweb1.modelo.Pago;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import helpers.Paginado;
 
 public interface ServicioOperador {
 	
@@ -16,5 +17,11 @@ public interface ServicioOperador {
 	Operador buscarOperador(Usuario usuario);
 	void notificarPago();
     void aprobarPago(Pago pago);
-	List<Pago> buscarPagos();
+	List<Pago> buscarPagos(Paginado paginado);
+
+    List<Pago> getNovedades();
+
+    void marcarVisto();
+
+    Integer buscarPagosCount();
 }
