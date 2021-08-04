@@ -3,12 +3,11 @@ package ar.edu.unlam.tallerweb1.controladores;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
+import helpers.Paginado;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Actividad;
-import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.SucursalActividad;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioActividad;
@@ -41,10 +39,10 @@ public class ControladorActividad {
 	}
 	
 	@RequestMapping("/sucursal/{id}/actividades")
-	public ModelAndView irAListaActividades(@PathVariable (value="id") Long id, @RequestParam(value="socio") Long idSocio) {
+	public ModelAndView irAListaActividades(@PathVariable (value="id") Long id, @RequestParam(value="socio") Long idSocio, Paginado paginado) {
 		ModelMap modelo = new ModelMap();
 		Formulario formulario = new Formulario();
-		List<SucursalActividad> lista = servicioActividad.listarActividadesEnSucursal(id);
+		List<SucursalActividad> lista = servicioActividad.listarActividadesEnSucursal(id, paginado);
 		Boolean validarPase = servicioSocio.validarActividadSocio(idSocio);
 				
 		modelo.put("listaActividades", lista);
@@ -58,7 +56,7 @@ public class ControladorActividad {
 //		boolean resultado = servicioActividad.guardarSocioActividadSucursal(formulario.getIdSocio(), formulario.getIdSucursalActividad());
 //		ModelMap modelo = new ModelMap();
 //		if (resultado == true) {
-//			modelo.put("exito", "La inscripcion se realizó correctamente");
+//			modelo.put("exito", "La inscripcion se realizï¿½ correctamente");
 //			return new ModelAndView("listaActividades", modelo);
 //		}else {
 //			modelo.put("exito", "Ya se encuentra inscripto en esta actividad");

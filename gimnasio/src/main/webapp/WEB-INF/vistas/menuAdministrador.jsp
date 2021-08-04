@@ -3,12 +3,8 @@
 
 <nav class="fh5co-nav" role="navigation">
 	<div class="top">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row justify-content-end">
-				<div class="col-auto">
-					<a href="<c:url value="/salir"/>">Salir</a>
-					<p class="num">Bienvenido/a ${sessionScope.nombre}</p>
-				</div>
 				<div class="col-auto">
 
 					<p class="num">Tel: +01 123 456 7890</p>
@@ -18,7 +14,10 @@
 						<li><a href="#"><i class="icon-github"></i></a></li>
 					</ul>
 				</div>
-
+				<div class="col-auto ml-auto">
+					<p class="num">Bienvenido/a ${sessionScope.nombre}</p>
+					<a class="logout" href="<c:url value="/salir"/>">Salir</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -30,7 +29,7 @@
 						<a href="index.html">Stamina<span>.</span></a>
 					</div>
 				</div>
-				<div class="d-flex menu-1">
+				<div class="d-flex menu-1 ml-auto">
 					<ul>
 						<!-- menu admin -->
 						<li class="active"><a href="<c:url value="/homeAdmin" />">Inicio</a></li>

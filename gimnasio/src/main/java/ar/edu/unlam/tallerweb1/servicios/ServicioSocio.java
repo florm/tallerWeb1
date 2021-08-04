@@ -4,10 +4,11 @@ import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import helpers.Paginado;
 
 public interface ServicioSocio {
 
-	List<Socio> buscarSocios(Long idSucursal);
+	List<Socio> buscarSocios(Long idSucursal, Paginado paginado);
 	List<Socio> buscarSocios();
 	Socio buscarSocio(Usuario usuario);
 	Socio buscarSocio(Long idSocio);
@@ -16,4 +17,5 @@ public interface ServicioSocio {
 	Boolean validarActividadSocio(Long idSocio);
 	Boolean registrarSocio(Socio socio);
 	Integer getEstadoDeSocioPorCuota(Long idSocio);
+    Integer buscarSociosCount(Long idSucursal);
 }

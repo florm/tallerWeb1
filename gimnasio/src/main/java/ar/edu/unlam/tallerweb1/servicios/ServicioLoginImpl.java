@@ -19,11 +19,11 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 public class ServicioLoginImpl implements ServicioLogin {
 
 	@Inject
-	private UsuarioDao servicioLoginDao;
+	private UsuarioDao usuarioDao;
 
 	@Override
 	public Usuario consultarUsuario (Usuario usuario) {
-		return servicioLoginDao.consultarUsuario(usuario);
+		return usuarioDao.consultarUsuario(usuario);
 	}
 
 }

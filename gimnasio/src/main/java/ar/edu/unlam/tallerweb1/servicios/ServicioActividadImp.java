@@ -2,9 +2,11 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
+import helpers.Paginado;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,8 +37,12 @@ public class ServicioActividadImp implements ServicioActividad {
 		this.servicioSocioDao= dao;
 	}
 	@Override
-	public List<SucursalActividad> listarActividadesEnSucursal(Long id) {
-		return servicioActividadDao.listarActividadesEnSucursal(id);
+	public List<SucursalActividad> listarActividadesEnSucursal(Long id, Paginado paginado) {
+		List<SucursalActividad> sucursalesActividad = servicioActividadDao.listarActividadesEnSucursal(id);
+		if(paginado == null) return sucursalesActividad;
+		return  sucursalesActividad.stream().skip(paginado.getRegistrosPorPagina() * (paginado.getNumeroPagina() - 1))
+				.limit(paginado.getRegistrosPorPagina())
+				.collect(Collectors.toList());
 	}
 	@Override
 	public boolean guardarSocioActividadSucursal(Long idSocio, Long idSucursalActividad) {
@@ -113,5 +119,10 @@ public class ServicioActividadImp implements ServicioActividad {
 	public List<Profesor> listarProfesores() {
 		return servicioActividadDao.listarProfesores();
 	}
-	
+
+	@Override
+	public Integer listarActividadesEnSucursalCount(Long idSucursal) {
+		return servicioActividadDao.listarActividadesEnSucursal(idSucursal).size();
+	}
+
 }

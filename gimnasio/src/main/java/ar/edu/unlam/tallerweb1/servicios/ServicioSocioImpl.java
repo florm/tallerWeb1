@@ -3,10 +3,12 @@ package ar.edu.unlam.tallerweb1.servicios;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
 import ar.edu.unlam.tallerweb1.modelo.*;
+import helpers.Paginado;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,8 +41,12 @@ public class ServicioSocioImpl implements ServicioSocio {
 	}
 	
 	@Override
-	public List<Socio> buscarSocios(Long idSucursal) {
-		return socioDao.buscarSocios(idSucursal);
+	public List<Socio> buscarSocios(Long idSucursal, Paginado paginado) {
+		List<Socio> todosLosSociosDeSucursal = socioDao.buscarSocios(idSucursal);
+		if(paginado == null) return todosLosSociosDeSucursal;
+		return  todosLosSociosDeSucursal.stream().skip(paginado.getRegistrosPorPagina() * (paginado.getNumeroPagina() - 1))
+				.limit(paginado.getRegistrosPorPagina())
+				.collect(Collectors.toList());
 	}
 	
 	@Override
@@ -159,5 +165,10 @@ public class ServicioSocioImpl implements ServicioSocio {
 			return 0;
 		}
 	}
-	
+
+	@Override
+	public Integer buscarSociosCount(Long idSucursal) {
+		return socioDao.buscarSocios(idSucursal).size();
+	}
+
 }

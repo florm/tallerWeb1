@@ -13,6 +13,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import helpers.Paginado;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
@@ -70,9 +71,9 @@ public class ControladorAdministrador {
 	}
 	
 	@RequestMapping(path = "socios")
-	public ModelAndView listarSocios(@RequestParam(value="idSucursal") Long idSucursal){
+	public ModelAndView listarSocios(@RequestParam(value="idSucursal") Long idSucursal, Paginado paginado){
 		ModelMap modelo = new ModelMap();
-		modelo.put("listaSocios", servicioSocio.buscarSocios(idSucursal));
+		modelo.put("listaSocios", servicioSocio.buscarSocios(idSucursal, paginado));
 		return new ModelAndView("socios",modelo);
 	}
 	
@@ -95,7 +96,7 @@ public class ControladorAdministrador {
 		cal.add(Calendar.MONTH, 1);
 		Date fechaHasta = cal.getTime();
 		
-		List<Socio> socios = servicioSocio.buscarSocios(idSucursal);
+		List<Socio> socios = servicioSocio.buscarSocios(idSucursal, null);
 	    List<Pago> pagos = servicioPago.listaPagos(socios, fechaDesde, fechaHasta);
 		Double ganancia = servicioPago.getTotalRecaudado(pagos);
 	    Sucursal sucursal = servicioSucursal.getSucursal(idSucursal);

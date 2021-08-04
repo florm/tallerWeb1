@@ -3,14 +3,9 @@
 
 <nav class="fh5co-nav" role="navigation">
 	<div class="top">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row justify-content-end">
 				<div class="col-auto">
-					<a href="<c:url value="/salir"/>">Salir</a>
-					<p class="num">Bienvenido/a ${sessionScope.nombre}</p>
-				</div>
-				<div class="col-auto">
-
 					<p class="num">Tel: +01 123 456 7890</p>
 					<ul class="fh5co-social">
 						<li><a href="https://www.twitter.com/"><i class="icon-twitter"></i></a></li>
@@ -18,7 +13,10 @@
 						<li><a href="https://github.com/"><i class="icon-github"></i></a></li>
 					</ul>
 				</div>
-
+				<div class="col-auto ml-auto">
+					<p class="num">Bienvenido/a ${sessionScope.nombre}</p>
+					<a class="logout" href="<c:url value="/salir"/>">Salir</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -30,7 +28,7 @@
 						<a href="#">Stamina<span>.</span></a>
 					</div>
 				</div>
-				<div class="col-xs-10 text-right menu-1">
+				<div class="col-xs-10 text-right menu-1 ml-auto">
 					<ul>
 						<!-- menu socio -->
 						<li class="active"><a href="<c:url value="/home" />">Inicio</a></li>

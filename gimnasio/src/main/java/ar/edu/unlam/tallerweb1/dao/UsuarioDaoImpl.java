@@ -2,6 +2,8 @@ package ar.edu.unlam.tallerweb1.dao;
 
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
+import ar.edu.unlam.tallerweb1.servicios.PasswordIncorrectaException;
+import ar.edu.unlam.tallerweb1.servicios.UsuarioInexistenteException;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -30,11 +32,15 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		// de busqueda de Usuario donde el email y password sean iguales a los del objeto recibido como parametro
 		// uniqueResult da error si se encuentran más de un resultado en la busqueda.
 		final Session session = sessionFactory.getCurrentSession();
+		Usuario nickBuscado = (Usuario) session.createCriteria(Usuario.class)
+				.add(Restrictions.eq("nick", usuario.getNick()))
+				.uniqueResult();
+		if(nickBuscado == null) throw new UsuarioInexistenteException();
 		Usuario usuarioBuscado = (Usuario) session.createCriteria(Usuario.class)
 				.add(Restrictions.eq("nick", usuario.getNick()))
 				.add(Restrictions.eq("password", usuario.getPassword()))
 				.uniqueResult();
-		
+		if(usuarioBuscado == null) throw new PasswordIncorrectaException();
 		return usuarioBuscado;
 	}
 

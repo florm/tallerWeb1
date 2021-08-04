@@ -1,36 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+<%@page pageEncoding="UTF-8" %>
 <nav class="fh5co-nav" role="navigation">
-	<div class="top">
-		<div class="container">
-			<div class="row justify-content-end">
-				<div class="row align-items-center">
-					<c:if test="${not empty error}">
-						<div class="text-center">
-							<span class="loginError">${error}</span>
-						</div>
-						<br>
-					</c:if>
-					<form:form method="post" action="validar-login" class="form-login"
-						modelAttribute="usuario">
-
-						<form:input class="form-control-md" path="nick" type="text"
-							id="nick" name="nick" placeholder="Nickname"></form:input>
-
-
-						<form:input class="form-control-md" path="password"
-							type="password" id="password" name="password"
-							placeholder="Contraseña"></form:input>
-
-						<button type="submit" id="btn-login">Ingresar</button>
-
-					</form:form>
-				</div>
-
-			</div>
-		</div>
-	</div>
 	<div class="top-menu">
 		<div class="container">
 			<div class="row">

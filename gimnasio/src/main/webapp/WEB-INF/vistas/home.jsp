@@ -63,7 +63,7 @@
 								<h1>
 									Un estilo de vida, <br> no un deber.
 								</h1>
-								<h2>La cadena de gimnasios m·s grande de Buenos Aires</h2>
+								<h2>La cadena de gimnasios m√°s grande de Buenos Aires</h2>
 								<!-- 
 							<button id="btn-modal" class="btn with-arrow" type="button" rel="tooltip" data-placement="bottom" title="" data-toggle="modal" data-target="#modal-login" data-original-title="Login">
 								Ingresar
@@ -71,6 +71,7 @@
 							</div>
 						</div>
 					</div>
+
 				</div>
 			</div>
 		</header>

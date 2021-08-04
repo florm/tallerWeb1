@@ -28,7 +28,8 @@ public class ControladorPase {
 		Usuario usuario = new Usuario();
 		modelo.put("listaPases", servicioPase.listarPases());
 		modelo.put("usuario", usuario);
-		modelo.put("estadoPago", servicioPago.getUltimoPago(usuario.getSocio()).getEstado().getId());
+		if(usuario.getSocio() != null)
+			modelo.put("estadoPago", servicioPago.getUltimoPago(usuario.getSocio()).getEstado().getId());
 		return new ModelAndView ("listaPases", modelo);
 		
 	}

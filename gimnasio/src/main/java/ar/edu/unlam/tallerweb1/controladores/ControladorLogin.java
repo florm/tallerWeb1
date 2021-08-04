@@ -2,6 +2,8 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+
+import ar.edu.unlam.tallerweb1.servicios.*;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,11 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.Pase;
 import ar.edu.unlam.tallerweb1.modelo.Socio;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
-import ar.edu.unlam.tallerweb1.servicios.ServicioLocalizacion;
-import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
-import ar.edu.unlam.tallerweb1.servicios.ServicioOperador;
-import ar.edu.unlam.tallerweb1.servicios.ServicioSocio;
-import ar.edu.unlam.tallerweb1.servicios.ServicioSucursal;
+
 
 @RestController
 public class ControladorLogin {
@@ -53,58 +51,40 @@ public class ControladorLogin {
 		Usuario usuario = new Usuario();
 		ModelMap modelo = new ModelMap();
 		modelo.put("usuario", usuario);
-		return new ModelAndView("login", modelo);
+		return new ModelAndView("login",modelo);
 	}
 
 	@RequestMapping(path = "/validar-login", method = RequestMethod.POST)
 
-	public ModelAndView validarLogin(@ModelAttribute Usuario usuario, HttpServletRequest request) {
-
-		Usuario usuarioBuscado = servicioLogin.consultarUsuario(usuario);
-		if (usuarioBuscado != null) {
-			
+	public ModelAndView validarLogin(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request) {
+		ModelMap model = new ModelMap();
+		try{
+			Usuario usuarioBuscado = servicioLogin.consultarUsuario(usuario);
 			switch (usuarioBuscado.getRol()) {
-			case "admin":
-				request.getSession().setAttribute("rol", usuarioBuscado.getRol());
-				request.getSession().setAttribute("nombre", "Admin");
-				return new ModelAndView("redirect:/homeAdmin");
-			case "operador":
-				Long idSucursal = servicioOperador.buscarOperador(usuarioBuscado).getSucursal().getId();
-				request.getSession().setAttribute("rol", usuarioBuscado.getRol());
-				request.getSession().setAttribute("idSucursal", idSucursal);
-				request.getSession().setAttribute("nombre", "Operador"); 
-				return new ModelAndView("redirect:/homeOperador/"+idSucursal);
-			default: //caso socio
-				request.getSession().setAttribute("idSucursal", servicioSocio.buscarSocio(usuarioBuscado).getSucursal().getId());
-				request.getSession().setAttribute("nombre", servicioSocio.buscarSocio(usuarioBuscado).getNombre());
-				request.getSession().setAttribute("idSocio", servicioSocio.buscarSocio(usuarioBuscado).getIdSocio());
-				request.getSession().setAttribute("idPase", servicioSocio.buscarSocio(usuarioBuscado).getPase().getId());
-				request.getSession().setAttribute("estado", servicioSocio.getEstadoDeSocioPorCuota(servicioSocio.buscarSocio(usuarioBuscado).getIdSocio()));
-				return new ModelAndView("redirect:/home");
+				case "admin":
+					request.getSession().setAttribute("rol", usuarioBuscado.getRol());
+					request.getSession().setAttribute("nombre", "Admin");
+					return new ModelAndView("redirect:/homeAdmin");
+				case "operador":
+					Long idSucursal = servicioOperador.buscarOperador(usuarioBuscado).getSucursal().getId();
+					request.getSession().setAttribute("rol", usuarioBuscado.getRol());
+					request.getSession().setAttribute("idSucursal", idSucursal);
+					request.getSession().setAttribute("nombre", "Operador");
+					return new ModelAndView("redirect:/homeOperador/"+idSucursal);
+				default: //caso socio
+					request.getSession().setAttribute("idSucursal", servicioSocio.buscarSocio(usuarioBuscado).getSucursal().getId());
+					request.getSession().setAttribute("nombre", servicioSocio.buscarSocio(usuarioBuscado).getNombre());
+					request.getSession().setAttribute("idSocio", servicioSocio.buscarSocio(usuarioBuscado).getIdSocio());
+					request.getSession().setAttribute("idPase", servicioSocio.buscarSocio(usuarioBuscado).getPase().getId());
+					request.getSession().setAttribute("estado", servicioSocio.getEstadoDeSocioPorCuota(servicioSocio.buscarSocio(usuarioBuscado).getIdSocio()));
+					return new ModelAndView("redirect:/home");
 			}
-			
-//			if(usuarioBuscado.getRol() != null){
-//				request.getSession().setAttribute("rol", usuarioBuscado.getRol());
-//				request.getSession().setAttribute("nombre", "admin");
-//				return new ModelAndView("redirect:/homeAdmin");
-//			}
-//			else{
-//				
-//				request.getSession().setAttribute("idSucursal",
-//						servicioSocio.buscarSocio(usuarioBuscado).getSucursal().getId());
-//				request.getSession().setAttribute("nombre", servicioSocio.buscarSocio(usuarioBuscado).getNombre());
-//				request.getSession().setAttribute("idSocio", servicioSocio.buscarSocio(usuarioBuscado).getIdSocio());
-//				request.getSession().setAttribute("idPase", servicioSocio.buscarSocio(usuarioBuscado).getPase().getId());
-//				request.getSession().setAttribute("estado", servicioSocio.getEstadoDeSocioPorCuota(servicioSocio.buscarSocio(usuarioBuscado).getIdSocio()));
-//			}
-//						
-//			return new ModelAndView("redirect:/home");
-		
-		} else {
-			ModelMap model = new ModelMap();
-			model.put("error", "Usuario o clave incorrecta");
-			return new ModelAndView("login", model);
+		}catch(UsuarioInexistenteException e){
+			model.put("error", e.getMessage());
+		}catch(PasswordIncorrectaException e){
+			model.put("error", e.getMessage());
 		}
+		return new ModelAndView("login", model);
 
 	}
 

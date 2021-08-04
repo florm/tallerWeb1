@@ -355,13 +355,13 @@ var active = $(".page-item.active > a");
 
 prev.click(function(e){
 	e.preventDefault();
-	window.location.href = "/gimnasio/ver-pagos" + "?numeroPagina=" + (parseInt(active.attr("numerodepagina")) - 1);
+	window.location.href = window.urlPropia + "?numeroPagina=" + (parseInt(active.attr("numerodepagina")) - 1);
 
 });
 
 next.click(function(e){
 	e.preventDefault();
-	window.location.href = "/gimnasio/ver-pagos" + "?numeroPagina=" + (parseInt(active.attr("numerodepagina")) + 1);
+	window.location.href = window.urlPropia + "?numeroPagina=" + (parseInt(active.attr("numerodepagina")) + 1);
 
 });
 

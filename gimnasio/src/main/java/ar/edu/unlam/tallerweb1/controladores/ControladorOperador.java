@@ -7,11 +7,11 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import ar.edu.unlam.tallerweb1.dto.PagoDto;
+import ar.edu.unlam.tallerweb1.dto.SocioDto;
 import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.servicios.*;
 import helpers.Pager;
 import helpers.Paginado;
-import helpers.UtilidadesFecha;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -46,10 +46,20 @@ public class ControladorOperador {
 	
 	
 	@RequestMapping(path = "/homeOperador/{idSucursal}")
-	public ModelAndView irAHomeOperador(@PathVariable (value="idSucursal") Long idSucursal) {
+	public ModelAndView irAHomeOperador(@PathVariable (value="idSucursal") Long idSucursal, Paginado paginado) {
+		Paginado.getPaginado(paginado, servicioSocio.buscarSociosCount(idSucursal));
 		ModelMap modelo = new ModelMap();
-		modelo.put("listaSocios", servicioSocio.buscarSocios(idSucursal));
+		List<Socio> socios = servicioSocio.buscarSocios(idSucursal, paginado);
+		List<SocioDto> sociosDto = new ArrayList<SocioDto>();
+		socios.forEach(s-> {
+			sociosDto.add(new SocioDto(s));
+		});
+		modelo.put("listaSocios", sociosDto);
+		Pager pager = new Pager(paginado.getRegistrosTotales(), paginado.getNumeroPagina(), paginado.getRegistrosPorPagina());
+		modelo.put("paginado", pager);
 		return new ModelAndView("homeOperador", modelo);
+
+
 	}
 	
 	@RequestMapping(path="operadores")
@@ -98,9 +108,13 @@ public class ControladorOperador {
 	}
 	
 	@RequestMapping(path="/actividadesOp/{idSucursal}")
-	public ModelAndView abmActividades(@PathVariable ("idSucursal")Long idSucursal) {
+	public ModelAndView abmActividades(@PathVariable ("idSucursal")Long idSucursal, Paginado paginado) {
 		ModelMap modelo = new ModelMap();
-		modelo.put("listaSucursalActividades", servicioActividad.listarActividadesEnSucursal(idSucursal));
+		Paginado.getPaginado(paginado, servicioActividad.listarActividadesEnSucursalCount(idSucursal));
+		List<SucursalActividad> sucursalActividades = servicioActividad.listarActividadesEnSucursal(idSucursal,paginado);
+		modelo.put("listaSucursalActividades", sucursalActividades);
+		Pager pager = new Pager(paginado.getRegistrosTotales(), paginado.getNumeroPagina(), paginado.getRegistrosPorPagina());
+		modelo.put("paginado", pager);
 		return new ModelAndView("listaActividadesAbm",modelo);
 	}
 	
@@ -116,14 +130,14 @@ public class ControladorOperador {
 	
 	@RequestMapping(path="/actividadesOp/{idSucursalActividad}/modificacionActividadProc", method= RequestMethod.POST)
 		public ModelAndView establecerModificacionActividad(@ModelAttribute ("sucursalActividadVacia") SucursalActividad sucursalActividadUpdate
-				,@PathVariable Long idSucursalActividad, HttpServletRequest request) {
+				,@PathVariable Long idSucursalActividad, HttpServletRequest request, Paginado paginado) {
 		
 		SucursalActividad sucursalActividadBdd= servicioActividad.traerActividadSucursal(idSucursalActividad);
 		servicioActividad.modificarActividad(sucursalActividadUpdate, sucursalActividadBdd);
 		ModelMap modelo = new ModelMap();
 		modelo.put("ok", "La actividad se guardo correctamente");
 		Long idSucursal = (Long)request.getSession().getAttribute("idSucursal");
-		modelo.put("listaSucursalActividades", servicioActividad.listarActividadesEnSucursal(idSucursal));
+		modelo.put("listaSucursalActividades", servicioActividad.listarActividadesEnSucursal(idSucursal, paginado));
 		return new ModelAndView("listaActividadesAbm", modelo); 
 	}
 	

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import helpers.Paginado;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -65,10 +66,10 @@ public class ControladorSucursal {
 	
 	
 	@RequestMapping("/sucursal/{id}/socios")
-	public ModelAndView verListaSocios(@PathVariable Long id) {
+	public ModelAndView verListaSocios(@PathVariable Long id, Paginado paginado) {
 
 		ModelMap modelo = new ModelMap();
-		List<Socio> socios = servicioSocio.buscarSocios(id);
+		List<Socio> socios = servicioSocio.buscarSocios(id, paginado);
 		modelo.put("listaSocios", socios);
 		
 		return new ModelAndView("listaSocios", modelo);

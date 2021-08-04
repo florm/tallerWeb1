@@ -52,7 +52,7 @@
 			<c:if test="${sessionScope.estado == 0 && sessionScope.idPase !=5}">
 				<div class="row justify-content-center align-items-center p-3 my-3" id="responseError">Su ${pase.nombre} ha vencido, puede seleccionar un nuevo Pase.</div>
 			</c:if>
-			<c:if test="${sessionScope.estadoPago != 1}">
+			<c:if test="${sessionScope.estadoPago != null && sessionScope.estadoPago != 1}">
 				<div class="row justify-content-center align-items-center p-3 my-3" id="responseError">El pago de su ${pase.nombre} aún no ha sido aprobado</div>
 			</c:if>
 			<div class="row animate-box fadeInUp animated-fast">

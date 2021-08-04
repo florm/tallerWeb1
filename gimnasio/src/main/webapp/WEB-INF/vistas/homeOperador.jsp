@@ -1,117 +1,87 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Stamina Gimnasios</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="author" content="freehtml5.co" />
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page pageEncoding="UTF-8" %>
 
 
-<link
-	href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800"
-	rel="stylesheet">
+<div class="fh5co-loader"></div>
 
-<!-- Animate.css -->
-<link href="<c:url value="/css/animate.css" />" rel="stylesheet">
-<!-- Icomoon Icon Fonts-->
-<link href="<c:url value="/css/icomoon.css" />" rel="stylesheet">
-<!-- Bootstrap  -->
-<link href="<c:url value="/css/bootstrap4.min.css" />" rel="stylesheet">
-<link href="<c:url value="/css/bootstrap.css" />" rel="stylesheet">
+<div id="page">
+    <%@include file="menuOperador.jsp" %>
+    <div class="container">
+        <div class="row p-4">
+            <h3>Lista de Socios</h3>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main-box clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                            <tr>
+                                <th class="text-center"><span>Nombre</span></th>
+                                <th class="text-center"><span>Apellido</span></th>
+                                <th class="text-center"><span>DNI</span></th>
+                                <th class="text-center"><span>Teléfono</span></th>
+                                <th class="text-center"><span>Email</span></th>
+                                <th class="text-center"><span>Localidad</span></th>
+                                <th class="text-center"><span>Calle</span></th>
+                                <th class="text-center"><span>Número</span></th>
+                                <th class="text-center"><span>Dpto</span></th>
+                                <th class="text-center"><span>Pase</span></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${listaSocios}" var="socio" varStatus="socios">
+                                <tr>
+                                    <td class="text-center">${socio.nombre}</td>
+                                    <td class="text-center">${socio.apellido}</td>
+                                    <td class="text-center">${socio.dni}</td>
+                                    <td class="text-center">${socio.telefono}</td>
+                                    <td class="text-center">${socio.mail}</td>
+                                    <td class="text-center">${socio.ciudad}</td>
+                                    <td class="text-center">${socio.domicilioCalle}</td>
+                                    <td class="text-center">${socio.domicilioNumero}</td>
+                                    <td class="text-center">${socio.domicilioDepto}</td>
+                                    <td class="text-center">${socio.pase}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                    <%@include file="paginado.jsp" %>
 
-<!-- Theme style  -->
-<link href="<c:url value="/css/style.css" />" rel="stylesheet">
-
-<!-- Modernizr JS -->
-<script src="<c:url value="/js/modernizr-2.6.2.min.js" />"></script>
-
-<link href="<c:url value="/css/datatables.css" />" rel="stylesheet">
-<link href="<c:url value="/css/fontawesome-all.css" />" rel="stylesheet">
-<link href="<c:url value="/css/estilos.css" />" rel="stylesheet">
-
-</head>
-<body>
-
-	<div class="fh5co-loader"></div>
-
-	<div id="page">
-		<%@include file="menuOperador.jsp"%>
-
-		<div class="container mt-5">
-			<table id="socios" class="table table-striped table-bordered"
-				style="width: 100%">
-				<thead>
-					<tr>
-						<td>Nombre</td>
-						<td>Apellido</td>
-						<td>DNI</td>
-						<td>Telefono</td>
-						<td>Email</td>
-						<td>Localidad</td>
-						<td>Calle</td>
-						<td>Numero</td>
-						<td>Depto</td>
-						<td>Pase</td>
-					</tr>
-
-				</thead>
-				<tbody>
-					<c:forEach items="${listaSocios}" var="socio">
-						<tr>
-							<td>${socio.nombre}</td>
-							<td>${socio.apellido}</td>
-							<td>${socio.dni}</td>
-							<td>${socio.telefono}</td>
-							<td>${socio.mail}</td>
-							<td>${socio.ciudad.nombre}</td>
-							<td>${socio.domicilioCalle}</td>
-							<td>${socio.domicilioNumero}</td>
-							<td>${socio.domicilioDepto}</td>
-							<td>${socio.pase.nombre}</td>
-							
-						</tr>
-					</c:forEach>
-
-				</tbody>
-
-			</table>
-		</div>	
-	</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
+<!-- jQuery -->
 
-	<!-- jQuery -->
+<script src="<c:url value="/js/jquery.min.js" />"></script>
+<!-- jQuery Easing -->
 
-	<script src="<c:url value="/js/jquery.min.js" />"></script>
-	<!-- jQuery Easing -->
+<script src="<c:url value="/js/jquery.easing.1.3.js" />"></script>
+<!-- Bootstrap -->
 
-	<script src="<c:url value="/js/jquery.easing.1.3.js" />"></script>
-	<!-- Bootstrap -->
+<script src="<c:url value="/js/bootstrap.min.js" />"></script>
+<!-- Waypoints -->
 
-	<script src="<c:url value="/js/bootstrap.min.js" />"></script>
-	<!-- Waypoints -->
+<script src="<c:url value="/js/jquery.waypoints.min.js" />"></script>
+<!-- Stellar Parallax -->
 
-	<script src="<c:url value="/js/jquery.waypoints.min.js" />"></script>
-	<!-- Stellar Parallax -->
+<script src="<c:url value="/js/jquery.stellar.min.js" />"></script>
+<!-- Carousel -->
 
-	<script src="<c:url value="/js/jquery.stellar.min.js" />"></script>
-	<!-- Carousel -->
+<script src="<c:url value="/js/owl.carousel.min.js" />"></script>
+<!-- countTo -->
 
-	<script src="<c:url value="/js/owl.carousel.min.js" />"></script>
-	<!-- countTo -->
+<script src="<c:url value="/js/jquery.countTo.js" />"></script>
+<script src="<c:url value="/js/datatables.js" />"></script>
 
-	<script src="<c:url value="/js/jquery.countTo.js" />"></script>
-	<script src="<c:url value="/js/datatables.js" />"></script>
-	
-	<!-- Main -->
-	<script src="<c:url value="/js/main.js" />"></script>
-	
-	<script src="<c:url value="/js/home.js" />"></script>
-	
+<!-- Main -->
+<script src="<c:url value="/js/main.js" />"></script>
 
-</body>
+<script src="<c:url value="/js/home.js" />"></script>
 
-</html>
