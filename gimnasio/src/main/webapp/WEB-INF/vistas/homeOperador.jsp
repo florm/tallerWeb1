@@ -1,7 +1,17 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page pageEncoding="UTF-8" %>
+<!DOCTYPE HTML>
+<html>
+<head>
 
+    <%@include file="head.jsp"%>
+	<script type="text/javascript">
+		var urlPropia = '<c:url value="/homeOperador/${sessionScope.idSucursal}" />';
+	</script>
+
+</head>
+<body>
 
 <div class="fh5co-loader"></div>
 
@@ -85,3 +95,7 @@
 
 <script src="<c:url value="/js/home.js" />"></script>
 
+
+</body>
+
+</html>

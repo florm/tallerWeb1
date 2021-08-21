@@ -1,5 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+		 pageEncoding="ISO-8859-1"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -45,7 +47,7 @@
 		<%@include file="menu.jsp"%>
 
 		<div class="container">
-		<c:if test="${sessionScope.estado == 0}"> <!-- Si el pase es 5 aparecerá esta leyenda -->
+		<c:if test="${sessionScope.estado == 0}"> <!-- Si el pase es 5 aparecerï¿½ esta leyenda -->
 			
 			<br><div class="col-md-8 col-md-offset-2 text-center">
 						<div class="display-t">
@@ -75,7 +77,7 @@
 								<span class="posted_on">${lista.descuento}</span>
 
 								<p>${lista.descripcion}</p>
-								<a href="<c:url value='/download/${lista.nombre}' />" class="btn btn-primary">Imprimir cupón</a>
+								<a href="<c:url value='/download/${lista.nombre}' />" class="btn btn-primary">Imprimir cupï¿½n</a>
 							</div>
 						</div>
 					</div>

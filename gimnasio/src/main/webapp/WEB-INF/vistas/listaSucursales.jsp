@@ -3,32 +3,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Stamina Gimnasios</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="author" content="freehtml5.co" />
 
-
-<link
-	href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800"
-	rel="stylesheet">
-
-
-<!-- Bootstrap  -->
-<link href="<c:url value="/css/bootstrap4.min.css" />" rel="stylesheet">
-<link href="<c:url value="/css/bootstrap.css" />" rel="stylesheet">
-
-<!-- Theme style  -->
-<link href="<c:url value="/css/style.css" />" rel="stylesheet">
-
-<link href="<c:url value="/css/datatables.css" />" rel="stylesheet">
-<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
-<link href="<c:url value="/css/MonthPicker.min.css" />" rel="stylesheet" type="text/css" />
-
-<link href="<c:url value="/css/fontawesome-all.css" />" rel="stylesheet">
-<link href="<c:url value="/css/estilos.css" />" rel="stylesheet">
-
+	<%@include file="head.jsp"%>
 </head>
 <body>
 
@@ -37,52 +13,73 @@
 
 	<div id="page">
 		<%@include file="menuAdministrador.jsp"%>
+		<div class="container mt-5 d-flex justify-content-end">
+			<a href="<c:url value="/sucursales" />"
+			   class="btn btn-primary btn-outline btn-sm">
+				Ver mapa<i class="icon-arrow-right"></i></a>
+			<a href="<c:url value="/sucursal/agregarNuevaSucursal" />"
+			   class="btn btn-primary btn-outline btn-sm">
+				Nueva Sucursal<i class="icon-arrow-right"></i></a>
+		</div>
+		<div class="container">
+			<div class="row p-4">
+				<h3>Lista de Sucursales</h3>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="main-box clearfix">
+						<div class="table-responsive">
+							<table class="table user-list">
+								<thead>
+								<tr>
+									<th class="d-none"><span>Id</span></th>
+									<th class="text-center">Nombre</th>
+									<th class="text-center">Localidad</th>
+									<th class="text-center">Direccion</th>
+									<th class="text-center">Codigo Postal</th>
+									<th class="text-center">Responsable</th>
+									<th class="text-center">Acciones</th>
 
-		<div class="container mt-5">
-			<table id="sucursales" class="table table-striped table-bordered" style="width:100%">
-				<thead>
-					<tr>
-						<td>Nombre</td>
-						<td>Localidad</td>
-						<td>Direccion</td>
-						<td>Codigo Postal</td>
-						<td>Responsable</td>
-						<td>Modificar</td>
-						<td>Eliminar</td>
-					</tr>
-				
-				</thead>
-				<tbody>
-					<c:forEach items="${listaSucursales}" var="sucursal">
-						<tr>
-							<td>${sucursal.nombre}</td>
-							<td>${sucursal.ciudad.nombre}</td>
-							<td>${sucursal.calle} ${sucursal.numcalle}</td>
-							<td>${sucursal.codPostal}</td>
-							<td>${sucursal.operador.nombre} ${sucursal.operador.apellido}</td>
-							<td><a href="<c:url value="/sucursal/${sucursal.id}/modificar" />" 
-							class="btn btn-primary btn-outline btn-sm">
-							Modificar<i class="icon-arrow-right"></i></a></td>
-							<td><a href="<c:url value="/sucursal/${sucursal.id}/eliminar" />" 
-							class="btn btn-primary btn-outline btn-sm">
-							Eliminar<i class="icon-arrow-right"></i></a></td>
-						</tr>
-					</c:forEach>
-				
-				</tbody>
-			
-			</table>
-		</div>	
-		<div class="container mt-5">
-		<a href="<c:url value="/sucursales" />" 
-		class="btn btn-primary btn-outline btn-sm">
-		Ver mapa<i class="icon-arrow-right"></i></a>
+								</tr>
+								</thead>
+								<tbody>
+								<c:forEach items="${listaSucursales}" var="sucursal" varStatus="loop">
+									<tr>
+										<td class="d-none">${sucrusal.id}</td>
+										<td class="text-center">${sucursal.nombre}</td>
+										<td class="text-center">${sucursal.ciudad.nombre}</td>
+										<td class="text-center">${sucursal.calle} ${sucursal.numcalle}</td>
+										<td class="text-center">${sucursal.codPostal}</td>
+										<td class="text-center">${sucursal.operador.nombre} ${sucursal.operador.apellido}</td>
+										<td class="text-center" style="width: 20%;">
+											<a href="<c:url value="/sucursal/${sucursal.id}/modificar" />" class="table-link"
+											   data-toggle="tooltip" data-placement="top" title="Modificar">
+														<span class="fa-stack">
+														<i class="fa fa-square fa-stack-2x"></i>
+														<i class="fa fa-edit fa-stack-1x fa-inverse"></i>
+														</span>
+											</a>
+											<a href="<c:url value="/sucursal/${sucursal.id}/eliminar" />" class="table-link"
+											   data-toggle="tooltip" data-placement="top" title="Eliminar">
+														<span class="fa-stack">
+														<i class="fa fa-square fa-stack-2x"></i>
+														<i class="fa fa-trash fa-stack-1x fa-inverse"></i>
+														</span>
+											</a>
+										</td>
+									</tr>
+								</c:forEach>
+								</tbody>
+							</table>
+						</div>
+						<%@include file="paginado.jsp" %>
+
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="container mt-5">
-		<a href="<c:url value="/sucursal/agregarNuevaSucursal" />" 
-		class="btn btn-primary btn-outline btn-sm">
-		Nueva Sucursal<i class="icon-arrow-right"></i></a>
-		</div>
+
+
 	</div>
 
 

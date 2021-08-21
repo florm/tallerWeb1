@@ -59,13 +59,15 @@ public class ControladorOperador {
 		modelo.put("paginado", pager);
 		return new ModelAndView("homeOperador", modelo);
 
-
 	}
 	
 	@RequestMapping(path="operadores")
-	public ModelAndView listaOperadores(){
+	public ModelAndView listaOperadores(Paginado paginado){
+		Paginado.getPaginado(paginado, servicioOperador.listarOperadoresCount());
 		ModelMap modelo = new ModelMap();
-		modelo.put("listaOperadores", servicioOperador.listarOperadores());
+		modelo.put("listaOperadores", servicioOperador.listarOperadores(paginado));
+		Pager pager = new Pager(paginado.getRegistrosTotales(), paginado.getNumeroPagina(), paginado.getRegistrosPorPagina());
+		modelo.put("paginado", pager);
 		return new ModelAndView("listaOperadores", modelo);
 	}
 	
@@ -75,7 +77,7 @@ public class ControladorOperador {
 		Operador operador = servicioOperador.getById(idOperador);
 		//Operador operadorUpdate = new Operador();
 		modelo.put("operador", operador);
-		List<Sucursal> listaSucursales = servicioSucursal.listarSucursales();
+		List<Sucursal> listaSucursales = servicioSucursal.listarSucursales(null);
 		modelo.put("listaSucursales", listaSucursales);
 		return new ModelAndView("modificarOperador", modelo);
 	}
@@ -153,7 +155,7 @@ public class ControladorOperador {
 	public ModelAndView agregarNuevaSucursalActividad(@PathVariable Long idSucursal) {
 		ModelMap modelo = new ModelMap();
 		SucursalActividad sucursalActividadVacia = new SucursalActividad();
-		modelo.put("listaSucursales", servicioSucursal.listarSucursales());
+		modelo.put("listaSucursales", servicioSucursal.listarSucursales(null));
 		modelo.put("sucursalActividadVacia", sucursalActividadVacia);
 		modelo.put("listaActividades", servicioActividad.listaActividades());
 		modelo.put("listaProfesores", servicioActividad.listarProfesores());

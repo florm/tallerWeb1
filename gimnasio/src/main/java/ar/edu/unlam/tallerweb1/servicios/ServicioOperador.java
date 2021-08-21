@@ -9,7 +9,7 @@ import helpers.Paginado;
 
 public interface ServicioOperador {
 	
-	List<Operador> listarOperadores();
+	List<Operador> listarOperadores(Paginado paginado);
 	void eliminar(Long idOperador);
 	Operador getById(Long idOperador);
 	void modificar(Operador operador);
@@ -24,4 +24,6 @@ public interface ServicioOperador {
     void marcarVisto();
 
     Integer buscarPagosCount();
+
+    Integer listarOperadoresCount();
 }

@@ -4,9 +4,11 @@ import java.awt.geom.Point2D;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
+import helpers.Paginado;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +30,12 @@ public class ServicioSucursalImp implements ServicioSucursal {
 	private LocalizacionDao localizacionDao;
 
 	@Override
-	public List<Sucursal> listarSucursales() {
-		return sucursalDao.listaSucursales();
+	public List<Sucursal> listarSucursales(Paginado paginado) {
+		List<Sucursal> todasLasSucursales = sucursalDao.listaSucursales();
+		if(paginado == null) return todasLasSucursales;
+		return  todasLasSucursales.stream().skip(paginado.getRegistrosPorPagina() * (paginado.getNumeroPagina() - 1))
+				.limit(paginado.getRegistrosPorPagina())
+				.collect(Collectors.toList());
 	}
 
 	@Override
@@ -74,6 +80,11 @@ public class ServicioSucursalImp implements ServicioSucursal {
 	@Override
 	public List<Sucursal> listarSucursalesLibres() {
 		return sucursalDao.listarSucursalesLibres();
+	}
+
+	@Override
+	public Integer listarSucursalesCount() {
+		return sucursalDao.listaSucursales().size();
 	}
 
 }

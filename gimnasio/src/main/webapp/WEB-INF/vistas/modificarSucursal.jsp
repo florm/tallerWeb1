@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page pageEncoding="UTF-8" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -76,10 +77,10 @@
 						        Calle:<form:input path="calle" type="text" class="form-control"  value="${sucursal.calle}"></form:input>
 						    </div>
 						    <div class="form-group input-size">
-						        Número:<form:input path="numcalle" type="text" class="form-control" value="${sucursal.numcalle}"></form:input>
+						        Nï¿½mero:<form:input path="numcalle" type="text" class="form-control" value="${sucursal.numcalle}"></form:input>
 						    </div>
 						    <div class="form-group input-size">
-						        Código Postal:<form:input path="codPostal" type="text" class="form-control" value="${sucursal.codPostal}"></form:input>
+						        Cï¿½digo Postal:<form:input path="codPostal" type="text" class="form-control" value="${sucursal.codPostal}"></form:input>
 						    </div>
 						    <div class="form-group input-size d-flex justify-content-center">						    
 						    <button type="submit" id="btn-modificar" value="modificar" class="btn btn-primary">Modificar</button>

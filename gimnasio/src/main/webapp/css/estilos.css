@@ -296,3 +296,13 @@ select.form-control:not([size]):not([multiple]) {
     padding-top: 30px;
     margin-top: 30px;
 }
+
+/*Datatables*/
+/*Datatables*/
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+    border: none;
+    background: none;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+    padding: 0;
+}

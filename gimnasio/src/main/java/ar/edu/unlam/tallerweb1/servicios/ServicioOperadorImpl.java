@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ar.edu.unlam.tallerweb1.dao.PagoDao;
-import ar.edu.unlam.tallerweb1.modelo.Estado;
-import ar.edu.unlam.tallerweb1.modelo.Pago;
+import ar.edu.unlam.tallerweb1.modelo.*;
 import helpers.Paginado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.edu.unlam.tallerweb1.dao.OperadorDao;
 import ar.edu.unlam.tallerweb1.dao.SucursalDao;
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
-import ar.edu.unlam.tallerweb1.modelo.Operador;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 @Service("servicioOperador")
 @Transactional
@@ -37,9 +34,12 @@ public class ServicioOperadorImpl implements ServicioOperador {
 	}
 
 	@Override
-	public List<Operador> listarOperadores() {
-		return operadorDao.listarOperadores();
-		
+	public List<Operador> listarOperadores(Paginado paginado) {
+		List<Operador> todosOperadores = operadorDao.listarOperadores();
+		if(paginado == null) return todosOperadores;
+		return  todosOperadores.stream().skip(paginado.getRegistrosPorPagina() * (paginado.getNumeroPagina() - 1))
+				.limit(paginado.getRegistrosPorPagina())
+				.collect(Collectors.toList());
 	}
 
 	@Override
@@ -116,6 +116,11 @@ public class ServicioOperadorImpl implements ServicioOperador {
 	@Override
 	public Integer buscarPagosCount() {
 		return operadorDao.buscarPagosCount();
+	}
+
+	@Override
+	public Integer listarOperadoresCount() {
+		return operadorDao.listarOperadores().size();
 	}
 
 	private boolean pagoEstaRechazado(Pago pago) {

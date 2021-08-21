@@ -54,7 +54,7 @@ public class ControladorSucursal {
 		Usuario usuario = new Usuario();
 		modelo.put("usuario", usuario);
 		
-		List<Sucursal> listaSucursales = servicioSucursal.listarSucursales();
+		List<Sucursal> listaSucursales = servicioSucursal.listarSucursales(null);
 		ArrayList<Coordenadas> listaCoordenadas = new ArrayList<Coordenadas>();
 		for (Sucursal sucursal : listaSucursales) {
 			Coordenadas coordenadaSucursal = new Coordenadas(sucursal.getNombre(),sucursal.getLat(),sucursal.getLng());

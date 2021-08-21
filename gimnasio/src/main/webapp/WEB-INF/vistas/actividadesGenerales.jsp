@@ -1,5 +1,7 @@
  <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+		  pageEncoding="ISO-8859-1"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -52,7 +54,7 @@
 		<div class="container">
 			<div class="row d-flex flex-column text-center m-5">
 				<h2>Actividades</h2>
-				<p>Los días y horarios de las Actividades varían de acuerdo a la Sucursal</p>
+				<p>Los dï¿½as y horarios de las Actividades varï¿½an de acuerdo a la Sucursal</p>
 			</div>
 			<div class="row">
 				<c:forEach items="${listaActividades}" var="actividad">

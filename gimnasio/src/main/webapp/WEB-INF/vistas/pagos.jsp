@@ -4,40 +4,16 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Stamina Gimnasios</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="freehtml5.co"/>
-    <link
-            href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800"
-            rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-
+    <%@include file="head.jsp"%>
     <!-- Animate.css -->
     <link href="<c:url value="/css/animate.css" />" rel="stylesheet">
-    <!-- Icomoon Icon Fonts-->
-    <link href="<c:url value="/css/icomoon.css" />" rel="stylesheet">
-    <!-- Bootstrap  -->
-    <link href="<c:url value="/css/bootstrap4.min.css" />" rel="stylesheet">
-    <link href="<c:url value="/css/bootstrap.css" />" rel="stylesheet">
 
-    <!-- Theme style  -->
-    <link href="<c:url value="/css/style.css" />" rel="stylesheet">
     <link href="<c:url value="/css/pagos.css" />" rel="stylesheet">
 
-    <!-- Modernizr JS -->
-    <script src="<c:url value="/js/modernizr-2.6.2.min.js" />"></script>
-
-    <!-- FOR IE9 below -->
-    <!--[if lt IE 9]>
-	<script src="<c:url value="/js/respond.min.js" />"></script>
-	<![endif]-->
 	<script type="text/javascript">
 		var urlPropia = '<c:url value="/ver-pagos" />';
 	</script>
-    <%--<link href="<c:url value="/css/fontawesome-all.css" />" rel="stylesheet">--%>
-    <link href="<c:url value="/css/estilos.css" />" rel="stylesheet">
+
 
 </head>
 <body>

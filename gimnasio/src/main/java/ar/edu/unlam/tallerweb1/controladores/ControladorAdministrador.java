@@ -13,6 +13,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import helpers.Pager;
 import helpers.Paginado;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -57,9 +58,12 @@ public class ControladorAdministrador {
 	
 	
 	@RequestMapping(path = "/homeAdmin")
-	public ModelAndView irAHomeAdministrador() {
+	public ModelAndView irAHomeAdministrador(Paginado paginado) {
+		Paginado.getPaginado(paginado, servicioSucursal.listarSucursalesCount());
 		ModelMap modelo = new ModelMap();
-		modelo.put("listaSucursales", servicioSucursal.listarSucursales());
+		modelo.put("listaSucursales", servicioSucursal.listarSucursales(paginado));
+		Pager pager = new Pager(paginado.getRegistrosTotales(), paginado.getNumeroPagina(), paginado.getRegistrosPorPagina());
+		modelo.put("paginado", pager);
 		return new ModelAndView("homeAdministrador", modelo);
 	}
 
@@ -72,8 +76,11 @@ public class ControladorAdministrador {
 	
 	@RequestMapping(path = "socios")
 	public ModelAndView listarSocios(@RequestParam(value="idSucursal") Long idSucursal, Paginado paginado){
+		Paginado.getPaginado(paginado, servicioSocio.buscarSociosCount(idSucursal));
 		ModelMap modelo = new ModelMap();
 		modelo.put("listaSocios", servicioSocio.buscarSocios(idSucursal, paginado));
+		Pager pager = new Pager(paginado.getRegistrosTotales(), paginado.getNumeroPagina(), paginado.getRegistrosPorPagina());
+		modelo.put("paginado", pager);
 		return new ModelAndView("socios",modelo);
 	}
 	
@@ -81,7 +88,7 @@ public class ControladorAdministrador {
 	public ModelAndView irAGanancias(){
 		ModelMap modelo = new ModelMap();
 		
-		modelo.put("listaSucursales", servicioSucursal.listarSucursales());
+		modelo.put("listaSucursales", servicioSucursal.listarSucursales(null));
 		return new ModelAndView("ganancias",modelo);
 	}
 	
@@ -111,9 +118,12 @@ public class ControladorAdministrador {
 
 	
 	@RequestMapping("/sucursalesadmin")
-	public ModelAndView irASucursales(){
+	public ModelAndView irASucursales(Paginado paginado){
+		Paginado.getPaginado(paginado, servicioSucursal.listarSucursalesCount());
 		ModelMap modelo = new ModelMap();
-		modelo.put("listaSucursales", servicioSucursal.listarSucursales());
+		modelo.put("listaSucursales", servicioSucursal.listarSucursales(paginado));
+		Pager pager = new Pager(paginado.getRegistrosTotales(), paginado.getNumeroPagina(), paginado.getRegistrosPorPagina());
+		modelo.put("paginado", pager);
 		return new ModelAndView("listaSucursales",modelo);
 	}
 	
@@ -146,7 +156,7 @@ public class ControladorAdministrador {
 		ModelMap modelo = new ModelMap();
 		modelo.put("sucursalVacia", sucursalVacia);
 		modelo.put("listaCiudad", servicioLocalizacion.listarCiudades());
-		modelo.put("listaSucursal", servicioSucursal.listarSucursales());
+		modelo.put("listaSucursal", servicioSucursal.listarSucursales(null));
 		return new ModelAndView("agregarSucursal",modelo);
 	}
 	@RequestMapping(path = "/sucursal/nuevaSucursal", method = RequestMethod.POST)

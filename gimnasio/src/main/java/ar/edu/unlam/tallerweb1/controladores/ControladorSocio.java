@@ -93,7 +93,7 @@ public class ControladorSocio {
 			modelo.put("socio", socio);
 			//modelo.put("listaProvincia", servicioLocalizacion.listarProvincias());
 			modelo.put("listaCiudad", servicioLocalizacion.listarCiudades());
-			modelo.put("listaSucursal", servicioSucursal.listarSucursales());
+			modelo.put("listaSucursal", servicioSucursal.listarSucursales(null));
 			return new ModelAndView("registrar", modelo);
 		}
 	
